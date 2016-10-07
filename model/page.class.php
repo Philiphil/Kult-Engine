@@ -50,6 +50,7 @@ class page{
         <script>
             $(document).ready(function(){
                 $("#k_loading").addClass("k_invisible");
+            });
             </script>
             ';
 

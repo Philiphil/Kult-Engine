@@ -8,7 +8,7 @@ class connector extends connectorFactory {
     {
 
         $query="SELECT ".connector::$_TABLE_DEMO.
-        "WHERE `".connector::$_GROUPE_NAME."` like :od";
+        "WHERE `".connector::$_GROUPE_NAME."` = :id";
         $query=connector::$_db->prepare($query);
         $query->execute(array(":id" => $id));
         $query = $query->fetchAll(PDO::FETCH_ASSOC);

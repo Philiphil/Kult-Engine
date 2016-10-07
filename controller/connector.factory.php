@@ -15,7 +15,7 @@ class connectorFactory extends PDO{
         self::$_DB_USER = constant('user');
         self::$_DB_PASS = constant('pass');
 
-       self::$_db = new pdo('mysql:dbname='.self::$_DB_NAME.';host='.self::$_DB_HOST.';charset=utf8',self::$_DB_USER,self::$_DB_PASS, array(PDO::MYSQL_ATTR_MAX_BUFFER_SIZE => 16777216));
+       self::$_db = new pdo('mysql:dbname='.self::$_DB_NAME.';host='.self::$_DB_HOST.';charset=utf8',self::$_DB_USER,self::$_DB_PASS);
        self::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        self::$_db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }

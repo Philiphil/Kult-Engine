@@ -13,7 +13,7 @@
 		var $_port;     // Standard syslog port is 514
 		var $_timeout;  // Timeout of the UDP connection (in seconds)
 		
-		function Syslog($facility = 1, $severity = 6, $hostname = "", $fqdn= "", $ip_from = "", $process="", $content = "")
+		function __construct($facility = 1, $severity = 6, $hostname = "", $fqdn= "", $ip_from = "", $process="", $content = "")
 		{
 			$this->_msg      = '';
 			$this->_server   = constant('ip_serveur_log');

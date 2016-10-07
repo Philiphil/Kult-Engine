@@ -23,12 +23,12 @@
 		    require_once(constant('controllerpath').'connector.class.php');
 		    require_once(constant('modelpath').'membre.class.php');
 		    require_once(constant('modelpath').'page.class.php');
-            
+            session_start();
             invokee::setter();
             invoker::require_mods($ext);
 		    connector::setter();
 
-            session_start();
+            
 		    membre::setter();
 
     	}
