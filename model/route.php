@@ -1,2 +1,4 @@
 <?php
-	$demo = new global_route('/*', function(){return 0;});
+    $demo = new global_route('/*', function () {
+        return 0;
+    });
