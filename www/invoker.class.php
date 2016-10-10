@@ -11,25 +11,27 @@
     				break;
     		}
 
-    		include_once($fnord.'config.php');
+            include_once($fnord.'config.php');
             invoker::setter();
 
-		    require_once(constant('controllerpath').'fonction.php');
+            require_once(constant('controllerpath').'fonction.php');
             require_once(constant('modelpath').'invokee.class.php');
-		    require_once(constant('controllerpath').'logger.class.php');
+            require_once(constant('controllerpath').'logger.class.php');
             require_once(constant('modelpath').'textes.php');
             require_once(constant('controllerpath').'texte.script.php');
             require_once(constant('controllerpath').'connector.factory.php');
-		    require_once(constant('controllerpath').'connector.class.php');
-		    require_once(constant('modelpath').'membre.class.php');
-		    require_once(constant('modelpath').'page.class.php');
+            require_once(constant('controllerpath').'connector.class.php');
+            require_once(constant('modelpath').'membre.class.php');
+            require_once(constant('modelpath').'page.class.php');
+            require_once(constant('controllerpath').'router.php');
+            require_once(constant('modelpath').'route.php');
             session_start();
             invokee::setter();
             invoker::require_mods($ext);
-		    connector::setter();
 
-            
-		    membre::setter();
+            k_rest::setter();
+            connector::setter();
+            membre::setter();
 
     	}
 
