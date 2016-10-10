@@ -1,35 +1,35 @@
 <?php
 
-class config{
-  #html folder's name.
-  public static $webfolder = "www";
-  
-  #model & controller folder's name
-  # www/model or www\model should be specified if the folder is in the webfolder
-  #protip : they shouldnt
-  public static $modelfolder = "model";
-  public static $controllerfolder = "controller";
+class config
+{
+    //html folder's name.
+  public static $webfolder = 'www';
 
-  # HTML root folder's name
-  public static $htmlfolder = "/";
+  //model & controller folder's name
+  // www/model or www\model should be specified if the folder is in the webfolder
+  //protip : they shouldnt
+  public static $modelfolder = 'model';
+    public static $controllerfolder = 'controller';
 
-  #is config.php inside webfolder ?
-  #protip : it shouldnt
+  // HTML root folder's name
+  public static $htmlfolder = '/';
+
+  //is config.php inside webfolder ?
+  //protip : it shouldnt
   public static $config = 0;
 
-  #Is the webserveur 'linux' or 'windows' ?
-  #if neither, have in mind that windows means c:\user
-  #and linux means /root/user
-  #the question is SHOULD I USE A SLASH OR AN ANTI SLASH
-  public static $systeme = "linux";
+  //Is the webserveur 'linux' or 'windows' ?
+  //if neither, have in mind that windows means c:\user
+  //and linux means /root/user
+  //the question is SHOULD I USE A SLASH OR AN ANTI SLASH
+  public static $systeme = 'linux';
 
-  #SQL IDs
+  //SQL IDs
   public static $host = '';
-  public static $db = '';
-  public static $user = '';
-  public static $pass = '';
+    public static $db = '';
+    public static $user = '';
+    public static $pass = '';
 
-  #CORE
+  //CORE
   public static $file = __FILE__;
 }
-
