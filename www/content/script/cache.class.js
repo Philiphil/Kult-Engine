@@ -84,7 +84,7 @@
   			{
   				radio[e.radiokey]++;
   			}else{
-  				radio[e.radiokey] = 1;
+  				radio[e.radiokey] = 0;
   			}
   		}
   	});
