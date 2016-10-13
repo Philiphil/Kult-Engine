@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>KULT-ENGINE:: DOCCUMENTATION</title>
+</head>
+<body>
+
+	<style>
+		html{
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.center{
+			text-align: center;
+		}
+		div{
+			margin : 0;
+			padding: 0;
+		}
+		.chapitre{
+			padding-bottom: 15px;
+			margin-top: 50px;
+			margin-left: 10px;
+			margin-bottom: 50px;
+			border-bottom: 1px darkgrey solid;
+		}
+		.mini_chapitre{
+			padding-bottom: 10px;
+			margin-top: 25px;
+			margin-left: 25px;
+			margin-right: 35px;
+			margin-bottom: 25px;
+			border-bottom: 1px lightgrey solid;
+		}
+		h1,h2,h3,h4,h5,h6,p,ul{
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		p{
+			margin-top: 2.5px;
+			margin-bottom: 2.5px;
+		}
+	</style>
+
+	<div class='chapitre center'>
+			<h1>Kult-Engine Doccumentation</h1>
+			<br>
+			<p>
+				Kult-Engine<br>
+				07/09/2016<br>
+				Théo Sorriaux<br>
+				171012@supinfo.com<br>
+				https://github.com/Philiphil/Kult-Engine<br>
+				PHP 5.5<br>
+			</p>
+	</div>
+
+	<div class='chapitre'>
+		<h2>Introduction</h2>
+		<p>
+			Kult-Engine is a full-stack framework <br>
+			Its goal is to be a foundation design to fit every website.<br>
+			Lightweight yet powerful; Kult-engine provides sets of tools for a website's common task.<br>
+			<br>
+			Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim.php... ?<br>
+			&emsp;Dont.<br>
+			I've made Kult-Engine for myself, because i needed a lightweight framework with only the necessary ordinary tools for a website, I didnt want tons of helpers that I wont use anyway, I didnt want over-complicated architecture that I need to learn perfectly in order to be able to hello world, I didnt want to install 3 software in order to not even make the whole thing runs but just install the stuff<br>
+			<br>
+			Since this list goes on and on, since this list apply everywhere and since nobody seems to be bothered by those things, you probably shouldnt use Kult Engine.
+		</p>
+	</div>
+
+	<div class='chapitre'>
+		<h2>Architecture</h2>
+		<div  class='mini_chapitre'>
+			<h3>Files</h3>
+			<p>
+				Kult-Engine architecture is based upon MVC paradigm.<br>
+				<br>
+				In the M(odel) : <br>
+				&emsp; Nothing, if you want data, you gotta do them yourself.<br>
+				<br>
+				in the C(ontrol) : <br>
+				&emsp;The 4 main folders.<br>
+				&emsp;&emsp; ./controller/core/<br>
+				&emsp;&emsp;&emsp; Where almost everything relevant is.<br>
+				&emsp;&emsp; ./controller/impt/<br>
+				&emsp;&emsp;&emsp; Containing what you will edit<br>
+				&emsp;&emsp; ./controller/mods/<br>
+				&emsp;&emsp;&emsp; Containing your mods<br>
+				&emsp;&emsp; ./controller/vendor/<br>
+				&emsp;&emsp;&emsp; Containing ... well, libs.<br>
+				<br>
+				in the V(iew) : <br>
+				&emsp;3 folders and one file.<br>
+				&emsp;&emsp; ./www/assets/<br>
+				&emsp;&emsp;&emsp;Where css goes<br>
+				&emsp;&emsp; ./www/script/<br>
+				&emsp;&emsp;&emsp; where js goes<br>
+				&emsp;&emsp; ./www/images/<br>
+				&emsp;&emsp;&emsp; where picture goes.<br>
+				&emsp;&emsp; ./www/invoker.class.php<br>
+				&emsp;&emsp;&emsp;We'll talk about this in a sec.<br>
+			</p>
+		</div>
+		<div  class='mini_chapitre'>
+			<h3>Functioning</h3>
+			<p>
+				Main functionalitys are handle by Singleton classes<br>
+				<br>
+				./www/invoker.class.php<br>
+				&emsp;Told you we was about to talk about this file.<br>
+				&emsp;Invoker is called by every page and allows the call and init of everyting needed.<br>
+				<br>
+				./controller/impt/invokee.class.php<br>
+				&emsp;Depending on the project, you might need extra call, extra init, extra const ...<br>
+				&emsp;In case of such needs, Invokee is the file you have to edit.<br>
+				<br>
+				./config.php<br>
+				&emsp;config.php should be in the same folder as view/controller and model.<br>
+				&emsp;Config is the ... conf file<br>
+
+			</p>
+		</div>
+		<div  class='mini_chapitre'>
+			<h3>How basic_page_using_kult_engine_works.php</h3>
+			<p>
+				<code>
+					&lt;php<br>
+					&emsp;require_once("invoker.class.php");<br>
+					&emsp;#Invoker is require.
+					&emsp;kult-engine\invoker::require_basics();<br>
+					&emsp;#This way the whole framework is init.<br>
+					&emsp;kult-engine\page::standardpage_head('Title');<br>
+					&emsp;kult-engine\page::standardpage_header();<br> 
+					&emsp;page::standardpage_body_begin();<br>
+					?><br>
+					<br>
+					&lt;p> Now html&lt;/p>
+					<br>				
+					&lt;?php<br>
+					&emsp;page::standardpage_body_end();<br>
+					&emsp;page::standardpage_footer();<br>
+				</code>
+			</p>
+		</div>
+		<div  class='mini_chapitre'>
+			<h3>Lifecycle</h3>
+			<p>
+				Main functionalitys are handle by Singleton classes<br>
+				<br>
+				./www/invoker.class.php<br>
+				&emsp;Told you we was about to talk about this file.<br>
+				&emsp;Invoker is called by every page and allows the call and init of everyting needed.<br>
+				<br>
+				./controller/impt/invokee.class.php<br>
+				&emsp;Depending on the project, you might need extra call, extra init, extra const ...<br>
+				&emsp;In case of such needs, Invokee is the file you have to edit.<br>
+				<br>
+				./config.php<br>
+				&emsp;config.php should be in the same folder as view/controller and model.<br>
+				&emsp;Config is the ... conf file<br>
+
+			</p>
+		</div>
+	</div>
+

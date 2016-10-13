@@ -1,17 +1,12 @@
 <?php
 include("invoker.class.php");
-invoker::require_basics();
-page::standardpage_head();
+use kult_engine as k;
+k\invoker::require_basics();
+k\page::standardpage_head();
+k\page::standardpage_header(); 
+k\page::standardpage_body_begin();
 
+echo k\get_text("hello");
 
-page::standardpage_header(); 
-page::standardpage_body_begin();
-
-
-?>
-
-<?php echo get_texte("hello");?>.
-
-<?php 
-page::standardpage_body_end();
-page::standardpage_footer(); ?>
+k\page::standardpage_body_end();
+k\page::standardpage_footer();

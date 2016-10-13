@@ -1,101 +1,147 @@
 <?php
-    class invoker{
-    	public static function require_basics($fnord="",$ext=null)
-    	{
-    		switch ($fnord) {
-    			case '':
-    				$fnord='../';
-    				break;
-    			case 'api':
-    				$fnord='../../';
-    				break;
-    		}
+namespace kult_engine;
+use kult_engine\config;
+use kult_engine\debuger;
+use kult_engine\invokee;
+use kult_engine\router;
+use kult_engine\connector;
+use kult_engine\membre;
 
-            include_once($fnord.'config.php');
-            invoker::setter();
+class invoker{
+ public static function require_basics($fnord="",$ext=null)
+ {
+  switch ($fnord) {
+   case '':
+   $fnord='../';
+   break;
+   case 'api':
+   $fnord='../../';
+   break;
+ }
 
-            require_once(constant('controllerpath').'fonction.php');
-            require_once(constant('modelpath').'invokee.class.php');
-            require_once(constant('controllerpath').'logger.class.php');
-            require_once(constant('modelpath').'textes.php');
-            require_once(constant('controllerpath').'texte.script.php');
-            require_once(constant('controllerpath').'connector.factory.php');
-            require_once(constant('controllerpath').'connector.class.php');
-            require_once(constant('modelpath').'membre.class.php');
-            require_once(constant('modelpath').'page.class.php');
-            require_once(constant('controllerpath').'router.php');
-            require_once(constant('modelpath').'route.php');
-            session_start();
-            invokee::setter();
-            invoker::require_mods($ext);
+ include_once($fnord.'config.php');
+ invoker::setter();
+ spl_autoload_register(__NAMESPACE__ .'\invoker::loader');
 
-            k_rest::setter();
-            connector::setter();
-            membre::setter();
+ require_once(constant('corepath').'fonction.php');
 
-    	}
+ require_once(constant('corepath').'debuger.class.php');
+ debuger::setter();
 
-        public static function require_mods($mods=null)
-        {
-            if(is_null($mods))
-            {
-                return 0;
-            }
-            foreach ($mods as $key) {
-               require_once(constant('modpath').$key.constant('filespace').$key.'.handler.php');
-            }
-        }
+ require_once(constant('imptpath').'invokee.class.php');
+ invokee::setter();
 
-        public static function try_get_conf()
-        {
-            //s'assure que config.php est bien include et si ce n'est pas le cas, tente de l'include lui même.
-            $array[0] = '../';
-            $array[1] = './';
-            $array[2] = '../../';
-            $array[3] = '../../../';
-            $i=0;
-            while(!class_exists('config'))
-            {
-                include_once($array[$i].'config.php');
-                $i++;
-            }
-        }
+ require_once(constant('corepath').'logger.class.php');
 
-        public static function setter()
-        {
-            if(!class_exists('config'))
-            {
-                invoker::try_get_conf();
-            }
+ require_once(constant('imptpath').'lang.php');
+ require_once(constant('corepath').'texte.script.php');
 
-            if(!class_exists('config'))
-            {
-                echo 'CONFIG.PHP MISSING';
-                die;
-            }
-            $filespace="/";
-            switch (config::$systeme) {
-              case "windows":
-              $filespace="\\";
-              break;
-              case "linux":
-              $filespace="/";
-              break;
-            }
-            config::$config = config::$config ==1 ? config::$webfolder.$filespace : "";
-            $base= substr(config::$file, 0, -strlen($filespace.config::$config."config.php"));
-            define('viewpath', $base.$filespace.config::$webfolder.$filespace);
-            define('modelpath', $base.$filespace.config::$modelfolder.$filespace);
-            define('controllerpath', $base.$filespace.config::$controllerfolder.$filespace);
-            define('libpath', constant('modelpath').'vendor'.$filespace);
-            define('modpath', constant('controllerpath').'mods'.$filespace);
-            define('htmlpath', config::$htmlfolder);
-            define('filespace', $filespace);
-            define('contentpath', constant('htmlpath').'content/');
-            define('imagepath', constant('contentpath').'images/');
-        }
+ require_once(constant('corepath').'connector.factory.php');
+ require_once(constant('imptpath').'connector.class.php');
+ connector::setter();
 
+ require_once(constant('corepath').'router.php');
+ require_once(constant('imptpath').'route.php');
+ router::setter();
 
+require_once(constant('imptpath').'page.class.php');
 
+require_once(constant('corepath').'membre.class.php');
+ 
+ session_start();
+ membre::setter();
+ invoker::require_mods($ext);
+}
 
+public static function require_mods($mods=null)
+{
+  if(is_null($mods))
+  {
+    return 0;
+  }
+  foreach ($mods as $key) {
+   require_once(constant('modpath').$key.constant('filespace').$key.'.handler.php');
+ }
+}
+
+public static function config_autoload()
+{
+  $array[0] = '../';
+  $array[1] = './';
+  $array[2] = '../../';
+  $array[3] = '../../../';
+  $i=0;
+  while(!class_exists(config::class,false) || $i < count($array))
+  {
+    include_once($array[$i].'config.php');
+    $i++;
+  }
+}
+
+public static function setter()
+{
+  if(!class_exists(config::class,false))
+  {
+    invoker::config_autoload();
+  }
+
+  if(!class_exists(config::class))
+  {
+    trigger_error('config file not found', E_USER_ERROR);
+  }
+  $filespace="/";
+  switch (config::$systeme) {
+    case "windows":
+    $filespace="\\";
+    break;
+    case "linux":
+    $filespace="/";
+    break;
+  }
+  config::$config = config::$config ==1 ? config::$webfolder.$filespace : "";
+  $base= substr(config::$file, 0, -strlen($filespace.config::$config."config.php"));
+  define('viewpath', $base.$filespace.config::$webfolder.$filespace);
+  define('modelpath', $base.$filespace.config::$modelfolder.$filespace);
+  define('controllerpath', $base.$filespace.config::$controllerfolder.$filespace);
+  define('vendorpath', constant('controllerpath').'vendor'.$filespace);
+  define('modpath', constant('controllerpath').'mods'.$filespace);
+
+  define('corepath', constant('controllerpath').'core'.$filespace);
+  define('imptpath', constant('controllerpath').'impt'.$filespace);
+
+  define('htmlpath', config::$htmlfolder);
+  define('filespace', $filespace);
+  define('contentpath', constant('htmlpath').'content/');
+  define('imagepath', constant('contentpath').'images/');
+  define('debug', config::$debug);
+}
+
+public static function loader($className) {
+  $className = substr($className, strripos($className, '\\')+1);
+  $prefix[0] = constant('corepath');
+  $prefix[1] = constant('imptpath');
+  $prefix[2] = constant('vendorpath');
+  $prefix[3] = constant('controllerpath');
+  $prefix[4] = constant('modpath').$className.constant('filespace');
+  $sufix[0] = '';
+  $sufix[1] = '.class';
+  $sufix[2] = '.trait';   
+  $sufix[3] = '.interface';
+  $sufix[4] = '.handler';
+  $sufix[5] = '.factory';
+  foreach ($prefix as $a) {
+    foreach ($sufix as $b) {
+      if(file_exists($a.$className.$b.'.php'))
+      {
+         include_once($a.$className.$b.'.php');
+         return true; 
+      }
     }
+  }
+  return false;
+}
+
+
+
+
+}

@@ -1,5 +1,5 @@
 <?php
-
+namespace kult_engine;
 class config{
   #html folder's name.
   public static $webfolder = "www";
@@ -28,6 +28,9 @@ class config{
   public static $db = '';
   public static $user = '';
   public static $pass = '';
+
+  #SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
+  public static $debug = 1;
 
   #CORE
   public static $file = __FILE__;

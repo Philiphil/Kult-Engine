@@ -1,8 +1,8 @@
 <?php
 	require_once("../invoker.class.php");
-	invoker::require_basics('api');
+	kult_engine\invoker::require_basics('api');
 
-	membre::login_required();
+	kult_engine\membre::login_required();
 
 
 	switch ($_POST["fonc"]) {
@@ -13,7 +13,7 @@
 
 
 
-function answer($arg1, $arg2, $num)
+function answer($arg1, $arg2)
 {
 }
 

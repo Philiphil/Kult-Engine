@@ -1,8 +1,8 @@
 <?php
 	require_once("../invoker.class.php");
-	invoker::require_basics('api');
-	membre::login_required();
-	membre::dont_wait();
+	kult_engine\invoker::require_basics('api');
+	kult_engine\membre::login_required();
+	kult_engine\membre::dont_wait();
 
 	$req = $_GET['req'];
 	$args = $_GET['args'];
