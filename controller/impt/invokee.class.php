@@ -1,21 +1,20 @@
 <?php
-namespace kult_engine;
-use kult_engine\config;
-use kult_engine\singleton;
-use kult_engine\debugable;
 
-class invokee{
+namespace kult_engine;
+
+class invokee
+{
     use singleton;
     use debugable;
+
     public static function require_local_model()
     {
-
     }
-    
+
     public static function require_external_basics()
     {
-        require_once(constant('vendorpath').'syslog.php');
-        require_once(constant('vendorpath').'password_hash.php');
+        require_once constant('vendorpath').'syslog.php';
+        require_once constant('vendorpath').'password_hash.php';
     }
 
     public static function setter()
@@ -25,7 +24,7 @@ class invokee{
         define('user', config::$user);
         define('pass', config::$pass);
 
-        invokee::require_local_model();
-        invokee::require_external_basics();
+        self::require_local_model();
+        self::require_external_basics();
     }
 }

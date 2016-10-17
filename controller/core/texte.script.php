@@ -1,34 +1,34 @@
 <?php
+
 namespace kult_engine;
-use kult_engine\textes;
+
 /*
-	Centralisation des textes
+    Centralisation des textes
 */
 
     function get_lang()
     {
-        $server = array("fr", "en");
-        $default = "en";
+        $server = ['fr', 'en'];
+        $default = 'en';
 
         $user = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-        $bfr= [];
-        $i=0;
+        $bfr = [];
+        $i = 0;
         foreach ($user as $key) {
             $i++;
             $bfr[$i] = $key;
-            if(strpos($key, ';') != false)
-            {
-                $bfr[$i] =  substr($key, 0, strpos($key, ';'));
+            if (strpos($key, ';') != false) {
+                $bfr[$i] = substr($key, 0, strpos($key, ';'));
             }
         }
-        $choice = array_merge(array_intersect($bfr,$server));
-        $result = "";
-        if( count($choice) == 0)
-        {
+        $choice = array_merge(array_intersect($bfr, $server));
+        $result = '';
+        if (count($choice) == 0) {
             $result = $default;
-        }else{
+        } else {
             $result = $choice[0];
         }
+
         return $result;
     }
 
@@ -40,5 +40,6 @@ use kult_engine\textes;
     {
         $lang = get_lang();
         $array = textes();
+
         return isset($array[$lang][$texte]) ? $array[$lang][$texte] : $texte;
     }

@@ -1,47 +1,52 @@
 <?php
+
 namespace kult_engine;
-use kult_engine\get_text;
-class page{
-    public static function standardpage_head($title=null){
+
+class page
+{
+    public static function standardpage_head($title = null)
+    {
         $title = get_text($title);
-        if(!is_null($title))
-        {
-            $title .=" :: ";
+        if (!is_null($title)) {
+            $title .= ' :: ';
         }
-        echo ('<!DOCTYPE html>
+        echo '<!DOCTYPE html>
             <html>
             <head>
                 <meta charset="utf-8" />
                 <script>var timer = new Date();</script>
-                <title>'.$title.get_text("main_title").'</title>
+                <title>'.$title.get_text('main_title').'</title>
                 <meta content="width=device-width, initial-scale=1" name="viewport" />
 
                 <link href="'.constant('contentpath').'assets/main.css" rel="stylesheet" type="text/css" />
-                <link rel="shortcut icon" href="favicon.ico" />');
-        page::standardpage_api();
-        page::standardpage_js();
-        echo('</head>');
+                <link rel="shortcut icon" href="favicon.ico" />';
+        self::standardpage_api();
+        self::standardpage_js();
+        echo '</head>';
     }
 
-    public static function standardpage_header(){
-        echo('<body>');
-    } 
+    public static function standardpage_header()
+    {
+        echo '<body>';
+    }
 
-    public static function standardpage_footer(){
-        echo('
+    public static function standardpage_footer()
+    {
+        echo '
     </body>
     </html>
-    ');
-
+    ';
     }
 
-    public static function standardpage_api(){
+    public static function standardpage_api()
+    {
         echo '<script src="https://apis.google.com/js/platform.js" async defer></script>';
         echo '<meta name="google-signin-client_id" content="">';
     }
 
-    public static function standardpage_js(){
-        include(constant('imptpath').'javascript.class.php');
+    public static function standardpage_js()
+    {
+        include constant('imptpath').'javascript.class.php';
         echo'       
         <script src="'.constant('contentpath').'script/jquery.js"></script>
         <script src="'.constant('contentpath').'script/json.js"></script>
@@ -54,18 +59,18 @@ class page{
             });
             </script>
             ';
-
-
-        }
-        public static function standardpage_body_begin($arianne="")
-        {
-            echo (' <div id="k_loading">
-                <br>
-                <img src="'.constant("imagepath").'loader.gif" />
-            </div>');
-        }
-        public static function standardpage_body_end()
-        {
-            echo('');
-        }
     }
+
+    public static function standardpage_body_begin($arianne = '')
+    {
+        echo ' <div id="k_loading">
+                <br>
+                <img src="'.constant('imagepath').'loader.gif" />
+            </div>';
+    }
+
+    public static function standardpage_body_end()
+    {
+        echo '';
+    }
+}
