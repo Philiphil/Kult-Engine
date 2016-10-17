@@ -8,7 +8,7 @@ abstract class debuger
     use debugable;
     use settable;
     use injectable;
-    
+
     public static $_debug = 1;
 
     public static function setter()

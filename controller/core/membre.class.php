@@ -8,7 +8,7 @@ abstract class membre
     use debugable;
     use settable;
     use injectable;
-    
+
     public static $_id;
     public static $_log;
     public static $_token_1;

@@ -8,7 +8,7 @@ class invokee
     use debugable;
     use settable;
     use injectable;
-    
+
     public static function require_local_model()
     {
         self::init_required();
