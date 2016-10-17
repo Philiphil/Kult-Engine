@@ -6,13 +6,17 @@ class invokee
 {
     use singleton;
     use debugable;
-
+    use settable;
+    use injectable;
+    
     public static function require_local_model()
     {
+        self::init_required();
     }
 
     public static function require_external_basics()
     {
+        self::init_required();
         require_once constant('vendorpath').'syslog.php';
         require_once constant('vendorpath').'password_hash.php';
     }

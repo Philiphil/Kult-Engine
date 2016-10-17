@@ -4,18 +4,18 @@ namespace kult_engine;
 
 
 
-class invoker
+abstract class invoker
 {
     public static function require_basics($fnord = '', $ext = null)
     {
         switch ($fnord) {
-   case '':
-   $fnord = '../';
-   break;
-   case 'api':
-   $fnord = '../../';
-   break;
- }
+           case '':
+           $fnord = '../';
+           break;
+           case 'api':
+           $fnord = '../../';
+           break;
+         }
 
         include_once $fnord.'config.php';
         self::setter();
@@ -24,11 +24,13 @@ class invoker
         require_once constant('corepath').'fonction.php';
         require_once constant('corepath').'debugable.trait.php';
         require_once constant('corepath').'singleton.trait.php';
+        require_once constant('corepath').'settable.trait.php';
+        require_once constant('corepath').'injectable.trait.php';
         require_once constant('corepath').'debuger.class.php';
-        debuger::setter();
+        debuger::init();
 
         require_once constant('imptpath').'invokee.class.php';
-        invokee::setter();
+        invokee::init();
 
         require_once constant('corepath').'logger.class.php';
 
@@ -37,43 +39,44 @@ class invoker
 
         require_once constant('corepath').'connector.factory.php';
         require_once constant('imptpath').'connector.class.php';
-        connector::setter();
+        connector::init();
 
         require_once constant('corepath').'router.php';
         require_once constant('imptpath').'route.php';
-        router::setter();
+        router::init();
 
         require_once constant('imptpath').'page.class.php';
 
         require_once constant('corepath').'membre.class.php';
 
         session_start();
-        membre::setter();
+        membre::init();
         self::require_mods($ext);
     }
 
     public static function require_lightweight($fnord = '', $core = null, $ext = null)
     {
         switch ($fnord) {
-    case '':
-    $fnord = '../';
-    break;
-    case 'api':
-    $fnord = '../../';
-    break;
-  }
+            case '':
+            $fnord = '../';
+            break;
+            case 'api':
+            $fnord = '../../';
+            break;
+        }
         include_once $fnord.'config.php';
         self::setter();
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
         require_once constant('corepath').'fonction.php';
         require_once constant('corepath').'debugable.trait.php';
         require_once constant('corepath').'singleton.trait.php';
+        require_once constant('corepath').'settable.trait.php';
         require_once constant('imptpath').'invokee.class.php';
-        invokee::setter();
+        invokee::init();
         if (is_array($core)) {
             if (\in_array('debuger', $core)) {
                 require_once constant('corepath').'debuger.class.php';
-                debuger::setter();
+                debuger::init();
             }
             if (\in_array('logger', $core)) {
                 require_once constant('corepath').'logger.class.php';
@@ -87,13 +90,13 @@ class invoker
             if (\in_array('connector', $core)) {
                 require_once constant('corepath').'connector.factory.php';
                 require_once constant('imptpath').'connector.class.php';
-                connector::setter();
+                connector::init();
             }
 
             if (\in_array('router', $core)) {
                 require_once constant('corepath').'router.php';
                 require_once constant('imptpath').'route.php';
-                router::setter();
+                router::init();
             }
 
             if (\in_array('page', $core)) {
@@ -103,7 +106,7 @@ class invoker
             if (\in_array('session', $core)) {
                 require_once constant('imptpath').'membre.class.php';
                 session_start();
-                membre::setter();
+                membre::init();
             } else {
                 session_start();
             }
@@ -149,13 +152,13 @@ class invoker
         }
         $filespace = '/';
         switch (config::$systeme) {
-    case 'windows':
-    $filespace = '\\';
-    break;
-    case 'linux':
-    $filespace = '/';
-    break;
-  }
+            case 'windows':
+            $filespace = '\\';
+            break;
+            case 'linux':
+            $filespace = '/';
+            break;
+        }
         config::$config = config::$config == 1 ? config::$webfolder.$filespace : '';
         $base = substr(config::$file, 0, -strlen($filespace.config::$config.'config.php'));
         define('viewpath', $base.$filespace.config::$webfolder.$filespace);

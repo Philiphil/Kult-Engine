@@ -4,10 +4,13 @@ namespace kult_engine;
 
 use kult_engine as k;
 
-class router
+abstract class router
 {
     use debugable;
     use singleton;
+    use settable;
+    use injectable;
+    
     public static $_a_asked;
     public static $_asked;
     public static $_method;
@@ -28,6 +31,7 @@ class router
 
     public static function read_asked($brut)
     {
+        self::init_required();
         if (k\contains('|<\\_**_', $brut)) {
             trigger_error('"|<\\_**_" is reserved by kult_engine\\router', E_USER_ERROR);
         }
@@ -52,11 +56,13 @@ class router
 
     public static function set_route($route, $func, $method = 'GET')
     {
+        self::init_required();
         self::$_route[count(self::$_route)] = [$route, $func, strtoupper($method)];
     }
 
     public static function exec()
     {
+        self::init_required();
         if (self::$_global_routing) {
             self::disable_global_routing();
             foreach (self::$_global_route as $route) {
@@ -71,6 +77,7 @@ class router
 
     public static function exec_route($route)
     {
+        self::init_required();
         if ($route[2] === self::$_method) {
             $tmp = self::is_route_applicable($route[0]);
             if ($tmp !== 0) {
@@ -81,12 +88,14 @@ class router
 
     public static function disable_global_routing($bool = 0)
     {
+        self::init_required();
         self::$_global_routing = $bool;
     }
 
 
     public static function is_route_applicable($route)
     {
+        self::init_required();
         $translated_route = self::read_asked($route);
         $args = [];
 

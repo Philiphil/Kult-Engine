@@ -2,10 +2,13 @@
 
 namespace kult_engine;
 
-class debuger
+abstract class debuger
 {
     use singleton;
     use debugable;
+    use settable;
+    use injectable;
+    
     public static $_debug = 1;
 
     public static function setter()
@@ -18,6 +21,7 @@ class debuger
 
     public static function handler($errno, $errstr, $errfile, $errline)
     {
+        self::init_required();
         if (!self::$_debug) {
             if ($errno != E_USER_ERROR || $errno != E_ERROR) {
                 return;

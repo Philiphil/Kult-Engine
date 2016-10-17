@@ -2,10 +2,13 @@
 
 namespace kult_engine;
 
-class membre
+abstract class membre
 {
     use singleton;
     use debugable;
+    use settable;
+    use injectable;
+    
     public static $_id;
     public static $_log;
     public static $_token_1;

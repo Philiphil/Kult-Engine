@@ -5,7 +5,10 @@ namespace kult_engine;
 class connector extends connectorFactory
 {
     use singleton;
+    use settable;
     use debugable;
+    use injectable;
+    
     public static $_TABLE_DEMO = '`demo`';
     public static $_DEMO_ID = 'id';
 
