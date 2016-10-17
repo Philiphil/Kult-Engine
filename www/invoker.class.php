@@ -2,8 +2,6 @@
 
 namespace kult_engine;
 
-
-
 abstract class invoker
 {
     public static function require_basics($fnord = '', $ext = null)

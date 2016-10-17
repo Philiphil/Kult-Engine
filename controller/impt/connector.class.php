@@ -8,7 +8,7 @@ class connector extends connectorFactory
     use settable;
     use debugable;
     use injectable;
-    
+
     public static $_TABLE_DEMO = '`demo`';
     public static $_DEMO_ID = 'id';
 
