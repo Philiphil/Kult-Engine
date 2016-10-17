@@ -85,7 +85,6 @@ class router
         self::$_global_routing = $bool;
     }
 
-
     public static function is_route_applicable($route)
     {
         $translated_route = self::read_asked($route);
