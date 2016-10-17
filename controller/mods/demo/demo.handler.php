@@ -1,5 +1,4 @@
 <?php
-	class demo{
-
-
-	}
+    class demo
+    {
+    }
