@@ -10,7 +10,7 @@ abstract class router
     use singleton;
     use settable;
     use injectable;
-    
+
     public static $_a_asked;
     public static $_asked;
     public static $_method;
@@ -78,7 +78,7 @@ abstract class router
     public static function exec_route($route)
     {
         self::init_required();
-        if ($route[2] === self::$_method || $route[2] === "*") {
+        if ($route[2] === self::$_method || $route[2] === '*') {
             $tmp = self::is_route_applicable($route[0]);
             if ($tmp !== 0) {
                 call_user_func_array($route[1], $tmp);
@@ -91,7 +91,6 @@ abstract class router
         self::init_required();
         self::$_global_routing = $bool;
     }
-
 
     public static function is_route_applicable($route)
     {
