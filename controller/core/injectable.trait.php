@@ -7,7 +7,7 @@ trait injectable
     public static function inject($dep)
     {
         foreach ($dep as $param => $value) {
-            eval(get_called_class().'::$'.$param.'=$value;');
+            static::$$param = $value;
         }
     }
 }
