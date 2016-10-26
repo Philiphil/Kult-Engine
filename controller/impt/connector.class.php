@@ -2,7 +2,7 @@
 
 namespace kult_engine;
 
-class connector extends connectorFactory
+abstract class connector extends connectorFactory
 {
     use singleton;
     use settable;

@@ -2,7 +2,7 @@
 
 namespace kult_engine;
 
-class logger
+abstract class logger
 {
     use singleton;
     use debuggable;

@@ -2,7 +2,7 @@
 
 namespace kult_engine;
 
-class invokee
+abstract class invokee
 {
     use singleton;
     use debuggable;
