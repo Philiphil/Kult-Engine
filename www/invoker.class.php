@@ -33,7 +33,6 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-
 namespace kult_engine;
 
 abstract class invoker
@@ -149,11 +148,10 @@ abstract class invoker
             } else {
                 session_start();
             }
-            
-            if(\in_array('inquisitor'))
-            {
-                 require_once constant('corepath').'inquisitor.class.php';
-                 inquisitor::init();
+
+            if (\in_array('inquisitor')) {
+                require_once constant('corepath').'inquisitor.class.php';
+                inquisitor::init();
             }
         } else {
             session_start();
