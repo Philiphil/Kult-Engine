@@ -56,7 +56,7 @@ Then, you can use it.
 
 So what can i do ?
 first,
-  use kult_engine as k;
+    use kult_engine as k;
 not required, but if you want to have to type kult_engine\ everytime you got something to do, that's not my problem.
 
 you can
