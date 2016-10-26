@@ -49,42 +49,42 @@ QUICKSTART :
 
 So, how does it work ?
 in order to use the framework, all you have to do is.
-require('invoker.class.php');
-kult_engine\invoker::require_basics();
+  require('invoker.class.php');
+  kult_engine\invoker::require_basics();
 
 Then, you can use it.
 
 So what can i do ?
 first,
-use kult_engine as k;
+  use kult_engine as k;
 not required, but if you want to have to type kult_engine\ everytime you got something to do, that's not my problem.
 
 you can
-k\get_text('text');
+  k\get_text('text');
 in order to get the most appropriate for the user's langage string which have "text" for key in controller/impt/lang.php
 
-k\page::standardpage_head();
+  k\page::standardpage_head();
 in order to display html <head>
 
-k\router::set_route('*', function(){echo 'helloworld';}, 'GET');
+  k\router::set_route('*', function(){echo 'helloworld';}, 'GET');
 in order to display helloworld everytime somebody is accessing the page.
 
-k\membre::login_required();
+  k\membre::login_required();
 in order to redirect not log'd users to your login page.
 
-k\inquisitor::add_deny();
+  k\inquisitor::add_deny();
 in order to prevent the user from accessing your site
 
-k\inquisitor::add_tmp();
+  k\inquisitor::add_tmp();
 in order to prevent your site from bruteforce.
 
 then when you get bored with php, you can
-<input type='text' k-caching='uniquekey'>
+  <input type='text' k-caching='uniquekey'>
 in order to cache this input.
 
 then when you remember that you cant do anything with html, you can
-var sender = new ReqAjax('req', 'param');
-sender.send(UrlAjax.WhateverYouDefined, function(callback){ ... });
+  var sender = new ReqAjax('req', 'param');
+  sender.send(UrlAjax.WhateverYouDefined, function(callback){ ... });
 in order to send an ajax request to WhateverYouDefined in UrlAjax with "req" and "param" as parametter.
 "req" should be the key that will define the function to launch, and param should be parametters of this functions.
 
