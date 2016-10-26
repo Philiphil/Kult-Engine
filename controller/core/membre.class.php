@@ -9,10 +9,10 @@ abstract class membre
     use settable;
     use injectable;
 
-    public static $_id=null;
-    public static $_log=0;
-    public static $_token_1=null;
-    public static $_token_2=null;
+    public static $_id = null;
+    public static $_log = 0;
+    public static $_token_1 = null;
+    public static $_token_2 = null;
 
     public static function setter()
     {
