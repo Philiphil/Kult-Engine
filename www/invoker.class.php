@@ -20,12 +20,14 @@ abstract class invoker
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
 
         require_once constant('corepath').'fonction.php';
-        require_once constant('corepath').'debugable.trait.php';
+        require_once constant('corepath').'debuggable.trait.php';
         require_once constant('corepath').'singleton.trait.php';
         require_once constant('corepath').'settable.trait.php';
         require_once constant('corepath').'injectable.trait.php';
-        require_once constant('corepath').'debuger.class.php';
-        debuger::init();
+        require_once constant('corepath').'inquisitable.trait.php';
+
+        require_once constant('corepath').'debugger.class.php';
+        debugger::init();
 
         require_once constant('imptpath').'invokee.class.php';
         invokee::init();
@@ -46,9 +48,11 @@ abstract class invoker
         require_once constant('imptpath').'page.class.php';
 
         require_once constant('corepath').'membre.class.php';
+        require_once constant('corepath').'inquisitor.class.php';
 
         session_start();
         membre::init();
+        inquisitor::init();
         self::require_mods($ext);
     }
 
@@ -66,15 +70,15 @@ abstract class invoker
         self::setter();
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
         require_once constant('corepath').'fonction.php';
-        require_once constant('corepath').'debugable.trait.php';
+        require_once constant('corepath').'debuggable.trait.php';
         require_once constant('corepath').'singleton.trait.php';
         require_once constant('corepath').'settable.trait.php';
         require_once constant('imptpath').'invokee.class.php';
         invokee::init();
         if (is_array($core)) {
-            if (\in_array('debuger', $core)) {
-                require_once constant('corepath').'debuger.class.php';
-                debuger::init();
+            if (\in_array('debugger', $core)) {
+                require_once constant('corepath').'debugger.class.php';
+                debugger::init();
             }
             if (\in_array('logger', $core)) {
                 require_once constant('corepath').'logger.class.php';

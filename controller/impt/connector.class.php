@@ -6,7 +6,7 @@ class connector extends connectorFactory
 {
     use singleton;
     use settable;
-    use debugable;
+    use debuggable;
     use injectable;
 
     public static $_TABLE_DEMO = '`demo`';

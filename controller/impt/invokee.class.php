@@ -5,7 +5,7 @@ namespace kult_engine;
 class invokee
 {
     use singleton;
-    use debugable;
+    use debuggable;
     use settable;
     use injectable;
 

@@ -6,18 +6,18 @@ use kult_engine as k;
 
 abstract class router
 {
-    use debugable;
+    use debuggable;
     use singleton;
     use settable;
     use injectable;
 
-    public static $_a_asked;
-    public static $_asked;
-    public static $_method;
-    public static $_route;
-    public static $_global_route;
+    public static $_a_asked = array();
+    public static $_asked = "";
+    public static $_method = "GET";
+    public static $_route = array();
+    public static $_global_route = array();
     public static $_argex = '|<!';
-    private static $_auto_executor;
+    private static $_auto_executor = null;
     public static $_global_routing = 1;
 
     public static function setter()

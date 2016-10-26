@@ -5,7 +5,7 @@ namespace kult_engine;
 class logger
 {
     use singleton;
-    use debugable;
+    use debuggable;
     public static $_max = 200;
 
     public static function write($fnord)
