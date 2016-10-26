@@ -33,6 +33,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
+
 namespace kult_engine;
 
 abstract class invoker
@@ -106,6 +107,9 @@ abstract class invoker
         require_once constant('corepath').'debuggable.trait.php';
         require_once constant('corepath').'singleton.trait.php';
         require_once constant('corepath').'settable.trait.php';
+        require_once constant('corepath').'injectable.trait.php';
+        require_once constant('corepath').'inquisitable.trait.php';
+
         require_once constant('imptpath').'invokee.class.php';
         invokee::init();
         if (is_array($core)) {
@@ -139,11 +143,17 @@ abstract class invoker
             }
 
             if (\in_array('session', $core)) {
-                require_once constant('imptpath').'membre.class.php';
+                require_once constant('corepath').'membre.class.php';
                 session_start();
                 membre::init();
             } else {
                 session_start();
+            }
+            
+            if(\in_array('inquisitor'))
+            {
+                 require_once constant('corepath').'inquisitor.class.php';
+                 inquisitor::init();
             }
         } else {
             session_start();
