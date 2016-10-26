@@ -22,7 +22,7 @@ abstract class debugger
     public static function handler($errno, $errstr, $errfile, $errline)
     {
         self::init_required();
-        
+
         if (!self::$_debug) {
             if ($errno != E_USER_ERROR || $errno != E_ERROR) {
                 return;
@@ -47,8 +47,7 @@ abstract class debugger
             $f->invoke(null);
         }
         if ($errno == E_USER_ERROR || $errno == E_ERROR) {
-            if($errno == E_USER_ERROR )
-            {
+            if ($errno == E_USER_ERROR) {
                 self::inquisite('flag');
             }
             die;

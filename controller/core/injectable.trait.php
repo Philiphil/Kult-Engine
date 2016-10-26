@@ -13,9 +13,9 @@ trait injectable
 
     public static function inject_default_state()
     {
-    	# Needs to be overide in order to work with static properties
+        // Needs to be overide in order to work with static properties
         $reflection = new \ReflectionClass(get_called_class());
-        $fnord=$reflection->getDefaultProperties();
+        $fnord = $reflection->getDefaultProperties();
         foreach ($fnord as $param => $value) {
             static::$$param = $value;
         }

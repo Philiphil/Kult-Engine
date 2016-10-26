@@ -11,11 +11,11 @@ abstract class router
     use settable;
     use injectable;
 
-    public static $_a_asked = array();
-    public static $_asked = "";
-    public static $_method = "GET";
-    public static $_route = array();
-    public static $_global_route = array();
+    public static $_a_asked = [];
+    public static $_asked = '';
+    public static $_method = 'GET';
+    public static $_route = [];
+    public static $_global_route = [];
     public static $_argex = '|<!';
     private static $_auto_executor = null;
     public static $_global_routing = 1;
