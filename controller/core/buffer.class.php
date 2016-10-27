@@ -1,64 +1,94 @@
 <?php
 
+/*
+ * Kult Engine
+ * PHP framework
+ *
+ * MIT License
+ *
+ * Copyright (c) 2016
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * @package Kult Engine
+ * @author Théo Sorriaux (philiphil)
+ * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @license MIT
+ * @link https://github.com/Philiphil/Kult-Engine
+ */
+
 namespace kult_engine;
 
 abstract class buffer
 {
-	use debuggable;
+    use debuggable;
     use singleton;
     use settable;
     use injectable;
-	public static $_is_buffering_on = 0;
-	private static $_auto_executor = null;
+    public static $_is_buffering_on = 0;
+    private static $_auto_executor = null;
 
-	public static function setter()
-	{
-		self::store();
-		self::$_auto_executor = new buffer_executor();
-	}
+    public static function setter()
+    {
+        self::store();
+        self::$_auto_executor = new buffer_executor();
+    }
 
-	public static function store()
-	{
-		if(!self::$_is_buffering_on)
-		{
-			self::$_is_buffering_on = 1;
-			mb_http_output("UTF-8");
-			ob_start("mb_output_handler");
-		}
-	}
+    public static function store()
+    {
+        if (!self::$_is_buffering_on) {
+            self::$_is_buffering_on = 1;
+            mb_http_output('UTF-8');
+            ob_start('mb_output_handler');
+        }
+    }
 
-	public static function get()
-	{
-		if(self::$_is_buffering_on)
-		{
-			self::$_is_buffering_on = 0;
-			return ob_get_clean();
-		}
-	}
+    public static function get()
+    {
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = 0;
 
-	public static function delete()
-	{
-		if(self::$_is_buffering_on)
-		{
-			self::$_is_buffering_on = 0;
-			ob_clean();
-		}
-	}
+            return ob_get_clean();
+        }
+    }
 
-	public static function send()
-	{
-		if(self::$_is_buffering_on)
-		{
-			self::$_is_buffering_on = 0;
-			ob_end_flush();
-		}
-	}
+    public static function delete()
+    {
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = 0;
+            ob_clean();
+        }
+    }
+
+    public static function send()
+    {
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = 0;
+            ob_end_flush();
+        }
+    }
 }
 
 class buffer_executor
 {
-	public function __destruct()
-	{
-		buffer::send();
-	}
+    public function __destruct()
+    {
+        buffer::send();
+    }
 }
