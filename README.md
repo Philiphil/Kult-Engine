@@ -8,7 +8,7 @@ Lightweight yet powerful; Kult-engine provides sets of tools for a website's com
 
 ##Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim/Cake ... ?
 Dont.
-- I've made Kult-Engine for myself, because i needed a lightweight framework with only the necessary ordinary tools for a website  
+I've made Kult-Engine for myself, because i needed a lightweight framework with only the necessary ordinary tools for a website  
 - I didnt want to have to learn everything about a complex architecture in order to be able to 'hello world' 
 - I didnt want a ton of helper that i wont use anyway  
 - I didnt want 'use legit_namespace\somewhat_legit_sub_namespace\useless_sub_sub_namespace\classname\classname;' 8 times in every file 
@@ -55,7 +55,7 @@ in order to use the framework, all you have to do is.
 ```
 Then, you can use it.
 
-So what can i do ?
+###So what can i do ?  
 first,
 ```
     use kult_engine as k;
