@@ -69,10 +69,9 @@ namespace kult_engine;
 
 
 
-    function get_text($texte)
+    function get_text($texte, $lang=null)
     {
-        $lang = get_lang();
+        $lang = is_null($lang) ? get_lang() : $lang;
         $array = textes();
-
         return isset($array[$lang][$texte]) ? $array[$lang][$texte] : $texte;
     }

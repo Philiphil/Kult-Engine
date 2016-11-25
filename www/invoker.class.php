@@ -190,7 +190,7 @@ abstract class invoker
             self::config_autoload();
         }
 
-        if (!class_exists(config::class)) {
+        if (!class_exists(config::class, false)) {
             trigger_error('config file not found', E_USER_ERROR);
         }
         $filespace = '/';
@@ -208,10 +208,12 @@ abstract class invoker
         define('modelpath', $base.$filespace.config::$modelfolder.$filespace);
         define('controllerpath', $base.$filespace.config::$controllerfolder.$filespace);
         define('vendorpath', constant('controllerpath').'vendor'.$filespace);
+
         define('modpath', constant('controllerpath').'mods'.$filespace);
 
         define('corepath', constant('controllerpath').'core'.$filespace);
         define('imptpath', constant('controllerpath').'impt'.$filespace);
+        define('optnpath', constant('controllerpath').'optn'.$filespace);
 
         define('htmlpath', config::$htmlfolder);
         define('filespace', $filespace);
@@ -227,7 +229,8 @@ abstract class invoker
         $prefix[1] = constant('imptpath');
         $prefix[2] = constant('vendorpath');
         $prefix[3] = constant('controllerpath');
-        $prefix[4] = constant('modpath').$className.constant('filespace');
+        $prefix[4] = constant('optnpath');
+        $prefix[5] = constant('modpath').$className.constant('filespace');
         $sufix[0] = '';
         $sufix[1] = '.class';
         $sufix[2] = '.trait';
