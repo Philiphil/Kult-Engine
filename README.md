@@ -1,59 +1,54 @@
-# Kult-Engine
-Kult-Engine is a full-stack framework
-Its goal is to be a base design to fit every website.
-Lightweight yet powerful; Kult-engine provides sets of tools for a website's common task.
+# Kult Engine
+Kult-Engine is a full-stack framework.
+Its goal is to be lightweight, easy to configure/install/run, fit every website and provide sets of powerful tools for common task.
 
 >PHP : 7  
 >Version : BETA
 
 ##Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim/Cake ... ?
 Dont.
-I've made Kult-Engine for myself, because i needed a lightweight framework with only the necessary ordinary tools for a website  
-- I didnt want to have to learn everything about a complex architecture in order to be able to 'hello world' 
-- I didnt want a ton of helper that i wont use anyway  
-- I didnt want 'use legit_namespace\somewhat_legit_sub_namespace\useless_sub_sub_namespace\classname\classname;' 8 times in every file 
-- I didnt want something too different than vanilla PHP. 
-- I didnt want to have to use linux, have to install 3 software on it, run 3 commands and then install the framework 
+I've made Kult-Engine for myself, because i didnt want to use those frameworks.
+- I didnt want to have to learn everything about a complex software in order to be able to "hello world", I mean : Come on ; The whole purpose of a framework is to help me to code quickly
+- I didnt want a ton of heavy and useless helpers that i wont use unless i'm forced to.
+- I didnt want to have to write 'use legit_namespace\somewhat_legit_sub_namespace\useless_sub_sub_namespace\classname\classname;' 8 times in every file, no matter what PSR XXVIII told
+- I didnt want something too far from vanilla PHP, I mean, if you hate PHP this much, dont use it
+- I didnt want to be required to use linux, install 3 softwares and  run 13 commands in order to get a folder full of .php files, what is wrong with you people ?
 
-I just wanted a set of simple tools that fits common use, how hard is it ?
 
-Since the list of things that i dont want goes on and on; 
-Since this list applies almost everywhere;  
-Since no one is complaining about it; 
-You probably shouldn't use Kult-Engine. 
+Since this list goes on and on;
+Since this list applies almost everywhere;
+Since no one seems to complain about it;
+You probably should not use the Kult Engine.
 
 ##Features
-- Easy to use  
-- Easy to learn  
-- Fast 
-- Light Weight 
-- Easily extendible  
+- Easy to use, to learn, to install and to run.
+- Lightweight and Fast.
 - REST class 
 - DB connector class 
 - Logger class 
 - Debugger class 
-- Multi-lang 
+- Multi-lang class and functions
 - Caching for html inputs. 
 - Ajax Class 
 - Injector class 
 - Templating 
-- More to come.  
-
-###Features to come :
-- Sanitizer.
-- Better page class
-- Better db connector class
-- Beter session classes.
+- and more.
 
 ##QUICKSTART :
 
-###So, how does it work ?
-in order to use the framework, all you have to do is.
+###How to install ?
+Just download it.
+###How to make it run ?
+Extract it to your site's root folder and edit config.php
+###How to make it work ?
+Well, in your files add 
 ```
   require('invoker.class.php');
   kult_engine\invoker::require_basics();
 ```
-Then, you can use it.
+###How ...
+Well, take a look at the wiki. (although its not done yet)
+(since its not done yet here's what old readme.md used to say : )
 
 ###So what can i do ?  
 first,
