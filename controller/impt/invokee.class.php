@@ -50,8 +50,6 @@ abstract class invokee
     public static function require_external_basics()
     {
         self::init_required();
-        require_once constant('vendorpath').'syslog.php';
-        require_once constant('vendorpath').'password_hash.php';
     }
 
     public static function setter()
