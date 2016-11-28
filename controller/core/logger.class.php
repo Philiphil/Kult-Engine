@@ -39,35 +39,6 @@ abstract class logger
 {
     use singleton;
     use debuggable;
-    public static $_max = 200;
-
-    public static function write($fnord)
-    {
-        $line = self::get_standard_header();
-        self::$_max -= strlen($line);
-
-        $number = round((strlen($fnord) / self::$_max), 0, PHP_ROUND_HALF_UP) + 1;
-        $array = [];
-
-        for ($i = 0; $i < $number; $i++) {
-            $y = 1 + $i;
-            $array[$i] = utf8_to_safe(substr($fnord, 0, self::$_max));
-            $fnord = substr($fnord, self::$_max);
-        }
-
-        if ($array[count($array) - 1] == '') {
-            unset($array[count($array) - 1]);
-        }
-
-        $i = 0;
-        foreach ($array as $key) {
-            $i++;
-            $msg = $line.':'.'['.$i.'/'.count($array).']'.$key;
-            $syslog = new Syslog();
-            $syslog->SetMsg($msg);
-            $retour = $syslog->Send();
-        }
-    }
 
     public static function get_standard_header()
     {
