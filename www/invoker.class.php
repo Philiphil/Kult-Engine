@@ -78,12 +78,14 @@ abstract class invoker
         require_once constant('imptpath').'route.php';
         router::init();
 
+        require_once constant('corepath'). 'buffer.class.php';
         require_once constant('imptpath').'page.class.php';
 
         require_once constant('corepath').'membre.class.php';
         require_once constant('corepath').'inquisitor.class.php';
 
         session_start();
+        buffer::init();
         membre::init();
         inquisitor::init();
         self::require_mods($ext);
@@ -141,20 +143,22 @@ abstract class invoker
                 require_once constant('imptpath').'page.class.php';
             }
 
+            session_start();
+            require_once constant('corepath').'buffer.class.php';
+            buffer::init();
+
             if (\in_array('session', $core)) {
                 require_once constant('corepath').'membre.class.php';
-                session_start();
                 membre::init();
-            } else {
-                session_start();
-            }
-
+            } 
             if (\in_array('inquisitor')) {
                 require_once constant('corepath').'inquisitor.class.php';
                 inquisitor::init();
             }
         } else {
             session_start();
+            require_once constant('corepath').'buffer.class.php';
+            buffer::init();
         }
         if (is_array($ext)) {
             self::require_mods($ext);
