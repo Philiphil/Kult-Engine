@@ -78,7 +78,7 @@ abstract class invoker
         require_once constant('imptpath').'route.php';
         router::init();
 
-        require_once constant('corepath'). 'buffer.class.php';
+        require_once constant('corepath').'buffer.class.php';
         require_once constant('imptpath').'page.class.php';
 
         require_once constant('corepath').'membre.class.php';
@@ -150,7 +150,7 @@ abstract class invoker
             if (\in_array('session', $core)) {
                 require_once constant('corepath').'membre.class.php';
                 membre::init();
-            } 
+            }
             if (\in_array('inquisitor')) {
                 require_once constant('corepath').'inquisitor.class.php';
                 inquisitor::init();
