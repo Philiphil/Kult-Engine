@@ -54,7 +54,6 @@ abstract class invokee
 
     public static function setter()
     {
-        
         define('host', config::$host);
         define('db', config::$db);
         define('user', config::$user);
