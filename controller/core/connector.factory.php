@@ -37,7 +37,7 @@ namespace kult_engine;
 
 abstract class connectorFactory
 {
-    protected static $_db = null;
+    public static $_db = null;
     protected static $_DB_HOST = host;
     protected static $_DB_NAME = db;
     protected static $_DB_USER = user;

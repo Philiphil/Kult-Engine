@@ -54,10 +54,13 @@ abstract class invokee
 
     public static function setter()
     {
+        
         define('host', config::$host);
         define('db', config::$db);
         define('user', config::$user);
         define('pass', config::$pass);
+        require_once constant('imptpath').'connector.class.php';
+        connector::init();
 
         self::require_local_model();
         self::require_external_basics();

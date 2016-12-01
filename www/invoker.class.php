@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Kult Engine
  * PHP framework
  *
@@ -71,8 +71,6 @@ abstract class invoker
         require_once constant('corepath').'texte.script.php';
 
         require_once constant('corepath').'connector.factory.php';
-        require_once constant('imptpath').'connector.class.php';
-        connector::init();
 
         require_once constant('corepath').'router.php';
         require_once constant('imptpath').'route.php';
@@ -125,12 +123,6 @@ abstract class invoker
             if (\in_array('lang', $core)) {
                 require_once constant('imptpath').'lang.php';
                 require_once constant('corepath').'texte.script.php';
-            }
-
-            if (\in_array('connector', $core)) {
-                require_once constant('corepath').'connector.factory.php';
-                require_once constant('imptpath').'connector.class.php';
-                connector::init();
             }
 
             if (\in_array('router', $core)) {

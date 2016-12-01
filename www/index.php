@@ -43,6 +43,5 @@ k\page::standardpage_body_begin();
 
 echo k\get_text('hello');
 
-
 k\page::standardpage_body_end();
 k\page::standardpage_footer();
