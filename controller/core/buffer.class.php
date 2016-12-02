@@ -52,6 +52,7 @@ abstract class buffer
 
     public static function store()
     {
+        self::init_required();
         if (!self::$_is_buffering_on) {
             self::$_is_buffering_on = 1;
             mb_http_output('UTF-8');
@@ -61,6 +62,7 @@ abstract class buffer
 
     public static function get()
     {
+        self::init_required();
         if (self::$_is_buffering_on) {
             self::$_is_buffering_on = 0;
 
@@ -70,6 +72,7 @@ abstract class buffer
 
     public static function delete()
     {
+        self::init_required();
         if (self::$_is_buffering_on) {
             self::$_is_buffering_on = 0;
             ob_clean();
@@ -78,6 +81,7 @@ abstract class buffer
 
     public static function send()
     {
+        self::init_required();
         if (self::$_is_buffering_on) {
             self::$_is_buffering_on = 0;
             ob_end_flush();

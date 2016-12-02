@@ -57,6 +57,7 @@ abstract class inquisitor
 
     public static function save()
     {
+        self::init_required();
         $_SESSION['watcher'] = self::$_watcher;
         $_SESSION['flag'] = self::$_flag;
         $_SESSION['deny'] = self::$_deny;
@@ -65,6 +66,7 @@ abstract class inquisitor
 
     public static function compute()
     {
+        self::init_required();
         if (isset(self::$_tempo['time'])) {
             if (time() - self::$_tempo['time'] > 60 * 5) {
                 unset(self::$_tempo['time']);
@@ -88,6 +90,7 @@ abstract class inquisitor
 
     public static function add_tmp()
     {
+        self::init_required();
         self::$_tempo['time'] = time();
         self::$_tempo['flags'] = isset(self::$_tempo['flags']) ? self::$_tempo['flags'] + 1 : 1;
         sleep(1);
@@ -96,18 +99,21 @@ abstract class inquisitor
 
     public static function add_watcher()
     {
+        self::init_required();
         self::$_watcher++;
         self::compute();
     }
 
     public static function add_flag()
     {
+        self::init_required();
         self::$_flag++;
         self::compute();
     }
 
     public static function add_deny()
     {
+        self::init_required();
         self::$_deny++;
         self::compute();
     }

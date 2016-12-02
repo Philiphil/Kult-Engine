@@ -48,7 +48,16 @@ trait settable
             return 0;
         }
         trigger_error(get_called_class().' ALREADY SET');
+        return 1;
+    }
 
+    public static function uninit()
+    {
+        if (static::$set) {
+            static::$set =0;
+            return 0;
+        }
+        trigger_error(get_called_class().' NOT SET YET');
         return 1;
     }
 

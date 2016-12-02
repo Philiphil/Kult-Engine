@@ -45,6 +45,7 @@ abstract class invokee
     public static function require_local_model()
     {
         self::init_required();
+        require_once constant('optnpath').'daoableObject.class.php';
     }
 
     public static function require_external_basics()
@@ -54,14 +55,15 @@ abstract class invokee
 
     public static function setter()
     {
+        self::require_local_model();
+        self::require_external_basics();
+
         define('host', config::$host);
         define('db', config::$db);
         define('user', config::$user);
         define('pass', config::$pass);
+        
         require_once constant('imptpath').'connector.class.php';
         connector::init();
-
-        self::require_local_model();
-        self::require_external_basics();
     }
 }

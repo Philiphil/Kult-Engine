@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Kult Engine
  * PHP framework
  *
@@ -58,6 +58,8 @@ abstract class invoker
         require_once constant('corepath').'settable.trait.php';
         require_once constant('corepath').'injectable.trait.php';
         require_once constant('corepath').'inquisitable.trait.php';
+        require_once constant('corepath').'connector.factory.php';
+        require_once constant('corepath').'queryable.trait.php';
 
         require_once constant('corepath').'debugger.class.php';
         debugger::init();
@@ -66,11 +68,10 @@ abstract class invoker
         invokee::init();
 
         require_once constant('corepath').'logger.class.php';
+        logger::init();
 
         require_once constant('imptpath').'lang.php';
         require_once constant('corepath').'texte.script.php';
-
-        require_once constant('corepath').'connector.factory.php';
 
         require_once constant('corepath').'router.php';
         require_once constant('imptpath').'route.php';
@@ -78,7 +79,6 @@ abstract class invoker
 
         require_once constant('corepath').'buffer.class.php';
         require_once constant('imptpath').'page.class.php';
-
         require_once constant('corepath').'membre.class.php';
         require_once constant('corepath').'inquisitor.class.php';
 
@@ -108,6 +108,8 @@ abstract class invoker
         require_once constant('corepath').'settable.trait.php';
         require_once constant('corepath').'injectable.trait.php';
         require_once constant('corepath').'inquisitable.trait.php';
+        require_once constant('corepath').'connector.factory.php';
+        require_once constant('corepath').'queryable.trait.php';
 
         require_once constant('imptpath').'invokee.class.php';
         invokee::init();
@@ -118,6 +120,7 @@ abstract class invoker
             }
             if (\in_array('logger', $core)) {
                 require_once constant('corepath').'logger.class.php';
+                logger::init();
             }
 
             if (\in_array('lang', $core)) {
@@ -216,6 +219,7 @@ abstract class invoker
         define('contentpath', constant('htmlpath').'content/');
         define('imagepath', constant('contentpath').'images/');
         define('debug', config::$debug);
+        define('logfile', config::$log);
     }
 
     public static function loader($className)

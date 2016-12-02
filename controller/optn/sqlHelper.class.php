@@ -75,7 +75,7 @@ class sqlHelper
         return $r;
     }
 
-    public function update_int($table, $haystack, $needle, $cat, $id = null)
+    public function update_int($table, $haystack, $needle='id', $cat, $id = null)
     {
         $cat = is_array($cat) ? $cat : [$cat];
         $id = is_null($id) ? $cat : $id;
@@ -95,5 +95,15 @@ class sqlHelper
     public function delete($table, $cat, $id = 'id')
     {
         return 'DELETE FROM '.$this->table_quoted($table).' WHERE '.$this->table_quoted($cat).' = :'.$id;
+    }
+
+    public function select_last($table,$cat)
+    {
+        return 'SELECT * FROM  '.$this->table_quoted($table).'WHERE 1=1 ORDER BY '.$cat.' DESC LIMIT 1';
+    }
+
+    public function select_all($table)
+    {
+        return 'SELECT * FROM  '.$this->table_quoted($table).'WHERE 1=1';
     }
 }

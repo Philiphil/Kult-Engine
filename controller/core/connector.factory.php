@@ -37,7 +37,7 @@ namespace kult_engine;
 
 abstract class connectorFactory
 {
-    public static $_db = null;
+    protected static $_db = null;
     protected static $_DB_HOST = host;
     protected static $_DB_NAME = db;
     protected static $_DB_USER = user;
@@ -52,5 +52,10 @@ abstract class connectorFactory
         self::$_db = new \pdo('mysql:dbname='.self::$_DB_NAME.';host='.self::$_DB_HOST.';charset=utf8mb4', self::$_DB_USER, self::$_DB_PASS);
         self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         self::$_db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+    }
+
+    public static function query($fnord)
+    {
+        return self::$_db->prepare($fnord);
     }
 }

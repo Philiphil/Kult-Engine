@@ -39,9 +39,22 @@ abstract class logger
 {
     use singleton;
     use debuggable;
+    use settable;
+    use injectable;
+    public static $_file = null;
+
+    public static function setter()
+    {
+        self::$_file = constant('logfile');
+        if( self::$_file === '' || is_null(self::$_file) || !file_exists(self::$_file))
+        {
+            self::uninit();
+        }
+    }
 
     public static function get_standard_header()
     {
+        self::init_required();
         $line = '';
         $line .= '['.$_SERVER['HTTP_USER_AGENT'];
         $line .= ']['.$_SERVER['REMOTE_ADDR'];
@@ -53,8 +66,9 @@ abstract class logger
         return $line;
     }
 
-    public static function write_local($fnord)
+    public static function write_local($fnord=null)
     {
+        self::init_required();
         $file = constant('controllerpath').'log.kult';
         $line = self::get_standard_header();
         $line .= ':'.$fnord;
