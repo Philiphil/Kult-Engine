@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Kult Engine
  * PHP framework
  *

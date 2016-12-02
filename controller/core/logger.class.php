@@ -46,8 +46,7 @@ abstract class logger
     public static function setter()
     {
         self::$_file = constant('logfile');
-        if( self::$_file === '' || is_null(self::$_file) || !file_exists(self::$_file))
-        {
+        if (self::$_file === '' || is_null(self::$_file) || !file_exists(self::$_file)) {
             self::uninit();
         }
     }
@@ -66,7 +65,7 @@ abstract class logger
         return $line;
     }
 
-    public static function write_local($fnord=null)
+    public static function write_local($fnord = null)
     {
         self::init_required();
         $file = constant('controllerpath').'log.kult';

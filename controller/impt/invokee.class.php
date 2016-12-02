@@ -62,7 +62,7 @@ abstract class invokee
         define('db', config::$db);
         define('user', config::$user);
         define('pass', config::$pass);
-        
+
         require_once constant('imptpath').'connector.class.php';
         connector::init();
     }
