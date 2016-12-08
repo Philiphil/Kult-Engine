@@ -51,6 +51,8 @@ abstract class invoker
         include_once $fnord.'config.php';
         self::setter();
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
+        mb_internal_encoding('UTF-8');
+        mb_http_output('UTF-8');
 
         require_once constant('corepath').'fonction.php';
         require_once constant('corepath').'debuggable.trait.php';
@@ -99,9 +101,12 @@ abstract class invoker
             $fnord = '../../';
             break;
         }
+
         include_once $fnord.'config.php';
         self::setter();
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
+        mb_internal_encoding('UTF-8');
+        mb_http_output('UTF-8');
         require_once constant('corepath').'fonction.php';
         require_once constant('corepath').'debuggable.trait.php';
         require_once constant('corepath').'singleton.trait.php';
@@ -241,12 +246,10 @@ abstract class invoker
             foreach ($sufix as $b) {
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
-
                     return true;
                 }
             }
         }
-
         return false;
     }
 }
