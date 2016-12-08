@@ -246,10 +246,12 @@ abstract class invoker
             foreach ($sufix as $b) {
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
+
                     return true;
                 }
             }
         }
+
         return false;
     }
 }
