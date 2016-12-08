@@ -128,4 +128,22 @@ class daoGenerator
         $query = $this->query($query);
         $query->execute([$fnord->id]);
     }
+
+    public function create_table($size='MEDIUMBLOB'){
+    	$query = $this->_sql->create_basic($this->_table,$this->_id,$this->_obj,$size);
+        $query = $this->query($query);
+        $query->execute();
+    }
+
+    public function delete_table(){
+    	$query = $this->_sql->drop($this->_table);
+        $query = $this->query($query);
+        $query->execute();
+    }
+
+    public function empty_table(){
+    	$query = $this->_sql->truncate($this->_table);
+        $query = $this->query($query);
+        $query->execute();
+    }
 }

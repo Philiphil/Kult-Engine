@@ -106,4 +106,23 @@ class sqlHelper
     {
         return 'SELECT * FROM  '.$this->table_quoted($table).'WHERE 1=1';
     }
+
+    public function truncate($table)
+    {
+        return 'TRUNCATE TABLE ' .$this->table_quoted($table) ;
+    }
+
+    public function drop($table)
+    {
+        return 'DROP TABLE ' .$this->table_quoted($table) ;
+    }
+
+    public function create_basic($table,$id,$obj,$size='MEDIUMBLOB')
+    {
+        $v = "CREATE TABLE ". $this->table_quoted($table);
+        $v .= " ( ";
+        $v .=  $id .' INT PRIMARY KEY NOT NULL,';
+        $v .= $obj .' '. $size . ')CHARSET=utf8mb4';
+        return $v;
+    }
 }
