@@ -47,11 +47,8 @@ namespace kult_engine;
     $javascript .= "kons.contentpath = '".constant('contentpath')."';\n";
     $javascript .= "kons.imagepath = '".constant('imagepath')."';\n";
 
-
-
     $javascript .= "var textekons = textekons || {};\n";
     $javascript .= "textekons.hello = '".get_text('hello')."';\n";
-
 
     $javascript .= "</script>\n";
     echo $javascript;

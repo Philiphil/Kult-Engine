@@ -65,10 +65,6 @@ namespace kult_engine;
         return $result;
     }
 
-
-
-
-
     function get_text($texte, $lang = null)
     {
         $lang = is_null($lang) ? get_lang() : $lang;

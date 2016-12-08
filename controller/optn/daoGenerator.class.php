@@ -43,7 +43,6 @@ class daoGenerator
     public $_id;
     private $_sql;
 
-
     public function __construct($fnord = null)
     {
         $this->_sql = new sqlHelper();
@@ -129,20 +128,23 @@ class daoGenerator
         $query->execute([$fnord->id]);
     }
 
-    public function create_table($size='MEDIUMBLOB'){
-    	$query = $this->_sql->create_basic($this->_table,$this->_id,$this->_obj,$size);
+    public function create_table($size = 'MEDIUMBLOB')
+    {
+        $query = $this->_sql->create_basic($this->_table, $this->_id, $this->_obj, $size);
         $query = $this->query($query);
         $query->execute();
     }
 
-    public function delete_table(){
-    	$query = $this->_sql->drop($this->_table);
+    public function delete_table()
+    {
+        $query = $this->_sql->drop($this->_table);
         $query = $this->query($query);
         $query->execute();
     }
 
-    public function empty_table(){
-    	$query = $this->_sql->truncate($this->_table);
+    public function empty_table()
+    {
+        $query = $this->_sql->truncate($this->_table);
         $query = $this->query($query);
         $query->execute();
     }
