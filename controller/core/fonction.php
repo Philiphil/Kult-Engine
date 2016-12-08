@@ -84,7 +84,6 @@ function is_int_legit($fnord = null)
     return 1;
 }
 
-
         function hello()
         {
             echo '<br>hello world<br>';
