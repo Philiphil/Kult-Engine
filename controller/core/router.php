@@ -142,15 +142,11 @@ abstract class router
         }
 
         for ($i = 0; $i < count($translated_route); $i++) {
-            if ($translated_route[$i] != '*' && !k\contains(self::$_argex, $translated_route[$i]) && $translated_route[$i] != self::$_a_asked[$i]) {
-                var_dump($translated_route);
-                k\echo_br();
-                var_dump(self::$_a_asked);
-
+            if ($translated_route[$i] != '*' && !k\contains(self::$_argex, $translated_route[$i]) && isset(self::$_a_asked[$i]) && $translated_route[$i] != self::$_a_asked[$i]) {
                 return 0;
             }
             if (k\contains(self::$_argex, $translated_route[$i])) {
-                $args[intval(substr($translated_route[$i], strlen(self::$_argex)))] = self::$_a_asked[$i];
+                $args[intval(substr($translated_route[$i], strlen(self::$_argex)))] = isset(self::$_a_asked[$i]) ? self::$_a_asked[$i] : null;
             }
         }
         if ($translated_route[0] === '*' && self::$_a_asked[0] === '|<\\_**_') {
