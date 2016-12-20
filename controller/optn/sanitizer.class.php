@@ -68,8 +68,63 @@ class sanitizer
 
     public function text()
     {
-        $this->_var = htmlspecialchars($this->_var);
+        $this->_var = htmlentities($this->_var);
 
+        return $this;
+    }
+
+    public function min($min)
+    {
+         $this->_var =  $this->_var < $min ? false :  $this->_var;
+         return $this;
+    }
+
+    public function max($max)
+    {
+         $this->_var =  $this->_var > $max ? false :  $this->_var;
+         return $this;
+    }
+    public function upper()
+    {
+        $this->_var = mb_strtoupper($this->_var, 'UTF-8');
+        return $this;
+    }
+
+    public function lower()
+    {
+        $this->_var = mb_strtolower($this->_var, 'UTF-8');
+        return $this;
+    }
+
+    public function upper_first()
+    {
+        $this->lower();
+        $this->_var = ucfirst($this->_var);
+        return $this;
+    }
+
+    public function upper_words()
+    {
+        $this->lower();
+        $this->_var = ucwords($this->_var);
+        return $this;
+    }
+
+    public function min_length($min)
+    {
+         $this->_var =  mb_strlen($this->_var, 'UTF-8') < $min ? false :  $this->_var;
+         return $this;
+    }
+
+    public function max_length($max)
+    {
+         $this->_var =  mb_strlen($this->_var, 'UTF-8') > $max ? false :  $this->_var;
+         return $this;
+    }
+
+    public function not_null()
+    {
+        $this->_var =  $this->_var == ""  ? false :  $this->_var;
         return $this;
     }
 }
