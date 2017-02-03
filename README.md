@@ -1,9 +1,11 @@
 # Kult Engine
-Kult-Engine is a full-stack framework.
-Its goal is to be lightweight, easy to configure/install/run, fit every website and provide sets of powerful tools for common task.
+Kult Engine is a FullStack php framework aiming to be a lightweight and easy to use/configure/install/learn set of powerful tools able to fit every website's common task and need
 
->PHP : 7  
->Version : BETA
+Kult Engine is still under development but wont be updated in this repos til July 2017.  
+A few incompatibilities might occur.
+
+PHP : 7  
+Version : BETA
 
 ##Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim/Cake ... ?
 Dont.
