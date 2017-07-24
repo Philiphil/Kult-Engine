@@ -1,7 +1,8 @@
 # Kult Engine
+
 Kult Engine is a FullStack php framework aiming to be a lightweight and easy to use/configure/install/learn set of powerful tools able to fit every website's common task and need
 
-Kult Engine is still under development but wont be updated in this repos til July 2017.  
+Kult Engine is still under development but wont be updated in this repos til October 2017.  
 A few incompatibilities might occur.
 
 PHP : 7  
@@ -51,5 +52,4 @@ Well, in your files add
   require('invoker.class.php');
   kult_engine\invoker::require_basics();
 ```
-###How ...
-Well, take a look at the wiki.
+https://www.paypal.me/TSorriaux
