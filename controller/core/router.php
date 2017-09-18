@@ -137,8 +137,8 @@ abstract class router
 
         if (count($translated_route) > count(self::$_a_asked) && (count($translated_route) - 1 == count(self::$_a_asked) && $translated_route[count($translated_route) - 1] != '*')) {
             // if route is longuer than uri, route is probably not applicable
-                //and if route is just 1 arg longuer than uri, this arg has to be *
-                return 0;
+            //and if route is just 1 arg longuer than uri, this arg has to be *
+            return 0;
         }
 
         for ($i = 0; $i < count($translated_route); $i++) {
