@@ -51,9 +51,9 @@ function timer_get()
 function is_string_legit($fnord = null, $max = 20, $min = 1, $null = 0)
 {
     //$fnord : string
-        //$max : taille max
-        //null : can be null
-        //$min : taille min
+    //$max : taille max
+    //null : can be null
+    //$min : taille min
     if ($min == 0) {
         $null = 1;
     }
@@ -76,7 +76,7 @@ function is_int_legit($fnord = null)
     /*
             fnord = int > 0
         */
-            $fnord = floatval($fnord);
+    $fnord = floatval($fnord);
     if ($fnord < 0 || $fnord == 0) {
         return 0;
     }
