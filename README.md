@@ -9,13 +9,13 @@ PHP : 7
 Version : BETA
 
 ##Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim/Cake ... ?
-Dont.
-I've made Kult-Engine for myself, because i didnt want to use those frameworks.
-- I didnt want to have to learn everything about a complex software in order to be able to "hello world", I mean : Come on ; The whole purpose of a framework is to help me to code quickly
-- I didnt want a ton of heavy and useless helpers that i wont use unless i'm forced to.
-- I didnt want to have to write 'use legit_namespace\somewhat_legit_sub_namespace\useless_sub_sub_namespace\classname\classname;' 8 times in every file, no matter what PSR XXVIII told
-- I didnt want something too far from vanilla PHP, I mean, if you hate PHP this much, dont use it
-- I didnt want to be required to use linux, install 3 softwares and  run 13 commands in order to get a folder full of .php files, what is wrong with you people ?
+Don't.
+I've made Kult-Engine for myself, because I didn't want to use those frameworks.
+- I didn't want to have to learn everything about a complex software in order to be able to "hello world", I mean : Come on ; The whole purpose of a framework is to help me to code quickly
+- I didn't want a ton of heavy and useless helpers that I won't use unless I'm forced to.
+- I didn't want to have to write 'use legit_namespace\somewhat_legit_sub_namespace\useless_sub_sub_namespace\classname\classname;' 8 times in every file, no matter what PSR XXVIII told
+- I didn't want something too far from vanilla PHP, I mean, if you hate PHP this much, don't use it
+- I didn't want to be required to use linux, install 3 softwares and  run 13 commands in order to get a folder full of .php files, what is wrong with you people ?
 
 
 Since this list goes on and on;  
@@ -24,12 +24,12 @@ Since no one seems to complain about it;
 You probably should not use the Kult Engine.  
 
 ##Features
-- Easy to use, to learn, to install and to run.
+- Easy to use, learn, install and run.
 - Lightweight and Fast.
 - MVC
 - REST class 
 - DB connector class
-- SQL Helper (i hate to write sql)
+- SQL Helper (I hate to write sql)
 - ORM classes
 - Logger class 
 - Debugger class 
