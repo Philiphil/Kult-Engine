@@ -27,7 +27,7 @@ class lilData implements \ArrayAccess{
 		}
 
 		public function offsetGet($offset) {
-			return $this->_datas[$offset;
+			return $this->_datas[$offset];
 		}
 
 		public function save(){
