@@ -60,6 +60,6 @@ abstract class invokee
     public static function require_external_basics()
     {
         self::init_required();
-         require_once(constant('vendorpath').'fpdf.php');
+        require_once constant('vendorpath').'fpdf.php';
     }
 }
