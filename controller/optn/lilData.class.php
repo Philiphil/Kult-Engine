@@ -3,7 +3,6 @@
 namespace kult_engine;
 
 class lilData implements \ArrayAccess{
-	{
 		public $_datas=[];
 		public $_name="";
 
