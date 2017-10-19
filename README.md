@@ -8,7 +8,7 @@ A few incompatibilities might occur.
 PHP : 7  
 Version : BETA
 
-##Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim/Cake ... ?
+##Why would someone choose Kult-Engine over CodeIgniter/Laravel/Symphony 2/Slim/Cake ... ?  
 Don't.
 I've made Kult-Engine for myself, because I didn't want to use those frameworks.
 - I didn't want to have to learn everything about a complex software in order to be able to "hello world", I mean : Come on ; The whole purpose of a framework is to help me to code quickly
@@ -49,7 +49,7 @@ Extract it to your site's root folder and edit config.php
 ###How to make it work ?
 Well, in your files add 
 ```
-  require('invoker.class.php');
+  require('../config.php');
   kult_engine\invoker::require_basics();
 ```
 https://www.paypal.me/TSorriaux
