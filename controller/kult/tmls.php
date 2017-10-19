@@ -1,4 +1,3 @@
-<?php
 THEO "PHIL" MICHEL LIONEL SORRIAUX'S
 █     █ █      █ █        █
 █    █  █      █ █     ▄▄▄█▄▄▄
