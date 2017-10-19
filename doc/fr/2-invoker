@@ -1,0 +1,12 @@
+Invoker a pour role d'initialiser le kult-engine, regardons plus en detail ses fonctions
+
+
+require_basics($rel,$mods)
+	require_basics est la fonction qui initialise le kult-engine en vu de creer une page web
+
+	$rel est le chemin relatif separant config.php de ma page,
+	exemple : /www/page.php -> $rel = "../"
+	exemple : /www/folder/page.php -> $rel = "../../"
+	Un autoloader existe pour chercher config.php si $rel est omis ou vide
+
+	$mods est un array contenant les noms de mod à invoquer et initialiser

@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-include 'invoker.class.php';
+include '../config.php';
 use kult_engine as k;
 
 k\invoker::require_basics();
@@ -41,7 +41,15 @@ k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();
 
-echo k\get_text('hello');
+echo k\text::get_text('hello');
+?>
+<script>
+	var req = new ReqAjax("test");
+	req.send("/api/demo.ajax.php", function(call){
+		console.debug(call);
+	})
+</script>
+<?
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

@@ -1,0 +1,394 @@
+Tout le contenu de cette page est suceptible d'être déprecier, de nombreuses fonction core sont censée changer de maniere plutot significative, mais en attendant de faire ces updates et la doc qui va avec ...
+
+
+Doc
+
+(04/07/2017)
+
+_____
+
+Introduction
+
+Infratools implemente KE, un framework php optimisé pour les besoins spécifiques d'infratools (Modulaire, ROP rapide, leger et rapide) (les deux derniers sont ce qui fait défaut aux gros framework, ex : lancer un ping avec symphony ou laravel )
+
+Overview
+Respectant le model MVC, il se divise en trois dossier
+controller, qui va contenir tout ce qui est fonction.
+model, ce qui est objet.
+html, qui a un nom plutot explicite je pense.
+
+et à ne pas oublier, le fichier config.php au meme niveau
+
+controller est divisé en plusieurs sous dossier, mais deux seul sont interessant pour utiliser KE, je reviendrais dessus en temps et en heure
+
+Les fonctions primaires sont gérés par plusieurs classe statiques, pareil en temps et en heure.
+
+
+_____
+
+QUICKSTART
+
+inclure le fichier invoker.class.php dans la page et lancer require_basics.
+<?php
+require('invoker.class.php');
+kult_engine\invoker::require_basics();
+?>
+de la sorte, le framework est chargé, initialisé et pret à delivrer ses fonctionnalitées.
+
+require_basics prends deux parametres optionels.
+$path et $mods
+
+$path est le chemin qui separe la page web du fichier de conf,
+par defaut, si la page est dans www/, le chemin est '../', ce qui est la valeur par defaut de path.
+
+Il existe néanmoins des raccourcis pour ne pas avoir à taper le chemin,
+"" (string vide) est un alias de '../'
+'api' est un alias de '../../'
+
+$mods est censé etre un array de mods,
+sous la forme ['modname'],
+plus d'info sur les mods plus bas dans la doc.
+
+______
+
+CREER UNE PAGE
+
+Commencer par inclure invoker et require basics.
+Le reste se joue avec la classe page, qui permet d'invoquer les elements html.
+
+<?php
+require('invoker.class.php');
+kult_engine\invoker::require_basics();
+kult_engine\page::standardpage_head("TITLE");
+//include la balise <head> et prends en param le title de la page
+kult_engine\page::standardpage_header(); 
+//balise header qui prend en paramettre le fil d'arianne à display
+kult_engine\page::standardpage_body_begin();
+?>
+<h1> element de la page </h1>
+<?php
+kult_engine\page::standardpage_body_end(); 
+kult_engine\page::standardpage_footer();
+?>
+
+________
+
+LANGUES
+Les textes doivent etre renseignés dans controller/impt/lang.php dans toutes les langues spécifiées par le serveur
+(actuellement fr, fr-FR, en)
+
+ILS PEUVENT PAR LA SUITE ETRE INVOQUER AVEC
+kult_engine\get_text('nom_de_la_clé');
+
+get_text va alors utiliser get_lang pour determiner quel est la langue parlée par le serveur dont la priorité pour le client est la plus elevée.
+Ou la langue par defaut (anglais) si le client ne parle aucune langue en commun avec le serveur
+_________
+
+
+Session, cookies, utilisateur
+
+Pour acceder à un element en session, plutot que $_SESSION['cle'], il faut passer par la classe membre.
+C'est elle qui va gerer ces elements.
+
+Exemple de fonction 
+kult_engine\membre::login_required();
+PERMET D'IMPOSER A ETRE CONNECTE AUX UTILISATEUR, sinon il sera redirigé vers la page de co
+
+kult_engine\membre::dont_wait();
+PERMET A LUTILISATEUR DE NE PAS ATTENDRE LE CHARGEMENT COMPLET DU SCRIPT AVANT DE FAIRE AUTRE CHOSE
+(UTIL POUR AJAX/ASYNCHRONE/SCRIPT LONG)
+
+kult_engine\membre::module_required(module::$_nom_du_module);
+COMME LOGIN REQUIRED mais avec un module.
+
+__________
+
+Connector
+
+Pour la db local, il faut passer par la classe connector qui automatise une partie du process
+
+infratools a débuté avec une version super vieille qui implementait salement l'idée, mais vu qu'il est tres grand et ne pose de probleme qu'à moi car d'un point de vu architecture c'est pas propre il ne bouge pas
+__________
+
+Buffer 
+
+En cas de besoin en plein milieu d'une page de supprimer tout le html censé etre dans la page et de recommencer, la classe controller/core/buffer offre un tas de fonction dans ce sens
+
+_________
+
+Router 
+
+permet de transformer une page en petit serveur rest, des routes globales peuvent aussi etre définie
+
+__________
+
+Invokee
+
+Pour rajouter des constantes, des includes ... qui doit etre contactable de n'importe ou
+demander à controller/impt/invokee de le faire, dans la fonction appropriée
+
+IMPT est pour IMPLEMENTATION, c'est des fichiers destinés à etre modifié 
+_________
+
+OPTN
+
+le dossier controller/optn contient des ... controleurs optionels comme son nom judicieux le laisse supposer.
+
+Ils ne sont pas appelés par default mais peuvent être call de partout, l'autoload s'en charge très bien
+
+ça comprends 
+
+daoableObject & daoGenerator : daoableObject doit etre extends par un autre classe pour permettre à daoGenerator de le manipuler comme si il était un dao fait pour cette autre clase
+
+rowableObject et daoGeneratorRow : meme chose mais daogenerator se contente de foutre l'object serialiser tout entier dans un gros champ blob, lui creer les rows proprement
+
+fluentConcrete : sert juste à implementer l'interface concrete sur un objet qui lui ait fillé
+
+mlText : sert à gerer des textes i18n serialisable en json lightweight
+
+sanitizer : sert à clean les inputs utilisateur
+
+sqlHelper : utilisé par daoGenerator(Row) pour creer des requetes sql basiques
+
+uploadHelper : permet de faciliter l'upload
+
+picuploadHelper : meme chose mais pour les photos, gere la redimention
+
+autre elements du kult engine pas implementés à infratools car useless dans le contexte ou en beta :
+
+koja (Kult engine Object for Json Ajax) : permet d'encapsuler donnée avant transfert, pratique pour token
+
+kultObject : servira d'objet base dans kult engine dans l'avenir
+
+secureSerial : permet de serialiser et de deserialiser des objets sans avoir à se demander si l'objet a été alterné entre temps
+
+textCrawler : permet de crawler dedans du texte
+
+__________
+
+TEDDY
+
+un dossier teddy existe dans la version de dev pour prevoir et tester une eventuelle implementation
+tout dans teddy est censé etre stateless
+
+________
+
+MODULE
+Ce qui est définit et appelé module dans infratools est simplement un(e) (ensemble de) fonction(alités) bien précise(s)
+Par exemple, la gestion de switch est un module.
+
+Pour en definir un nouveau
+le creer en sql soit même à la main dans la table 'module'
+preciser au fichier model/module le nom du module et son id dans SQL
+
+_____________
+
+MOD
+Ce qui est définit et appelé MOD dans KE est un controlleur optionnel trop lourd pour être invoqué partout.
+
+COMMENT AJOUTER UN CONTROLLEUR ?
+admetons qu'il s'appelle XYZXXX
+
+creer controller/mods/xyzxxx/xyzxxx.handler.php
+organiser son code et ses include dedans.
+l'invoquer en début de page avec le kult engine.
+kult_engine\invoker::require_basics('www',['xyzxxx']);
+
+___________
+
+COMMENT EVITER DE TAPPER kult_engine\ PARTOUT
+
+pour les classes : 
+en haut de script mettre
+use kult_engine\invoker;
+ainsi on pourra faire juste invoker::require_basics();
+A eviter
+
+pour les fonctions :
+pas pris en charge de php, mais on peut toujours faire
+
+use kult_engine as k;
+permet de juste avoir à tapper k\ au lieu de kult_engine\ à chaque fois que kult_engine\ est requis.
+(Meilleur pratique)
+
+Ou bien, pour ne jamais avoir à mentioner k\ ou use kult_engine\classe un millier de fois.
+specifier en haut de script namespace kult_engine;
+(Pire pratique)
+
+
+______________
+
+Les traits
+
+KE utilise beaucoup de trait, qui sont attypiques, c'est comme une interface mais où on peut implementer dirrectement, pratique pour des comportement egaux
+
+coreElement : sert juste de facade pour tout les traits communs
+debuggable : permet aux classes qui plantent d'etre un peu plus eloquante sur ce qui peut planter
+inquisitable : permet à une classe d'appeler la classe inquisitor
+queryable : permet à une classe de faire faire des querys à connector
+settable : permet l'initialisation des classes
+
+______________
+
+MISC : 
+
+J'ai installé golang au cas où sur la lidev026, si php n'arrive pas à faire quelque chose (contacter dans un protocol précis ...), go peut s'en charger et donner son resultat à php
+
+
+_________________
+
+NOTE EN CAS DE MIGRATION
+
+normalement juste config.php est à modifier.
+
+si la configuration d'appache et du plugin snmp varient, il se peut que le script permettant l'affichage des switchs lache.
+si la config varie, le nom retourné des requettes snmp (OID) varie, pas de bol un d'entre eux est en brut, c'est lui à editer.
+donc ouvrir array[12] qui est affiché en debug dans la console du navigateur.
+regarder le nouveau nom
+changer là où l'erreur s'est formulée.
+
+LES REQUETTES VERS LES WEBSERVICE INTERNE
+si le serveur n'est pas sur le meme domaine que les webservice ...
+merci de demander à un ingenieur réseau comment les de dns marchent
+en general c'est un fr.adellego.com à ajouter ou bonduelle, en fonction.
+
+LES REQUETTES VERS LES WEBSERVICES EXTERNES
+si elles foirent sans raison, verifier config SSH/SSL DU SERVEUR
+
+
+
+
+_________________
+
+CLASSES
+
+#BUFFER
+k\buffer::setter(); : initialise l'execution, appelé par invoker
+k\buffer::store(); : initialise le caching du contenu
+k\buffer::get(); -> string : retourne tout le contenu du cache
+k\buffer::delete(); : vide le cache completement
+k\buffer::send(); : vide le vache pour l'envoyer à l'utilisateur
+
+
+
+#DEBUGGER
+k\debugger::setter() : initialise l'execution, apelé par invoker
+k\debugger::handler(int,string,string,int) : debugger personalisé, remplace celui de php, appelé auto des bug
+
+
+
+#INQUISITOR
+pas utilisé dans infratools, gere la sécurité et les ban normalement
+
+
+
+#LOGGER
+k\logger::write(string) : envoie le log au serveur syslog
+k\logger::get_standard_header : creer entete de log, jamais appelé directement
+k\logger::write_local(string) : ecrit dans fichier de log
+
+#ANALYTIC
+k\analytic::init() : initialise une page d'analytics
+
+
+#MEMBRE
+k\membre::setter(); : initialise session utiliateur, appelé par invoker
+k\membre::destroy() : detruit session utilisateur
+k\membre::login_required() : redirige membre non log vers page de connexion
+k\membre::is_on_login_page() -> bool : titre explicite, appelé par login_required();
+k\membre::module_required(module::nomdu_module) : redirige membre si pas de droit sur le module
+k\membre::write_network_required(192.168.0.0/24) : redirige membre si pas de droit d'ecriture sur le reseau
+k\membre::read_network_required(ip) : meme chose d'au dessus 
+k\membre::connexion(int,string,string,array,string,array,string,array) : creer session utilisateur
+k\membre::dont_wait() : ferme sessioning
+k\membre::set_permission($id) : set permissions à chaque page pour changer dynamiquement les droits
+
+
+
+#ROUTER
+k\router::setter() : ...
+k\router::read_asked() : dechifre l'url pour determiner route
+k\router::set_route() : permet de creer route sur la page où il est appelé
+k\router::exec() : execute toutes les routes, appelé en fin de script automatiquement
+k\router::exec_route :: execute une route
+k\router::disabled_global_routing() : desactive route globale sur une page
+k\router::is_route_applicable() : determine si une route s'applique
+
+
+
+#CONNECTOR
+Connector n'est pas une classe du core mais une implementation,
+sert à executer querys sql vers serveur local
+
+#CONNECTOR.FACTORY
+Definie connector
+
+
+
+#INVOKEE
+k\invokee::setter() : appelé par invoker, lance toutes les autres fonctions d'invokee
+k\invokee:require_local_model : appelé par setter, recupere les objets
+k\invokee::require_external_basics : appelle les classes vendor
+
+
+
+#PAGE
+k\page::standard_head(string) : affiche le header, require le title
+k\page::standard_header() : affiche <header>
+k\page::standard_footer() : affiche <footer>
+k\page::standard_api : gere l'importation de key et token d'api
+k\page::standard_js() : importation de tout le js required
+
+k\page::standard_body_begin(ariane)
+k\page::standard_body_end()
+
+ECRIRE CONTENU HTML ENTRE LES DEUX
+
+
+
+#TEXTE
+(Dans version inferieur de KE, n'est pas une classe)
+get_lang() -> string : retourne langue utilisateur parlée par le serveur
+get_text(key,lang) cherche key dans langue user dans lang.php,lang est optionnel
+
+
+
+##JS##
+
+#ReqAjax
+ReqAjax est un objet permetant d'envoyer simplement des requettes ajax.
+
+Il se construit ainsi
+
+var reqajax = ReqAjax("requette","paramettres");
+
+requette est censé etre une string qui sera interprété comme etant la fonction à lancer
+paramettres a un nom assez explicite et peut etre de n'importe quel type
+
+reqajax.send(url, function(callback){/*...*/}); pour envoyer un get
+reqajax.sendPost(url, function(callback){/*...*/}); pour envoyer un post
+reqajax.ajax(url,type,callback,fallback) pour envoyer un type de requette très précis avec fallback
+reqajax.promise(url,type,callback,fallback) pour creer une promise
+
+#Queue et QueueAjax
+
+Queue est une implementation d'une ... queue, elle a des methodes : 
+
+queue.add(e) qui ajoute un element
+queue.uniq() qui dedoublone la queue
+queue.run(x) qui attend une closure x, qu'elle execute sur l'element sortant
+queue.contains(e) qui renvoit un bool indiquant la presence ou non d'un objet e
+
+queueajax est une implementation de queue orientée ajax
+la seule difference est que la fonction run est asynchrone
+
+##HTML##
+
+Des fonctions de cachings sont disponnibles pour les inputs, juste en ajoutant des attributs html
+
+k-caching="key_unique" permet de cacher la valeur de l'input
+k-caching-onload permet la mise en cache de l'element des le chargement (pour input invisible par exemple)
+k-caching-dependency="foreign_key" permet de cacher à la condition que l'input qui a k-caching="foreign_key" a la meme valeur que son cache
+k-caching-radio="key_partagee" permet de cache sur des radios
+k-caching-static, à combiner avec onload si l'element n'est pas censé changer sur la page
+

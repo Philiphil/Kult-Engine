@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,10 +37,7 @@ namespace kult_engine;
 
 abstract class inquisitor
 {
-    use singleton;
-    use debuggable;
-    use settable;
-    use injectable;
+    use coreElement;
     public static $_tempo = [];
     public static $_watcher = 0;
     public static $_flag = 0;

@@ -1,0 +1,38 @@
+Intro
+Kult Engine est un framework fullstack PHP dont le but est de fournir un eventaille de fonctionnalité pouvant correspondre à tout les sites.
+
+Il dispose de la liste non exhaustive de fonctionnalités suivantes : 
+Router
+Analytics
+Buffer
+Logger
+i18n
+Templating
+DB connector
+Et pleins de fonction visant à raccourcir le plus d'opérations courrantes possibles.
+
+Respectant le model MVC, il se divise en trois dossier
+
+controller, qui va contenir tout ce qui est fonction.
+model, ce qui est objet.
+www, les pages webs
+
+et le fichier config.php qui se trouve au meme niveau
+
+le dossier /www est supposé etre le dossier racine du site, le reste est supposé etre au même niveau que /www
+
+
+Le fichier config permet de configurer :
+Le nom et l'emplacement de ces dossiers.
+l'emplacement de config.php
+l'os du system (linux ou windows)
+Les informations de login sql
+Le chemin vers le fichier de log
+La langue par défaut du site
+Les langues dans lesquelles il est disponible
+Activer ou désactiver le debug
+
+Des variables optionelles peuvent etre ajoutées au bon plaisir de l'utilisateur
+Personnellement, je rajoute "$env" pouvant etre "prd" ou "dev"
+
+Vous pouvez passer au QUICKSTART

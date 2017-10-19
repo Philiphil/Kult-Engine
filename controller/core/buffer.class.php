@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,17 +37,14 @@ namespace kult_engine;
 
 abstract class buffer
 {
-    use debuggable;
-    use singleton;
-    use settable;
-    use injectable;
+    use coreElement;
+    use hookable;
+
     public static $_is_buffering_on = 0;
-    private static $_auto_executor = null;
 
     public static function setter()
     {
         self::store();
-        self::$_auto_executor = new buffer_executor();
     }
 
     public static function store()
@@ -87,12 +84,9 @@ abstract class buffer
             ob_end_flush();
         }
     }
-}
 
-class buffer_executor
-{
-    public function __destruct()
+    public static function destruct()
     {
-        buffer::send();
+        return [["kult_engine\\buffer::send",null], 999];
     }
 }

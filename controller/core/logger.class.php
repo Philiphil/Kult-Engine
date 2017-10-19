@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,32 +28,25 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace kult_engine;
 
-abstract class logger
+class logger
 {
-    use singleton;
-    use debuggable;
-    use settable;
-    use injectable;
-    public static $_file = null;
+    public $_file = null;
 
-    public static function setter()
+    public function __construct($fnord=null)
     {
-        self::$_file = constant('logfile');
-        if (self::$_file === '' || is_null(self::$_file) || !file_exists(self::$_file)) {
-            self::uninit();
-        }
+        $this->_file = $fnord === null ? ( constant('logfile') === null || constant('logfile') == "" ? constant('tmppath').constant("view").'.log' : constant("logfile")) :  $fnord ;
     }
 
-    public static function get_standard_header()
+
+    public function get_standard_header()
     {
-        self::init_required();
         $line = '';
         $line .= '['.$_SERVER['HTTP_USER_AGENT'];
         $line .= ']['.$_SERVER['REMOTE_ADDR'];
@@ -65,13 +58,13 @@ abstract class logger
         return $line;
     }
 
-    public static function write_local($fnord = null)
+    public function write_local($fnord = null)
     {
-        self::init_required();
-        $file = constant('controllerpath').'log.kult';
-        $line = self::get_standard_header();
+        $line = $this->get_standard_header();
         $line .= ':'.$fnord;
         $line .= "\n";
-        file_put_contents($file, $line, FILE_APPEND);
+        file_put_contents($this->_file, $line, FILE_APPEND);
     }
 }
+
+

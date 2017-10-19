@@ -76,7 +76,6 @@
   	$('[k-caching]').each(function(e){
   		var e = new kacheObj(this);
   		e.load();
-  		console.debug(e);
   		array.push(e);
   		if(e.radio)
   		{
@@ -114,7 +113,6 @@
 
   	$('[k-caching]').change(function(x){
   		var e = new kacheObj(this);
-  		console.debug(e);
   		if(!e.dep)
   		{
   			localStorage[e.key] = $(this).val();
@@ -137,12 +135,6 @@
   		{
   			localStorage[e.key] = "";
   			$(this).val('');
-      //compatibilité bootstrap-select
-      if($(this).hasClass('bs-select'))
-      {
-      	$(this).selectpicker('render');
-      	$(this).selectpicker('refresh');
-      }
       if(e.radio)
       {
       	if( typeof radio[e.radiokey] !== typeof undefined && radio[e.radiokey] !== false  )
