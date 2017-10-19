@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -38,45 +38,45 @@ namespace kult_engine;
 class config
 {
     //html folder's name.
-  public static $webfolder = 'www';
-  //model & controller folder's name
-  // www/model or www\model should be specified if the folder is in the webfolder
-  //protip : they shouldnt
-  public static $modelfolder = 'model';
-  public static $controllerfolder = 'controller';
-  // HTML root folder's name
-  public static $htmlfolder = '/';
-  //is config.php inside webfolder ?
-  //protip : it shouldnt
-  public static $config = 0;
+    public static $webfolder = 'www';
+    //model & controller folder's name
+    // www/model or www\model should be specified if the folder is in the webfolder
+    //protip : they shouldnt
+    public static $modelfolder = 'model';
+    public static $controllerfolder = 'controller';
+    // HTML root folder's name
+    public static $htmlfolder = '/';
+    //is config.php inside webfolder ?
+    //protip : it shouldnt
+    public static $config = 0;
 
-  //Is the webserveur 'linux' or 'windows' ?
-  //if neither, have in mind that windows means c:\user
-  //and linux means /root/user
-  //the question is SHOULD I USE A SLASH OR AN ANTI SLASH
-  public static $systeme = 'linux';
-  //SQL IDs
-  public static $host = '';
-  public static $db = '';
-  public static $user = '';
-  public static $pass = '';
-  public static $driver = 'mysql';
-  
-  //SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
-  public static $debug = 1;
+    //Is the webserveur 'linux' or 'windows' ?
+    //if neither, have in mind that windows means c:\user
+    //and linux means /root/user
+    //the question is SHOULD I USE A SLASH OR AN ANTI SLASH
+    public static $systeme = 'linux';
+    //SQL IDs
+    public static $host = '';
+    public static $db = '';
+    public static $user = '';
+    public static $pass = '';
+    public static $driver = 'mysql';
 
-  //full path to your logfile
-  public static $log = '';
-  public static $default_lang = "en";
-  public static $server_lang = ["en","fr"];
-  public static $login_page = "";
+    //SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
+    public static $debug = 1;
 
-  //Does multiple site run on the same kult engine ?
-  public static $multi=0;
+    //full path to your logfile
+    public static $log = '';
+    public static $default_lang = 'en';
+    public static $server_lang = ['en', 'fr'];
+    public static $login_page = '';
 
-  //CORE
-  public static $file = __FILE__;
+    //Does multiple site run on the same kult engine ?
+    public static $multi = 0;
+
+    //CORE
+    public static $file = __FILE__;
 }
 
-require_once(substr(config::$file, 0, -10) . config::$controllerfolder . substr(config::$file, -11, -10) ."core" . substr(config::$file, -11, -10). "abst". substr(config::$file, -11, -10) . "invoker.factory.php");
-require_once(substr(config::$file, 0, -10) . config::$controllerfolder . substr(config::$file, -11, -10) ."core" . substr(config::$file, -11, -10). "invoker.class.php");
+require_once substr(config::$file, 0, -10).config::$controllerfolder.substr(config::$file, -11, -10).'core'.substr(config::$file, -11, -10).'abst'.substr(config::$file, -11, -10).'invoker.factory.php';
+require_once substr(config::$file, 0, -10).config::$controllerfolder.substr(config::$file, -11, -10).'core'.substr(config::$file, -11, -10).'invoker.class.php';

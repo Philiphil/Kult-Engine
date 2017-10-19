@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -40,11 +40,14 @@ trait settable
     private static $set = 0;
 
     abstract public static function setter();
+
     abstract public static function setter_conf($fnord);
-    public static function init($fnord=null)
+
+    public static function init($fnord = null)
     {
         if (!self::$set) {
             self::$set = 1;
+
             return is_null($fnord) ? self::setter() : self::setter_conf($fnord);
         }
         trigger_error(get_called_class().' ALREADY SET');

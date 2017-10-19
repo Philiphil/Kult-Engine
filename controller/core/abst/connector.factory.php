@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -54,11 +54,11 @@ abstract class connectorFactory
 
     public static function setter_conf($fnord)
     {
-        self::$_DB_HOST = $fnord["host"];
-        self::$_DB_NAME = $fnord["name"];
-        self::$_DB_USER = $fnord["user"];
-        self::$_DB_PASS = $fnord["pass"];
-        self::set_pdo($fnord["driver"]);
+        self::$_DB_HOST = $fnord['host'];
+        self::$_DB_NAME = $fnord['name'];
+        self::$_DB_USER = $fnord['user'];
+        self::$_DB_PASS = $fnord['pass'];
+        self::set_pdo($fnord['driver']);
     }
 
     public static function query($fnord)
@@ -75,14 +75,14 @@ abstract class connectorFactory
             case 'mysql':
                 self::$_db = new \pdo('mysql:host='.self::$_DB_HOST.';dbname='.self::$_DB_NAME.';charset=utf8mb4', self::$_DB_USER, self::$_DB_PASS);
                 break;
-            case "odbc":
-                self::$_db = new \pdo('odbc:DRIVER={ODBC Driver 13 for SQL Server};SERVER='.self::$_DB_HOST.';DATABASE='.self::$_DB_NAME.";", self::$_DB_USER , self::$_DB_PASS);
+            case 'odbc':
+                self::$_db = new \pdo('odbc:DRIVER={ODBC Driver 13 for SQL Server};SERVER='.self::$_DB_HOST.';DATABASE='.self::$_DB_NAME.';', self::$_DB_USER, self::$_DB_PASS);
                 break;
-            case "sqlsrv":
-                self::$_db = new \pdo('sqlsrv:Server='.self::$_DB_HOST.';Database='.self::$_DB_NAME, self::$_DB_USER , self::$_DB_PASS);
+            case 'sqlsrv':
+                self::$_db = new \pdo('sqlsrv:Server='.self::$_DB_HOST.';Database='.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS);
                 break;
-            case "sqlite":
-                self::$_db = new \pdo('sqlite:'.self::$_DB_NAME, self::$_DB_USER ,self::$_DB_PASS , array(\PDO::ATTR_PERSISTENT => true)); 
+            case 'sqlite':
+                self::$_db = new \pdo('sqlite:'.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS, [\PDO::ATTR_PERSISTENT => true]);
                 break;
         }
         self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);

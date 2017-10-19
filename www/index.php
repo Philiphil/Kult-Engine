@@ -49,7 +49,7 @@ echo k\text::get_text('hello');
 		console.debug(call);
 	})
 </script>
-<?
+<?php
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

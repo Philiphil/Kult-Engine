@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -57,9 +57,8 @@ abstract class invokerFactory
         }
     }
 
-
     public static function setter()
-    {        
+    {
         $filespace = '/';
         switch (config::$systeme) {
             case 'windows':
@@ -73,25 +72,25 @@ abstract class invokerFactory
         config::$config = config::$config == 1 ? config::$webfolder.$filespace : '';
         $base = substr(config::$file, 0, -strlen($filespace.config::$config.'config.php'));
 
-        define("multi", config::$multi);
+        define('multi', config::$multi);
 
         define('filespace', $filespace);
-        define('basepath', $base . $filespace);
+        define('basepath', $base.$filespace);
 
-        if(!config::$multi){
+        if (!config::$multi) {
             define('viewpath', $base.$filespace.config::$webfolder.$filespace);
-        }else{
+        } else {
             $bfr = debug_backtrace();
-            define('viewpath', $base.$filespace.substr($bfr[count($bfr)-1]["file"], strlen(basepath), strpos(substr($bfr[count($bfr)-1]["file"], strlen(basepath)),filespace)).$filespace);
+            define('viewpath', $base.$filespace.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), filespace)).$filespace);
         }
         define('modelpath', $base.$filespace.config::$modelfolder.$filespace);
         define('controllerpath', $base.$filespace.config::$controllerfolder.$filespace);
 
         define('vendorpath', constant('controllerpath').'vendor'.$filespace);
         define('modpath', constant('controllerpath').'mods'.$filespace);
-        if(!config::$multi){
+        if (!config::$multi) {
             define('imptpath', constant('controllerpath').'impt'.$filespace);
-        }else{
+        } else {
             define('imptpath', constant('viewpath').'impt'.$filespace);
         }
         define('tmppath', constant('controllerpath').'tmp'.$filespace);
@@ -115,29 +114,29 @@ abstract class invokerFactory
         define('logfile', config::$log);
         define('default_lang', config::$default_lang);
         define('server_lang', config::$server_lang);
-        define("loginpage", config::$login_page);
-        define("view", config::$webfolder);
-        define("url", substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'],".php")+4));
-        define("page", substr( $_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/')+1, strpos( $_SERVER['PHP_SELF'],".php")+4));
+        define('loginpage', config::$login_page);
+        define('view', config::$webfolder);
+        define('url', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '.php') + 4));
+        define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1, strpos($_SERVER['PHP_SELF'], '.php') + 4));
 
         define('host', config::$host);
         define('db', config::$db);
         define('user', config::$user);
         define('pass', config::$pass);
-        define("driver", config::$driver);
+        define('driver', config::$driver);
     }
 
     public static function require_impt()
     {
-        $impt = scandir(constant("imptpath"));
+        $impt = scandir(constant('imptpath'));
         foreach ($impt as $key) {
-            if(contains(".load.", $key)){
-            include( constant("imptpath")  . $key );
-                if(class_exists(__NAMESPACE__."\\".strstr($key,".",true))){
-                   if(in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__."\\".strstr($key,".",true))) || in_array(__NAMESPACE__."\settable",class_uses(__NAMESPACE__."\\".strstr($key,".",true))) ||in_array("coreElement", class_uses(__NAMESPACE__."\\".strstr($key,".",true))) || in_array("settable",class_uses(__NAMESPACE__."\\".strstr($key,".",true)))) {
-                    $d=__NAMESPACE__."\\".strstr($key,".",true);
-                    $d::init();
-                    } 
+            if (contains('.load.', $key)) {
+                include constant('imptpath').$key;
+                if (class_exists(__NAMESPACE__.'\\'.strstr($key, '.', true))) {
+                    if (in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true))) || in_array(__NAMESPACE__."\settable", class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true))) || in_array('coreElement', class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true))) || in_array('settable', class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true)))) {
+                        $d = __NAMESPACE__.'\\'.strstr($key, '.', true);
+                        $d::init();
+                    }
                 }
             }
         }
@@ -165,14 +164,17 @@ abstract class invokerFactory
             foreach ($sufix as $b) {
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
+
                     return true;
                 }
             }
         }
+
         return false;
     }
 
-    public static function require_base(){
+    public static function require_base()
+    {
         self::is_ke_runnable();
         self::setter();
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
@@ -184,14 +186,14 @@ abstract class invokerFactory
         require_once constant('itfcpath').'queryable.trait.php';
         require_once constant('itfcpath').'coreElement.trait.php';
     }
-    
-     public static function is_ke_runnable()
+
+    public static function is_ke_runnable()
     {
-        $needed = ["mbstring","json","PDO", "Reflection", "openssl", "session"];
+        $needed = ['mbstring', 'json', 'PDO', 'Reflection', 'openssl', 'session'];
         $loaded = get_loaded_extensions();
         foreach ($needed as $key) {
-            if(!in_array($key, $loaded)){
-                echo $key . " not found, KULT ENGINE cant run";
+            if (!in_array($key, $loaded)) {
+                echo $key.' not found, KULT ENGINE cant run';
                 die();
             }
         }
@@ -218,7 +220,7 @@ abstract class invokerFactory
         echo 'L : <b>'.$errline.'</b> - F : <b>'.$file.'</b><br>';
         echo $status;
 
-        if (class_exists(__NAMESPACE__.'\\'.$file) && in_array(__NAMESPACE__.'\\'.'coreElement', class_uses(__NAMESPACE__.'\\'.$file)) ||in_array(__NAMESPACE__.'\\'.'debuggable', class_uses(__NAMESPACE__.'\\'.$file)) ) {
+        if (class_exists(__NAMESPACE__.'\\'.$file) && in_array(__NAMESPACE__.'\\'.'coreElement', class_uses(__NAMESPACE__.'\\'.$file)) || in_array(__NAMESPACE__.'\\'.'debuggable', class_uses(__NAMESPACE__.'\\'.$file))) {
             $e = new \ReflectionClass(__NAMESPACE__.'\\'.$file);
             $f = $e->getMethod('debug');
             $f->invoke(null);

@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -41,13 +41,13 @@ abstract class sessionFactory
     public static $_login = 0;
     public static $_token_1 = null;
     public static $_token_2 = null;
-    public static $_val=null;
+    public static $_val = null;
 
     public static function setter()
     {
         session_start();
-    	self::$_login_page =  self::$_login_page == null ? constant("loginpage") : self::$_login_page ;
-        if (isset($_SESSION['login']) && password_verify($_SERVER['HTTP_USER_AGENT'], $_SESSION['token_1']) && password_verify("_S7aTic_:p=rm@tK3y;", $_SESSION['token_2'])) {
+        self::$_login_page = self::$_login_page == null ? constant('loginpage') : self::$_login_page;
+        if (isset($_SESSION['login']) && password_verify($_SERVER['HTTP_USER_AGENT'], $_SESSION['token_1']) && password_verify('_S7aTic_:p=rm@tK3y;', $_SESSION['token_2'])) {
             self::$_login = intval($_SESSION['login']);
             self::$_token_1 = $_SESSION['token_1'];
             self::$_token_2 = $_SESSION['token_2'];
@@ -60,8 +60,8 @@ abstract class sessionFactory
     public static function setter_conf($fnord)
     {
         session_start();
-    	self::$_login_page = constant("loginpage");
-        if (isset($_SESSION['login']) && password_verify($_SERVER['HTTP_USER_AGENT'], $_SESSION['token_1']) && password_verify("_S7aTic_:p=rm@tK3y;", $_SESSION['token_2'])) {
+        self::$_login_page = constant('loginpage');
+        if (isset($_SESSION['login']) && password_verify($_SERVER['HTTP_USER_AGENT'], $_SESSION['token_1']) && password_verify('_S7aTic_:p=rm@tK3y;', $_SESSION['token_2'])) {
             self::$_login = intval($_SESSION['login']);
             self::$_token_1 = $_SESSION['token_1'];
             self::$_token_2 = $_SESSION['token_2'];
@@ -103,27 +103,29 @@ abstract class sessionFactory
     {
         $_SESSION['login'] = 1;
         $_SESSION['token_1'] = password_hash($_SERVER['HTTP_USER_AGENT'], PASSWORD_BCRYPT);
-        $_SESSION['token_2'] = password_hash("_S7aTic_:p=rm@tK3y;", PASSWORD_BCRYPT);
+        $_SESSION['token_2'] = password_hash('_S7aTic_:p=rm@tK3y;', PASSWORD_BCRYPT);
         self::$_login = 1;
         self::$_token_1 = $_SESSION['token_1'];
-        self::$_token_2 =  $_SESSION['token_2'];
+        self::$_token_2 = $_SESSION['token_2'];
     }
 
-    public static function set($k,$v)
+    public static function set($k, $v)
     {
         $s = new secureSerial();
-        $b = isset($_SESSION["val"]) ? $s->unserialize($_SESSION["val"]) : [];
+        $b = isset($_SESSION['val']) ? $s->unserialize($_SESSION['val']) : [];
         $b[$k] = $v;
-        $_SESSION["val"] = $s->serialize($b);
+        $_SESSION['val'] = $s->serialize($b);
         self::$_val = $b;
     }
 
     public static function get($k)
     {
-        if(!isset($_SESSION["val"]))return false;
+        if (!isset($_SESSION['val'])) {
+            return false;
+        }
         $s = new secureSerial();
-        $b = $s->unserialize($_SESSION["val"]);
-        return $b === false ? $b :  $b[$k];
-    }
+        $b = $s->unserialize($_SESSION['val']);
 
+        return $b === false ? $b : $b[$k];
+    }
 }

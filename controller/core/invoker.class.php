@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -45,19 +45,19 @@ abstract class invoker extends invokerFactory
         require_once constant('corepath').'hook.class.php';
 
         require_once constant('imptpath').'invokee.class.php';
-        
+
         require_once constant('corepath').'logger.class.php';
-        
+
         require_once constant('imptpath').'lang.php';
         require_once constant('corepath').'text.class.php';
-        
+
         require_once constant('corepath').'buffer.class.php';
- 
+
         require_once constant('abstpath').'session.factory.php';
 
         require_once constant('corepath').'inquisitor.class.php';
 
-        require_once constant('abstpath')."connector.factory.php";
+        require_once constant('abstpath').'connector.factory.php';
         hook::init();
         text::init();
 
@@ -81,9 +81,9 @@ abstract class invoker extends invokerFactory
 
     public static function webService($ext)
     {
-         self::require_basics($ext);
-         require_once constant("corepath")."webService.class.php";
-         return new webService();
-    }
+        self::require_basics($ext);
+        require_once constant('corepath').'webService.class.php';
 
+        return new webService();
+    }
 }

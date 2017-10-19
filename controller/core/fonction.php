@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -83,47 +83,48 @@ function contains($needle, $haystack)
 
 function dateIntervalToSeconds($dateInterval)
 {
-    $reference = new \DateTimeImmutable;
+    $reference = new \DateTimeImmutable();
     $endTime = $reference->add($dateInterval);
 
-    return intval($endTime->getTimestamp() - $reference->getTimestamp()) > 0 ?  intval($endTime->getTimestamp() - $reference->getTimestamp()) : abs( intval($endTime->getTimestamp() - $reference->getTimestamp()));
+    return intval($endTime->getTimestamp() - $reference->getTimestamp()) > 0 ? intval($endTime->getTimestamp() - $reference->getTimestamp()) : abs(intval($endTime->getTimestamp() - $reference->getTimestamp()));
 }
 
-
-    function normalize_files($files) {
-    if(count($files)==1){
-        $tmp=0;
-        foreach ($files as $key) {
-            $tmp = $key;
+    function normalize_files($files)
+    {
+        if (count($files) == 1) {
+            $tmp = 0;
+            foreach ($files as $key) {
+                $tmp = $key;
+            }
+            $files = $tmp;
         }
-        $files=$tmp;
+        $return = [];
+        $i = 0;
+        foreach ($files['name'] as $key) {
+            $return[$i] = [];
+            $return[$i]['name'] = $key;
+            $i++;
+        }
+        $i = 0;
+        foreach ($files['type'] as $key) {
+            $return[$i]['type'] = $key;
+            $i++;
+        }
+        $i = 0;
+        foreach ($files['tmp_name'] as $key) {
+            $return[$i]['tmp_name'] = $key;
+            $i++;
+        }
+        $i = 0;
+        foreach ($files['error'] as $key) {
+            $return[$i]['error'] = $key;
+            $i++;
+        }
+        $i = 0;
+        foreach ($files['size'] as $key) {
+            $return[$i]['size'] = $key;
+            $i++;
+        }
+
+        return count($return) > 0 ? $return : $files;
     }
-    $return = [];
-    $i=0;
-    foreach ($files["name"] as $key) {
-        $return[$i] = [];
-        $return[$i]["name"]=$key;
-        $i++;
-    }
-    $i=0;
-    foreach ($files["type"] as $key) {
-        $return[$i]["type"]=$key;
-        $i++;
-    }
-    $i=0;
-    foreach ($files["tmp_name"] as $key) {
-        $return[$i]["tmp_name"]=$key;
-        $i++;
-    }
-    $i=0;
-    foreach ($files["error"] as $key) {
-        $return[$i]["error"]=$key;
-        $i++;
-    }
-    $i=0;
-    foreach ($files["size"] as $key) {
-        $return[$i]["size"]=$key;
-        $i++;
-    }
-    return count($return) > 0 ? $return : $files;
-}

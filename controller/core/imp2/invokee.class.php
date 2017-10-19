@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -41,24 +41,25 @@ abstract class invokee
 
     public static function setter()
     {
-    	self::require_local_model();
+        self::require_local_model();
         self::require_external_basics();
     }
 
-        public static function require_local_model()
+    public static function require_local_model()
     {
         self::init_required();
-        require_once(constant('optnpath').'daoableObject.class.php');
-		$model = scandir(constant("modelpath"));
-		foreach ($model as $key) {
-			if(contains(".class.", $key)) include( constant("modelpath") . constant("filespace") . $key );
-		}
-        
+        require_once constant('optnpath').'daoableObject.class.php';
+        $model = scandir(constant('modelpath'));
+        foreach ($model as $key) {
+            if (contains('.class.', $key)) {
+                include constant('modelpath').constant('filespace').$key;
+            }
+        }
     }
 
     public static function require_external_basics()
     {
         self::init_required();
- 		require_once(constant('vendorpath').'fpdf.php');
+         require_once(constant('vendorpath').'fpdf.php');
     }
 }

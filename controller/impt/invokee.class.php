@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,36 +37,37 @@ namespace kult_engine;
 
 class invokee
 {
-
     public function __construct()
     {
-    	$this->require_local_model();
+        $this->require_local_model();
         $this->require_external_basics();
         $this->require_local_controler();
     }
 
-        public function require_local_model()
+    public function require_local_model()
     {
-        require_once(constant('optnpath').'daoableObject.class.php');
-        require_once(constant('optnpath').'daoGenerator.class.php');
-		$model = scandir(constant("modelpath"));
-		foreach ($model as $key) {
-			if(contains(".class.", $key)) include( constant("modelpath") . constant("filespace") . $key );
-		}
-        
+        require_once constant('optnpath').'daoableObject.class.php';
+        require_once constant('optnpath').'daoGenerator.class.php';
+        $model = scandir(constant('modelpath'));
+        foreach ($model as $key) {
+            if (contains('.class.', $key)) {
+                include constant('modelpath').constant('filespace').$key;
+            }
+        }
     }
 
     public function require_local_controler()
     {
-        $ctrl = scandir(constant("ctrltpath"));
+        $ctrl = scandir(constant('ctrltpath'));
         foreach ($ctrl as $key) {
-            if(contains(".php", $key)) include( constant("ctrltpath") . constant("filespace") . $key );
+            if (contains('.php', $key)) {
+                include constant('ctrltpath').constant('filespace').$key;
+            }
         }
-        
     }
 
     public function require_external_basics()
     {
- 		//require_once(constant('vendorpath').'....php');
+        //require_once(constant('vendorpath').'....php');
     }
 }

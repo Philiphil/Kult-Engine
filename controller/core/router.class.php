@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -60,7 +60,7 @@ abstract class router
 
     public static function destruct()
     {
-        return [["kult_engine\\router::exec",null], 1];
+        return [['kult_engine\\router::exec', null], 1];
     }
 
     public static function read_asked($brut)
@@ -138,8 +138,8 @@ abstract class router
 
         if (count($translated_route) > count(self::$_a_asked) && (count($translated_route) - 1 == count(self::$_a_asked) && $translated_route[count($translated_route) - 1] != '*')) {
             // if route is longuer than uri, route is probably not applicable
-                //and if route is just 1 arg longuer than uri, this arg has to be *
-                return 0;
+            //and if route is just 1 arg longuer than uri, this arg has to be *
+            return 0;
         }
 
         for ($i = 0; $i < count($translated_route); $i++) {
@@ -157,7 +157,6 @@ abstract class router
         return $args;
     }
 }
-
 
     class global_route
     {

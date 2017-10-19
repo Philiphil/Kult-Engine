@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -61,14 +61,14 @@ class sanitizer
     public function pos()
     {
         $this->_var = $this->_var > 0 ? $this->_var : false;
-        
+
         return $this;
     }
 
     public function neg()
     {
         $this->_var = $this->_var < 0 ? $this->_var : false;
-        
+
         return $this;
     }
 
@@ -78,8 +78,8 @@ class sanitizer
 
         return $this;
     }
-    
-      public function mail()
+
+    public function mail()
     {
         $this->_var = filter_var($this->_var, FILTER_VALIDATE_EMAIL);
 
