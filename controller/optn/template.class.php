@@ -6,11 +6,12 @@ class template{
 
 	public function load()
 	{
-        $impt = scandir(constant("tpltpath"));
-        foreach ($impt as $key) {
-            if(contains(".load.", $key)){
-            	$this->_templates[strstr($key, ".load.", true)] = $this->writeTotemplate(file_get_contents(constant("tpltpath").$key));
-        }
+		$impt = scandir(constant("tpltpath"));
+		foreach ($impt as $key) {
+		    if(contains(".load.", $key)){
+			$this->_templates[strstr($key, ".load.", true)] = $this->writeTotemplate(file_get_contents(constant("tpltpath").$key));
+			}
+		}
 	}
 
 	public function writeTotemplate($template,$option=[])
