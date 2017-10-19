@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -50,12 +50,11 @@ abstract class hook
     public static function exec()
     {
         foreach (static::$_hook as $key) {
- 
-          call_user_func($key[0], $key[1]);
+            call_user_func($key[0], $key[1]);
         }
     }
 
-    public static function add_hook($f,$p)
+    public static function add_hook($f, $p)
     {
         static::$_hook[$p] = $f;
     }
@@ -69,11 +68,12 @@ abstract class hook
         }
     }
 
-trait hookable{
+trait hookable
+{
     public static function hook()
     {
         $bfr = static::destruct();
-        hook::add_hook($bfr[0],$bfr[1]);
+        hook::add_hook($bfr[0], $bfr[1]);
     }
 
     abstract public static function destruct();

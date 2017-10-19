@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -47,10 +47,8 @@ namespace kult_engine;
     $javascript .= "kons.contentpath = '".constant('contentpath')."';\n";
     $javascript .= "kons.imagepath = '".constant('imagepath')."';\n";
     $javascript .= "kons.langs = '".json_encode(config::$server_lang)."';\n";
-    $javascript .= "kons.page = '".constant("page")."';\n";
-    $javascript .= "kons.url = '".constant("url")."';\n";
-
-
+    $javascript .= "kons.page = '".constant('page')."';\n";
+    $javascript .= "kons.url = '".constant('url')."';\n";
 
     $javascript .= "var textekons = textekons || {};\n";
     $javascript .= "textekons.hello = '".text::get_text('hello')."';\n";

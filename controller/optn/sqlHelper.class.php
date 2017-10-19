@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -149,25 +149,33 @@ class sqlHelper
         return "SHOW TABLES LIKE ':table'";
     }
 
-
     public function create_advance($table, $tableau)
     {
         $v = 'CREATE TABLE '.$this->table_quoted($table);
         $v .= ' ( ';
-        $i=0;
+        $i = 0;
         foreach ($tableau as $key => $b) {
-            $d = $i == 0 ? "" : ",";
-            if($b=== "id" ) $v .= $d. $key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
-            if(is_array($b) ||is_object($b)) $v .= $d. $key." LONGTEXT NULL";
-            if($b===0 || $b === "int") $v .= $d. $key." INT NOT NULL DEFAULT '0'";
-            if($b==="string") $v .= $d. $key." TEXT NULL";
-            if($b==="blob") $v .= $d. $key." MEDIUMBLOB NULL";
+            $d = $i == 0 ? '' : ',';
+            if ($b === 'id') {
+                $v .= $d.$key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
+            }
+            if (is_array($b) || is_object($b)) {
+                $v .= $d.$key.' LONGTEXT NULL';
+            }
+            if ($b === 0 || $b === 'int') {
+                $v .= $d.$key." INT NOT NULL DEFAULT '0'";
+            }
+            if ($b === 'string') {
+                $v .= $d.$key.' TEXT NULL';
+            }
+            if ($b === 'blob') {
+                $v .= $d.$key.' MEDIUMBLOB NULL';
+            }
 
             $i++;
         }
         $v .= ')CHARSET=utf8mb4';
+
         return $v;
     }
-
-
 }
