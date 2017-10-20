@@ -44,8 +44,6 @@ abstract class invoker extends invokerFactory
         set_error_handler(__NAMESPACE__.'\invoker::error');
         require_once constant('corepath').'hook.class.php';
 
-        require_once constant('imptpath').'invokee.class.php';
-
         require_once constant('corepath').'logger.class.php';
 
         require_once constant('imptpath').'lang.php';
@@ -67,7 +65,8 @@ abstract class invoker extends invokerFactory
         self::require_impt();
 
         self::require_mods($ext);
-        $b = new invokee();
+        self::require_local_model();
+        self::require_local_controler();
         $b = new logger();
         $b->write_local();
     }

@@ -227,4 +227,25 @@ abstract class invokerFactory
         }
         die();
     }
+    public static function require_local_model()
+    {
+        require_once constant('optnpath').'daoableObject.class.php';
+        require_once constant('optnpath').'daoGenerator.class.php';
+        $model = scandir(constant('modelpath'));
+        foreach ($model as $key) {
+            if (contains('.class.', $key)) {
+                include constant('modelpath').constant('filespace').$key;
+            }
+        }
+    }
+
+    public static function require_local_controler()
+    {
+        $ctrl = scandir(constant('ctrltpath'));
+        foreach ($ctrl as $key) {
+            if (contains('.php', $key)) {
+                include constant('ctrltpath').constant('filespace').$key;
+            }
+        }
+    }
 }
