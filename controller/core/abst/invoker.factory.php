@@ -227,6 +227,7 @@ abstract class invokerFactory
         }
         die();
     }
+
     public static function require_local_model()
     {
         require_once constant('optnpath').'daoableObject.class.php';
