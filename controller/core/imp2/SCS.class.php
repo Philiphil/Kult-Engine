@@ -6,7 +6,7 @@ class SCS
 {
     use coreElement;
     use hookable;
-    public static $_secret = "Fn0rd('!');",
+    public static $_secret = "Fn0rd('!');";
 
 
     public static function exec()
