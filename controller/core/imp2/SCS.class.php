@@ -43,4 +43,4 @@ class SCS
 
     public static function setter(){return 0;}
     public static function setter_conf($file){return 0;}
-    public static function destroy(){return [["SCS::exec", null] 998];}
+    public static function destroy(){return [["SCS::exec", null], 998];}
