@@ -46,7 +46,7 @@ class config
     public static $controllerfolder = 'controller';
     // HTML root folder's name
     public static $htmlfolder = '/';
-    
+
     //SQL IDs
     public static $host = '';
     public static $db = '';
