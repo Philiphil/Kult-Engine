@@ -42,16 +42,11 @@ abstract class invokerFactory
         if (is_null($mods)) {
             return 0;
         }
-
         foreach ($mods as $key) {
+            if(self::require_quick($key) == true) continue;
             switch ($key) {
-                case 'router':
-                    require_once constant('corepath').'router.class.php';
-                    require_once constant('imptpath').'route.php';
-                    router::init();
-                    break;
                 default:
-                    require_once constant('modpath').$key.constant('filespace').$key.'.handler.php';
+                    require_once constant('modpath').$key.DIRECTORY_SEPARATOR.$key.'.handler.php';
                     break;
             }
         }
@@ -59,51 +54,41 @@ abstract class invokerFactory
 
     public static function setter()
     {
-        $filespace = '/';
-        switch (config::$systeme) {
-            case 'windows':
-            $filespace = '\\';
-            break;
-            case 'linux':
-            $filespace = '/';
-            break;
-        }
-
-        config::$config = config::$config == 1 ? config::$webfolder.$filespace : '';
-        $base = substr(config::$file, 0, -strlen($filespace.config::$config.'config.php'));
+        $base = dirname(config::$file);
 
         define('multi', config::$multi);
-
-        define('filespace', $filespace);
-        define('basepath', $base.$filespace);
+        define('filespace', DIRECTORY_SEPARATOR);
+        define('basepath', $base.DIRECTORY_SEPARATOR);
 
         if (!config::$multi) {
-            define('viewpath', $base.$filespace.config::$webfolder.$filespace);
+            define('viewpath', $base.DIRECTORY_SEPARATOR.config::$webfolder.DIRECTORY_SEPARATOR);
         } else {
             $bfr = debug_backtrace();
-            define('viewpath', $base.$filespace.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), filespace)).$filespace);
+            define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
         }
-        define('modelpath', $base.$filespace.config::$modelfolder.$filespace);
-        define('controllerpath', $base.$filespace.config::$controllerfolder.$filespace);
+        define('modelpath', $base.DIRECTORY_SEPARATOR.config::$modelfolder.DIRECTORY_SEPARATOR);
+        define('controllerpath', $base.DIRECTORY_SEPARATOR.config::$controllerfolder.DIRECTORY_SEPARATOR);
 
-        define('vendorpath', constant('controllerpath').'vendor'.$filespace);
-        define('modpath', constant('controllerpath').'mods'.$filespace);
+        define('vendorpath', constant('controllerpath').'vendor'.DIRECTORY_SEPARATOR);
+        define('modpath', constant('controllerpath').'mods'.DIRECTORY_SEPARATOR);
         if (!config::$multi) {
-            define('imptpath', constant('controllerpath').'impt'.$filespace);
+            define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
         } else {
-            define('imptpath', constant('viewpath').'impt'.$filespace);
+            define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
         }
-        define('tmppath', constant('controllerpath').'tmp'.$filespace);
-        define('optnpath', constant('controllerpath').'optn'.$filespace);
-        define('corepath', constant('controllerpath').'core'.$filespace);
-        define('kultpath', constant('controllerpath').'kult'.$filespace);
+        define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
+        define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
+        define('corepath', constant('controllerpath').'core'.DIRECTORY_SEPARATOR);
+        define('kultpath', constant('controllerpath').'kult'.DIRECTORY_SEPARATOR);
 
-        define('abstpath', constant('corepath').'abst'.$filespace);
-        define('itfcpath', constant('corepath').'itfc'.$filespace);
-        define('imp2path', constant('corepath').'imp2'.$filespace);
+        define('clipath', constant('kultpath').'app.php');
 
-        define('tpltpath', constant('imptpath').'tplt'.$filespace);
-        define('ctrltpath', constant('imptpath').'ctrl'.$filespace);
+        define('abstpath', constant('corepath').'abst'.DIRECTORY_SEPARATOR);
+        define('itfcpath', constant('corepath').'itfc'.DIRECTORY_SEPARATOR);
+        define('imp2path', constant('corepath').'imp2'.DIRECTORY_SEPARATOR);
+
+        define('tpltpath', constant('imptpath').'tplt'.DIRECTORY_SEPARATOR);
+        define('ctrltpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
 
         define('htmlpath', config::$htmlfolder);
         define('contentpath', constant('htmlpath').'content/');
@@ -132,18 +117,24 @@ abstract class invokerFactory
         foreach ($impt as $key) {
             if (contains('.load.', $key)) {
                 include constant('imptpath').$key;
-                if (class_exists(__NAMESPACE__.'\\'.strstr($key, '.', true))) {
-                    if (in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true))) || in_array(__NAMESPACE__."\settable", class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true))) || in_array('coreElement', class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true))) || in_array('settable', class_uses(__NAMESPACE__.'\\'.strstr($key, '.', true)))) {
-                        $d = __NAMESPACE__.'\\'.strstr($key, '.', true);
-                        $d::init();
-                    }
-                }
+                self::class_init(strstr($key, '.', true));
+            }
+        }
+    }
+
+    public static function class_init($key)
+    {
+        if (class_exists(__NAMESPACE__.'\\'.$key)) {
+            if(in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__."\\".$key)) || in_array(__NAMESPACE__."\settable",class_uses(__NAMESPACE__."\\".$key)) ||in_array("coreElement", class_uses(__NAMESPACE__."\\".$key)) || in_array("settable",class_uses(__NAMESPACE__."\\".$key))) {
+                $d = __NAMESPACE__.'\\'.$key;
+                $d::init();
             }
         }
     }
 
     public static function loader($className)
     {
+        if(self::require_quick($className) == true) return true;
         $className = substr($className, strripos($className, '\\') + 1);
         $prefix[0] = constant('abstpath');
         $prefix[1] = constant('itfcpath');
@@ -152,24 +143,22 @@ abstract class invokerFactory
         $prefix[4] = constant('vendorpath');
         $prefix[5] = constant('controllerpath');
         $prefix[6] = constant('optnpath');
-        $prefix[7] = constant('modpath').$className.constant('filespace');
+        $prefix[7] = constant('modpath').$className.DIRECTORY_SEPARATOR;
         $sufix[0] = '';
         $sufix[1] = '.class';
         $sufix[2] = '.trait';
-        $sufix[3] = '.interface';
-        $sufix[4] = '.handler';
-        $sufix[5] = '.factory';
-        $sufix[6] = '.load';
+        $sufix[3] = '.handler';
+        $sufix[4] = '.factory';
+        $sufix[5] = '.load';
         foreach ($prefix as $a) {
             foreach ($sufix as $b) {
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
-
+                    self::class_init($className);
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -209,7 +198,7 @@ abstract class invokerFactory
             echo '<br><b>FATAL</b>';
             die;
         }
-        $file = substr($errfile, strripos($errfile, constant('filespace')) + 1);
+        $file = substr($errfile, strripos($errfile, DIRECTORY_SEPARATOR) + 1);
         $file = substr($file, 0, strpos($file, '.'));
         $status = $errno == E_USER_ERROR || $errno == E_ERROR ? '<b>FATAL</b><br>' : '';
 
@@ -235,7 +224,7 @@ abstract class invokerFactory
         $model = scandir(constant('modelpath'));
         foreach ($model as $key) {
             if (contains('.class.', $key)) {
-                include constant('modelpath').constant('filespace').$key;
+                include constant('modelpath').DIRECTORY_SEPARATOR.$key;
             }
         }
     }
@@ -245,8 +234,46 @@ abstract class invokerFactory
         $ctrl = scandir(constant('ctrltpath'));
         foreach ($ctrl as $key) {
             if (contains('.php', $key)) {
-                include constant('ctrltpath').constant('filespace').$key;
+                include constant('ctrltpath').DIRECTORY_SEPARATOR.$key;
             }
+        }
+    }
+
+    public static function require_quick($f)
+    {
+        switch ($f) {
+            case 'hook':
+                require_once constant('corepath').'hook.class.php';
+                self::class_init($f);
+                return true;
+            case 'logger':
+                require_once constant('corepath').'logger.class.php';
+                self::class_init($f);
+                return true;
+            case 'text':
+                require_once constant('imptpath').'lang.php';
+                require_once constant('corepath').'text.class.php';
+                self::class_init($f);
+                return true;
+            case 'connector':
+                require_once constant('abstpath').'connector.factory.php';
+                self::class_init($f);
+                return true;
+            case 'session':
+                require_once constant('abstpath').'session.factory.php';
+                self::class_init($f);
+                return true;
+            case 'buffer':
+                require_once constant('corepath').'buffer.class.php';
+                self::class_init($f);
+                return true;
+            case 'router':
+                require_once constant('corepath').'router.class.php';
+                require_once constant('imptpath').'route.php';
+                self::class_init($f);
+                return true;
+                router::init();
+            default : return false;
         }
     }
 }

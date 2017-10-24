@@ -39,7 +39,6 @@ function timer_init()
 {
     $GLOBALS['timer'] = microtime(true);
 }
-timer_init();
 
 function timer_get()
 {

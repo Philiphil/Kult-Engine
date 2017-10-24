@@ -46,15 +46,7 @@ class config
     public static $controllerfolder = 'controller';
     // HTML root folder's name
     public static $htmlfolder = '/';
-    //is config.php inside webfolder ?
-    //protip : it shouldnt
-    public static $config = 0;
-
-    //Is the webserveur 'linux' or 'windows' ?
-    //if neither, have in mind that windows means c:\user
-    //and linux means /root/user
-    //the question is SHOULD I USE A SLASH OR AN ANTI SLASH
-    public static $systeme = 'linux';
+    
     //SQL IDs
     public static $host = '';
     public static $db = '';
