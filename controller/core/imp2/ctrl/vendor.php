@@ -32,23 +32,3 @@
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
-
-namespace kult_engine;
-
-
-require_once strstr(__FILE__, "controller".DIRECTORY_SEPARATOR."kult".DIRECTORY_SEPARATOR."app.php", true)."config.php";
-
-invoker::require_base();
-cli_set_process_title('Kult Engine');
-
-
-switch ($_SERVER["argv"][1]) {
-	case 'async':
-		$e = unserialize(base64_decode($_SERVER["argv"][2]));
-		$e->_closure();
-		break;
-	
-	default:
-		# code...
-		break;
-}

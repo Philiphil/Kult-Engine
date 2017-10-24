@@ -46,7 +46,7 @@ class config
     public static $controllerfolder = 'controller';
     // HTML root folder's name
     public static $htmlfolder = '/';
-
+    
     //SQL IDs
     public static $host = '';
     public static $db = '';
@@ -70,5 +70,5 @@ class config
     public static $file = __FILE__;
 }
 
-require_once substr(config::$file, 0, -10).config::$controllerfolder.substr(config::$file, -11, -10).'core'.substr(config::$file, -11, -10).'abst'.substr(config::$file, -11, -10).'invoker.factory.php';
-require_once substr(config::$file, 0, -10).config::$controllerfolder.substr(config::$file, -11, -10).'core'.substr(config::$file, -11, -10).'invoker.class.php';
+require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'abst'.DIRECTORY_SEPARATOR.'invoker.factory.php';
+require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'invoker.class.php';

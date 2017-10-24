@@ -43,9 +43,7 @@ abstract class invokerFactory
             return 0;
         }
         foreach ($mods as $key) {
-            if (self::require_quick($key) == true) {
-                continue;
-            }
+            if(self::require_quick($key) == true) continue;
             switch ($key) {
                 default:
                     require_once constant('modpath').$key.DIRECTORY_SEPARATOR.$key.'.handler.php';
@@ -127,7 +125,7 @@ abstract class invokerFactory
     public static function class_init($key)
     {
         if (class_exists(__NAMESPACE__.'\\'.$key)) {
-            if (in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__.'\\'.$key)) || in_array(__NAMESPACE__."\settable", class_uses(__NAMESPACE__.'\\'.$key)) || in_array('coreElement', class_uses(__NAMESPACE__.'\\'.$key)) || in_array('settable', class_uses(__NAMESPACE__.'\\'.$key))) {
+            if(in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__."\\".$key)) || in_array(__NAMESPACE__."\settable",class_uses(__NAMESPACE__."\\".$key)) ||in_array("coreElement", class_uses(__NAMESPACE__."\\".$key)) || in_array("settable",class_uses(__NAMESPACE__."\\".$key))) {
                 $d = __NAMESPACE__.'\\'.$key;
                 $d::init();
             }
@@ -136,9 +134,7 @@ abstract class invokerFactory
 
     public static function loader($className)
     {
-        if (self::require_quick($className) == true) {
-            return true;
-        }
+        if(self::require_quick($className) == true) return true;
         $className = substr($className, strripos($className, '\\') + 1);
         $prefix[0] = constant('abstpath');
         $prefix[1] = constant('itfcpath');
@@ -159,12 +155,10 @@ abstract class invokerFactory
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
                     self::class_init($className);
-
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -251,42 +245,35 @@ abstract class invokerFactory
             case 'hook':
                 require_once constant('corepath').'hook.class.php';
                 self::class_init($f);
-
                 return true;
             case 'logger':
                 require_once constant('corepath').'logger.class.php';
                 self::class_init($f);
-
                 return true;
             case 'text':
                 require_once constant('imptpath').'lang.php';
                 require_once constant('corepath').'text.class.php';
                 self::class_init($f);
-
                 return true;
             case 'connector':
                 require_once constant('abstpath').'connector.factory.php';
                 self::class_init($f);
-
                 return true;
             case 'session':
                 require_once constant('abstpath').'session.factory.php';
                 self::class_init($f);
-
                 return true;
             case 'buffer':
                 require_once constant('corepath').'buffer.class.php';
                 self::class_init($f);
-
                 return true;
             case 'router':
                 require_once constant('corepath').'router.class.php';
                 require_once constant('imptpath').'route.php';
                 self::class_init($f);
-
                 return true;
                 router::init();
-            default: return false;
+            default : return false;
         }
     }
 }

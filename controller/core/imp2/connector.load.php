@@ -35,20 +35,21 @@
 
 namespace kult_engine;
 
+abstract class connector extends connectorFactory
+{
+    use coreElement;
 
-require_once strstr(__FILE__, "controller".DIRECTORY_SEPARATOR."kult".DIRECTORY_SEPARATOR."app.php", true)."config.php";
+    public static $_TABLE_DEMO = '`demo`';
+    public static $_DEMO_ID = 'id';
 
-invoker::require_base();
-cli_set_process_title('Kult Engine');
+    public static function demo_get($id)
+    {
+        $query = 'SELECT '.self::$_TABLE_DEMO.
+        'WHERE `'.self::$_GROUPE_NAME.'` = :id';
+        $query = self::$_db->prepare($query);
+        $query->execute([':id' => $id]);
+        $query = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
-switch ($_SERVER["argv"][1]) {
-	case 'async':
-		$e = unserialize(base64_decode($_SERVER["argv"][2]));
-		$e->_closure();
-		break;
-	
-	default:
-		# code...
-		break;
+        return $query;
+    }
 }
