@@ -41,10 +41,11 @@ class crypter
     public $_salt;
     public $_iv;
 
-    public function __construct()
+    public function __construct($key="D3f4ultKey!")
     {
         $this->_salt = random_bytes(32);
         $this->_iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-256-CBC'));
+        $this->generate_key($key);
     }
 
     public function generate_key($key)
@@ -58,18 +59,16 @@ class crypter
         $return['iv'] = base64_encode($this->_iv);
         $return['salt'] = base64_encode($this->_salt);
         $return['txt'] = base64_encode(openssl_encrypt($txt, 'AES-256-CBC', $this->_key, 0, $this->_iv));
-
         return json_encode($return);
     }
 
-    public function decrypt($json, $key)
+    public function decrypt($json, $key="D3f4ultKey!")
     {
         $obj = json_decode($json, true);
         $this->_iv = base64_decode($obj['iv']);
         $this->_salt = base64_decode($obj['salt']);
         $this->generate_key($key);
         $h = base64_decode($obj['txt']);
-
         return openssl_decrypt($h, 'AES-256-CBC', $this->_key, 0, $this->_iv);
     }
 }
