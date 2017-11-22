@@ -1,5 +1,3 @@
-Kult Engine
-
 # Fullstack PHP Framework
 
 The Kult engine is a php framework aiming to be a lightweight and easy to use/configure/install/learn set of powerful tools able to fit every website's common task and need.
@@ -28,7 +26,7 @@ debugger
 i18n
 ajax and webservice
 templating
-and more.
+and so much more.
 
 # QUICKSTART :
 
