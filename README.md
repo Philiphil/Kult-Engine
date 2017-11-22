@@ -15,18 +15,18 @@ You can drag & drop your website on a whole different server, just conf.php will
 Based on this idea to make something that runs quick, the kult engine stated to grow, and since version 33.1 is proud to be ready for production.
 
 ## Features
-Easy to use, learn, install and run.
-Lightweight and fast
-MVC
-Router
-Sql Helper
-Orm
-logger
-debugger
-i18n
-ajax and webservice
-templating
-and so much more.
+* Easy to use, learn, install and run.
+* Lightweight and fast
+* MVC
+* Router
+* Sql Helper
+* Orm
+* logger
+* debugger
+* i18n
+* ajax and webservice
+* templating
+* and so much more.
 
 # QUICKSTART :
 
