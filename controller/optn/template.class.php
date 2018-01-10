@@ -44,12 +44,12 @@ class template
         $impt = scandir(constant('tpltpath'));
         foreach ($impt as $key) {
             if (contains('.load.', $key)) {
-                $this->_templates[strstr($key, '.load.', true)] = $this->writeTotemplate(file_get_contents(constant('tpltpath').$key),[],1);
+                $this->_templates[strstr($key, '.load.', true)] = $this->writeTotemplate(file_get_contents(constant('tpltpath').$key), [], 1);
             }
         }
     }
 
-    public function write_to_template($template, $option = [],$load=0)
+    public function write_to_template($template, $option = [], $load = 0)
     {
         $template = preg_replace_callback("/\.*kt:!(.*):!/", function ($match) {
             return text::get_text($match[1]) === null ? $match[1] : text::get_text($match[1]);
@@ -57,7 +57,7 @@ class template
         $template = preg_replace_callback("/\.*kc:!(.*):!/", function ($match) {
             return constant($match[1]) === null ? $match[1] : constant($match[1]);
         }, $template);
-        if(!$load){
+        if (!$load) {
             $template = preg_replace_callback("/\.*ko:!(.*):!/", function ($match) use ($option) {
                 return !isset($option[$match[1]]) ? $match[1] : $option[$match[1]];
             }, $template);
