@@ -49,7 +49,7 @@ class template
         }
     }
 
-    public function writeTotemplate($template, $option = [])
+    public function write_to_template($template, $option = [])
     {
         $template = preg_replace_callback("/\.*kt:!(.*):!/", function ($match) {
             return text::get_text($match[1]) === null ? $match[1] : text::get_text($match[1]);
