@@ -44,7 +44,7 @@ class template
         $impt = scandir(constant('tpltpath'));
         foreach ($impt as $key) {
             if (contains('.load.', $key)) {
-                $this->_templates[strstr($key, '.load.', true)] = $this->writeTotemplate(file_get_contents(constant('tpltpath').$key), [], 1);
+                $this->_templates[strstr($key, '.load.', true)] = $this->write_to_template(file_get_contents(constant('tpltpath').$key), [], 1);
             }
         }
     }
