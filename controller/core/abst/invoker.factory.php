@@ -136,10 +136,10 @@ abstract class invokerFactory
 
     public static function loader($className)
     {
+        $className = substr($className, strripos($className, '\\') + 1);
         if (self::require_quick($className) == true) {
             return true;
         }
-        $className = substr($className, strripos($className, '\\') + 1);
         $prefix[0] = constant('abstpath');
         $prefix[1] = constant('itfcpath');
         $prefix[2] = constant('corepath');
