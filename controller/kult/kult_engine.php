@@ -37,6 +37,6 @@ namespace kult_engine;
 
 abstract class kult_engine
 {
-    public static $_ver = '1.33.1';
-    public static $_time = '1505380084';
+    public static $_ver = '1.33.2';
+    public static $_time = '1518517080';
 }
