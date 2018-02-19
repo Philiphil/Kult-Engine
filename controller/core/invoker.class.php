@@ -66,6 +66,7 @@ abstract class invoker extends invokerFactory
 
         self::require_mods($ext);
         self::require_local_model();
+        self::require_local_vendor();
         self::require_local_controler();
         $b = new logger();
         $b->write_local();
