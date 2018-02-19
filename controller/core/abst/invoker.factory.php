@@ -244,7 +244,7 @@ abstract class invokerFactory
             }
         }
     }
-    
+
     public static function require_vendor()
     {
         $ctrl = scandir(constant('vendorpath'));
