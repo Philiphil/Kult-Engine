@@ -244,6 +244,16 @@ abstract class invokerFactory
             }
         }
     }
+    
+    public static function require_vendor()
+    {
+        $ctrl = scandir(constant('vendorpath'));
+        foreach ($ctrl as $key) {
+            if (contains('.php', $key)) {
+                include constant('vendorpath').DIRECTORY_SEPARATOR.$key;
+            }
+        }
+    }
 
     public static function require_quick($f)
     {
