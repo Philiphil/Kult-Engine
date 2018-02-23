@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -66,10 +66,9 @@ abstract class invoker extends invokerFactory
 
         self::require_mods($ext);
         self::require_local_model();
-        self::require_local_vendor();
+        self::require_vendor();
         self::require_local_controler();
-        $b = new logger();
-        $b->write_local();
+
     }
 
     public static function analytics()
@@ -77,13 +76,5 @@ abstract class invoker extends invokerFactory
         self::require_base();
         require_once constant('corepath').'analytics.class.php';
         analytics::init();
-    }
-
-    public static function webService($ext)
-    {
-        self::require_basics($ext);
-        require_once constant('corepath').'webService.class.php';
-
-        return new webService();
     }
 }

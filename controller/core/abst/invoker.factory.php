@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -136,10 +136,11 @@ abstract class invokerFactory
 
     public static function loader($className)
     {
-        $className = substr($className, strripos($className, '\\') + 1);
+ $className = substr($className, strripos($className, '\\') + 1);
         if (self::require_quick($className) == true) {
             return true;
         }
+       
         $prefix[0] = constant('abstpath');
         $prefix[1] = constant('itfcpath');
         $prefix[2] = constant('corepath');
@@ -235,22 +236,22 @@ abstract class invokerFactory
         }
     }
 
-    public static function require_local_controler()
-    {
-        $ctrl = scandir(constant('ctrltpath'));
-        foreach ($ctrl as $key) {
-            if (contains('.php', $key)) {
-                include constant('ctrltpath').DIRECTORY_SEPARATOR.$key;
-            }
-        }
-    }
-
     public static function require_vendor()
     {
         $ctrl = scandir(constant('vendorpath'));
         foreach ($ctrl as $key) {
             if (contains('.php', $key)) {
                 include constant('vendorpath').DIRECTORY_SEPARATOR.$key;
+            }
+        }
+    }
+
+    public static function require_local_controler()
+    {
+        $ctrl = scandir(constant('ctrltpath'));
+        foreach ($ctrl as $key) {
+            if (contains('.php', $key)) {
+                include constant('ctrltpath').DIRECTORY_SEPARATOR.$key;
             }
         }
     }
@@ -293,9 +294,13 @@ abstract class invokerFactory
                 require_once constant('corepath').'router.class.php';
                 require_once constant('imptpath').'route.php';
                 self::class_init($f);
-
                 return true;
-                router::init();
+
+            case "webService":
+            case "webservice":
+                require_once constant('corepath').'webService.class.php';
+                self::class_init($f);
+                return true;
             default: return false;
         }
     }
