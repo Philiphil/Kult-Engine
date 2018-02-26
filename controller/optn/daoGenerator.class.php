@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016-208
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -46,7 +46,7 @@ class daoGenerator
         $this->_sql = new sqlHelper();
         $x = new \ReflectionClass($fnord);
         $this->_obj[0] = $x->getName();
-        $this->_obj[0] = strpos($this->_obj[0], "kult_engine\\") ===0 ? substr($this->_obj[0],12):$this->_obj[0];
+        $this->_obj[0] = strpos($this->_obj[0], 'kult_engine\\') === 0 ? substr($this->_obj[0], 12) : $this->_obj[0];
         $b = $x->getProperties();
         $o = $x->newInstanceWithoutConstructor();
         foreach ($b as $p) {
@@ -197,8 +197,7 @@ class daoGenerator
         $this->verify_table();
         $r = [];
         $array = $this->get_all();
-        if(is_array($array) && count($array) >0)
-        {
+        if (is_array($array) && count($array) > 0) {
             foreach ($array as $o) {
                 if ($o->$wat == $val) {
                     array_push($r, $o);
