@@ -39,14 +39,17 @@ use kult_engine as k;
 
 abstract class router
 {
-    use coreElement;
-    use hookable;
+    use debuggable;
+    use singleton;
+    use settable;
+    use injectable;
+
     public static $_a_asked = [];
     public static $_asked = '';
     public static $_method = 'GET';
     public static $_route = [];
     public static $_global_route = [];
-    public static $_argex = 'k:!';
+    public static $_argex = '|<!';
     private static $_auto_executor = null;
     public static $_global_routing = 1;
 
@@ -56,11 +59,7 @@ abstract class router
         self::$_asked = substr($_SERVER['REQUEST_URI'], strlen($_SERVER['SCRIPT_NAME']));
         self::$_a_asked = self::read_asked(self::$_asked);
         self::$_route = [];
-    }
-
-    public static function destruct()
-    {
-        return [['kult_engine\\router::exec', null], 1];
+        self::$_auto_executor = new router_executor();
     }
 
     public static function read_asked($brut)
@@ -157,6 +156,14 @@ abstract class router
         return $args;
     }
 }
+
+    class router_executor
+    {
+        public function __destruct()
+        {
+            router::exec();
+        }
+    }
 
     class global_route
     {

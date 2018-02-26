@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -45,6 +45,7 @@ abstract class webService
     public static $_method;
     public static $_token;
     public static $_func = [];
+
 
     public static function setter()
     {
@@ -67,13 +68,13 @@ abstract class webService
         }
     }
 
-    public static function service($a, $c, $t = 'POST')
+    public static  function service($a, $c, $t = 'POST')
     {
         self::$_func[$t][$a] = $c;
     }
 
     public static function destruct()
     {
-        return [['kult_engine\\webService::execute', null], 2];
+        return [['kult_engine\\webService::execute', null], 1];
     }
 }
