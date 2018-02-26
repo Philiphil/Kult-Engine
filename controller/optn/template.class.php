@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016-208
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -44,12 +44,12 @@ class template
         $impt = scandir(constant('tpltpath'));
         foreach ($impt as $key) {
             if (contains('.load.', $key)) {
-                $this->_templates[strstr($key, '.load.', true)] = $this->writeTotemplate(file_get_contents(constant('tpltpath').$key),[],1);
+                $this->_templates[strstr($key, '.load.', true)] = $this->writeTotemplate(file_get_contents(constant('tpltpath').$key), [], 1);
             }
         }
     }
 
-    public function writeTotemplate($template, $option = [],$load=0)
+    public function writeTotemplate($template, $option = [], $load = 0)
     {
         $template = preg_replace_callback("/\.*kt:!(.*):!/", function ($match) {
             return text::get_text($match[1]) === null ? $match[1] : text::get_text($match[1]);
@@ -57,14 +57,14 @@ class template
         $template = preg_replace_callback("/\.*kc:!(.*):!/", function ($match) {
             return constant($match[1]) === null ? $match[1] : constant($match[1]);
         }, $template);
-if(!$load){
-$template = preg_replace_callback("/\.*ko:!(.*):!/", function ($match) use ($option) {
-            return !isset($option[$match[1]]) ? $match[1]: $option[$match[1]];
-        }, $template);
-        $template = preg_replace_callback("/\.*kod:!(.*):!/", function ($match) use ($option) {
-            return !isset($option[$match[1]]) ? '' : $option[$match[1]];
-        }, $template);
-}
+        if (!$load) {
+            $template = preg_replace_callback("/\.*ko:!(.*):!/", function ($match) use ($option) {
+                return !isset($option[$match[1]]) ? $match[1] : $option[$match[1]];
+            }, $template);
+            $template = preg_replace_callback("/\.*kod:!(.*):!/", function ($match) use ($option) {
+                return !isset($option[$match[1]]) ? '' : $option[$match[1]];
+            }, $template);
+        }
         $template = preg_replace_callback("/\.*ktp:!(.*):!/", function ($match) {
             if ($this->_templates === null) {
                 $this->load();
