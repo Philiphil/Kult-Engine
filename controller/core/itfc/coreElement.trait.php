@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -38,15 +38,5 @@ namespace kult_engine;
 trait coreElement
 {
     use debuggable;
-    use settable{
-        settable::init as s_init;
-    }
-
-    public static function init($fnord = null)
-    {
-        static::s_init($fnord);
-        if (in_array(__NAMESPACE__."\hookable", class_uses(get_called_class()))) {
-            static::hook();
-        }
-    }
+    use settable;
 }

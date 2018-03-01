@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -49,6 +49,8 @@ abstract class invokerFactory
             switch ($key) {
                 default:
                     require_once constant('modpath').$key.DIRECTORY_SEPARATOR.$key.'.handler.php';
+                    self::class_init($key);
+                    self::class_init($key."Handler");
                     break;
             }
         }
@@ -104,7 +106,7 @@ abstract class invokerFactory
         define('loginpage', config::$login_page);
         define('view', config::$webfolder);
         define('url', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '.php') + 4));
-        define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1, strpos($_SERVER['PHP_SELF'], '.php') + 4));
+        define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'), strpos($_SERVER['PHP_SELF'], '.php') + 4));
 
         define('host', config::$host);
         define('db', config::$db);
@@ -136,11 +138,11 @@ abstract class invokerFactory
 
     public static function loader($className)
     {
-        $className = substr($className, strripos($className, '\\') + 1);
+ $className = substr($className, strripos($className, '\\') + 1);
         if (self::require_quick($className) == true) {
             return true;
         }
-
+       
         $prefix[0] = constant('abstpath');
         $prefix[1] = constant('itfcpath');
         $prefix[2] = constant('corepath');
@@ -207,6 +209,12 @@ abstract class invokerFactory
         }
         $file = substr($errfile, strripos($errfile, DIRECTORY_SEPARATOR) + 1);
         $file = substr($file, 0, strpos($file, '.'));
+        if (class_exists(__NAMESPACE__.'\\'.$file) && in_array(__NAMESPACE__.'\\'.'coreElement', class_uses(__NAMESPACE__.'\\'.$file)) || in_array(__NAMESPACE__.'\\'.'debuggable', class_uses(__NAMESPACE__.'\\'.$file))) {
+            $e = new \ReflectionClass(__NAMESPACE__.'\\'.$file);
+            $f = $e->getMethod('debug');
+            $f->invoke(null);
+        }
+
         $status = $errno == E_USER_ERROR || $errno == E_ERROR ? '<b>FATAL</b><br>' : '';
 
         $saying = $errstr != '' ? $errstr : $errno;
@@ -215,12 +223,6 @@ abstract class invokerFactory
         echo '<br> <b>E</b> : '.$saying.'<br>';
         echo 'L : <b>'.$errline.'</b> - F : <b>'.$file.'</b><br>';
         echo $status;
-
-        if (class_exists(__NAMESPACE__.'\\'.$file) && in_array(__NAMESPACE__.'\\'.'coreElement', class_uses(__NAMESPACE__.'\\'.$file)) || in_array(__NAMESPACE__.'\\'.'debuggable', class_uses(__NAMESPACE__.'\\'.$file))) {
-            $e = new \ReflectionClass(__NAMESPACE__.'\\'.$file);
-            $f = $e->getMethod('debug');
-            $f->invoke(null);
-        }
         die();
     }
 
@@ -294,14 +296,12 @@ abstract class invokerFactory
                 require_once constant('corepath').'router.class.php';
                 require_once constant('imptpath').'route.php';
                 self::class_init($f);
-
                 return true;
 
-            case 'webService':
-            case 'webservice':
+            case "webService":
+            case "webservice":
                 require_once constant('corepath').'webService.class.php';
                 self::class_init($f);
-
                 return true;
             default: return false;
         }

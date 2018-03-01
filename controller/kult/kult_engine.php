@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,6 +37,6 @@ namespace kult_engine;
 
 abstract class kult_engine
 {
-    public static $_ver = '1.34';
-    public static $_time = '1519382154';
+    public static $_ver = '1.34.2';
+    public static $_time = '1505380085';
 }
