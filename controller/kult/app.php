@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016-208
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,18 +37,17 @@ namespace kult_engine;
 
 require_once strstr(__FILE__, 'controller'.DIRECTORY_SEPARATOR.'kult'.DIRECTORY_SEPARATOR.'app.php', true).'config.php';
 
-
 cli_set_process_title('Kult Engine');
 
 switch ($_SERVER['argv'][1]) {
     case 'async':
-    	invoker::require_base();
+        invoker::require_base();
         $e = unserialize(base64_decode($_SERVER['argv'][2]));
         $e->_closure();
         break;
      case 'soros':
-     	invoker::require_basics(["soros_bot"]);
-        soros_bot::run($_SERVER["argv"][2]);
+         invoker::require_basics(['soros_bot']);
+        soros_bot::run($_SERVER['argv'][2]);
     default:
         // code...
         break;
