@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -51,7 +51,7 @@ abstract class sessionFactory
             self::$_login = intval($_SESSION['login']);
             self::$_token_1 = $_SESSION['token_1'];
             self::$_token_2 = $_SESSION['token_2'];
-            self::$_val = $_SESSION['val'];
+            self::$_val = isset($_SESSION['val']) ? $_SESSION['val'] : [];
         } else {
             self::destroy();
         }
