@@ -46,7 +46,7 @@ class urlTempo
         return $url;
     }
 
-    public function untempo($url, $key='K:!//15856zaaf;')
+    public function untempo($url, $key = 'K:!//15856zaaf;')
     {
         preg_match('/time=(.*)&/', $url, $e);
         preg_match('/&token=(.*)/', $url, $o);
