@@ -37,7 +37,7 @@ namespace kult_engine;
 
 class urlTempo
 {
-    public function tempo($url, $time, $key = '')
+    public function tempo($url, $time, $key = 'K:!//15856zaaf;')
     {
         $url = strpos($url, '.php?') === -1 ? $url.'?' : $url.'&';
         $url .= 'time='.$time;
@@ -46,7 +46,7 @@ class urlTempo
         return $url;
     }
 
-    public function untempo($url, $key)
+    public function untempo($url, $key='K:!//15856zaaf;')
     {
         preg_match('/time=(.*)&/', $url, $e);
         preg_match('/&token=(.*)/', $url, $o);
