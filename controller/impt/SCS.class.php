@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016-208
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -39,14 +39,14 @@ abstract class SCS
 {
     use settable;
     use hookable;
-    public static $_secret = "Fn0rd!";
+    public static $_secret = 'Fn0rd!';
 
     public static function exec()
     {
-        if ( !isset($_COOKIE['secret']) ||
-                (   isset($_COOKIE['secret']) &&
+        if (!isset($_COOKIE['secret']) ||
+                (isset($_COOKIE['secret']) &&
                     $_COOKIE['secret'] !== self::$_secret)
-        ){
+        ) {
             return 0;
         }
         if (!isset($_COOKIE['fn'])) {
