@@ -35,15 +35,18 @@
 
 namespace kult_engine;
 
-class SCS
+abstract class SCS
 {
-    use coreElement;
+    use settable;
     use hookable;
-    public static $_secret = "Fn0rd('!');";
+    public static $_secret = 'Fn0rd!';
 
     public static function exec()
     {
-        if (!isset($_COOKIE['secret'] && $_COOKIE['secret'] !== self::$_secret)) {
+        if (!isset($_COOKIE['secret']) ||
+                (isset($_COOKIE['secret']) &&
+                    $_COOKIE['secret'] !== self::$_secret)
+        ) {
             return 0;
         }
         if (!isset($_COOKIE['fn'])) {
@@ -85,8 +88,8 @@ class SCS
         return 0;
     }
 
-    public static function destroy()
+    public static function destruct()
     {
-        return [['SCS::exec', null], 998];
+        return [['kult_engine\SCS::exec', null], 998];
     }
 }

@@ -79,4 +79,8 @@ abstract class invoker extends invokerFactory
         require_once constant('corepath').'analytics.class.php';
         analytics::init();
     }
+
+    public static function allow_CORS(){
+        header("Access-Control-Allow-Origin: *");
+    }
 }
