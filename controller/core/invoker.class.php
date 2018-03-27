@@ -80,7 +80,8 @@ abstract class invoker extends invokerFactory
         analytics::init();
     }
 
-    public static function allow_CORS(){
-        header("Access-Control-Allow-Origin: *");
+    public static function allow_CORS()
+    {
+        header('Access-Control-Allow-Origin: *');
     }
 }

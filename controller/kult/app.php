@@ -37,7 +37,6 @@ namespace kult_engine;
 
 require_once strstr(__FILE__, 'controller'.DIRECTORY_SEPARATOR.'kult'.DIRECTORY_SEPARATOR.'app.php', true).'config.php';
 
-
 cli_set_process_title('Kult Engine');
 
 switch ($_SERVER['argv'][1]) {
@@ -47,8 +46,8 @@ switch ($_SERVER['argv'][1]) {
         $e->_closure();
         break;
      case 'soros':
-        invoker::require_basics(["soros_bot"]);
-        $var = isset($_SERVER["argv"][2]) ? $_SERVER["argv"][2]: false;
+        invoker::require_basics(['soros_bot']);
+        $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
         soros_bot::run($var);
     default:
         // code...
