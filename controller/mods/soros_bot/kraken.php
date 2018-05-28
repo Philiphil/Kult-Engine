@@ -143,6 +143,7 @@ class KrakenAPI
         if (!is_array($result)) {
             throw new KrakenAPIException('JSON decode error');
         }
+
         return $result;
     }
 
@@ -189,6 +190,7 @@ class KrakenAPI
         if (!is_array($result)) {
             throw new KrakenAPIException('JSON decode error');
         }
+
         return $result;
     }
 }
