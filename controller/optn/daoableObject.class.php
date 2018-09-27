@@ -52,7 +52,7 @@ abstract class daoableObject
     {
         $this->_iduniq = uniqid();
         foreach ($this as $key => $value) {
-            if ($value == 'string') {
+            if ($value == 'string' || $value == 'id') {
                 $this->$key = '';
             }
         }
