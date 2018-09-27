@@ -1,5 +1,5 @@
 var UrlAjax = UrlAjax || {};
-UrlAjax.demo = '/api/demo.ajax.php';
+UrlAjax.pokemon = '/api/pokemon.ajax.php';
 
 
 var ReqAjax = function(req,args=0,method="POST",rep="JSON")
@@ -14,7 +14,7 @@ var ReqAjax = function(req,args=0,method="POST",rep="JSON")
 ReqAjax.prototype.send = function(url, callback=1, fallback=1){
     var data = new FormData()
     data.append("req",this.req)
-    data.append("args",JSON.stringify(this.args))
+    data.append("args",Array.isArray(this.args) ? JSON.stringify(this.args): JSON.stringify([this.args]) )
     data.append("token",this.token)
     var x = this.rep
     fetch(url,{
