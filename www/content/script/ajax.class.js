@@ -1,5 +1,5 @@
 var UrlAjax = UrlAjax || {};
-UrlAjax.pokemon = '/api/pokemon.ajax.php';
+UrlAjax.demo = '/api/demo.ajax.php';
 
 
 var ReqAjax = function(req,args=0,method="POST",rep="JSON")
