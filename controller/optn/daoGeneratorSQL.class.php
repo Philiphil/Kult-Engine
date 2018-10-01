@@ -38,6 +38,7 @@ namespace kult_engine;
 class daoGeneratorSQL extends daoGeneratorFactory
 {
     use queryable;
+    public $_connector;
 
     public function __construct($fnord = null)
     {
@@ -50,6 +51,10 @@ class daoGeneratorSQL extends daoGeneratorFactory
         foreach ($b as $p) {
             $this->_obj[$p->getName()] = $o->{$p->getName()};
         }
+    }
+
+    public function setConnector($fnord){
+
     }
 
     public function objToRow($o, $id = 1)
