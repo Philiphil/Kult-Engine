@@ -102,7 +102,7 @@ class daoGeneratorSQL extends daoGeneratorFactory
     public function set($fnord)
     {
         $this->verify_table();
-        if ($fnord->_id === 'id') {
+        if ($fnord->_id === $fnord->getDefaultId()) {
             $o = $this->objToRow($fnord, 0);
             $query = $this->_helper->insert($this->_obj[0], $o[0]);
             $query = $this->query($query);
