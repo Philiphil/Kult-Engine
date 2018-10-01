@@ -58,16 +58,14 @@ abstract class daoableObject
         }
     }
 
-    public function setIduniq(){
+    public function setIduniq()
+    {
         $this->_iduniq = uniqid();
     }
 
-    public function clean(){
+    public function clean()
+    {
         unset($this->_id);
         unset($this->_iduniq);
     }
-
-
-
-
 }
