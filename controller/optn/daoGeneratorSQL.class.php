@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-208
+ * Copyright (c) 2016-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,25 +28,23 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2017, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace kult_engine;
 
-class daoGenerator
+class daoGeneratorSQL extends daoGeneratorFactory
 {
     use queryable;
-    public $_obj;
-    private $_sql;
 
     public function __construct($fnord = null)
     {
-        $this->_sql = new sqlHelper();
+        $this->_helper = new sqlHelper();
         $x = new \ReflectionClass($fnord);
         $this->_obj[0] = $x->getName();
-        $this->_obj[0] = strpos($this->_obj[0], 'kult_engine\\') === 0 ? substr($this->_obj[0], 12) : $this->_obj[0];
+        $this->_obj[0] = strpos($this->_obj[0], "kult_engine\\") ===0 ? substr($this->_obj[0],12):$this->_obj[0];
         $b = $x->getProperties();
         $o = $x->newInstanceWithoutConstructor();
         foreach ($b as $p) {
@@ -93,7 +91,7 @@ class daoGenerator
     public function get($fnord)
     {
         $this->verify_table();
-        $query = $this->_sql->select_string($this->_obj[0], '_id');
+        $query = $this->_helper->select_string($this->_obj[0], '_id');
         $query = $this->query($query);
         $query->execute([$fnord]);
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -106,10 +104,10 @@ class daoGenerator
         $this->verify_table();
         if ($fnord->_id === 'id') {
             $o = $this->objToRow($fnord, 0);
-            $query = $this->_sql->insert($this->_obj[0], $o[0]);
+            $query = $this->_helper->insert($this->_obj[0], $o[0]);
             $query = $this->query($query);
             $query->execute($o[1]);
-            $query = $this->_sql->select_string($this->_obj[0], '_iduniq');
+            $query = $this->_helper->select_string($this->_obj[0], '_iduniq');
             $query = $this->query($query);
             $query->execute([$fnord->_iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -118,7 +116,7 @@ class daoGenerator
             return $fnord;
         } else {
             $o = $this->objToRow($fnord, 0);
-            $query = $this->_sql->update_int($this->_obj[0], '_id', '_id', $o[0]);
+            $query = $this->_helper->update_int($this->_obj[0], '_id', '_id', $o[0]);
             $query = $this->query($query);
             $o[1][] = $fnord->_id;
             $query->execute($o[1]);
@@ -130,7 +128,7 @@ class daoGenerator
     public function get_last()
     {
         $this->verify_table();
-        $query = $this->_sql->select_last($this->_obj[0], '_id');
+        $query = $this->_helper->select_last($this->_obj[0], '_id');
         $query = $this->query($query);
         $query->execute();
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -141,7 +139,7 @@ class daoGenerator
     public function get_all()
     {
         $this->verify_table();
-        $query = $this->_sql->select_all($this->_obj[0], '_id');
+        $query = $this->_helper->select_all($this->_obj[0], '_id');
         $query = $this->query($query);
         $query->execute();
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -159,7 +157,7 @@ class daoGenerator
     public function delete($fnord)
     {
         $this->verify_table();
-        $query = $this->_sql->delete($this->_obj[0], '_id');
+        $query = $this->_helper->delete($this->_obj[0], '_id');
         $query = $this->query($query);
         $query->execute([$fnord->_id]);
     }
@@ -171,7 +169,7 @@ class daoGenerator
         }
         $x = $this->_obj;
         unset($x[0]);
-        $query = $this->_sql->create_advance($this->_obj[0], $x);
+        $query = $this->_helper->create_advance($this->_obj[0], $x);
         $query = $this->query($query);
         $query->execute();
     }
@@ -179,7 +177,7 @@ class daoGenerator
     public function delete_table()
     {
         $this->verify_table();
-        $query = $this->_sql->drop($this->_obj[0]);
+        $query = $this->_helper->drop($this->_obj[0]);
         $query = $this->query($query);
         $query->execute();
     }
@@ -187,7 +185,7 @@ class daoGenerator
     public function empty_table()
     {
         $this->verify_table();
-        $query = $this->_sql->truncate($this->_obj[0]);
+        $query = $this->_helper->truncate($this->_obj[0]);
         $query = $this->query($query);
         $query->execute();
     }
@@ -197,7 +195,8 @@ class daoGenerator
         $this->verify_table();
         $r = [];
         $array = $this->get_all();
-        if (is_array($array) && count($array) > 0) {
+        if(is_array($array) && count($array) >0)
+        {
             foreach ($array as $o) {
                 if ($o->$wat == $val) {
                     array_push($r, $o);
@@ -226,7 +225,7 @@ class daoGenerator
     public function table_exists()
     {
         try {
-            $query = $this->_sql->select_last($this->_obj[0], '_id');
+            $query = $this->_helper->select_last($this->_obj[0], '_id');
             $query = $this->query($query);
             $query->execute();
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -244,3 +243,4 @@ class daoGenerator
         }
     }
 }
+

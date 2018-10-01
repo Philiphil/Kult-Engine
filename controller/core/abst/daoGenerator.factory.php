@@ -35,9 +35,10 @@
 
 namespace kult_engine;
 
-class daoGeneratorFactory
+abstract class daoGeneratorFactory
 {
     public $_obj;
+    private $_helper;
 
     public function __construct($fnord = null)
     {
