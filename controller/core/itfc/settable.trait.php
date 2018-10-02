@@ -37,7 +37,7 @@ namespace kult_engine;
 
 trait settable
 {
-    private static $set = 0;
+    protected static $set = 0;
 
     abstract public static function setter();
 
@@ -45,15 +45,11 @@ trait settable
 
     public static function init($fnord = null)
     {
-        if (!self::$set) {
-            self::$set = 1;
-            $r = is_null($fnord) ? self::setter() : self::setter_conf($fnord);
-            if (in_array(
-                __NAMESPACE__."\hookable", class_uses(get_called_class()))
-            ) {
-                self::hook();
-            }
-
+        if (!static::$set) {
+            static::$set = !static::$set;
+            $r = is_null($fnord) ? static::setter() : static::setter_conf($fnord);
+            if (in_array(__NAMESPACE__."\\hookable", class_uses_deep(static::class)) || in_array("hookable", class_uses_deep(static::class))
+            ) static::hook();
             return $r;
         }
         trigger_error(get_called_class().' ALREADY SET');
@@ -61,8 +57,8 @@ trait settable
 
     public static function uninit()
     {
-        if (self::$set) {
-            self::$set = 0;
+        if (static::$set) {
+            static::$set = !static::$set;
 
             return 0;
         }
@@ -73,7 +69,7 @@ trait settable
 
     public static function init_required()
     {
-        if (!self::$set) {
+        if (!static::$set) {
             trigger_error(get_called_class().' NOT SET', E_USER_ERROR);
 
             return 0;
@@ -83,5 +79,5 @@ trait settable
     }
 
 //    public static function setter(){}
-  //  public static function setter_conf($fnord){self::setter();}
+  //  public static function setter_conf($fnord){static::setter();}
 }

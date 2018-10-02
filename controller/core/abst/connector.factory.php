@@ -37,33 +37,34 @@ namespace kult_engine;
 
 abstract class connectorFactory
 {
+    use coreElement;
+
+    protected static $_this=null;
     protected static $_db = null;
-    protected static $_DB_HOST = host;
-    protected static $_DB_NAME = db;
-    protected static $_DB_USER = user;
-    protected static $_DB_PASS = pass;
+
+    protected static $_DB_DRIVER = null;
+    protected static $_DB_HOST = null;
+    protected static $_DB_NAME = null;
+    protected static $_DB_USER = null;
+    protected static $_DB_PASS = null;
 
     public static function setter()
     {
-        self::$_DB_HOST = constant('host');
-        self::$_DB_NAME = constant('db');
-        self::$_DB_USER = constant('user');
-        self::$_DB_PASS = constant('pass');
-        self::set_pdo(constant('driver'));
+        static::set_pdo(static::$_DB_DRIVER);
     }
 
     public static function setter_conf($fnord)
     {
-        self::$_DB_HOST = $fnord['host'];
-        self::$_DB_NAME = $fnord['name'];
-        self::$_DB_USER = $fnord['user'];
-        self::$_DB_PASS = $fnord['pass'];
-        self::set_pdo($fnord['driver']);
+        static::$_DB_HOST = $fnord['host'];
+        static::$_DB_NAME = $fnord['name'];
+        static::$_DB_USER = $fnord['user'];
+        static::$_DB_PASS = $fnord['pass'];
+        static::set_pdo($fnord['driver']);
     }
 
     public static function query($fnord)
     {
-        return self::$_db->prepare($fnord);
+        return static::$_db->prepare($fnord);
     }
 
     public static function set_pdo($fnord)
@@ -73,19 +74,26 @@ abstract class connectorFactory
         //$option = array(\PDO::MYSQL_ATTR_MAX_BUFFER_SIZE => 2097152);
         switch ($fnord) {
             case 'mysql':
-                self::$_db = new \pdo('mysql:host='.self::$_DB_HOST.';dbname='.self::$_DB_NAME.';charset=utf8mb4', self::$_DB_USER, self::$_DB_PASS);
+                static::$_db = new \pdo('mysql:host='.static::$_DB_HOST.';dbname='.static::$_DB_NAME.';charset=utf8mb4', static::$_DB_USER, static::$_DB_PASS);
                 break;
             case 'odbc':
-                self::$_db = new \pdo('odbc:DRIVER={ODBC Driver 13 for SQL Server};SERVER='.self::$_DB_HOST.';DATABASE='.self::$_DB_NAME.';', self::$_DB_USER, self::$_DB_PASS);
+                static::$_db = new \pdo('odbc:DRIVER={ODBC Driver 13 for SQL Server};SERVER='.static::$_DB_HOST.';DATABASE='.static::$_DB_NAME.';', static::$_DB_USER, static::$_DB_PASS);
                 break;
             case 'sqlsrv':
-                self::$_db = new \pdo('sqlsrv:Server='.self::$_DB_HOST.';Database='.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS);
+                static::$_db = new \pdo('sqlsrv:Server='.static::$_DB_HOST.';Database='.static::$_DB_NAME, static::$_DB_USER, static::$_DB_PASS);
                 break;
             case 'sqlite':
-                self::$_db = new \pdo('sqlite:'.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS, [\PDO::ATTR_PERSISTENT => true]);
+                static::$_db = new \pdo('sqlite:'.static::$_DB_NAME, static::$_DB_USER, static::$_DB_PASS, [\PDO::ATTR_PERSISTENT => true]);
                 break;
         }
-        self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        self::$_db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+        static::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        static::$_db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+    }
+
+    public static function get()
+    {
+        echo 2;
+        if (static::$_this === null) static::$_this = new static();
+        return static::$_this;
     }
 }

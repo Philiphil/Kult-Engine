@@ -70,16 +70,16 @@ abstract class invokerFactory
             $bfr = debug_backtrace();
             define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
         }
+
         define('modelpath', $base.DIRECTORY_SEPARATOR.config::$modelfolder.DIRECTORY_SEPARATOR);
         define('controllerpath', $base.DIRECTORY_SEPARATOR.config::$controllerfolder.DIRECTORY_SEPARATOR);
 
         define('vendorpath', constant('controllerpath').'vendor'.DIRECTORY_SEPARATOR);
         define('modpath', constant('controllerpath').'mods'.DIRECTORY_SEPARATOR);
-        if (!config::$multi) {
-            define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
-        } else {
-            define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
-        }
+
+        if (!config::$multi)define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
+        else define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
+
         define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
         define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
         define('corepath', constant('controllerpath').'core'.DIRECTORY_SEPARATOR);
@@ -108,11 +108,6 @@ abstract class invokerFactory
         define('url', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '.php') + 4));
         define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'), strpos($_SERVER['PHP_SELF'], '.php') + 4));
 
-        define('host', config::$host);
-        define('db', config::$db);
-        define('user', config::$user);
-        define('pass', config::$pass);
-        define('driver', config::$driver);
     }
 
     public static function require_impt()
@@ -128,41 +123,45 @@ abstract class invokerFactory
 
     public static function class_init($key)
     {
-        if (class_exists(__NAMESPACE__.'\\'.$key)) {
-            if (in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__.'\\'.$key)) || in_array(__NAMESPACE__."\settable", class_uses(__NAMESPACE__.'\\'.$key)) || in_array('coreElement', class_uses(__NAMESPACE__.'\\'.$key)) || in_array('settable', class_uses(__NAMESPACE__.'\\'.$key))) {
-                $d = __NAMESPACE__.'\\'.$key;
-                $d::init();
+        $class = class_exists(__NAMESPACE__.'\\'.$key) ? __NAMESPACE__.'\\'.$key : (class_exists($key) ? $key : "");
+        if ($key) {
+            $traits = class_uses_deep($class);
+            if (in_array(__NAMESPACE__."\\settable",  $traits) ||in_array('settable', $traits) ){
+                $class::init();
             }
         }
     }
 
     public static function loader($className)
     {
-        $className = substr($className, strripos($className, '\\') + 1);
-        if (self::require_quick($className) == true) {
-            return true;
-        }
 
-        $prefix[0] = constant('abstpath');
-        $prefix[1] = constant('itfcpath');
-        $prefix[2] = constant('corepath');
-        $prefix[3] = constant('imptpath');
-        $prefix[4] = constant('vendorpath');
-        $prefix[5] = constant('controllerpath');
-        $prefix[6] = constant('optnpath');
-        $prefix[7] = constant('modpath').$className.DIRECTORY_SEPARATOR;
+        $className = strpos($className, '\\') > -1 ? substr($className, strripos($className, '\\') + 1) : $className;
+
+       /* if (self::require_quick($className) == true) {
+            return true;
+        }*/
+
+        $prefix[0] = constant('optnpath');
+        $prefix[1] = constant('imptpath');
+        $prefix[2] = constant('vendorpath');
+        $prefix[3] = constant('modpath').$className.DIRECTORY_SEPARATOR;
+        $prefix[4] = constant('abstpath');
+        $prefix[5] = constant('itfcpath');
+        $prefix[6] = constant('corepath');
+        $prefix[7] = constant('controllerpath');
+
         $sufix[0] = '';
         $sufix[1] = '.class';
-        $sufix[2] = '.trait';
-        $sufix[3] = '.handler';
+        $sufix[2] = '.handler';
+        $sufix[3] = '.trait';
         $sufix[4] = '.factory';
         $sufix[5] = '.load';
+
         foreach ($prefix as $a) {
             foreach ($sufix as $b) {
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
                     self::class_init($className);
-
                     return true;
                 }
             }
@@ -180,9 +179,10 @@ abstract class invokerFactory
         require_once constant('corepath').'fonction.php';
         require_once constant('itfcpath').'debuggable.trait.php';
         require_once constant('itfcpath').'settable.trait.php';
-        require_once constant('abstpath').'connector.factory.php';
         require_once constant('itfcpath').'queryable.trait.php';
         require_once constant('itfcpath').'coreElement.trait.php';
+
+        require_once constant('abstpath').'connector.factory.php';
     }
 
     public static function is_ke_runnable()

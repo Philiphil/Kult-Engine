@@ -43,7 +43,6 @@ function timer_init()
 function timer_get()
 {
     $return = round((microtime(true) - $GLOBALS['timer']), 5);
-
     return $return;
 }
 
@@ -88,8 +87,8 @@ function dateIntervalToSeconds($dateInterval)
     return intval($endTime->getTimestamp() - $reference->getTimestamp()) > 0 ? intval($endTime->getTimestamp() - $reference->getTimestamp()) : abs(intval($endTime->getTimestamp() - $reference->getTimestamp()));
 }
 
-    function normalize_files($files)
-    {
+ function normalize_files($files)
+ {
         if (count($files) == 1) {
             $tmp = 0;
             foreach ($files as $key) {
@@ -126,4 +125,21 @@ function dateIntervalToSeconds($dateInterval)
         }
 
         return count($return) > 0 ? $return : $files;
-    }
+ }
+
+function class_uses_deep($class, $autoload = true){
+         $traits = [];
+         do {
+             $traits = array_merge(class_uses($class, $autoload), $traits);
+         } while ($class = get_parent_class($class));
+         $traitsToSearch = $traits;
+         while (!empty($traitsToSearch)) {
+             $newTraits = class_uses(array_pop($traitsToSearch), $autoload);
+             $traits = array_merge($newTraits, $traits);
+             $traitsToSearch = array_merge($newTraits, $traitsToSearch);
+         };
+         foreach ($traits as $trait => $same) {
+             $traits = array_merge(class_uses($trait, $autoload), $traits);
+         }
+         return array_unique($traits);
+}

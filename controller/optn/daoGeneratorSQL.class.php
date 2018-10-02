@@ -35,7 +35,7 @@
 
 namespace kult_engine;
 
-class daoGeneratorSQL extends daoGenerator
+class daoGeneratorSQL extends daoGeneratorFactory
 {
     public function __construct($fnord = null)
     {
