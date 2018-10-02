@@ -34,7 +34,7 @@ namespace kult_engine;
 
 trait settable
 {
-    protected static $set = 0;
+    public static $set = 0;
 
     abstract public static function setter();
 

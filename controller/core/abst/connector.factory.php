@@ -34,7 +34,7 @@ namespace kult_engine;
 
 abstract class connectorFactory
 {
-    // use coreElement;
+    use coreElement;
 
     public static $_this = null;
     public static $_db = null;
