@@ -6,7 +6,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2016-2017
+ * Copyright (c) 2016-208
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2017, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,7 +37,6 @@ namespace kult_engine;
 
 class daoGeneratorSQL extends daoGenerator
 {
-
     public function __construct($fnord = null)
     {
         parent::__construct($fnord);
@@ -63,6 +62,7 @@ class daoGeneratorSQL extends daoGenerator
             $query->execute([$fnord->_iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
             $fnord->_id = $query[0]['_id'];
+
             return $fnord;
         } else {
             $o = $this->objToRow($fnord, 0);
@@ -143,7 +143,7 @@ class daoGeneratorSQL extends daoGenerator
     public function select($val, $wat = '_id', $mult = 0)
     {
         $this->verify_table();
-        $query = $this->_obj[$wat] === 0 || $this->_obj[$wat] === "id" || $this->_obj[$wat] === 0.0 ? $this->_helper->select_int($this->_obj[0],$wat,$wat) :  $this->_helper->select_string($this->_obj[0],$wat,$wat) ;
+        $query = $this->_obj[$wat] === 0 || $this->_obj[$wat] === 'id' || $this->_obj[$wat] === 0.0 ? $this->_helper->select_int($this->_obj[0], $wat, $wat) : $this->_helper->select_string($this->_obj[0], $wat, $wat);
         $query = $this->query($query);
         $query->execute([$val]);
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -162,6 +162,7 @@ class daoGeneratorSQL extends daoGenerator
             foreach ($query as $key) {
                 $r[] = $this->rowToObj($key[0]);
             }
+
             return $r;
         }
     }
@@ -179,6 +180,4 @@ class daoGeneratorSQL extends daoGenerator
             return false;
         }
     }
-
 }
-
