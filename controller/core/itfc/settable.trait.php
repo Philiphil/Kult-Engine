@@ -78,6 +78,4 @@ trait settable
         return 1;
     }
 
-//    public static function setter(){}
-  //  public static function setter_conf($fnord){static::setter();}
 }

@@ -278,7 +278,7 @@ abstract class invokerFactory
                 return true;
             case 'connector':
                 require_once constant('abstpath').'connector.factory.php';
-                self::class_init($f);
+                self::class_init($f); 
 
                 return true;
             case 'session':

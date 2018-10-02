@@ -34,13 +34,17 @@ namespace kult_engine;
 
 abstract class daoGeneratorFactory
 {
-    public $_obj;
-    public $_helper;
-    public $_connector;
-    use queryable; //queryable's last days
+    public $_obj=null;
+    public $_helper=null;
+    public $_connector=null;
 
     public function setConnector($fnord)
     {
+        $this->_connector = $fnord;
+    }
+    public function query($query){
+        if ($this->_connector==null) trigger_error(get_called_class() .'connector not set');
+        return $this->_connector->query($query);
     }
 
     public function __construct($fnord = null)
