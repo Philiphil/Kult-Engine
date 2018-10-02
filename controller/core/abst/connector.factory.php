@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016-208
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -37,9 +34,9 @@ namespace kult_engine;
 
 abstract class connectorFactory
 {
-   // use coreElement;
+    // use coreElement;
 
-    public static $_this=null;
+    public static $_this = null;
     public static $_db = null;
 
     public static $_DB_DRIVER = null;
@@ -92,7 +89,10 @@ abstract class connectorFactory
 
     public static function get()
     {
-        if (static::$_this === null) static::$_this = new static();
+        if (static::$_this === null) {
+            static::$_this = new static();
+        }
+
         return static::$_this;
     }
 }

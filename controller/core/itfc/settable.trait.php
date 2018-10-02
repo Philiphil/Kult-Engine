@@ -77,5 +77,4 @@ trait settable
 
         return 1;
     }
-
 }
