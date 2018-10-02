@@ -122,6 +122,7 @@ abstract class invokerFactory
 
     public static function class_init($key)
     {
+        var_dump("invoker::class_init".$key);
         $class = class_exists(__NAMESPACE__.'\\'.$key) ? __NAMESPACE__.'\\'.$key : (class_exists($key) ? $key : '');
         if ($key) {
             $traits = class_uses_deep($class);
@@ -133,6 +134,7 @@ abstract class invokerFactory
 
     public static function loader($className)
     {
+         var_dump("invoker::loader".$className);
         $className = strpos($className, '\\') > -1 ? substr($className, strripos($className, '\\') + 1) : $className;
 
         /* if (self::require_quick($className) == true) {
