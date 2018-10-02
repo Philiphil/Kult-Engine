@@ -62,32 +62,37 @@ abstract class daoableObject
         }
     }
 
-    public function setIduniq(){
+    public function setIduniq()
+    {
         $this->_iduniq = uniqid();
+
         return $this;
     }
 
-    public function getDefaultId(){
-        return "id";
+    public function getDefaultId()
+    {
+        return 'id';
     }
 
-    public function setDefaultId(){
+    public function setDefaultId()
+    {
         $this->_id = $this->getDefaultId();
+
         return $this;
     }
 
-    public function clean(){
+    public function clean()
+    {
         unset($this->_iduniq);
+
         return $this;
     }
 
-    public function clone(){
+    public function clone()
+    {
         $n = $this;
         $n->setIduniq()->setDefaultId();
+
         return $n;
     }
-
-
-
-
 }
