@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016-208
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -43,6 +40,7 @@ function timer_init()
 function timer_get()
 {
     $return = round((microtime(true) - $GLOBALS['timer']), 5);
+
     return $return;
 }
 
@@ -89,57 +87,59 @@ function dateIntervalToSeconds($dateInterval)
 
  function normalize_files($files)
  {
-        if (count($files) == 1) {
-            $tmp = 0;
-            foreach ($files as $key) {
-                $tmp = $key;
-            }
-            $files = $tmp;
-        }
-        $return = [];
-        $i = 0;
-        foreach ($files['name'] as $key) {
-            $return[$i] = [];
-            $return[$i]['name'] = $key;
-            $i++;
-        }
-        $i = 0;
-        foreach ($files['type'] as $key) {
-            $return[$i]['type'] = $key;
-            $i++;
-        }
-        $i = 0;
-        foreach ($files['tmp_name'] as $key) {
-            $return[$i]['tmp_name'] = $key;
-            $i++;
-        }
-        $i = 0;
-        foreach ($files['error'] as $key) {
-            $return[$i]['error'] = $key;
-            $i++;
-        }
-        $i = 0;
-        foreach ($files['size'] as $key) {
-            $return[$i]['size'] = $key;
-            $i++;
-        }
+     if (count($files) == 1) {
+         $tmp = 0;
+         foreach ($files as $key) {
+             $tmp = $key;
+         }
+         $files = $tmp;
+     }
+     $return = [];
+     $i = 0;
+     foreach ($files['name'] as $key) {
+         $return[$i] = [];
+         $return[$i]['name'] = $key;
+         $i++;
+     }
+     $i = 0;
+     foreach ($files['type'] as $key) {
+         $return[$i]['type'] = $key;
+         $i++;
+     }
+     $i = 0;
+     foreach ($files['tmp_name'] as $key) {
+         $return[$i]['tmp_name'] = $key;
+         $i++;
+     }
+     $i = 0;
+     foreach ($files['error'] as $key) {
+         $return[$i]['error'] = $key;
+         $i++;
+     }
+     $i = 0;
+     foreach ($files['size'] as $key) {
+         $return[$i]['size'] = $key;
+         $i++;
+     }
 
-        return count($return) > 0 ? $return : $files;
+     return count($return) > 0 ? $return : $files;
  }
 
-function class_uses_deep($class, $autoload = true){
-         $traits = [];
-         do {
-             $traits = array_merge(class_uses($class, $autoload), $traits);
-         } while ($class = get_parent_class($class));
-         $traitsToSearch = $traits;
-         while (!empty($traitsToSearch)) {
-             $newTraits = class_uses(array_pop($traitsToSearch), $autoload);
-             $traits = array_merge($newTraits, $traits);
-             $traitsToSearch = array_merge($newTraits, $traitsToSearch);
-         };
-         foreach ($traits as $trait => $same) {
-             $traits = array_merge(class_uses($trait, $autoload), $traits);
-         }
-         return array_unique($traits);
+function class_uses_deep($class, $autoload = true)
+{
+    $traits = [];
+    do {
+        $traits = array_merge(class_uses($class, $autoload), $traits);
+    } while ($class = get_parent_class($class));
+    $traitsToSearch = $traits;
+    while (!empty($traitsToSearch)) {
+        $newTraits = class_uses(array_pop($traitsToSearch), $autoload);
+        $traits = array_merge($newTraits, $traits);
+        $traitsToSearch = array_merge($newTraits, $traitsToSearch);
+    }
+    foreach ($traits as $trait => $same) {
+        $traits = array_merge(class_uses($trait, $autoload), $traits);
+    }
+
+    return array_unique($traits);
 }

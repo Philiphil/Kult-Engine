@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016-208
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -48,8 +45,11 @@ trait settable
         if (!static::$set) {
             static::$set = !static::$set;
             $r = is_null($fnord) ? static::setter() : static::setter_conf($fnord);
-            if (in_array(__NAMESPACE__."\\hookable", class_uses_deep(static::class)) || in_array("hookable", class_uses_deep(static::class))
-            ) static::hook();
+            if (in_array(__NAMESPACE__.'\\hookable', class_uses_deep(static::class)) || in_array('hookable', class_uses_deep(static::class))
+            ) {
+                static::hook();
+            }
+
             return $r;
         }
         trigger_error(get_called_class().' ALREADY SET');

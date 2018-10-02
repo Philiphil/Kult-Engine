@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016-208
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -77,8 +74,11 @@ abstract class invokerFactory
         define('vendorpath', constant('controllerpath').'vendor'.DIRECTORY_SEPARATOR);
         define('modpath', constant('controllerpath').'mods'.DIRECTORY_SEPARATOR);
 
-        if (!config::$multi)define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
-        else define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
+        if (!config::$multi) {
+            define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
+        } else {
+            define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
+        }
 
         define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
         define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
@@ -107,7 +107,6 @@ abstract class invokerFactory
         define('view', config::$webfolder);
         define('url', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '.php') + 4));
         define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'), strpos($_SERVER['PHP_SELF'], '.php') + 4));
-
     }
 
     public static function require_impt()
@@ -123,10 +122,10 @@ abstract class invokerFactory
 
     public static function class_init($key)
     {
-        $class = class_exists(__NAMESPACE__.'\\'.$key) ? __NAMESPACE__.'\\'.$key : (class_exists($key) ? $key : "");
+        $class = class_exists(__NAMESPACE__.'\\'.$key) ? __NAMESPACE__.'\\'.$key : (class_exists($key) ? $key : '');
         if ($key) {
             $traits = class_uses_deep($class);
-            if (in_array(__NAMESPACE__."\\settable",  $traits) ||in_array('settable', $traits) ){
+            if (in_array(__NAMESPACE__.'\\settable', $traits) || in_array('settable', $traits)) {
                 $class::init();
             }
         }
@@ -134,12 +133,11 @@ abstract class invokerFactory
 
     public static function loader($className)
     {
-
         $className = strpos($className, '\\') > -1 ? substr($className, strripos($className, '\\') + 1) : $className;
 
-       /* if (self::require_quick($className) == true) {
-            return true;
-        }*/
+        /* if (self::require_quick($className) == true) {
+             return true;
+         }*/
 
         $prefix[0] = constant('optnpath');
         $prefix[1] = constant('imptpath');
@@ -162,6 +160,7 @@ abstract class invokerFactory
                 if (file_exists($a.$className.$b.'.php')) {
                     include_once $a.$className.$b.'.php';
                     self::class_init($className);
+
                     return true;
                 }
             }
