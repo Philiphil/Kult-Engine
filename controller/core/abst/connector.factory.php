@@ -92,7 +92,6 @@ abstract class connectorFactory
         if (static::$_this === null) {
             static::$_this = new static();
         }
-
         return static::$_this;
     }
 }
