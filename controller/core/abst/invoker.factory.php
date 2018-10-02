@@ -229,7 +229,7 @@ abstract class invokerFactory
     public static function require_local_model()
     {
         require_once constant('optnpath').'daoableObject.class.php';
-        require_once constant('optnpath').'daoGenerator.class.php';
+        require_once constant('abstpath').'daoGenerator.factory.php';
         $model = scandir(constant('modelpath'));
         foreach ($model as $key) {
             if (contains('.class.', $key)) {

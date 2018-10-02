@@ -35,73 +35,19 @@
 
 namespace kult_engine;
 
-class daoGeneratorSQL extends daoGeneratorFactory
+class daoGeneratorSQL extends daoGenerator
 {
-    use queryable;
-    public $_connector;
 
     public function __construct($fnord = null)
     {
+        parent::__construct($fnord);
         $this->_helper = new sqlHelper();
-        $x = new \ReflectionClass($fnord);
-        $this->_obj[0] = $x->getName();
-        $this->_obj[0] = strpos($this->_obj[0], "kult_engine\\") ===0 ? substr($this->_obj[0],12):$this->_obj[0];
-        $b = $x->getProperties();
-        $o = $x->newInstanceWithoutConstructor();
-        foreach ($b as $p) {
-            $this->_obj[$p->getName()] = $o->{$p->getName()};
-        }
-    }
-
-    public function setConnector($fnord){
-
-    }
-
-    public function objToRow($o, $id = 1)
-    {
-        $x = new \ReflectionClass($o);
-        $a = $x->newInstanceWithoutConstructor();
-        $b = $x->getProperties();
-        $r = [];
-        $i = 0;
-        foreach ($b as $p) {
-            if ($id == 1 || ($id == 0 && $p->getName() != '_id')) {
-                $r[0][$i] = $p->getName();
-                $r[1][$i] = is_array($o->{$p->getName()}) || is_object($o->{$p->getName()}) ? serialize($o->{$p->getName()}) : $o->{$p->getName()};
-                $i++;
-            }
-        }
-
-        return $r;
-    }
-
-    public function rowToObj($r)
-    {
-        $x = new \ReflectionClass($this->_obj[0]);
-        $a = $x->newInstanceWithoutConstructor();
-        $o = $x->newInstance();
-        foreach ($r as $key => $value) {
-            $o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
-        }
-
-        return $o;
     }
 
     public function __invoke($fnord)
     {
         $bfr = new self($fnord);
         $this->_obj = $bfr->_obj;
-    }
-
-    public function get($fnord)
-    {
-        $this->verify_table();
-        $query = $this->_helper->select_string($this->_obj[0], '_id');
-        $query = $this->query($query);
-        $query->execute([$fnord]);
-        $query = $query->fetchAll(\PDO::FETCH_ASSOC);
-
-        return isset($query[0]) ? $this->rowToObj($query[0]) : false;
     }
 
     public function set($fnord)
@@ -117,7 +63,6 @@ class daoGeneratorSQL extends daoGeneratorFactory
             $query->execute([$fnord->_iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
             $fnord->_id = $query[0]['_id'];
-
             return $fnord;
         } else {
             $o = $this->objToRow($fnord, 0);
@@ -198,33 +143,27 @@ class daoGeneratorSQL extends daoGeneratorFactory
     public function select($val, $wat = '_id', $mult = 0)
     {
         $this->verify_table();
-        $r = [];
-        $array = $this->get_all();
-        if(is_array($array) && count($array) >0)
-        {
-            foreach ($array as $o) {
-                if ($o->$wat == $val) {
-                    array_push($r, $o);
-                }
-            }
-        }
-        if (count($r) == 0) {
+        $query = $this->_obj[$wat] === 0 || $this->_obj[$wat] === "id" || $this->_obj[$wat] === 0.0 ? $this->_helper->select_int($this->_obj[0],$wat,$wat) :  $this->_helper->select_string($this->_obj[0],$wat,$wat) ;
+        $query = $this->query($query);
+        $query->execute([$val]);
+        $query = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        if (count($query) == 0) {
             return 0;
         }
-        if (!$mult && count($r) > 1) {
+        if (!$mult && count($query) > 1) {
             return false;
         }
         if (!$mult) {
-            return $r[0];
+            return $this->rowToObj($query[0]);
         }
         if ($mult) {
+            $r = [];
+            foreach ($query as $key) {
+                $r[] = $this->rowToObj($key[0]);
+            }
             return $r;
         }
-    }
-
-    public function select_all($val, $wat)
-    {
-        return $this->select($val, $wat, 1);
     }
 
     public function table_exists()
@@ -241,11 +180,5 @@ class daoGeneratorSQL extends daoGeneratorFactory
         }
     }
 
-    public function verify_table()
-    {
-        if (!$this->table_exists()) {
-            $this->create_table();
-        }
-    }
 }
 

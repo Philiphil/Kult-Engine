@@ -77,7 +77,6 @@ abstract class daoableObject
     }
 
     public function clean(){
-        unset($this->_id);
         unset($this->_iduniq);
         return $this;
     }

@@ -35,10 +35,14 @@
 
 namespace kult_engine;
 
-abstract class daoGeneratorFactory
-{
+abstract class daoGenerator{
+    
     public $_obj;
-    private $_helper;
+    public $_helper;
+    public $_connector;
+    use queryable;//queryable's last days
+
+    public function setConnector($fnord){}
 
     public function __construct($fnord = null)
     {
@@ -51,6 +55,8 @@ abstract class daoGeneratorFactory
             $this->_obj[$p->getName()] = $o->{$p->getName()};
         }
     }
+
+
 
     public function objToRow($o, $id = 1)
     {
@@ -88,8 +94,7 @@ abstract class daoGeneratorFactory
         $this->_obj = $bfr->_obj;
     }
 
-    public function get($fnord){
-    }
+
 
     public function set($fnord){}
 
