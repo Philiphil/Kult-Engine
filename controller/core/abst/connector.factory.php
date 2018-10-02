@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016-208
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -39,7 +36,7 @@ abstract class connectorFactory
 {
     use coreElement;
 
-    protected static $_this=null;
+    protected static $_this = null;
     protected static $_db = null;
 
     protected static $_DB_DRIVER = null;
@@ -93,7 +90,10 @@ abstract class connectorFactory
     public static function get()
     {
         echo 2;
-        if (static::$_this === null) static::$_this = new static();
+        if (static::$_this === null) {
+            static::$_this = new static();
+        }
+
         return static::$_this;
     }
 }
