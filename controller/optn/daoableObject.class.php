@@ -38,23 +38,61 @@ namespace kult_engine;
 abstract class daoableObject
 {
     /*
-    int = 0
-    double = 0.0
-    string = "string"
-    id = "id"
-    array = []
-    obj=new obj()
+
+        long ?
+        int = 0
+        double = 0.0
+        string = "string"
+
+        id = "id"
+
+        array = []
+        obj=new obj()
      */
     public $_id = 'id';
     public $_iduniq = 'string';
 
     public function __construct()
     {
-        $this->_iduniq = uniqid();
+        $this->setIduniq();
         foreach ($this as $key => $value) {
-            if ($value == 'string' || $value == 'id') {
+            if ($value == 'string') {
                 $this->$key = '';
             }
         }
+    }
+
+    public function setIduniq()
+    {
+        $this->_iduniq = uniqid();
+
+        return $this;
+    }
+
+    public function getDefaultId()
+    {
+        return 'id';
+    }
+
+    public function setDefaultId()
+    {
+        $this->_id = $this->getDefaultId();
+
+        return $this;
+    }
+
+    public function clean()
+    {
+        unset($this->_iduniq);
+
+        return $this;
+    }
+
+    public function clone()
+    {
+        $n = $this;
+        $n->setIduniq()->setDefaultId();
+
+        return $n;
     }
 }
