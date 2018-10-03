@@ -40,16 +40,9 @@ class config
     // www/model or www\model should be specified if the folder is in the webfolder
     //protip : they shouldnt
     public static $modelfolder = 'model';
-    public static $controllerfolder = 'controller';
+    public static $controllerfolder = 'kult-engine';
     // HTML root folder's name
     public static $htmlfolder = '/';
-
-    //SQL IDs
-    public static $host = '';
-    public static $db = '';
-    public static $user = '';
-    public static $pass = '';
-    public static $driver = 'mysql';
 
     //SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
     public static $debug = 1;
