@@ -44,6 +44,13 @@ class config
     // HTML root folder's name
     public static $htmlfolder = '/';
 
+    //SQL IDs
+    public static $host = '';
+    public static $db = '';
+    public static $user = '';
+    public static $pass = '';
+    public static $driver = 'mysql';
+
     //SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
     public static $debug = 1;
 
