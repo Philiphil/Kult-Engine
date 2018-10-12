@@ -1,0 +1,49 @@
+version: '2.0'
+
+services:
+    web:
+        build:
+            context: docker/images/apache7
+        volumes:
+            - .:/var/www/kult/
+            - ./docker/apache7/certs:/etc/ssl/certs
+        links:
+            - mysql
+            - maildev
+        tty: true
+        networks:
+            - traefik
+        labels:
+            - "traefik.frontend.rule=Host:kultengine.local"
+
+    maildev:
+        image: djfarrelly/maildev
+        networks:
+            - traefik
+
+    mysql:
+        image: mysql:5.7
+        restart: always
+        environment:
+            - MYSQL_DATABASE=kult
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        volumes:
+            - /tmp:/tmp
+            - ./docker/db:/var/lib/mysql
+        networks:
+            - traefik
+
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mysql:db
+        networks:
+            - traefik
+        labels:
+            - "traefik.frontend.rule=Host:pma.kultengine.local"
+
+networks:
+    traefik:
+        external:
+            name: traefik_webgateway

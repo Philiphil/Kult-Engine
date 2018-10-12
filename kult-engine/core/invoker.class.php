@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-abstract class invoker extends invokerFactory
+abstract class invoker extends invokerAbstract
 {
     public static function require_basics($ext = null)
     {
@@ -48,11 +48,11 @@ abstract class invoker extends invokerFactory
 
         require_once constant('corepath').'buffer.class.php';
 
-        require_once constant('abstpath').'session.factory.php';
+        require_once constant('abstpath').'session.abstract.php';
 
         require_once constant('corepath').'inquisitor.class.php';
 
-        require_once constant('abstpath').'connector.factory.php';
+        require_once constant('abstpath').'connector.abstract.php';
         hook::init();
         text::init();
 

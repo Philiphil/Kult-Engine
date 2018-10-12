@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-class connector extends kult_engine\connectorFactory
+class connector extends kult_engine\connectorAbstract
 {
     public static $_DB_DRIVER = 'mysql';
     public static $_DB_HOST = 'localhost';

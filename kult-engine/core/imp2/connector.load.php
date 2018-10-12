@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-abstract class connector extends connectorFactory
+abstract class connector extends connectorAbstract
 {
     use coreElement;
 
