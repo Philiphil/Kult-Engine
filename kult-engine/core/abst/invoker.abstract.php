@@ -197,9 +197,6 @@ abstract class invokerAbstract
     public static function error($errno, $errstr, $errfile, $errline)
     {
         if (!constant('debug')) {
-            if ($errno != E_USER_ERROR || $errno != E_ERROR) {
-                return;
-            }
             buffer::delete();
             echo '<br><b>FATAL</b>';
             die;
