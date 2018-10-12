@@ -49,7 +49,7 @@ abstract class invokee
         $model = scandir(constant('modelpath'));
         foreach ($model as $key) {
             if (contains('.class.', $key)) {
-                include constant('modelpath').constant('filespace').$key;
+                include constant('modelpath').DIRECTORY_SEPARATOR.$key;
             }
         }
     }

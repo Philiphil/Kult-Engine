@@ -45,12 +45,12 @@ class fatData
 
     public function set($name)
     {
-        file_put_contents(constant('controllerpath').'tmp'.constant('filespace').$name.'.fat', json_encode($this));
+        file_put_contents(constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR.$name.'.fat', json_encode($this));
     }
 
     public static function get($name)
     {
-        $v = json_decode(file_get_contents(constant('controllerpath').'tmp'.constant('filespace').$name.'.fat'), true);
+        $v = json_decode(file_get_contents(constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR.$name.'.fat'), true);
 
         return new self($v['_data'], $v['_timestamp']);
     }

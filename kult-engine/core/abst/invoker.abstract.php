@@ -56,30 +56,16 @@ abstract class invokerAbstract
     public static function setter()
     {
         $base = dirname(config::$file);
-
         define('multi', config::$multi);
-        define('filespace', DIRECTORY_SEPARATOR);
         define('basepath', $base.DIRECTORY_SEPARATOR);
 
-        if (!config::$multi) {
-            define('viewpath', $base.DIRECTORY_SEPARATOR.config::$webfolder.DIRECTORY_SEPARATOR);
-        } else {
-            $bfr = debug_backtrace();
-            define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
-        }
-
-        define('modelpath', $base.DIRECTORY_SEPARATOR.config::$modelfolder.DIRECTORY_SEPARATOR);
+        $bfr = debug_backtrace();
+        define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
         define('controllerpath', $base.DIRECTORY_SEPARATOR.config::$controllerfolder.DIRECTORY_SEPARATOR);
+        define('modelpath', constant("controllerpath")."model".DIRECTORY_SEPARATOR);
 
         define('vendorpath', constant('controllerpath').'vendor'.DIRECTORY_SEPARATOR);
         define('modpath', constant('controllerpath').'mods'.DIRECTORY_SEPARATOR);
-
-        if (!config::$multi) {
-            define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
-        } else {
-            define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
-        }
-
         define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
         define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
         define('corepath', constant('controllerpath').'core'.DIRECTORY_SEPARATOR);
@@ -90,6 +76,13 @@ abstract class invokerAbstract
         define('abstpath', constant('corepath').'abst'.DIRECTORY_SEPARATOR);
         define('itfcpath', constant('corepath').'itfc'.DIRECTORY_SEPARATOR);
         define('imp2path', constant('corepath').'imp2'.DIRECTORY_SEPARATOR);
+
+
+        if (!config::$multi) {
+            define('imptpath', constant('controllerpath').'impt'.DIRECTORY_SEPARATOR);
+        } else {
+            define('imptpath', constant('viewpath').'impt'.DIRECTORY_SEPARATOR);
+        }
 
         define('tpltpath', constant('imptpath').'tplt'.DIRECTORY_SEPARATOR);
         define('ctrltpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
@@ -104,7 +97,8 @@ abstract class invokerAbstract
         define('default_lang', config::$default_lang);
         define('server_lang', config::$server_lang);
         define('loginpage', config::$login_page);
-        define('view', config::$webfolder);
+        define('view',substr(substr(constant("viewpath"),0,-1), strrpos(substr(constant("viewpath"),0,-1), DIRECTORY_SEPARATOR)+1));
+
         define('url', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '.php') + 4));
         define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'), strpos($_SERVER['PHP_SELF'], '.php') + 4));
     }

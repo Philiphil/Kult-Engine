@@ -93,7 +93,7 @@ class uploadHelper
 
     public function default_dest_folder()
     {
-        return constant('controllerpath').'tmp'.constant('filespace');
+        return constant('controllerpath').'tmp'.DS;
     }
 
     public function dest_op($fail = 0)

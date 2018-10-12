@@ -211,7 +211,7 @@ abstract class shop
             $d->delete($v);
             $html = '';
             foreach ($v->_pic as $key) {
-                unlink(constant('viewpath').'content'.constant('filespace').'images'.constant('filespace').$key);
+                unlink(constant('viewpath').'content'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$key);
             }
 
             $v = $d->get_all();
@@ -306,7 +306,7 @@ abstract class shop
                         $v->_max_width = 500;
                         $v->_max_height = 500;
                         $v->_name = $p->_name[config::$default_lang].'_'.$i;
-                        $v->_dest_folder = constant('viewpath').'content'.constant('filespace').'images'.constant('filespace');
+                        $v->_dest_folder = constant('viewpath').'content'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR;
                         $v->run();
                         $i++;
                         $p->_pic[] = $v->_name.'.'.$v->_extention;
