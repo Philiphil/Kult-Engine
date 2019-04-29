@@ -66,6 +66,7 @@ abstract class router
     public static function read_asked($brut)
     {
         self::init_required();
+
         return explode('/', substr($brut, 1));
     }
 
@@ -114,16 +115,14 @@ abstract class router
         $args = [];
         var_dump($translated_route);
 
-
         if (count($translated_route) > count(self::$_a_asked)) {
             return 0;
         }
 
         for ($i = 0; $i < count($translated_route); $i++) {
-
-            if ($translated_route[$i] != '*' && 
-                !k\contains(self::$_argex, $translated_route[$i]) && 
-                isset(self::$_a_asked[$i]) && 
+            if ($translated_route[$i] != '*' &&
+                !k\contains(self::$_argex, $translated_route[$i]) &&
+                isset(self::$_a_asked[$i]) &&
                 $translated_route[$i] != self::$_a_asked[$i]) {
                 return 0;
             }
