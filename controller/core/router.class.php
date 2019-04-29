@@ -51,11 +51,8 @@ abstract class router
     {
         self::$_method = strtoupper($_SERVER['REQUEST_METHOD']);
         self::$_asked = $_SERVER['REQUEST_URI'];
-
-        var_dump(self::$_asked);
         self::$_a_asked = self::read_asked(self::$_asked);
         self::$_route = [];
-        var_dump(self::$_a_asked);
     }
 
     public static function destruct()
@@ -113,7 +110,6 @@ abstract class router
         self::init_required();
         $translated_route = self::read_asked($route);
         $args = [];
-        var_dump($translated_route);
 
         if (count($translated_route) > count(self::$_a_asked)) {
             return 0;
