@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2019, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -46,23 +46,23 @@ class template
         }
     }
 
-    public function write_to_template($template, $option = [], $load = 0)
+    public function write_to_template($template, $option = [], $load = false)
     {
-        $template = preg_replace_callback("/\.*kt:!(.*):!/", function ($match) {
+        $template = preg_replace_callback("/\.*kt:!(.[^:!]*):!/", function ($match) {
             return text::get_text($match[1]) === null ? $match[1] : text::get_text($match[1]);
         }, $template);
-        $template = preg_replace_callback("/\.*kc:!(.*):!/", function ($match) {
+        $template = preg_replace_callback("/\.*kc:!(.[^:!]*):!/", function ($match) {
             return constant($match[1]) === null ? $match[1] : constant($match[1]);
         }, $template);
         if (!$load) {
-            $template = preg_replace_callback("/\.*ko:!(.*):!/", function ($match) use ($option) {
+            $template = preg_replace_callback("/\.*ko:!(.[^:!]*):!/", function ($match) use ($option) {
                 return !isset($option[$match[1]]) ? $match[1] : $option[$match[1]];
             }, $template);
-            $template = preg_replace_callback("/\.*kod:!(.*):!/", function ($match) use ($option) {
+            $template = preg_replace_callback("/\.*kod:!(.[^:!]*):!/", function ($match) use ($option) {
                 return !isset($option[$match[1]]) ? '' : $option[$match[1]];
             }, $template);
         }
-        $template = preg_replace_callback("/\.*ktp:!(.*):!/", function ($match) {
+        $template = preg_replace_callback("/\.*ktp:!(.[^:!]*):!/", function ($match) {
             if ($this->_templates === null) {
                 $this->load();
             }
