@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2019, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
