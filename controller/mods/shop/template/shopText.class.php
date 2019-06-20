@@ -165,7 +165,7 @@ abstract class shopText
     public static function writeTotemplate($template, $option = [])
     {
         $template = preg_replace_callback("/\.*kt:!(.*):!/", function ($match) {
-            return shopText::get_text($match[1]) === null ? $match[1] : shopText::get_text($match[1]);
+            return self::get_text($match[1]) === null ? $match[1] : self::get_text($match[1]);
         }, $template);
         $template = preg_replace_callback("/\.*kc:!(.*):!/", function ($match) {
             return constant($match[1]) === null ? $match[1] : constant($match[1]);
