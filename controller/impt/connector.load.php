@@ -32,21 +32,12 @@
 
 namespace kult_engine;
 
-abstract class connector extends connectorFactory
+class connector extends connectorFactory
 {
     use coreElement;
-
-    public static $_TABLE_DEMO = '`demo`';
-    public static $_DEMO_ID = 'id';
-
-    public static function demo_get($id)
-    {
-        $query = 'SELECT '.self::$_TABLE_DEMO.
-        'WHERE `'.self::$_GROUPE_NAME.'` = :id';
-        $query = self::$_db->prepare($query);
-        $query->execute([':id' => $id]);
-        $query = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        return $query;
-    }
+    public static $_DB_DRIVER = "mysql";
+    public static $_DB_HOST = "localhost";
+    public static $_DB_NAME = "db";
+    public static $_DB_USER = "root";
+    public static $_DB_PASS = "";
 }

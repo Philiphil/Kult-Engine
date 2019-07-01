@@ -132,7 +132,7 @@ class sqlHelper
     }
 
     public function create_basic($table, $id, $obj, $size = 'MEDIUMBLOB')
-    {
+    {   //unused
         $v = 'CREATE TABLE '.$this->table_quoted($table);
         $v .= ' ( ';
         $v .= $id.' INT PRIMARY KEY AUTO_INCREMENT  NOT NULL,';
@@ -155,20 +155,15 @@ class sqlHelper
             $d = $i == 0 ? '' : ',';
             if ($b === 'id') {
                 $v .= $d.$key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
-            }
-            if (is_array($b) || is_object($b)) {
+            }else if (is_array($b) || is_object($b)) {
                 $v .= $d.$key.' LONGTEXT NULL';
-            }
-            if ($b === 0) {
+            }else if (gettype($b) === "integer" ) {
                 $v .= $d.$key." INT NOT NULL DEFAULT '0'";
-            }
-            if ($b === 'string') {
-                $v .= $d.$key.' TEXT NULL';
-            }
-            if ($b === 'blob') {
+            }else if ($b === 'blob') {
                 $v .= $d.$key.' MEDIUMBLOB NULL';
-            }
-            if ($b === 0.0) {
+            }else if (gettype($b) === "string") {
+                $v .= $d.$key.' TEXT NULL';
+            }else if (gettype($b) === "double") {
                 $v .= $d.$key." DOUBLE NOT NULL DEFAULT '0'";
             }
             $i++;

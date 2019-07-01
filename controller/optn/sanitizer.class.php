@@ -57,7 +57,7 @@ class sanitizer
 
     public function pos()
     {
-        $this->_var = $this->_var > 0 ? $this->_var : false;
+        $this->_var = $this->_var >= 0 ? $this->_var : false;
 
         return $this;
     }

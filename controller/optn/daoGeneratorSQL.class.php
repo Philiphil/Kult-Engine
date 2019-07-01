@@ -36,14 +36,8 @@ class daoGeneratorSQL extends daoGenerator
 {
     public function __construct($fnord = null)
     {
-        parent::__construct($fnord);
+        $this->asign($fnord);
         $this->_helper = new sqlHelper();
-    }
-
-    public function __invoke($fnord)
-    {
-        $bfr = new self($fnord);
-        $this->_obj = $bfr->_obj;
     }
 
     public function set($fnord)
@@ -140,7 +134,11 @@ class daoGeneratorSQL extends daoGenerator
     public function select($val, $wat = '_id', $mult = 0)
     {
         $this->verify_table();
-        $query = $this->_obj[$wat] === 0 || $this->_obj[$wat] === 'id' || $this->_obj[$wat] === 0.0 ? $this->_helper->select_int($this->_obj[0], $wat, $wat) : $this->_helper->select_string($this->_obj[0], $wat, $wat);
+        $query = (gettype($this->_obj[$wat]) === "integer" ||
+            $this->_obj[$wat] === 'id' ||
+            gettype($this->_obj[$wat]) === "double") 
+            ? $this->_helper->select_int($this->_obj[0], $wat, $wat) 
+            : $this->_helper->select_string($this->_obj[0], $wat, $wat);
         $query = $this->query($query);
         $query->execute([$val]);
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);

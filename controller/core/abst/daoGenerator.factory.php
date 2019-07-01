@@ -37,14 +37,24 @@ abstract class daoGenerator
     public $_obj;
     public $_helper;
     public $_connector;
-    use queryable; //queryable's last days
-
+ 
     public function setConnector($fnord)
     {
+        $this->_connector=$fnord;
+    }
+
+    public function query($fnord){
+        return $this->_connector::query($fnord);
     }
 
     public function __construct($fnord = null)
     {
+        $this->asign($fnord);
+    }
+
+    public function asign($fnord)
+    {
+        $this->_obj = [];
         $x = new \ReflectionClass($fnord);
         $this->_obj[0] = $x->getName();
         $this->_obj[0] = strpos($this->_obj[0], 'kult_engine\\') === 0 ? substr($this->_obj[0], 12) : $this->_obj[0];
@@ -79,7 +89,7 @@ abstract class daoGenerator
         $a = $x->newInstanceWithoutConstructor();
         $o = $x->newInstance();
         foreach ($r as $key => $value) {
-            $o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
+          @ $o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
         }
 
         return $o;
@@ -87,8 +97,7 @@ abstract class daoGenerator
 
     public function __invoke($fnord)
     {
-        $bfr = new self($fnord);
-        $this->_obj = $bfr->_obj;
+        $this->asign($fnord);
     }
 
     public function set($fnord)
