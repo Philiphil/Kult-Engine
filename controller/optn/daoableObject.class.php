@@ -44,9 +44,9 @@ abstract class daoableObject
     public $_iduniq = 'string';
     public $_tabletype = 0;
 
-    public function __construct($typetable=0)
+    public function __construct($typetable = 0)
     {
-        $this->_tabletype=$typetable;
+        $this->_tabletype = $typetable;
         $this->setIduniq();
         foreach ($this as $key => $value) {
             if ($value == 'string') {
@@ -58,6 +58,7 @@ abstract class daoableObject
     public function setIduniq()
     {
         $this->_iduniq = uniqid();
+
         return $this;
     }
 
@@ -69,12 +70,14 @@ abstract class daoableObject
     public function setDefaultId()
     {
         $this->_id = $this->getDefaultId();
+
         return $this;
     }
 
     public function clean()
     {
         unset($this->_iduniq);
+
         return $this;
     }
 
@@ -82,10 +85,12 @@ abstract class daoableObject
     {
         $n = $this;
         $n->setIduniq()->setDefaultId();
+
         return $n;
     }
-    public static $_ONE=0;
-    public static $_ONETOMANY=1;
-    public static $_MANYTOMANY=2;
-    public static $_MANYTOONE=3;
+
+    public static $_ONE = 0;
+    public static $_ONETOMANY = 1;
+    public static $_MANYTOMANY = 2;
+    public static $_MANYTOONE = 3;
 }

@@ -73,4 +73,3 @@ class template
         return $template;
     }
 }
-

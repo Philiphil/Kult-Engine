@@ -37,13 +37,14 @@ abstract class daoGenerator
     public $_obj;
     public $_helper;
     public $_connector;
- 
+
     public function setConnector($fnord)
     {
-        $this->_connector=$fnord;
+        $this->_connector = $fnord;
     }
 
-    public function query($fnord){
+    public function query($fnord)
+    {
         return $this->_connector::query($fnord);
     }
 
@@ -89,7 +90,7 @@ abstract class daoGenerator
         $a = $x->newInstanceWithoutConstructor();
         $o = $x->newInstance();
         foreach ($r as $key => $value) {
-          @ $o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
+            @$o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
         }
 
         return $o;
