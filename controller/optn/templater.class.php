@@ -32,59 +32,65 @@
 
 namespace kult_engine;
 
-
 class templater
 {
     public $_templates = [];
 
     public function load($template)
     {
-    	if(isset($this->_templates[$template])) return $this->_templates[$template];
+        if (isset($this->_templates[$template])) {
+            return $this->_templates[$template];
+        }
         $impt = scandir(constant('tpltpath'));
-        for ($i=0; $i < count($impt) ; $i++) {
-
-        	if ( $impt[$i] === $template || substr(strstr($impt[$i], DIRECTORY_SEPARATOR, false),1) === $template  ) {
+        for ($i = 0; $i < count($impt); $i++) {
+            if ($impt[$i] === $template || substr(strstr($impt[$i], DIRECTORY_SEPARATOR, false), 1) === $template) {
                 $this->_templates[$template] = $this->write_to_template(file_get_contents(constant('tpltpath').$impt[$i]), [], 1);
+
                 return $this->_templates[$template];
-            }else if( is_dir(constant("tpltpath").$impt[$i]) &&
-            ( $impt[$i] != "." && $impt[$i] != "..")){
+            } elseif (is_dir(constant('tpltpath').$impt[$i]) &&
+            ($impt[$i] != '.' && $impt[$i] != '..')) {
                 $tmp = scandir(constant('tpltpath').$impt[$i]);
-                $bfr=[];
+                $bfr = [];
                 foreach ($tmp as $key) {
-                    if($key == "." ||$key == "..")continue;
+                    if ($key == '.' || $key == '..') {
+                        continue;
+                    }
                     $impt[count($impt)] = $impt[$i].DIRECTORY_SEPARATOR.$key;
                 }
             }
         }
-        return;
     }
 
-    public function write_to_template($template, $option = [],$load=false)
+    public function write_to_template($template, $option = [], $load = false)
     {
-    	if(!$load)$template = $this->load($template);
-    	if(!$template)return $template;
-    	if($load){
-	        $template = preg_replace_callback("/\.*kt:!(.[^:!]*):!/", function ($match) {
-	            return text::get_text($match[1]) === null ? $match[1] : text::get_text($match[1]);
-	        }, $template);
-	        $template = preg_replace_callback("/\.*kc:!(.[^:!]*):!/", function ($match) {
-	            return constant($match[1]) === null ? $match[1] : constant($match[1]);
-	        }, $template);
-	    }else{
-	        $template = preg_replace_callback("/\.*ko:!(.[^:!]*):!/", function ($match) use ($option) {
-	            return !isset($option[$match[1]]) ? $match[1] : $option[$match[1]];
-	        }, $template);
-	        $template = preg_replace_callback("/\.*kod:!(.[^:!]*):!/", function ($match) use ($option) {
-	            return !isset($option[$match[1]]) ? '' : $option[$match[1]];
-	        }, $template);
-        /*$template = preg_replace_callback("/\.*ktp:!(.[^:!]*):!/", function ($match) {
-            if ($this->_templates === null) {
-                $this->load();
-            }
-            return isset($this->_templates[$match[1]]) ? $this->_templates[$match[1]] : $match[1];
-        }, $template);*/
-    	}
+        if (!$load) {
+            $template = $this->load($template);
+        }
+        if (!$template) {
+            return $template;
+        }
+        if ($load) {
+            $template = preg_replace_callback("/\.*kt:!(.[^:!]*):!/", function ($match) {
+                return text::get_text($match[1]) === null ? $match[1] : text::get_text($match[1]);
+            }, $template);
+            $template = preg_replace_callback("/\.*kc:!(.[^:!]*):!/", function ($match) {
+                return constant($match[1]) === null ? $match[1] : constant($match[1]);
+            }, $template);
+        } else {
+            $template = preg_replace_callback("/\.*ko:!(.[^:!]*):!/", function ($match) use ($option) {
+                return !isset($option[$match[1]]) ? $match[1] : $option[$match[1]];
+            }, $template);
+            $template = preg_replace_callback("/\.*kod:!(.[^:!]*):!/", function ($match) use ($option) {
+                return !isset($option[$match[1]]) ? '' : $option[$match[1]];
+            }, $template);
+            /*$template = preg_replace_callback("/\.*ktp:!(.[^:!]*):!/", function ($match) {
+                if ($this->_templates === null) {
+                    $this->load();
+                }
+                return isset($this->_templates[$match[1]]) ? $this->_templates[$match[1]] : $match[1];
+            }, $template);*/
+        }
+
         return $template;
     }
 }
-

@@ -34,7 +34,7 @@ namespace kult_engine;
 
 class daoGeneratorSQL extends daoGenerator
 {
-    public function __construct($fnord = null,$connector=null)
+    public function __construct($fnord = null, $connector = null)
     {
         $this->asign($fnord);
         $this->setConnector($connector);
@@ -135,10 +135,10 @@ class daoGeneratorSQL extends daoGenerator
     public function select($val, $wat = '_id', $mult = 0)
     {
         $this->verify_table();
-        $query = (gettype($this->_obj[$wat]) === "integer" ||
+        $query = (gettype($this->_obj[$wat]) === 'integer' ||
             $this->_obj[$wat] === 'id' ||
-            gettype($this->_obj[$wat]) === "double") 
-            ? $this->_helper->select_int($this->_obj[0], $wat, $wat) 
+            gettype($this->_obj[$wat]) === 'double')
+            ? $this->_helper->select_int($this->_obj[0], $wat, $wat)
             : $this->_helper->select_string($this->_obj[0], $wat, $wat);
         $query = $this->query($query);
         $query->execute([$val]);
@@ -181,24 +181,29 @@ class daoGeneratorSQL extends daoGenerator
     {
         return parent::setConnector($fnord);
     }
+
     public function verify_table($fnord)
     {
         return parent::verify_table($fnord);
     }
+
     public function query($fnord)
     {
         return parent::query($fnord);
     }
+
     public function rowToObj($fnord)
     {
         return parent::rowToObj($fnord);
     }
-    public function objToRow($fnord,$id)
+
+    public function objToRow($fnord, $id)
     {
-        return parent::objToRow($fnord,$id);
+        return parent::objToRow($fnord, $id);
     }
-    public function select_all($fnord,$id)
+
+    public function select_all($fnord, $id)
     {
-        return parent::select_all($fnord,$id);
+        return parent::select_all($fnord, $id);
     }
 }

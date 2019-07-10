@@ -155,15 +155,15 @@ class sqlHelper
             $d = $i == 0 ? '' : ',';
             if ($b === 'id') {
                 $v .= $d.$key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
-            }else if (is_array($b) || is_object($b)) {
+            } elseif (is_array($b) || is_object($b)) {
                 $v .= $d.$key.' LONGTEXT NULL';
-            }else if (gettype($b) === "integer" ) {
+            } elseif (gettype($b) === 'integer') {
                 $v .= $d.$key." INT NOT NULL DEFAULT '0'";
-            }else if ($b === 'blob') {
+            } elseif ($b === 'blob') {
                 $v .= $d.$key.' MEDIUMBLOB NULL';
-            }else if (gettype($b) === "string") {
+            } elseif (gettype($b) === 'string') {
                 $v .= $d.$key.' TEXT NULL';
-            }else if (gettype($b) === "double") {
+            } elseif (gettype($b) === 'double') {
                 $v .= $d.$key." DOUBLE NOT NULL DEFAULT '0'";
             }
             $i++;

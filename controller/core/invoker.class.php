@@ -62,8 +62,6 @@ abstract class invoker extends invokerFactory
         }
         inquisitor::init();
 
-    
-
         self::require_mods($ext);
         self::require_local_model();
         self::require_vendor();
