@@ -34,30 +34,32 @@ namespace kult_engine;
 
 class daoGenerator
 {
-    protected $_obj=null;
-    protected $_helper=null;
-    protected $_connector=null;
-    private $_daughter=null;
- 
+    protected $_obj = null;
+    protected $_helper = null;
+    protected $_connector = null;
+    private $_daughter = null;
+
     protected function setConnector($fnord)
     {
-        $this->_connector=$fnord;
+        $this->_connector = $fnord;
     }
 
-    protected function query($fnord){
+    protected function query($fnord)
+    {
         return $this->_connector::query($fnord);
     }
 
-    public function __construct($fnord = null,$connector=null)
+    public function __construct($fnord = null, $connector = null)
     {
         switch ($connector::$_DB_DRIVER) {
             case 'mysql':
-                $this->_daughter=new daoGeneratorSQL($fnord,$connector);
+                $this->_daughter = new daoGeneratorSQL($fnord, $connector);
                 break;
         }
     }
 
-    protected function __call($fn,$params){
+    protected function __call($fn, $params)
+    {
         return $this->_daughter->$fn(...$params);
     }
 
@@ -98,7 +100,7 @@ class daoGenerator
         $a = $x->newInstanceWithoutConstructor();
         $o = $x->newInstance();
         foreach ($r as $key => $value) {
-          @ $o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
+            @$o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
         }
 
         return $o;

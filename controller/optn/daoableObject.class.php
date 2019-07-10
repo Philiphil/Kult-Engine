@@ -40,20 +40,20 @@ abstract class daoableObject
         array = []
         obj=new obj()
      */
-    const CLASSIC=0;
-    const ONETOMANY=1;
-    const MANYTOMANY=2;
+    const CLASSIC = 0;
+    const ONETOMANY = 1;
+    const MANYTOMANY = 2;
 
     public $_id = 'id';
     public $_iduniq = 'string';
     public $_tabletype = 0;
 
-    public function __construct($typetable=daoableObject::CLASSIC)
+    public function __construct($typetable = self::CLASSIC)
     {
         $this->_tabletype = intval($typetable);
         $this->setIduniq();
         foreach ($this as $key => $value) {
-        if ( gettype($value) === 'string') {
+            if (gettype($value) === 'string') {
                 $this->$key = '';
             }
         }
@@ -62,6 +62,7 @@ abstract class daoableObject
     public function setIduniq()
     {
         $this->_iduniq = uniqid();
+
         return $this;
     }
 
@@ -73,12 +74,14 @@ abstract class daoableObject
     public function setDefaultId()
     {
         $this->_id = $this->getDefaultId();
+
         return $this;
     }
 
     public function clean()
     {
         unset($this->_iduniq);
+
         return $this;
     }
 
@@ -86,6 +89,7 @@ abstract class daoableObject
     {
         $n = $this;
         $n->setIduniq()->setDefaultId();
+
         return $n;
     }
 }
