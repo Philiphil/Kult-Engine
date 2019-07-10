@@ -62,7 +62,11 @@ abstract class invokerFactory
         define('basepath', $base.DIRECTORY_SEPARATOR);
 
         if (!config::$multi) {
-            define('viewpath', $base.DIRECTORY_SEPARATOR.config::$webfolder.DIRECTORY_SEPARATOR);
+            if(config::$webfolder){
+                define('viewpath', $base.DIRECTORY_SEPARATOR.config::$webfolder.DIRECTORY_SEPARATOR);
+            }else{
+                define('viewpath', $base.DIRECTORY_SEPARATOR);
+            }
         } else {
             $bfr = debug_backtrace();
             define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(basepath), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(basepath)), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
@@ -115,10 +119,20 @@ abstract class invokerFactory
     public static function require_impt()
     {
         $impt = scandir(constant('imptpath'));
-        foreach ($impt as $key) {
-            if (contains('.load.', $key)) {
-                include constant('imptpath').$key;
-                self::class_init(strstr($key, '.', true));
+        for ($i=0; $i < count($impt) ; $i++) {
+            if( is_dir(constant("imptpath").$impt[$i]) &&
+            ( $impt[$i] != "." && $impt[$i] != ".." && $impt[$i] != "tplt" )){
+                $tmp = scandir(constant('imptpath').$impt[$i]);
+                $bfr=[];
+                foreach ($tmp as $key) {
+                    if($key == "." ||$key == "..")continue;
+                    $bfr[count($bfr)] = $impt[$i].DIRECTORY_SEPARATOR.$key;
+                }
+
+                $impt =  array_merge($impt,  $bfr );
+            }else if (contains('.load.', $impt[$i])) {
+                include constant('imptpath').$impt[$i];
+                self::class_init(strstr($impt[$i], '.', true));
             }
         }
     }

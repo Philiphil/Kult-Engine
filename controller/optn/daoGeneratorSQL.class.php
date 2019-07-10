@@ -34,9 +34,10 @@ namespace kult_engine;
 
 class daoGeneratorSQL extends daoGenerator
 {
-    public function __construct($fnord = null)
+    public function __construct($fnord = null,$connector=null)
     {
         $this->asign($fnord);
+        $this->setConnector($connector);
         $this->_helper = new sqlHelper();
     }
 
@@ -174,5 +175,30 @@ class daoGeneratorSQL extends daoGenerator
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    public function setConnector($fnord)
+    {
+        return parent::setConnector($fnord);
+    }
+    public function verify_table($fnord)
+    {
+        return parent::verify_table($fnord);
+    }
+    public function query($fnord)
+    {
+        return parent::query($fnord);
+    }
+    public function rowToObj($fnord)
+    {
+        return parent::rowToObj($fnord);
+    }
+    public function objToRow($fnord,$id)
+    {
+        return parent::objToRow($fnord,$id);
+    }
+    public function select_all($fnord,$id)
+    {
+        return parent::select_all($fnord,$id);
     }
 }

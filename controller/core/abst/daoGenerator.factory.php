@@ -32,27 +32,36 @@
 
 namespace kult_engine;
 
-abstract class daoGenerator
+class daoGenerator
 {
-    public $_obj;
-    public $_helper;
-    public $_connector;
+    protected $_obj=null;
+    protected $_helper=null;
+    protected $_connector=null;
+    private $_daughter=null;
  
-    public function setConnector($fnord)
+    protected function setConnector($fnord)
     {
         $this->_connector=$fnord;
     }
 
-    public function query($fnord){
+    protected function query($fnord){
         return $this->_connector::query($fnord);
     }
 
-    public function __construct($fnord = null)
+    public function __construct($fnord = null,$connector=null)
     {
-        $this->asign($fnord);
+        switch ($connector::$_DB_DRIVER) {
+            case 'mysql':
+                $this->_daughter=new daoGeneratorSQL($fnord,$connector);
+                break;
+        }
     }
 
-    public function asign($fnord)
+    protected function __call($fn,$params){
+        return $this->_daughter->$fn(...$params);
+    }
+
+    protected function asign($fnord)
     {
         $this->_obj = [];
         $x = new \ReflectionClass($fnord);
@@ -65,7 +74,7 @@ abstract class daoGenerator
         }
     }
 
-    public function objToRow($o, $id = 1)
+    protected function objToRow($o, $id = 1)
     {
         $x = new \ReflectionClass($o);
         $a = $x->newInstanceWithoutConstructor();
@@ -83,7 +92,7 @@ abstract class daoGenerator
         return $r;
     }
 
-    public function rowToObj($r)
+    protected function rowToObj($r)
     {
         $x = new \ReflectionClass($this->_obj[0]);
         $a = $x->newInstanceWithoutConstructor();
@@ -95,56 +104,56 @@ abstract class daoGenerator
         return $o;
     }
 
-    public function __invoke($fnord)
+    protected function __invoke($fnord)
     {
         $this->asign($fnord);
     }
 
-    public function set($fnord)
+    protected function set($fnord)
     {
     }
 
-    public function get_last()
+    protected function get_last()
     {
     }
 
-    public function get_all()
+    protected function get_all()
     {
     }
 
-    public function delete($fnord)
+    protected function delete($fnord)
     {
     }
 
-    public function create_table()
+    protected function create_table()
     {
         if ($this->table_exists()) {
             return;
         }
     }
 
-    public function delete_table()
+    protected function delete_table()
     {
     }
 
-    public function empty_table()
+    protected function empty_table()
     {
     }
 
-    public function select($val, $wat = '_id', $mult = 0)
+    protected function select($val, $wat = '_id', $mult = 0)
     {
     }
 
-    public function select_all($val, $wat)
+    protected function select_all($val, $wat)
     {
         return $this->select($val, $wat, 1);
     }
 
-    public function table_exists()
+    protected function table_exists()
     {
     }
 
-    public function verify_table()
+    protected function verify_table()
     {
         if (!$this->table_exists()) {
             $this->create_table();
