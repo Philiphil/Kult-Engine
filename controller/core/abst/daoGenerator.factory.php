@@ -76,7 +76,7 @@ class daoGenerator
         }
     }
 
-    protected function objToRow($o, $id=1)
+    protected function objToRow($o, $id = 1)
     {
         $x = new \ReflectionClass($o);
         $a = $x->newInstanceWithoutConstructor();

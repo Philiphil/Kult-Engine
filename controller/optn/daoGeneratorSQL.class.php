@@ -197,7 +197,7 @@ class daoGeneratorSQL extends daoGenerator
         return parent::rowToObj($fnord);
     }
 
-    public function objToRow($fnord, $id=1)
+    public function objToRow($fnord, $id = 1)
     {
         return parent::objToRow($fnord, $id);
     }
