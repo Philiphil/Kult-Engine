@@ -88,7 +88,7 @@ abstract class sessionFactory
 
     public static function is_on_login_page()
     {
-        return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], constant('filespace')) + 1) === static::$_login_page;
+        return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], DIRECTORY_SEPARATOR) + 1) === static::$_login_page;
     }
 
     public static function end()

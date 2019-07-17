@@ -60,7 +60,7 @@ abstract class invoker extends invokerFactory
         if (constant('debug')) {
             buffer::send();
         }
-        inquisitor::init();
+        //inquisitor::init();
 
         self::require_mods($ext);
         self::require_local_model();

@@ -36,8 +36,8 @@ require_once constant('optnpath').'daoableObject.class.php';
 require_once constant('optnpath').'daoGenerator.class.php';
 
 define('shoppath', substr(__FILE__, 0, strlen(__FILE__) - 16));
-define('shoptemplate', constant('shoppath').'template'.constant('filespace'));
-define('shopmodel', constant('shoppath').'model'.constant('filespace'));
+define('shoptemplate', constant('shoppath').'template'.DIRECTORY_SEPARATOR);
+define('shopmodel', constant('shoppath').'model'.DIRECTORY_SEPARATOR);
 
 require_once constant('shoppath').'shop.config.php';
 define('currency_html', shopConfig::$currency_char);
