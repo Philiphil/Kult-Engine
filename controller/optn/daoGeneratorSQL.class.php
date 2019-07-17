@@ -182,9 +182,9 @@ class daoGeneratorSQL extends daoGenerator
         return parent::setConnector($fnord);
     }
 
-    public function verify_table($fnord)
+    public function verify_table()
     {
-        return parent::verify_table($fnord);
+        return parent::verify_table();
     }
 
     public function query($fnord)
@@ -197,7 +197,7 @@ class daoGeneratorSQL extends daoGenerator
         return parent::rowToObj($fnord);
     }
 
-    public function objToRow($fnord, $id)
+    public function objToRow($fnord, $id=1)
     {
         return parent::objToRow($fnord, $id);
     }

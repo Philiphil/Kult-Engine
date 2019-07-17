@@ -58,7 +58,7 @@ class daoGenerator
         }
     }
 
-    protected function __call($fn, $params)
+    public function __call($fn, $params)
     {
         return $this->_daughter->$fn(...$params);
     }
@@ -76,7 +76,7 @@ class daoGenerator
         }
     }
 
-    protected function objToRow($o, $id = 1)
+    protected function objToRow($o, $id=1)
     {
         $x = new \ReflectionClass($o);
         $a = $x->newInstanceWithoutConstructor();
@@ -106,7 +106,7 @@ class daoGenerator
         return $o;
     }
 
-    protected function __invoke($fnord)
+    public function __invoke($fnord)
     {
         $this->asign($fnord);
     }

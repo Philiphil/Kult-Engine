@@ -36,6 +36,7 @@ abstract class invokerFactory
 {
     public static function require_mods($mods = [])
     {
+        if($mods==null)return;
         foreach ($mods as $key) {
             if (self::require_quick($key) == true) {
                 continue;
