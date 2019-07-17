@@ -59,7 +59,7 @@ abstract class invokerFactory
         define('basepath', $base.DIRECTORY_SEPARATOR);
 
         if (!config::$multi) {
-            if (config::$webfolder && config::$webfolder != "/" ) {
+            if (config::$webfolder && config::$webfolder != '/') {
                 define('viewpath', $base.DIRECTORY_SEPARATOR.config::$webfolder.DIRECTORY_SEPARATOR);
             } else {
                 define('viewpath', $base.DIRECTORY_SEPARATOR);
@@ -87,7 +87,7 @@ abstract class invokerFactory
 
         define('abstpath', constant('corepath').'abst'.DIRECTORY_SEPARATOR);
         define('itfcpath', constant('corepath').'itfc'.DIRECTORY_SEPARATOR);
-        
+
         define('tpltpath', constant('imptpath').'tplt'.DIRECTORY_SEPARATOR);
         define('ctrltpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
 
