@@ -78,7 +78,7 @@ abstract class sessionFactory
 
     public static function login_required()
     {
-        if (!isset($_SESSION['log'])) {
+        if (!isset($_SESSION['login'])) {
             if (!static::is_on_login_page()) {
                 redirect(constant('htmlpath').self::$_login_page, 0);
                 die;
