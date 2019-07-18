@@ -43,7 +43,7 @@ abstract class invoker extends invokerFactory
 
         require_once constant('corepath').'logger.class.php';
 
-        require_once constant('imptpath').'lang.php';
+        require_once constant('rqrdpath').'lang.php';
         require_once constant('corepath').'text.class.php';
 
         require_once constant('corepath').'buffer.class.php';

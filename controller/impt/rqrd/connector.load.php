@@ -35,9 +35,9 @@ namespace kult_engine;
 class connector extends connectorFactory
 {
     use coreElement;
-    public static $_DB_DRIVER = 'mysql';
-    public static $_DB_HOST = 'localhost';
-    public static $_DB_NAME = 'db';
-    public static $_DB_USER = 'root';
-    public static $_DB_PASS = '';
+    //public static $_DB_DRIVER = 'mysql';
+    //public static $_DB_HOST = 'localhost';
+    //public static $_DB_NAME = 'test';
+    //public static $_DB_USER = 'root';
+    //public static $_DB_PASS = '';
 }

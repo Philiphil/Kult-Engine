@@ -45,14 +45,14 @@ class config
     public static $htmlfolder = '/';
 
     //SQL IDs
-    public static $host = '';
-    public static $db = '';
-    public static $user = '';
+    public static $host = 'localhost';
+    public static $db = 'test';
+    public static $user = 'root';
     public static $pass = '';
     public static $driver = 'mysql';
 
     //SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
-    public static $debug = 1;
+    public static $debug = 0;
 
     //full path to your logfile
     public static $log = '';

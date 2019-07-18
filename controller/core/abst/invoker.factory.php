@@ -91,7 +91,8 @@ abstract class invokerFactory
         define('itfcpath', constant('corepath').'itfc'.DIRECTORY_SEPARATOR);
 
         define('tpltpath', constant('imptpath').'tplt'.DIRECTORY_SEPARATOR);
-        define('ctrltpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
+        define('ctrlpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
+        define('rqrdpath', constant('imptpath').'rqrd'.DIRECTORY_SEPARATOR);
 
         define('htmlpath', config::$htmlfolder);
         define('contentpath', constant('htmlpath').'content/');
@@ -261,10 +262,10 @@ abstract class invokerFactory
 
     public static function require_local_controler()
     {
-        $ctrl = scandir(constant('ctrltpath'));
+        $ctrl = scandir(constant('ctrlpath'));
         foreach ($ctrl as $key) {
             if (contains('.php', $key)) {
-                include constant('ctrltpath').DIRECTORY_SEPARATOR.$key;
+                include constant('ctrlpath').DIRECTORY_SEPARATOR.$key;
             }
         }
     }

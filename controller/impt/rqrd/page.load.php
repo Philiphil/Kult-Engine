@@ -76,7 +76,7 @@ class page
 
     public static function standardpage_js()
     {
-        include constant('imptpath').'javascript.php';
+        include constant('rqrdpath').'javascript.php';
         echo'       
         <script src="'.constant('contentpath').'script/jquery.js"></script>
         <script src="'.constant('contentpath').'script/json.js"></script>
