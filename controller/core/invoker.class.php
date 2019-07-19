@@ -50,7 +50,7 @@ abstract class invoker extends invokerFactory
 
         require_once constant('abstpath').'session.factory.php';
 
-       // require_once constant('corepath').'inquisitor.class.php';
+        // require_once constant('corepath').'inquisitor.class.php';
 
         require_once constant('abstpath').'connector.factory.php';
         hook::init();
