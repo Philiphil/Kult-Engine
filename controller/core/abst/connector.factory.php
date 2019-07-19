@@ -39,15 +39,15 @@ abstract class connectorFactory
     protected static $_DB_NAME = null;
     protected static $_DB_USER = null;
     protected static $_DB_PASS = null;
-    protected static $_DB_DRIVER = null;
+    protected static $_DB_DRIVER= null;
 
     public static function setter()
     {
-        self::$_DB_HOST = static::$_DB_HOST ?? constant('host');
-        self::$_DB_NAME = static::$_DB_NAME ?? constant('db');
-        self::$_DB_USER = static::$_DB_USER ?? constant('user');
-        self::$_DB_PASS = static::$_DB_PASS ?? constant('pass');
-        self::$_DB_DRIVER = static::$_DB_DRIVER ?? constant('driver');
+        self::$_DB_HOST =  static::$_DB_HOST ?? constant('host');
+        self::$_DB_NAME =  static::$_DB_NAME ?? constant('db');
+        self::$_DB_USER =  static::$_DB_USER ?? constant('user');
+        self::$_DB_PASS =  static::$_DB_PASS ?? constant('pass');
+        self::$_DB_DRIVER =  static::$_DB_DRIVER ?? constant('driver');
 
         self::set_pdo(self::$_DB_DRIVER);
     }
@@ -88,4 +88,5 @@ abstract class connectorFactory
         self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         self::$_db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
     }
+    public static function getDriver(){ return self::$_DB_DRIVER; }
 }

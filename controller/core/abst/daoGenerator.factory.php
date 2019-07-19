@@ -51,7 +51,7 @@ class daoGenerator
 
     public function __construct($fnord = null, $connector = null)
     {
-        switch ($connector::$_DB_DRIVER) {
+        switch ($connector::getDriver()) {
             case 'mysql':
                 $this->_daughter = new daoGeneratorSQL($fnord, $connector);
                 break;

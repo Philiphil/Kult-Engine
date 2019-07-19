@@ -136,7 +136,7 @@ class daoGeneratorSQL extends daoGenerator
     {
         $this->verify_table();
         $query = (gettype($this->_obj[$wat]) === 'integer' ||
-            $this->_obj[$wat] === 'id' ||
+            $this->_obj[$wat] === 'id' || gettype($this->_obj[$wat]) === 'boolean' ||
             gettype($this->_obj[$wat]) === 'double')
             ? $this->_helper->select_int($this->_obj[0], $wat, $wat)
             : $this->_helper->select_string($this->_obj[0], $wat, $wat);
