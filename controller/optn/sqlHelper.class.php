@@ -165,12 +165,13 @@ class sqlHelper
                 $v .= $d.$key.' TEXT NULL';
             } elseif (gettype($b) === 'double') {
                 $v .= $d.$key." DOUBLE NOT NULL DEFAULT '0'";
-            }else if(gettype($b) === "boolean"){
-                $v .= $d.$key." BOOLEAN NOT NULL DEFAULT ".($b?"TRUE":"FALSE");
+            } elseif (gettype($b) === 'boolean') {
+                $v .= $d.$key.' BOOLEAN NOT NULL DEFAULT '.($b ? 'TRUE' : 'FALSE');
             }
             $i++;
         }
         $v .= ')CHARSET=utf8mb4';
+
         return $v;
     }
 }
