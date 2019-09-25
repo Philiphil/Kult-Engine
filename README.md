@@ -4,7 +4,8 @@ The Kult engine is a php framework aiming to be a lightweight and easy to use/co
 
 **PHP 7**
 
-**Version : 1.34**
+**Version : 1.34-BETA**
+
 
 ## Why choose the Kult Engine ?
 
