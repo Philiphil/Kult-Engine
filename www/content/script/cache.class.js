@@ -8,7 +8,7 @@
   	}
   	if (typeof $(e).attr('k-caching-onload') !== typeof undefined && $(e).attr('k-caching-onload') !== false ) 
   	{
-  		this.val = $(e).val();
+  		this.val = e.value
   		this.onload = true;
   	}else{
   		this.onload = false;
@@ -73,20 +73,23 @@
 
   	var array = [];
   	var radio = {};
-  	$('[k-caching]').each(function(e){
-  		var e = new kacheObj(this);
-  		e.load();
-  		array.push(e);
-  		if(e.radio)
-  		{
-  			if( typeof radio[e.radiokey] !== typeof undefined && radio[e.radiokey] !== false  )
-  			{
-  				radio[e.radiokey]++;
-  			}else{
-  				radio[e.radiokey] = 0;
-  			}
-  		}
-  	});
+
+    var elements = document.querySelectorAll("[k-caching]");
+    Array.prototype.forEach.call(elements, function(el, i){
+      var e = new kacheObj(el);
+      e.load();
+      array.push(e);
+      if(e.radio)
+      {
+        if( typeof radio[e.radiokey] !== typeof undefined && radio[e.radiokey] !== false  )
+        {
+          radio[e.radiokey]++;
+        }else{
+          radio[e.radiokey] = 0;
+        }
+      }
+    });
+
 
   	var _radio = Object.create(radio);
   	for (var i in _radio)
@@ -115,9 +118,9 @@
   		var e = new kacheObj(this);
   		if(!e.dep)
   		{
-  			localStorage[e.key] = $(this).val();
+  			localStorage[e.key] = this.value
   		}else{
-  			localStorage[e.key] = $(this).val();
+  			localStorage[e.key] = this.value
   			localStorage[e.dependencykey+e.key] = $('[k-caching="'+e.dependencykey+'"]').val();
   		}
   	});
@@ -128,24 +131,26 @@
   {
   	var array = [];
   	var radio = {};
-  	$('[k-caching]').each(function(x){
-  		var e = new kacheObj(this);
-  		array.push(e);
-  		if(!e.static)
-  		{
-  			localStorage[e.key] = "";
-  			$(this).val('');
-      if(e.radio)
-      {
-      	if( typeof radio[e.radiokey] !== typeof undefined && radio[e.radiokey] !== false  )
-      	{
-      		radio[e.radiokey]++;
-      	}else{
-      		radio[e.radiokey] = 1;
-      	}
+    var elements = document.querySelectorAll("[k-caching]");
+    Array.prototype.forEach.call(elements, function(el, i){
+          var e = new kacheObj(el);
+          array.push(e);
+          if(!e.static)
+          {
+            localStorage[e.key] = "";
+            el.value="";
+          if(e.radio)
+          {
+            if( typeof radio[e.radiokey] !== typeof undefined && radio[e.radiokey] !== false  )
+            {
+              radio[e.radiokey]++;
+            }else{
+              radio[e.radiokey] = 1;
+            }
+          }
       }
-  }
-});
+    });
+
   	var _radio = Object.create(radio);
   	for (var i in _radio)
   	{
@@ -172,21 +177,24 @@
   function is_page_kached()
   {
   	var i = 0
-  	$('[k-caching]').each(function(x){
-  		var e = new kacheObj(this);
-  		if (localStorage[e.key] && typeof localStorage[e.key] !== typeof undefined && localStorage[e.key] !== false && localStorage[e.key] !== '') 
-  		{
-  			if(e.dep)
-  			{
-  				if($('[k-caching="'+e.dependencykey+'"]').val() == localStorage[e.dependencykey+e.key])
-  				{
-  					i++;
-  				}
-  			}else if(!e.onload){
-  				i++;
-  			}
-  		}
-  	});
+    var elements = document.querySelectorAll("[k-caching]");
+    Array.prototype.forEach.call(elements, function(el, i){
+  var e = new kacheObj(el);
+  if (localStorage[e.key] && typeof localStorage[e.key] !== typeof undefined && localStorage[e.key] !== false && localStorage[e.key] !== '') 
+  {
+    if(e.dep)
+    {
+      if($('[k-caching="'+e.dependencykey+'"]').val() == localStorage[e.dependencykey+e.key])
+      {
+        i++;
+      }
+    }else if(!e.onload){
+      i++;
+    }
+  }
+    });
+
+
   	return i !== 0;
   }
 
