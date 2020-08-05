@@ -34,7 +34,7 @@ namespace kult_engine;
 
 abstract class AbstractInvoker
 {
-    public static function require_mods(?array $mods=[]) : void
+    public static function require_mods(?array $mods = []): void
     {
         if ($mods == null) {
             return;
@@ -53,7 +53,7 @@ abstract class AbstractInvoker
         }
     }
 
-    public static function setter() : void
+    public static function setter(): void
     {
         $base = dirname(config::$file);
 
@@ -115,7 +115,7 @@ abstract class AbstractInvoker
         define('driver', config::$driver);
     }
 
-    public static function require_impt() : void
+    public static function require_impt(): void
     {
         $impt = scandir(constant('imptpath'));
         for ($i = 0; $i < count($impt); $i++) {
@@ -138,7 +138,7 @@ abstract class AbstractInvoker
         }
     }
 
-    public static function class_init(string $key) : void
+    public static function class_init(string $key): void
     {
         if (class_exists(__NAMESPACE__.'\\'.$key)) {
             if (in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__.'\\'.$key)) || in_array(__NAMESPACE__."\settable", class_uses(__NAMESPACE__.'\\'.$key)) || in_array('coreElement', class_uses(__NAMESPACE__.'\\'.$key)) || in_array('settable', class_uses(__NAMESPACE__.'\\'.$key))) {
@@ -148,7 +148,7 @@ abstract class AbstractInvoker
         }
     }
 
-    public static function loader(string $className) : bool
+    public static function loader(string $className): bool
     {
         $className = substr($className, strripos($className, '\\') + 1);
         if (self::require_quick($className) == true) {
@@ -182,7 +182,7 @@ abstract class AbstractInvoker
         return false;
     }
 
-    public static function _requireBase() : void
+    public static function _requireBase(): void
     {
         self::is_ke_runnable();
         self::setter();
@@ -195,22 +195,22 @@ abstract class AbstractInvoker
         require_once constant('itfcpath').'queryable.trait.php';
         require_once constant('itfcpath').'coreElement.trait.php';
 
-        self::require_quick("Hook");
+        self::require_quick('Hook');
     }
 
-    public static function is_ke_runnable() : void
+    public static function is_ke_runnable(): void
     {
         $needed = ['mbstring', 'json', 'PDO', 'Reflection', 'openssl', 'session'];
         $loaded = get_loaded_extensions();
         foreach ($needed as $key) {
             if (!in_array($key, $loaded)) {
                 echo $key.' not found, KULT ENGINE cant run';
-                die();
+                exit();
             }
         }
     }
 
-    public static function error($errno, $errstr, $errfile, $errline) : void
+    public static function error($errno, $errstr, $errfile, $errline): void
     {
         if (!constant('debug')) {
             if ($errno != E_USER_ERROR || $errno != E_ERROR) {
@@ -218,7 +218,7 @@ abstract class AbstractInvoker
             }
             buffer::delete();
             echo '<br><b>FATAL</b>';
-            die;
+            exit;
         }
         $file = substr($errfile, strripos($errfile, DIRECTORY_SEPARATOR) + 1);
         $file = substr($file, 0, strpos($file, '.'));
@@ -236,15 +236,15 @@ abstract class AbstractInvoker
         echo '<br> <b>E</b> : '.$saying.'<br>';
         echo 'L : <b>'.$errline.'</b> - F : <b>'.$file.'</b><br>';
         echo $status;
-        die();
+        exit();
     }
 
-    public static function require_local_model() : void
+    public static function require_local_model(): void
     {
-        require_once corepath."dao".DS.'AbstractConnector.php';
-        require_once corepath."dao".DS.'DaoableObject.php';
-        require_once corepath."dao".DS.'DaoGenerator.php';
-        require_once corepath."dao".DS.'DaoGeneratorSQL.php';
+        require_once corepath.'dao'.DS.'AbstractConnector.php';
+        require_once corepath.'dao'.DS.'DaoableObject.php';
+        require_once corepath.'dao'.DS.'DaoGenerator.php';
+        require_once corepath.'dao'.DS.'DaoGeneratorSQL.php';
         $model = scandir(constant('modelpath'));
         foreach ($model as $key) {
             if (contains('.class.', $key)) {
@@ -253,7 +253,7 @@ abstract class AbstractInvoker
         }
     }
 
-    public static function require_vendor() : void
+    public static function require_vendor(): void
     {
         $ctrl = scandir(constant('vendorpath'));
         foreach ($ctrl as $key) {
@@ -263,7 +263,7 @@ abstract class AbstractInvoker
         }
     }
 
-    public static function require_local_controler() : void
+    public static function require_local_controler(): void
     {
         $ctrl = scandir(constant('ctrlpath'));
         foreach ($ctrl as $key) {
@@ -273,10 +273,10 @@ abstract class AbstractInvoker
         }
     }
 
-    public static function require_quick(string $f) : bool
+    public static function require_quick(string $f): bool
     {
         switch ($f) {
-            case 'Hook':                
+            case 'Hook':
                 require_once constant('corepath').'hook'.DS.'Hook.php';
                 require_once constant('corepath').'hook'.DS.'HookableTrait.php';
                 require_once constant('corepath').'hook'.DS.'HookExecutor.php';
@@ -295,7 +295,7 @@ abstract class AbstractInvoker
 
                 return true;
             case 'connector':
-                require_once corepath."dao".DS.'AbstractConnector.php';
+                require_once corepath.'dao'.DS.'AbstractConnector.php';
                 self::class_init($f);
 
                 return true;

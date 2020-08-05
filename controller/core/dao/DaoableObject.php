@@ -59,7 +59,7 @@ abstract class daoableObject
         }
     }
 
-    public function setIduniq():daoableObject
+    public function setIduniq(): daoableObject
     {
         $this->_iduniq = uniqid();
 
@@ -71,14 +71,14 @@ abstract class daoableObject
         return 'id';
     }
 
-    public function setDefaultId():daoableObject
+    public function setDefaultId(): daoableObject
     {
         $this->_id = $this->getDefaultId();
 
         return $this;
     }
 
-    public function clean():daoableObject
+    public function clean(): daoableObject
     {
         unset($this->_iduniq);
 

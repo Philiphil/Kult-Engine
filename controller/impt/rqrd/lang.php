@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-function texts() : array
+function texts(): array
 {
     $array['fr']['hello'] = 'Salut';
     $array['en']['hello'] = 'Hello';

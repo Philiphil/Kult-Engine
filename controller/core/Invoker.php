@@ -34,7 +34,7 @@ namespace kult_engine;
 
 abstract class Invoker extends AbstractInvoker
 {
-    public static function requireBase(?string $ext=null)
+    public static function requireBase(?string $ext = null)
     {
         parent::_requireBase();
 

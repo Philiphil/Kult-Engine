@@ -50,7 +50,7 @@ abstract class Text
         self::$_default = $fnord['default'];
     }
 
-    public static function getLang() : string
+    public static function getLang(): string
     {
         if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return self::$_default;
@@ -84,7 +84,7 @@ abstract class Text
         return $result;
     }
 
-    public static function get_true_lang() : string
+    public static function get_true_lang(): string
     {
         return explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0];
     }

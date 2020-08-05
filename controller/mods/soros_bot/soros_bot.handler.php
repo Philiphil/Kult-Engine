@@ -116,7 +116,7 @@ class soros_bot
         buffer::send();
         echo "soros init'd\n";
         $norders = 0;
-        for (; ;) {
+        for (;;) {
             self::loop();
             self::actualise_bag();
         }

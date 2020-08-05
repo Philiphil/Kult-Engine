@@ -89,7 +89,7 @@ abstract class AbstractConnector
         self::$_db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
     }
 
-    public static function getDriver() : ?string
+    public static function getDriver(): ?string
     {
         return self::$_DB_DRIVER;
     }

@@ -81,8 +81,8 @@ class drive
         $driveService = new \Google_Service_Drive($client);
 
         $optParams = [
-          'pageSize' => 999,
-          'fields'   => 'nextPageToken, files(id, name)',
+            'pageSize' => 999,
+            'fields'   => 'nextPageToken, files(id, name)',
         ];
         $results = $driveService->files->listFiles($optParams);
 
@@ -105,7 +105,9 @@ class drive
 
         $emptyFileMetadata = new \Google_Service_Drive_DriveFile();
         foreach ($args as $key) {
-            $file = $driveService->files->update($key, $emptyFileMetadata,
+            $file = $driveService->files->update(
+                $key,
+                $emptyFileMetadata,
                 ['addParents' => $folderId]
             );
         }
@@ -118,17 +120,19 @@ class drive
         $driveService = new \Google_Service_Drive($client);
 
         $fileMetadata = new \Google_Service_Drive_DriveFile(
-            ['name'   => substr($file, strrpos($file, '/') + 1),
-            'parents' => [self::getUploadFolderId($token)],
-        ]);
+            ['name'       => substr($file, strrpos($file, '/') + 1),
+                'parents' => [self::getUploadFolderId($token)],
+            ]
+        );
 
         $content = file_get_contents($file);
         $driveService->files->create(
-                    $fileMetadata, [
-                        'data'       => $content,
-                        'mimeType'   => kmime_content_type($file),
-                        'uploadType' => 'media',
-                    ]
+            $fileMetadata,
+            [
+                'data'       => $content,
+                'mimeType'   => kmime_content_type($file),
+                'uploadType' => 'media',
+            ]
         );
     }
 
@@ -138,7 +142,9 @@ class drive
             file_get_contents(
                 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='.
                 $token['access_token']
-        ), true);
+            ),
+            true
+        );
     }
 }
 /*

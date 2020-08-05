@@ -41,7 +41,7 @@ class Logger
         $this->_file = $fnord === null ? (constant('logfile') === null || constant('logfile') == '' ? constant('tmppath').constant('view').'.log' : constant('logfile')) : $fnord;
     }
 
-    public function get_standard_header() : string
+    public function get_standard_header(): string
     {
         $line = '';
         $line .= '['.$_SERVER['HTTP_USER_AGENT'];

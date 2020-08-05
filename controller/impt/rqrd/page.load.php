@@ -34,7 +34,7 @@ namespace kult_engine;
 
 class page
 {
-    public static function standardpage_head(?string $title = null):void
+    public static function standardpage_head(?string $title = null): void
     {
         $title = text::get_text($title);
         if (!is_null($title)) {
@@ -55,12 +55,12 @@ class page
         echo '</head>';
     }
 
-    public static function standardpage_header():void
+    public static function standardpage_header(): void
     {
         echo '<body>';
     }
 
-    public static function standardpage_footer():void
+    public static function standardpage_footer(): void
     {
         echo '
     </body>
@@ -68,13 +68,13 @@ class page
     ';
     }
 
-    public static function standardpage_api():void
+    public static function standardpage_api(): void
     {
         //echo '<script src="https://apis.google.com/js/platform.js" async defer></script>';
         //echo '<meta name="google-signin-client_id" content="">';
     }
 
-    public static function standardpage_js():void
+    public static function standardpage_js(): void
     {
         include constant('rqrdpath').'javascript.php';
         echo'       
@@ -91,7 +91,7 @@ class page
             ';
     }
 
-    public static function standardpage_body_begin(?string $arianne = ''):void
+    public static function standardpage_body_begin(?string $arianne = ''): void
     {
         echo ' <div id="k_loading">
                 <br>
@@ -99,7 +99,7 @@ class page
             </div>';
     }
 
-    public static function standardpage_body_end():void
+    public static function standardpage_body_end(): void
     {
         echo '';
     }

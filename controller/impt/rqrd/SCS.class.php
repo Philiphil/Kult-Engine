@@ -75,12 +75,12 @@ abstract class SCS
         }
     }
 
-    public static function setter():bool
+    public static function setter(): bool
     {
         return false;
     }
 
-    public static function setter_conf($file):bool
+    public static function setter_conf($file): bool
     {
         return false0;
     }

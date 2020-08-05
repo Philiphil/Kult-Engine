@@ -34,22 +34,22 @@ namespace kult_engine;
 
 class sqlHelper
 {
-    private function table_quoted($table):string
+    private function table_quoted($table): string
     {
         return strpos($table, '`') === false ? '`'.$table.'`' : $table;
     }
 
-    public function select_int($table, $cat, $id = 'id'):string
+    public function select_int($table, $cat, $id = 'id'): string
     {
         return 'SELECT * FROM '.$this->table_quoted($table).' WHERE '.$cat.' = :'.$id;
     }
 
-    public function select_string($table, $cat, $id = 'id'):string
+    public function select_string($table, $cat, $id = 'id'): string
     {
         return 'SELECT * FROM '.$this->table_quoted($table).' WHERE '.$cat.' like :'.$id;
     }
 
-    public function insert($table, $cat, $id = null):string
+    public function insert($table, $cat, $id = null): string
     {
         $cat = is_array($cat) ? $cat : [$cat];
         $id = is_null($id) ? $cat : $id;
@@ -72,7 +72,7 @@ class sqlHelper
         return $r;
     }
 
-    public function update_int($table, $haystack, $needle, $cat, $id = null):string
+    public function update_int($table, $haystack, $needle, $cat, $id = null): string
     {
         $cat = is_array($cat) ? $cat : [$cat];
         $id = is_null($id) ? $cat : $id;
@@ -89,7 +89,7 @@ class sqlHelper
         return $r;
     }
 
-    public function update_string($table, $haystack, $needle, $cat, $id = null):string
+    public function update_string($table, $haystack, $needle, $cat, $id = null): string
     {
         $cat = is_array($cat) ? $cat : [$cat];
         $id = is_null($id) ? $cat : $id;
@@ -106,32 +106,32 @@ class sqlHelper
         return $r;
     }
 
-    public function delete($table, $cat, $id = 'id'):string
+    public function delete($table, $cat, $id = 'id'): string
     {
         return 'DELETE FROM '.$this->table_quoted($table).' WHERE '.$this->table_quoted($cat).' = :'.$id;
     }
 
-    public function select_last($table, $cat):string
+    public function select_last($table, $cat): string
     {
         return 'SELECT * FROM  '.$this->table_quoted($table).'WHERE 1=1 ORDER BY '.$cat.' DESC LIMIT 1';
     }
 
-    public function select_all($table):string
+    public function select_all($table): string
     {
         return 'SELECT * FROM  '.$this->table_quoted($table).'WHERE 1=1';
     }
 
-    public function truncate($table):string
+    public function truncate($table): string
     {
         return 'TRUNCATE TABLE '.$this->table_quoted($table);
     }
 
-    public function drop($table):string
+    public function drop($table): string
     {
         return 'DROP TABLE '.$this->table_quoted($table);
     }
 
-    public function create_basic($table, $id, $obj, $size = 'MEDIUMBLOB'):string
+    public function create_basic($table, $id, $obj, $size = 'MEDIUMBLOB'): string
     {   //unused
         $v = 'CREATE TABLE '.$this->table_quoted($table);
         $v .= ' ( ';
@@ -141,12 +141,12 @@ class sqlHelper
         return $v;
     }
 
-    public function table_exists():string
+    public function table_exists(): string
     {
         return "SHOW TABLES LIKE ':table'";
     }
 
-    public function create_advance($table, $tableau):string
+    public function create_advance($table, $tableau): string
     {
         $v = 'CREATE TABLE '.$this->table_quoted($table);
         $v .= ' ( ';
