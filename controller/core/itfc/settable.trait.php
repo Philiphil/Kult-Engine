@@ -46,7 +46,9 @@ trait settable
             self::$set = true;
             $r = is_null($fnord) ? self::setter() : self::setter_conf($fnord);
             if (in_array(
-                __NAMESPACE__."\HookableTrait", class_uses(get_called_class()))
+                __NAMESPACE__."\HookableTrait",
+                class_uses(get_called_class())
+            )
             ) {
                 self::hook();
             }
@@ -56,7 +58,7 @@ trait settable
         trigger_error(get_called_class().' ALREADY SET');
     }
 
-    public static function uninit() : bool
+    public static function uninit(): bool
     {
         if (self::$set) {
             self::$set = false;
@@ -68,7 +70,7 @@ trait settable
         return true;
     }
 
-    public static function init_required():bool
+    public static function init_required(): bool
     {
         if (!self::$set) {
             trigger_error(get_called_class().' NOT SET', E_USER_ERROR);

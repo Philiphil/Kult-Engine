@@ -78,7 +78,7 @@ abstract class inquisitor
         self::save();
         if (self::$_deny) {
             echo 'Inquisit\'d';
-            die;
+            exit;
         }
     }
 

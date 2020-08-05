@@ -36,6 +36,6 @@ class HookExecutor
 {
     public function __destruct()
     {
-            Hook::exec();
+        Hook::exec();
     }
 }

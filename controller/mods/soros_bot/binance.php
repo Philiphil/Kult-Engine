@@ -242,7 +242,7 @@ class binance
         // https://curl.haxx.se/libcurl/c/CURLOPT_PROXY.html
         $supportedProxyProtocols = ['http', 'https', 'socks4', 'socks4a', 'socks5', 'socks5h'];
         if (in_array($uri, $supportedProxyProtocols) == false) {
-            die("Unknown proxy protocol '".$this->proxyConf['proto']."', supported protocols are ".implode(', ', $supportedProxyProtocols)."\n");
+            exit("Unknown proxy protocol '".$this->proxyConf['proto']."', supported protocols are ".implode(', ', $supportedProxyProtocols)."\n");
         }
 
         $uri .= '://';
@@ -268,7 +268,7 @@ class binance
     {
         // is cURL installed yet?
         if (!function_exists('curl_init')) {
-            die('Sorry cURL is not installed!');
+            exit('Sorry cURL is not installed!');
         }
 
         $ch = curl_init();
@@ -278,10 +278,10 @@ class binance
         // signed with params
         if ($signed == true) {
             if (empty($this->api_key)) {
-                die('signedRequest error: API Key not set!');
+                exit('signedRequest error: API Key not set!');
             }
             if (empty($this->api_secret)) {
-                die('signedRequest error: API Secret not set!');
+                exit('signedRequest error: API Secret not set!');
             }
             $base = $this->base;
             $ts = (microtime(true) * 1000) + $this->info['timeOffset'];
@@ -788,7 +788,7 @@ class binance
             }
             $this->info[$symbol]['firstUpdate'] = 0;
             $connector('wss://stream.binance.com:9443/ws/'.strtolower($symbol).'@depth')->then(function ($ws) use ($callback, $symbol, $loop) {
-                $ws->on('message', function ($data) use ($ws, $callback) {
+                $ws->on('message', function ($data) use ($callback) {
                     $json = json_decode($data, true);
                     $symbol = $json['s'];
                     if ($this->info[$symbol]['firstUpdate'] == 0) {
@@ -832,7 +832,7 @@ class binance
             }
             //$this->info[$symbol]['tradesCallback'] = $callback;
             $connector('wss://stream.binance.com:9443/ws/'.strtolower($symbol).'@aggTrade')->then(function ($ws) use ($callback, $symbol, $loop) {
-                $ws->on('message', function ($data) use ($ws, $callback) {
+                $ws->on('message', function ($data) use ($callback) {
                     $json = json_decode($data, true);
                     $symbol = $json['s'];
                     $price = $json['p'];
@@ -860,7 +860,7 @@ class binance
     {
         $endpoint = $symbol ? strtolower($symbol).'@ticker' : '!ticker@arr';
         \Ratchet\Client\connect('wss://stream.binance.com:9443/ws/'.$endpoint)->then(function ($ws) use ($callback, $symbol) {
-            $ws->on('message', function ($data) use ($ws, $callback, $symbol) {
+            $ws->on('message', function ($data) use ($callback, $symbol) {
                 $json = json_decode($data);
                 if ($symbol) {
                     call_user_func($callback, $this, $symbol, $this->tickerStreamHandler($json));
@@ -907,7 +907,7 @@ class binance
             $this->info[$symbol][$interval]['firstOpen'] = 0;
             //$this->info[$symbol]['chartCallback'.$interval] = $callback;
             $connector('wss://stream.binance.com:9443/ws/'.strtolower($symbol).'@kline_'.$interval)->then(function ($ws) use ($callback, $symbol, $loop) {
-                $ws->on('message', function ($data) use ($ws, $callback) {
+                $ws->on('message', function ($data) use ($callback) {
                     $json = json_decode($data);
                     $chart = $json->k;
                     $symbol = $json->s;
@@ -950,7 +950,7 @@ class binance
     {
         \Ratchet\Client\connect('wss://stream2.binance.com:9443/ws/!miniTicker@arr@1000ms')
             ->then(function ($ws) use ($callback) {
-                $ws->on('message', function ($data) use ($ws, $callback) {
+                $ws->on('message', function ($data) use ($callback) {
                     $json = json_decode($data, true);
                     $markets = [];
                     foreach ($json as $obj) {

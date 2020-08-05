@@ -96,12 +96,14 @@ class KrakenAPI
         $this->version = $version;
         $this->curl = curl_init();
 
-        curl_setopt_array($this->curl, [
-            CURLOPT_SSL_VERIFYPEER => $sslverify,
-            CURLOPT_SSL_VERIFYHOST => 2,
-            CURLOPT_USERAGENT      => 'Kraken PHP API Agent',
-            CURLOPT_POST           => true,
-            CURLOPT_RETURNTRANSFER => true, ]
+        curl_setopt_array(
+            $this->curl,
+            [
+                CURLOPT_SSL_VERIFYPEER => $sslverify,
+                CURLOPT_SSL_VERIFYHOST => 2,
+                CURLOPT_USERAGENT      => 'Kraken PHP API Agent',
+                CURLOPT_POST           => true,
+                CURLOPT_RETURNTRANSFER => true, ]
         );
     }
 

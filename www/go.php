@@ -5,7 +5,7 @@ include 'invoker.class.php';
 k\invoker::require_basics();
 if ($_COOKIE['secret'] != 'Fn0rd!') {
     echo file_get_content('index.php');
-    die();
+    exit();
 }
 ?>
 <form method="post" action="this.php" enctype="multipart/form-data" >
