@@ -34,7 +34,7 @@ namespace kult_engine;
 
 abstract class sessionFactory
 {
-    public static $_login_page = null;
+    public static  ?string $_login_page = null;
     public static $_login = 0;
     public static $_token_1 = null;
     public static $_token_2 = null;
@@ -86,7 +86,7 @@ abstract class sessionFactory
         }
     }
 
-    public static function is_on_login_page()
+    public static function is_on_login_page():bool
     {
         return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], DIRECTORY_SEPARATOR) + 1) === static::$_login_page;
     }

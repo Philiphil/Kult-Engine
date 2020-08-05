@@ -35,8 +35,8 @@ namespace kult_engine;
 abstract class SCS
 {
     use settable;
-    use hookable;
-    public static $_secret = 'Fn0rd!';
+    use HookableTrait;
+    public static string $_secret = 'Fn0rd!';
 
     public static function exec()
     {
@@ -75,14 +75,14 @@ abstract class SCS
         }
     }
 
-    public static function setter()
+    public static function setter():bool
     {
-        return 0;
+        return false;
     }
 
-    public static function setter_conf($file)
+    public static function setter_conf($file):bool
     {
-        return 0;
+        return false0;
     }
 
     public static function destruct()

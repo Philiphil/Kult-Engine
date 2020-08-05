@@ -32,53 +32,13 @@
 
 namespace kult_engine;
 
-trait settable
+trait HookableTrait
 {
-    private static bool $set = false;
-
-    abstract public static function setter();
-
-    abstract public static function setter_conf($fnord);
-
-    public static function init($fnord = null)
+    public static function hook()
     {
-        if (!self::$set) {
-            self::$set = true;
-            $r = is_null($fnord) ? self::setter() : self::setter_conf($fnord);
-            if (in_array(
-                __NAMESPACE__."\HookableTrait", class_uses(get_called_class()))
-            ) {
-                self::hook();
-            }
-
-            return $r;
-        }
-        trigger_error(get_called_class().' ALREADY SET');
+        $bfr = static::destruct();
+        Hook::addHook($bfr[0], $bfr[1]);
     }
 
-    public static function uninit() : bool
-    {
-        if (self::$set) {
-            self::$set = false;
-
-            return false;
-        }
-        trigger_error(get_called_class().' NOT SET YET');
-
-        return true;
-    }
-
-    public static function init_required():bool
-    {
-        if (!self::$set) {
-            trigger_error(get_called_class().' NOT SET', E_USER_ERROR);
-
-            return false;
-        }
-
-        return true;
-    }
-
-//    public static function setter(){}
-  //  public static function setter_conf($fnord){self::setter();}
+    abstract public static function destruct();
 }

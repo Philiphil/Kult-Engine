@@ -35,10 +35,10 @@ namespace kult_engine;
 abstract class inquisitor
 {
     use coreElement;
-    public static $_tempo = [];
-    public static $_watcher = 0;
-    public static $_flag = 0;
-    public static $_deny = 0;
+    public static array $_tempo = [];
+    public static int $_watcher = 0;
+    public static int $_flag = 0;
+    public static int $_deny = 0;
 
     public static function setter()
     {

@@ -89,7 +89,7 @@ class mlText
 
     public function get($lang = null)
     {
-        $lang = is_null($lang) ? get_lang() : $lang;
+        $lang = is_null($lang) ? getLang() : $lang;
         $k = null;
         foreach ($this->_keys as $key => $value) {
             if (in_array($lang, $value)) {

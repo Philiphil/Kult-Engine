@@ -32,11 +32,11 @@
 
 namespace kult_engine;
 
-class daoGenerator
+class DaoGenerator
 {
     protected $_obj = null;
     protected $_helper = null;
-    protected $_connector = null;
+    protected AbstractConnector $_connector;
     private $_daughter = null;
 
     protected function setConnector($fnord)
@@ -49,11 +49,11 @@ class daoGenerator
         return $this->_connector::query($fnord);
     }
 
-    public function __construct($fnord = null, $connector = null)
+    public function __construct($fnord = null, AbstractConnector $connector = null)
     {
         switch ($connector::getDriver()) {
             case 'mysql':
-                $this->_daughter = new daoGeneratorSQL($fnord, $connector);
+                $this->_daughter = new DaoGeneratorSQL($fnord, $connector);
                 break;
         }
     }

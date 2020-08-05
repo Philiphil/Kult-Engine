@@ -47,7 +47,7 @@ abstract class cart
             $l = $d->get_all();
             if (count($l) != 1) {
                 foreach ($l as $key) {
-                    if ($key->_pays == text::get_lang() || (!isset($_SESSION['cart_location']) && $key->_pays == text::$_default)) {
+                    if ($key->_pays == text::getLang() || (!isset($_SESSION['cart_location']) && $key->_pays == text::$_default)) {
                         $_SESSION['cart_location'] = $key->_id;
                     }
                 }

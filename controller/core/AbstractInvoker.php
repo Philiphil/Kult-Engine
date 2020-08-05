@@ -32,9 +32,9 @@
 
 namespace kult_engine;
 
-abstract class invokerFactory
+abstract class AbstractInvoker
 {
-    public static function require_mods($mods = [])
+    public static function require_mods(?array $mods=[]) : void
     {
         if ($mods == null) {
             return;
@@ -53,12 +53,13 @@ abstract class invokerFactory
         }
     }
 
-    public static function setter()
+    public static function setter() : void
     {
         $base = dirname(config::$file);
 
         define('multi', config::$multi);
         define('basepath', $base.DIRECTORY_SEPARATOR);
+        define('DS', DIRECTORY_SEPARATOR);
 
         if (!config::$multi) {
             if (config::$webfolder && config::$webfolder != '/') {
@@ -87,7 +88,6 @@ abstract class invokerFactory
 
         define('clipath', constant('kultpath').'app.php');
 
-        define('abstpath', constant('corepath').'abst'.DIRECTORY_SEPARATOR);
         define('itfcpath', constant('corepath').'itfc'.DIRECTORY_SEPARATOR);
 
         define('tpltpath', constant('imptpath').'tplt'.DIRECTORY_SEPARATOR);
@@ -115,7 +115,7 @@ abstract class invokerFactory
         define('driver', config::$driver);
     }
 
-    public static function require_impt()
+    public static function require_impt() : void
     {
         $impt = scandir(constant('imptpath'));
         for ($i = 0; $i < count($impt); $i++) {
@@ -138,7 +138,7 @@ abstract class invokerFactory
         }
     }
 
-    public static function class_init($key)
+    public static function class_init(string $key) : void
     {
         if (class_exists(__NAMESPACE__.'\\'.$key)) {
             if (in_array(__NAMESPACE__."\coreElement", class_uses(__NAMESPACE__.'\\'.$key)) || in_array(__NAMESPACE__."\settable", class_uses(__NAMESPACE__.'\\'.$key)) || in_array('coreElement', class_uses(__NAMESPACE__.'\\'.$key)) || in_array('settable', class_uses(__NAMESPACE__.'\\'.$key))) {
@@ -148,21 +148,20 @@ abstract class invokerFactory
         }
     }
 
-    public static function loader($className)
+    public static function loader(string $className) : bool
     {
         $className = substr($className, strripos($className, '\\') + 1);
         if (self::require_quick($className) == true) {
             return true;
         }
 
-        $prefix[0] = constant('abstpath');
-        $prefix[1] = constant('itfcpath');
-        $prefix[2] = constant('corepath');
-        $prefix[3] = constant('imptpath');
-        $prefix[4] = constant('vendorpath');
-        $prefix[5] = constant('controllerpath');
-        $prefix[6] = constant('optnpath');
-        $prefix[7] = constant('modpath').$className.DIRECTORY_SEPARATOR;
+        $prefix[0] = constant('itfcpath');
+        $prefix[1] = constant('corepath');
+        $prefix[2] = constant('imptpath');
+        $prefix[3] = constant('vendorpath');
+        $prefix[4] = constant('controllerpath');
+        $prefix[5] = constant('optnpath');
+        $prefix[6] = constant('modpath').$className.DIRECTORY_SEPARATOR;
         $sufix[0] = '';
         $sufix[1] = '.class';
         $sufix[2] = '.trait';
@@ -183,21 +182,23 @@ abstract class invokerFactory
         return false;
     }
 
-    public static function require_base()
+    public static function _requireBase() : void
     {
         self::is_ke_runnable();
         self::setter();
         spl_autoload_register(__NAMESPACE__.'\invoker::loader');
         mb_internal_encoding('UTF-8');
+
         require_once constant('corepath').'fonction.php';
         require_once constant('itfcpath').'debuggable.trait.php';
         require_once constant('itfcpath').'settable.trait.php';
-        require_once constant('abstpath').'connector.factory.php';
         require_once constant('itfcpath').'queryable.trait.php';
         require_once constant('itfcpath').'coreElement.trait.php';
+
+        self::require_quick("Hook");
     }
 
-    public static function is_ke_runnable()
+    public static function is_ke_runnable() : void
     {
         $needed = ['mbstring', 'json', 'PDO', 'Reflection', 'openssl', 'session'];
         $loaded = get_loaded_extensions();
@@ -209,7 +210,7 @@ abstract class invokerFactory
         }
     }
 
-    public static function error($errno, $errstr, $errfile, $errline)
+    public static function error($errno, $errstr, $errfile, $errline) : void
     {
         if (!constant('debug')) {
             if ($errno != E_USER_ERROR || $errno != E_ERROR) {
@@ -238,10 +239,12 @@ abstract class invokerFactory
         die();
     }
 
-    public static function require_local_model()
+    public static function require_local_model() : void
     {
-        require_once constant('optnpath').'daoableObject.class.php';
-        require_once constant('abstpath').'daoGenerator.factory.php';
+        require_once corepath."dao".DS.'AbstractConnector.php';
+        require_once corepath."dao".DS.'DaoableObject.php';
+        require_once corepath."dao".DS.'DaoGenerator.php';
+        require_once corepath."dao".DS.'DaoGeneratorSQL.php';
         $model = scandir(constant('modelpath'));
         foreach ($model as $key) {
             if (contains('.class.', $key)) {
@@ -250,7 +253,7 @@ abstract class invokerFactory
         }
     }
 
-    public static function require_vendor()
+    public static function require_vendor() : void
     {
         $ctrl = scandir(constant('vendorpath'));
         foreach ($ctrl as $key) {
@@ -260,7 +263,7 @@ abstract class invokerFactory
         }
     }
 
-    public static function require_local_controler()
+    public static function require_local_controler() : void
     {
         $ctrl = scandir(constant('ctrlpath'));
         foreach ($ctrl as $key) {
@@ -270,27 +273,29 @@ abstract class invokerFactory
         }
     }
 
-    public static function require_quick($f)
+    public static function require_quick(string $f) : bool
     {
         switch ($f) {
-            case 'hook':
-                require_once constant('corepath').'hook.class.php';
+            case 'Hook':                
+                require_once constant('corepath').'hook'.DS.'Hook.php';
+                require_once constant('corepath').'hook'.DS.'HookableTrait.php';
+                require_once constant('corepath').'hook'.DS.'HookExecutor.php';
                 self::class_init($f);
 
                 return true;
-            case 'logger':
-                require_once constant('corepath').'logger.class.php';
+            case 'Logger':
+                require_once constant('corepath').'Logger.php';
                 self::class_init($f);
 
                 return true;
             case 'text':
                 require_once constant('imptpath').'lang.php';
-                require_once constant('corepath').'text.class.php';
+                require_once constant('corepath').'Text.php';
                 self::class_init($f);
 
                 return true;
             case 'connector':
-                require_once constant('abstpath').'connector.factory.php';
+                require_once corepath."dao".DS.'AbstractConnector.php';
                 self::class_init($f);
 
                 return true;

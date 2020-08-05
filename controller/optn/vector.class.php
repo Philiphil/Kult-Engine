@@ -34,9 +34,9 @@ namespace kult_engine;
 
 class vector implements \ArrayAccess, \Iterator, \Serializable, \JsonSerializable, \Countable
 {
-    protected $_container = [];
-    protected $_properties = [];
-    protected $_position = 0;
+    protected array  $_container = [];
+    protected array $_properties = [];
+    protected int $_position = 0;
 
     public function __construct(array $data = [])
     {

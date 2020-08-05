@@ -32,47 +32,64 @@
 
 namespace kult_engine;
 
-abstract class hook
+abstract class daoableObject
 {
-    use coreElement;
+    /*
+        long ?
+        id = "id"
+        array = []
+        obj=new obj()
+     */
+    const CLASSIC = 0;
+    const ONETOMANY = 1;
+    const MANYTOMANY = 2;
 
-    public static $_hook = [];
-    private static $_auto_executor = null;
+    public string $_id = 'id';
+    public string $_iduniq = 'string';
+    public int $_tabletype = 0;
 
-    public static function setter()
+    public function __construct($typetable = self::CLASSIC)
     {
-        self::$_auto_executor = new hook_executor();
-    }
-
-    public static function exec()
-    {
-        ksort(static::$_hook);
-        foreach (static::$_hook as $key) {
-            call_user_func($key[0], $key[1]);
+        $this->_tabletype = intval($typetable);
+        $this->setIduniq();
+        foreach ($this as $key => $value) {
+            if (gettype($value) === 'string') {
+                $this->$key = '';
+            }
         }
     }
 
-    public static function add_hook($f, $p)
+    public function setIduniq():daoableObject
     {
-        static::$_hook[$p] = $f;
-    }
-}
+        $this->_iduniq = uniqid();
 
-    class hook_executor
-    {
-        public function __destruct()
-        {
-            hook::exec();
-        }
+        return $this;
     }
 
-trait hookable
-{
-    public static function hook()
+    public function getDefaultId(): string
     {
-        $bfr = static::destruct();
-        hook::add_hook($bfr[0], $bfr[1]);
+        return 'id';
     }
 
-    abstract public static function destruct();
+    public function setDefaultId():daoableObject
+    {
+        $this->_id = $this->getDefaultId();
+
+        return $this;
+    }
+
+    public function clean():daoableObject
+    {
+        unset($this->_iduniq);
+
+        return $this;
+    }
+
+    public function clone()
+    {
+        $n = $this;
+        $n->setIduniq()->setDefaultId();
+
+        return $n;
+    }
 }

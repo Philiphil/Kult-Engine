@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-class connector extends connectorFactory
+class Connector extends AbstractConnector
 {
     use coreElement;
     //public static $_DB_DRIVER = 'mysql';

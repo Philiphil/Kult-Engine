@@ -36,7 +36,7 @@
 include '../config.php';
 use kult_engine as k;
 
-k\invoker::require_basics();
+k\Invoker::requireBase();
 k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();
@@ -50,6 +50,10 @@ echo k\text::get_text('hello');
 	})
 </script>
 <?php
+
+
+$d = new kult_engine\DaoGenerator(new pokemon(), new k\Connector());
+$d->create_table();
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

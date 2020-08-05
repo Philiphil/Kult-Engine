@@ -35,13 +35,13 @@ namespace kult_engine;
 abstract class webService
 {
     use coreElement;
-    use hookable;
+    use HookableTrait;
 
-    public static $_req;
-    public static $_args;
-    public static $_method;
-    public static $_token;
-    public static $_func = [];
+    public static string $_req;
+    public static string $_args;
+    public static string $_method;
+    public static string $_token;
+    public static array $_func = [];
 
     public static function setter()
     {

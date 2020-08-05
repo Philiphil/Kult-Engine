@@ -32,33 +32,28 @@
 
 namespace kult_engine;
 
-class logger
+abstract class Hook
 {
-    public $_file = null;
+    use coreElement;
 
-    public function __construct($fnord = null)
+    public static array $_hooks = [];
+    private static HookExecutor $_auto_executor;
+
+    public static function setter()
     {
-        $this->_file = $fnord === null ? (constant('logfile') === null || constant('logfile') == '' ? constant('tmppath').constant('view').'.log' : constant('logfile')) : $fnord;
+        self::$_auto_executor = new HookExecutor();
     }
 
-    public function get_standard_header()
+    public static function exec()
     {
-        $line = '';
-        $line .= '['.$_SERVER['HTTP_USER_AGENT'];
-        $line .= ']['.$_SERVER['REMOTE_ADDR'];
-        $line .= ']';
-        $line .= '['.date('d/m/Y-H:i:s', time()).']';
-        $line .= '['.$_SERVER['REQUEST_METHOD'].']';
-        $line .= '['.$_SERVER['REQUEST_URI'].']';
-
-        return $line;
+        ksort(static::$_hooks);
+        foreach (static::$_hooks as $key) {
+            call_user_func($key[0], $key[1]);
+        }
     }
 
-    public function write_local($fnord = null)
+    public static function addHook($f, $p)
     {
-        $line = $this->get_standard_header();
-        $line .= ':'.$fnord;
-        $line .= "\n";
-        file_put_contents($this->_file, $line, FILE_APPEND);
+        static::$_hooks[$p] = $f;
     }
 }

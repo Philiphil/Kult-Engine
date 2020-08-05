@@ -32,64 +32,50 @@
 
 namespace kult_engine;
 
-abstract class daoableObject
+abstract class Invoker extends AbstractInvoker
 {
-    /*
-        long ?
-        id = "id"
-        array = []
-        obj=new obj()
-     */
-    const CLASSIC = 0;
-    const ONETOMANY = 1;
-    const MANYTOMANY = 2;
-
-    public $_id = 'id';
-    public $_iduniq = 'string';
-    public $_tabletype = 0;
-
-    public function __construct($typetable = self::CLASSIC)
+    public static function requireBase(?string $ext=null)
     {
-        $this->_tabletype = intval($typetable);
-        $this->setIduniq();
-        foreach ($this as $key => $value) {
-            if (gettype($value) === 'string') {
-                $this->$key = '';
-            }
+        parent::_requireBase();
+
+        set_error_handler(__NAMESPACE__.'\invoker::error');
+
+        require_once constant('corepath').'Logger.php';
+
+        require_once constant('rqrdpath').'lang.php';
+        require_once constant('corepath').'Text.php';
+
+        require_once constant('corepath').'buffer.class.php';
+
+        require_once constant('abstpath').'session.factory.php';
+
+        // require_once constant('corepath').'inquisitor.class.php';
+
+        Hook::init();
+        Text::init();
+
+        buffer::init();
+        if (constant('debug')) {
+            buffer::send();
         }
+        //inquisitor::init();
+
+        self::require_mods($ext);
+        self::require_local_model();
+        self::require_vendor();
+        self::require_local_controler();
+        self::require_impt();
     }
 
-    public function setIduniq()
+    public static function analytics()
     {
-        $this->_iduniq = uniqid();
-
-        return $this;
+        self::require_base();
+        require_once constant('corepath').'analytics.class.php';
+        analytics::init();
     }
 
-    public function getDefaultId()
+    public static function allow_CORS()
     {
-        return 'id';
-    }
-
-    public function setDefaultId()
-    {
-        $this->_id = $this->getDefaultId();
-
-        return $this;
-    }
-
-    public function clean()
-    {
-        unset($this->_iduniq);
-
-        return $this;
-    }
-
-    public function clone()
-    {
-        $n = $this;
-        $n->setIduniq()->setDefaultId();
-
-        return $n;
+        header('Access-Control-Allow-Origin: *');
     }
 }

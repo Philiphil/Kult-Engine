@@ -32,14 +32,14 @@
 
 namespace kult_engine;
 
-abstract class connectorFactory
+abstract class AbstractConnector
 {
-    protected static $_db = null;
-    protected static $_DB_HOST = null;
-    protected static $_DB_NAME = null;
-    protected static $_DB_USER = null;
-    protected static $_DB_PASS = null;
-    protected static $_DB_DRIVER = null;
+    protected static ?\PDO $_db = null;
+    protected static ?string $_DB_HOST = null;
+    protected static ?string $_DB_NAME = null;
+    protected static ?string $_DB_USER = null;
+    protected static ?string $_DB_PASS = null;
+    protected static ?string $_DB_DRIVER = null;
 
     public static function setter()
     {
@@ -49,7 +49,7 @@ abstract class connectorFactory
         self::$_DB_PASS = static::$_DB_PASS ?? constant('pass');
         self::$_DB_DRIVER = static::$_DB_DRIVER ?? constant('driver');
 
-        self::set_pdo(self::$_DB_DRIVER);
+        self::setPdo(self::$_DB_DRIVER);
     }
 
     public static function setter_conf($fnord)
@@ -58,7 +58,7 @@ abstract class connectorFactory
         self::$_DB_NAME = $fnord['name'];
         self::$_DB_USER = $fnord['user'];
         self::$_DB_PASS = $fnord['pass'];
-        self::set_pdo($fnord['driver']);
+        self::setPdo($fnord['driver']);
     }
 
     public static function query($fnord)
@@ -66,7 +66,7 @@ abstract class connectorFactory
         return self::$_db->prepare($fnord);
     }
 
-    public static function set_pdo($fnord)
+    public static function setPdo($fnord)
     {
         //268435456 2G0
         //2097152 2MO
@@ -89,7 +89,7 @@ abstract class connectorFactory
         self::$_db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
     }
 
-    public static function getDriver()
+    public static function getDriver() : ?string
     {
         return self::$_DB_DRIVER;
     }

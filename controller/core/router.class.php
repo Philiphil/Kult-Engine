@@ -37,17 +37,17 @@ use kult_engine as k;
 abstract class router
 {
     use coreElement;
-    use hookable;
-    public static $_a_asked = [];
-    public static $_asked = '';
-    public static $_method = 'GET';
-    public static $_route = [];
-    public static $_global_route = [];
-    public static $_argex = '$';
+    use HookableTrait;
+    public static array $_a_asked = [];
+    public static string $_asked = '';
+    public static string $_method = 'GET';
+    public static array $_route = [];
+    public static array $_global_route = [];
+    public static string $_argex = '$';
     private static $_auto_executor = null;
-    public static $_global_routing = 1;
-    public static $_code = 200;
-    public static $_routing = 0;
+    public static bool $_global_routing = true;
+    public static int $_code = 200;
+    public static int $_routing = 0;
 
     public static function setter()
     {
@@ -113,7 +113,7 @@ abstract class router
         }
     }
 
-    public static function disable_global_routing($bool = 0)
+    public static function disable_global_routing(bool $bool = false)
     {
         self::init_required();
         self::$_global_routing = $bool;

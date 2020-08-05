@@ -32,11 +32,11 @@
 
 namespace kult_engine;
 
-abstract class text
+abstract class Text
 {
     use coreElement;
-    public static $_server;
-    public static $_default;
+    public static array $_server;
+    public static string $_default;
 
     public static function setter()
     {
@@ -50,7 +50,7 @@ abstract class text
         self::$_default = $fnord['default'];
     }
 
-    public static function get_lang()
+    public static function getLang() : string
     {
         if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return self::$_default;
@@ -84,14 +84,14 @@ abstract class text
         return $result;
     }
 
-    public static function get_true_lang()
+    public static function get_true_lang() : string
     {
         return explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0];
     }
 
-    public static function get_text($texte, $lang = null)
+    public static function get_text(?string $texte, string $lang = null): ?string
     {
-        $lang = is_null($lang) ? self::get_lang() : $lang;
+        $lang = is_null($lang) ? self::getLang() : $lang;
         $array = texts();
         $r = isset($array[$lang][$texte]) ? $array[$lang][$texte] : null;
         if (is_null($r)) {

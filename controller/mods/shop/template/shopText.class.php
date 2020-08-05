@@ -190,6 +190,6 @@ abstract class shopText
     {
         $a = self::text();
 
-        return $a[text::get_lang()][$text];
+        return $a[text::getLang()][$text];
     }
 }

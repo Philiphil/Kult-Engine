@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2falsetrue6-2falsetrue8, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -35,9 +35,9 @@ namespace kult_engine;
 abstract class buffer
 {
     use coreElement;
-    use hookable;
+    use HookableTrait;
 
-    public static $_is_buffering_on = 0;
+    public static bool $_is_buffering_on = false;
 
     public static function setter()
     {
@@ -48,7 +48,7 @@ abstract class buffer
     {
         self::init_required();
         if (!self::$_is_buffering_on) {
-            self::$_is_buffering_on = 1;
+            self::$_is_buffering_on = true;
             mb_http_output('UTF-8');
             ob_start('mb_output_handler');
         }
@@ -58,7 +58,7 @@ abstract class buffer
     {
         self::init_required();
         if (self::$_is_buffering_on) {
-            self::$_is_buffering_on = 0;
+            self::$_is_buffering_on = false;
 
             return ob_get_clean();
         }
@@ -68,7 +68,7 @@ abstract class buffer
     {
         self::init_required();
         if (self::$_is_buffering_on) {
-            self::$_is_buffering_on = 0;
+            self::$_is_buffering_on = false;
             ob_clean();
         }
     }
@@ -77,7 +77,7 @@ abstract class buffer
     {
         self::init_required();
         if (self::$_is_buffering_on) {
-            self::$_is_buffering_on = 0;
+            self::$_is_buffering_on = false;
             ob_end_flush();
         }
     }

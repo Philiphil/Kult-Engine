@@ -32,9 +32,9 @@
 
 namespace kult_engine;
 
-class daoGeneratorSQL extends daoGenerator
+class DaoGeneratorSQL extends DaoGenerator
 {
-    public function __construct($fnord = null, $connector = null)
+    public function __construct($fnord = null, AbstractConnector $connector)
     {
         $this->asign($fnord);
         $this->setConnector($connector);

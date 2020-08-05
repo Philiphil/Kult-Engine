@@ -35,9 +35,9 @@ namespace kult_engine;
 class analytics
 {
     use coreElement;
-    public static $_logs = null;
-    public static $_file = null;
-    public static $_analytics = null;
+    public static ?array $_logs = null;
+    public static ?string $_file = null;
+    public static ?array $_analytics = null;
 
     public static function setter()
     {

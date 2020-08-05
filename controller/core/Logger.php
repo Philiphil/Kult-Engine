@@ -32,52 +32,33 @@
 
 namespace kult_engine;
 
-abstract class invoker extends invokerFactory
+class Logger
 {
-    public static function require_basics($ext = null)
+    public ?string $_file = null;
+
+    public function __construct($fnord = null)
     {
-        self::require_base();
-
-        set_error_handler(__NAMESPACE__.'\invoker::error');
-        require_once constant('corepath').'hook.class.php';
-
-        require_once constant('corepath').'logger.class.php';
-
-        require_once constant('rqrdpath').'lang.php';
-        require_once constant('corepath').'text.class.php';
-
-        require_once constant('corepath').'buffer.class.php';
-
-        require_once constant('abstpath').'session.factory.php';
-
-        // require_once constant('corepath').'inquisitor.class.php';
-
-        require_once constant('abstpath').'connector.factory.php';
-        hook::init();
-        text::init();
-
-        buffer::init();
-        if (constant('debug')) {
-            buffer::send();
-        }
-        //inquisitor::init();
-
-        self::require_mods($ext);
-        self::require_local_model();
-        self::require_vendor();
-        self::require_local_controler();
-        self::require_impt();
+        $this->_file = $fnord === null ? (constant('logfile') === null || constant('logfile') == '' ? constant('tmppath').constant('view').'.log' : constant('logfile')) : $fnord;
     }
 
-    public static function analytics()
+    public function get_standard_header() : string
     {
-        self::require_base();
-        require_once constant('corepath').'analytics.class.php';
-        analytics::init();
+        $line = '';
+        $line .= '['.$_SERVER['HTTP_USER_AGENT'];
+        $line .= ']['.$_SERVER['REMOTE_ADDR'];
+        $line .= ']';
+        $line .= '['.date('d/m/Y-H:i:s', time()).']';
+        $line .= '['.$_SERVER['REQUEST_METHOD'].']';
+        $line .= '['.$_SERVER['REQUEST_URI'].']';
+
+        return $line;
     }
 
-    public static function allow_CORS()
+    public function write_local(?string $fnord = null)
     {
-        header('Access-Control-Allow-Origin: *');
+        $line = $this->get_standard_header();
+        $line .= ':'.$fnord;
+        $line .= "\n";
+        file_put_contents($this->_file, $line, FILE_APPEND);
     }
 }

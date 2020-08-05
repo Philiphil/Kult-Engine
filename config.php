@@ -67,5 +67,5 @@ class config
     public static $file = __FILE__;
 }
 
-require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'abst'.DIRECTORY_SEPARATOR.'invoker.factory.php';
-require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'invoker.class.php';
+require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'AbstractInvoker.php';
+require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'Invoker.php';

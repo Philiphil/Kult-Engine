@@ -157,7 +157,7 @@ abstract class shop
             $v = $d->get_all();
             $html = '';
             foreach ($v as $key) {
-                $html .= '<p>'.$key->_nom[text::get_lang()]." <a href='".constant('url').'/inventory/'.$key->_id."'>".shopText::get_text('inventaire')."</a> <a href='".constant('url').'/del_magasin/'.$key->_id."del_magasin'>".shopText::get_text('supprimer').'</a></p>';
+                $html .= '<p>'.$key->_nom[text::getLang()]." <a href='".constant('url').'/inventory/'.$key->_id."'>".shopText::get_text('inventaire')."</a> <a href='".constant('url').'/del_magasin/'.$key->_id."del_magasin'>".shopText::get_text('supprimer').'</a></p>';
             }
             echo shopText::writeTotemplate(file_get_contents(constant('shoptemplate').'empty_admin.php'), ['this'=>$html, 'admin' => $header]);
         });
@@ -170,7 +170,7 @@ abstract class shop
             $html = '';
             $v = $d->get_all();
             foreach ($v as $key) {
-                $html .= '<p>'.$key->_nom[text::get_lang()]." <a href='".constant('url').'/inventory/'.$key->_id."'>".shopText::get_text('inventaire')."</a> <a href='".constant('url').'/del_magasin/'.$key->_id."del_magasin'>".shopText::get_text('supprimer').'</a></p>';
+                $html .= '<p>'.$key->_nom[text::getLang()]." <a href='".constant('url').'/inventory/'.$key->_id."'>".shopText::get_text('inventaire')."</a> <a href='".constant('url').'/del_magasin/'.$key->_id."del_magasin'>".shopText::get_text('supprimer').'</a></p>';
             }
             echo shopText::writeTotemplate(file_get_contents(constant('shoptemplate').'empty_admin.php'), ['this'=>$html, 'admin' => $header]);
         });
@@ -187,7 +187,7 @@ abstract class shop
             $html .= '	<input type="hidden" name="shop" value="'.$a.'">';
             foreach ($ps as $p) {
                 $q = isset($m->_inventory[$p->_id]) ? $m->_inventory[$p->_id] : '';
-                $html .= '<p>'.$p->_name[text::get_lang()]." : <input type='text' name='p_".$p->_id."' value='".$q."' class='k_input' />";
+                $html .= '<p>'.$p->_name[text::getLang()]." : <input type='text' name='p_".$p->_id."' value='".$q."' class='k_input' />";
             }
             $html .= "<br><input type='submit' value='ok' class='k_input' ></form>";
             echo shopText::writeTotemplate(file_get_contents(constant('shoptemplate').'empty_admin.php'), ['this'=>$html, 'admin' => $header]);
@@ -199,7 +199,7 @@ abstract class shop
             $v = $d->get_all();
             $html = '';
             foreach ($v as $key) {
-                $html .= '<p>'.$key->_name[text::get_lang()]."<a href='".constant('url').'/del_product/'.$key->_id."'>".shopText::get_text('supprimer').'</a></p>';
+                $html .= '<p>'.$key->_name[text::getLang()]."<a href='".constant('url').'/del_product/'.$key->_id."'>".shopText::get_text('supprimer').'</a></p>';
             }
             echo shopText::writeTotemplate(file_get_contents(constant('shoptemplate').'empty_admin.php'), ['this'=>$html, 'admin' => $header]);
         });
@@ -216,7 +216,7 @@ abstract class shop
 
             $v = $d->get_all();
             foreach ($v as $key) {
-                $html .= '<p>'.$key->_name[text::get_lang()]." <a href='".constant('url').'/del_product/'.$key->_id."'>".shopText::get_text('supprimer').'</a></p>';
+                $html .= '<p>'.$key->_name[text::getLang()]." <a href='".constant('url').'/del_product/'.$key->_id."'>".shopText::get_text('supprimer').'</a></p>';
             }
             echo shopText::writeTotemplate(file_get_contents(constant('shoptemplate').'empty_admin.php'), ['this'=>$html, 'admin' => $header]);
         });
@@ -237,7 +237,7 @@ abstract class shop
                         continue;
                     }
                     $vk = json_decode($key, true);
-                    $ls .= '<span>'.$vk['_name'][text::get_lang()].'&nbsp;&nbsp;&nbsp;&nbsp;';
+                    $ls .= '<span>'.$vk['_name'][text::getLang()].'&nbsp;&nbsp;&nbsp;&nbsp;';
                     $ls .= $vk['_price'].currency_html.'&nbsp;&nbsp;&nbsp;&nbsp;';
                     $ls .= shopText::get_text('qtt').' : '.$d[$key].'&nbsp;&nbsp;&nbsp;&nbsp;';
                     $ls .= shopText::get_text('total').' : '.($y += ($d[$key] * ($vk['_price'] - $vk['_reduction'] * $vk['_price'] / 100))).currency_html.'</span>';
