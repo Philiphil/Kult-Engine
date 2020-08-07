@@ -320,6 +320,7 @@ abstract class AbstractInvoker
             case 'webservice':
                 require_once constant('corepath').'webService.class.php';
                 self::class_init($f);
+
                 return true;
             default: return false;
         }

@@ -49,7 +49,6 @@ abstract class Invoker extends AbstractInvoker
 
         require_once constant('abstpath').'AbstractSession.php';
 
-
         Hook::init();
         Text::init();
 
@@ -71,5 +70,4 @@ abstract class Invoker extends AbstractInvoker
         require_once constant('corepath').'analytics.class.php';
         analytics::init();
     }
-
 }
