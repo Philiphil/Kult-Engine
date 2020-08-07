@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-abstract class buffer
+abstract class Buffer
 {
     use coreElement;
     use HookableTrait;
@@ -84,6 +84,6 @@ abstract class buffer
 
     public static function destruct()
     {
-        return [['kult_engine\\buffer::send', null], 999];
+        return [['kult_engine\\Buffer::send', null], 999];
     }
 }

@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-abstract class session extends sessionFactory
+abstract class session extends AbstractSession
 {
     use coreElement;
     public static ?string $_login_page = null;

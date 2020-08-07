@@ -42,23 +42,21 @@ abstract class Invoker extends AbstractInvoker
 
         require_once constant('corepath').'Logger.php';
 
-        require_once constant('rqrdpath').'lang.php';
+        require_once constant('rqrdpath').'i18n.php';
         require_once constant('corepath').'Text.php';
 
-        require_once constant('corepath').'buffer.class.php';
+        require_once constant('corepath').'Buffer.php';
 
-        require_once constant('abstpath').'session.factory.php';
+        require_once constant('abstpath').'AbstractSession.php';
 
-        // require_once constant('corepath').'inquisitor.class.php';
 
         Hook::init();
         Text::init();
 
-        buffer::init();
-        if (constant('debug')) {
-            buffer::send();
+        Buffer::init();
+        if (debug) {
+            Buffer::send();
         }
-        //inquisitor::init();
 
         self::require_mods($ext);
         self::require_local_model();
@@ -74,8 +72,4 @@ abstract class Invoker extends AbstractInvoker
         analytics::init();
     }
 
-    public static function allow_CORS()
-    {
-        header('Access-Control-Allow-Origin: *');
-    }
 }

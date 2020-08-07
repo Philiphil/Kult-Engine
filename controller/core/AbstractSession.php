@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-abstract class sessionFactory
+abstract class AbstractSession
 {
     public static ?string $_login_page = null;
     public static $_login = 0;

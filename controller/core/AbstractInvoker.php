@@ -289,7 +289,7 @@ abstract class AbstractInvoker
 
                 return true;
             case 'text':
-                require_once constant('imptpath').'lang.php';
+                require_once constant('imptpath').'i18n.php';
                 require_once constant('corepath').'Text.php';
                 self::class_init($f);
 
@@ -299,13 +299,13 @@ abstract class AbstractInvoker
                 self::class_init($f);
 
                 return true;
-            case 'session':
-                require_once constant('abstpath').'session.factory.php';
+            case 'AbstractSession':
+                require_once constant('abstpath').'AbstractSession.php';
                 self::class_init($f);
 
                 return true;
-            case 'buffer':
-                require_once constant('corepath').'buffer.class.php';
+            case 'Buffer':
+                require_once constant('corepath').'Buffer.php';
                 self::class_init($f);
 
                 return true;
@@ -320,9 +320,13 @@ abstract class AbstractInvoker
             case 'webservice':
                 require_once constant('corepath').'webService.class.php';
                 self::class_init($f);
-
                 return true;
             default: return false;
         }
+    }
+
+    public static function allowCORS()
+    {
+        header('Access-Control-Allow-Origin: *');
     }
 }
