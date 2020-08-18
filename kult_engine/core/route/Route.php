@@ -32,12 +32,10 @@
 
 namespace kult_engine;
 
-use kult_engine as k;
-
 class Route
 {
     public function __construct($route, $func, $method = 'GET', $code = 200)
     {
-            Router::$_global_route[count(router::$_global_route)] = [$route, $func, $method, intval($code)];
+        Router::$_global_route[count(router::$_global_route)] = [$route, $func, $method, intval($code)];
     }
- }
+}
