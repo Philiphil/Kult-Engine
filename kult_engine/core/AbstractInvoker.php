@@ -69,10 +69,10 @@ abstract class AbstractInvoker
             }
         } else {
             $bfr = debug_backtrace();
-            define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(constant("basepath")), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(constant("basepath"))), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
+            define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(constant('basepath')), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(constant('basepath'))), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
         }
         define('localpath', $base.DIRECTORY_SEPARATOR.config::$localCodeFolder.DIRECTORY_SEPARATOR);
-        define('modelpath', constant('localpath')."model".DIRECTORY_SEPARATOR);
+        define('modelpath', constant('localpath').'model'.DIRECTORY_SEPARATOR);
         define('controllerpath', $base.DIRECTORY_SEPARATOR.config::$kult_engineFolder.DIRECTORY_SEPARATOR);
 
         define('vendorpath', constant('controllerpath').'vendor'.DIRECTORY_SEPARATOR);
@@ -80,7 +80,7 @@ abstract class AbstractInvoker
         if (!config::$multi) {
             define('imptpath', constant('localpath').'impt'.DIRECTORY_SEPARATOR);
         } else {
-            define('imptpath', constant('viewpath')."local".DIRECTORY_SEPARATOR.'impt'.DIRECTORY_SEPARATOR);
+            define('imptpath', constant('viewpath').'local'.DIRECTORY_SEPARATOR.'impt'.DIRECTORY_SEPARATOR);
         }
         define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
         define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
@@ -313,8 +313,8 @@ abstract class AbstractInvoker
                 return true;
             case 'Router':
             case 'Route':
-                require_once constant('corepath')."route".DS.'Router.php';
-                require_once constant('corepath')."route".DS.'Route.php';
+                require_once constant('corepath').'route'.DS.'Router.php';
+                require_once constant('corepath').'route'.DS.'Route.php';
                 require_once constant('imptpath').'rqrd'.DS.'route.php';
                 self::class_init($f);
 
