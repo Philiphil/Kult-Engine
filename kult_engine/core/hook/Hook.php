@@ -31,6 +31,7 @@
  */
 
 namespace KultEngine\Core\Hook;
+
 use KultEngine\CoreElementTrait;
 
 abstract class Hook
