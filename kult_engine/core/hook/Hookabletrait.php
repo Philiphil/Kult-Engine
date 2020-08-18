@@ -30,7 +30,8 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace kult_engine;
+namespace KultEngine;
+use KultEngine\Core\Hook\Hook;
 
 trait HookableTrait
 {

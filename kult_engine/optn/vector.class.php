@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace kult_engine;
+namespace KultEngine;
 
 class vector implements \ArrayAccess, \Iterator, \Serializable, \JsonSerializable, \Countable
 {

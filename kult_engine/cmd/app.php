@@ -30,20 +30,20 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace kult_engine;
+namespace KultEngine;
 
-require_once strstr(__FILE__, 'controller'.DIRECTORY_SEPARATOR.'kult'.DIRECTORY_SEPARATOR.'app.php', true).'config.php';
+require_once strstr(__FILE__, '..'.DIRECTORY_SEPARATOR.'cmd'.DIRECTORY_SEPARATOR.'app.php', true).'config.php';
 
 cli_set_process_title('Kult Engine');
 
 switch ($_SERVER['argv'][1]) {
     case 'async':
-        invoker::require_base();
+        Invoker::requireBase();
         $e = unserialize(base64_decode($_SERVER['argv'][2]));
         $e->_closure();
         break;
      case 'soros':
-        invoker::require_basics(['soros_bot']);
+        Invoker::requireBase(['soros_bot']);
         $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
         soros_bot::run($var);
     default:

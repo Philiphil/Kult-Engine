@@ -30,6 +30,6 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new kult_engine\Route('*', function () {
+$demo = new KultEngine\Route('*', function () {
     return 1;
 });

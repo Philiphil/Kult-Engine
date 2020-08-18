@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace kult_engine;
+namespace KultEngine;
 
 abstract class Invoker extends AbstractInvoker
 {
@@ -65,7 +65,7 @@ abstract class Invoker extends AbstractInvoker
 
     public static function analytics()
     {
-        self::require_base();
+        self::_requireBase();
         require_once constant('corepath').'Analytics.php';
         Analytics::init();
     }
