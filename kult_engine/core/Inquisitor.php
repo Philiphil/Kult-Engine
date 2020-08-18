@@ -32,7 +32,7 @@
 
 namespace kult_engine;
 
-abstract class Inquisitor//DEPRECATED
+abstract class Inquisitor //DEPRECATED
 {
     use CoreElementTrait;
     public static array $_tempo = [];

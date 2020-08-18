@@ -36,7 +36,7 @@
 include '../config.php';
 use kult_engine as k;
 
-k\Invoker::requireBase(["Router"]);
+k\Invoker::requireBase(['Router']);
 k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();
