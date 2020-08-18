@@ -35,37 +35,38 @@ namespace kult_engine;
 class config
 {
     //html folder's name.
-    public static $webfolder = 'www';
-    //model & controller folder's name
-    // www/model or www\model should be specified if the folder is in the webfolder
-    //protip : they shouldnt
-    public static $modelfolder = 'model';
-    public static $controllerfolder = 'controller';
+    public static $webFolder = 'www';
+    //local code folder compared to config.php or fullpath
+    public static $localCodeFolder = 'local';
+
+    //kult_engine folder compared to config.php or fullpath
+    public static $kult_engineFolder = 'kult_engine';
+
     // HTML root folder's name
-    public static $htmlfolder = '/';
+    public static $htmlFolder = '/';
 
     //SQL IDs
-    public static $host = 'localhost';
+    public static $host = 'localhost:3301';
     public static $db = 'test';
     public static $user = 'root';
     public static $pass = '';
     public static $driver = 'mysql';
 
-    //SHOULD THE WEBSITE BE IN DEBUG MODE ? 0/1
-    public static $debug = 0;
+    //SHOULD THE WEBSITE BE IN DEBUG MODE ? true/false
+    public static $debug = true;
 
     //full path to your logfile
     public static $log = '';
-    public static $default_lang = 'en';
-    public static $server_lang = ['en', 'fr'];
-    public static $login_page = '';
+    public static $defaultLang = 'en';
+    public static $serverLang = ['en', 'fr'];
+    public static $loginPage = '';
 
-    //Does multiple site run on the same kult engine ?
-    public static $multi = 0;
+    //Does multiple site run on the same kult engine ?  true/false
+    // localCodeFolder should be in webfolder then.
+    public static $multi = false;
 
-    //CORE
     public static $file = __FILE__;
 }
 
-require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'AbstractInvoker.php';
-require_once substr(config::$file, 0, -10).config::$controllerfolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'Invoker.php';
+require_once substr(config::$file, 0, -10).config::$kult_engineFolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'AbstractInvoker.php';
+require_once substr(config::$file, 0, -10).config::$kult_engineFolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'Invoker.php';

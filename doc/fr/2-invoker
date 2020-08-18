@@ -1,6 +1,0 @@
-Invoker a pour role d'initialiser le kult-engine, regardons plus en detail ses fonctions
-
-
-require_basics($mods)
-	require_basics est la fonction qui initialise le kult-engine en vu de creer une page web
-	$mods est un array contenant les noms de mod à invoquer et initialiser

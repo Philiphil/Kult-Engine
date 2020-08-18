@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f935c6bd-33e8-4bd2-8b63-d987f7f579cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/AbstractInvoker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/AbstractSession.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/Buffer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/Invoker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/Logger.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/Text.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/analytics.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/dao/AbstractConnector.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/dao/DaoGenerator.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/dao/DaoGeneratorSQL.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/dao/DaoableObject.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/fonction.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/hook/Hook.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/hook/HookExecutor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/hook/Hookabletrait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/inquisitor.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/itfc/coreElement.trait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/itfc/debuggable.trait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/itfc/queryable.trait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/itfc/settable.trait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/router.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/core/webService.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/ctrl/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/SCS.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/connector.load.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/i18n.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/javascript.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/page.load.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/route.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/rqrd/session.load.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/impt/tplt/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/kult/app.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/kult/kult_engine.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/kult/tmls.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/demo/demo.handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/cart.ajax.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/cart.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/model.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/model/model.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/paiementValide.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/shop.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/shop.config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/shop.handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/admin_header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/create_shop.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/empty_admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/magasin_admin_new.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/product_admin_edit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/product_admin_new.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/template/shopText.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/ticket.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/shop/validationpaiement.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/soros_bot/binance.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/soros_bot/class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/soros_bot/config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/soros_bot/kraken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/mods/soros_bot/soros_bot.handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/crypter.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/drivecontroller.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/fatData.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/fluentConcrete.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/lilData.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/loop.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/map.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/mlText.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/picuploadHelper.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/sanitizer.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/secureSerial.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/serializableClosure.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/sqlHelper.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/sse.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/templater.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/uploadHelper.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/urlTempo.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/vector.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/optn/webPolice.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/tmp/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/vendor/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/fr/0-readme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/fr/1-quickstart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/fr/2-invoker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/fr/ReqAjax &amp; webService" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/pokemon.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/api/demo.ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/api/demo.ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1gERnGh3NugAx00rN0S1SBU40uo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f935c6bd-33e8-4bd2-8b63-d987f7f579cd" name="Default Changelist" comment="" />
+      <created>1597677930489</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597677930489</updated>
+      <workItem from="1597677931601" duration="100000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

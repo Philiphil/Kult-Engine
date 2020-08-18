@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -28,31 +25,15 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-include '../config.php';
-use kult_engine as k;
+namespace kult_engine;
 
-k\Invoker::requireBase(["Router"]);
-k\page::standardpage_head();
-k\page::standardpage_header();
-k\page::standardpage_body_begin();
-
-echo k\text::get_text('hello');
-?>
-<script>
-	var req = new ReqAjax("test");
-	req.send("/api/demo.ajax.php", function(call){
-		console.debug(call);
-	})
-</script>
-<?php
-
-$d = new kult_engine\DaoGenerator(new pokemon(), new k\Connector());
-$d->create_table();
-
-k\page::standardpage_body_end();
-k\page::standardpage_footer();
+trait CoreElementTrait
+{
+    use DebuggableTrait;
+    use SettableTrait;
+}

@@ -30,9 +30,57 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-require_once '../../config.php';
-    kult_engine\Invoker::requireBase(['WebService']);
+namespace kult_engine;
 
-    kult_engine\WebService::service('test', function ($args) {
-        return ['op' => 1];
-    }, 'POST');
+trait SettableTrait
+{
+    private static bool $set = false;
+
+    abstract public static function setter();
+
+    abstract public static function setter_conf($fnord);
+
+    public static function init($fnord = null)
+    {
+        if (!self::$set) {
+            self::$set = true;
+            $r = is_null($fnord) ? self::setter() : self::setter_conf($fnord);
+            if (in_array(
+                __NAMESPACE__."\HookableTrait",
+                class_uses(get_called_class())
+            )
+            ) {
+                self::hook();
+            }
+
+            return $r;
+        }
+        trigger_error(get_called_class().' ALREADY SET');
+    }
+
+    public static function uninit(): bool
+    {
+        if (self::$set) {
+            self::$set = false;
+
+            return false;
+        }
+        trigger_error(get_called_class().' NOT SET YET');
+
+        return true;
+    }
+
+    public static function init_required(): bool
+    {
+        if (!self::$set) {
+            trigger_error(get_called_class().' NOT SET', E_USER_ERROR);
+
+            return false;
+        }
+
+        return true;
+    }
+
+//    public static function setter(){}
+  //  public static function setter_conf($fnord){self::setter();}
+}

@@ -30,9 +30,47 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-require_once '../../config.php';
-    kult_engine\Invoker::requireBase(['WebService']);
+namespace kult_engine;
 
-    kult_engine\WebService::service('test', function ($args) {
-        return ['op' => 1];
-    }, 'POST');
+abstract class WebService
+{
+    use CoreElementTrait;
+    use HookableTrait;
+
+    public static string $_req;
+    public static string $_args;
+    public static string $_method;
+    public static string $_token;
+    public static array $_func = [];
+
+    public static function setter()
+    {
+        self::$_req = isset($_POST['req']) ? $_POST['req'] : (isset($_GET['req']) ? $_GET['req'] : false);
+        self::$_args = isset($_POST['args']) ? json_decode($_POST['args'], true) : (isset($_GET['args']) ? json_decode($_GET['args'], true) : false);
+        self::$_token = isset($_POST['token']) ? $_POST['token'] : (isset($_GET['token']) ? $_GET['token'] : false);
+        self::$_method = $_SERVER['REQUEST_METHOD'];
+    }
+
+    public static function send($array = [])
+    {
+        $array['token'] = self::$_token;
+        echo json_encode($array);
+    }
+
+    public static function execute()
+    {
+        if (isset(self::$_func[self::$_method][self::$_req])) {
+            self::send(self::$_func[self::$_method][self::$_req](self::$_args));
+        }
+    }
+
+    public static function service($a, $c, $t = 'POST')
+    {
+        self::$_func[$t][$a] = $c;
+    }
+
+    public static function destruct()
+    {
+        return [['kult_engine\\WebService::execute', null], 2];
+    }
+}

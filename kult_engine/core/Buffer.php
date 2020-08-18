@@ -5,9 +5,6 @@
  * PHP framework
  *
  * MIT License
- *
- * Copyright (c) 2016
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -28,31 +25,65 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-include '../config.php';
-use kult_engine as k;
+namespace kult_engine;
 
-k\Invoker::requireBase(["Router"]);
-k\page::standardpage_head();
-k\page::standardpage_header();
-k\page::standardpage_body_begin();
+abstract class Buffer
+{
+    use CoreElementTrait;
+    use HookableTrait;
 
-echo k\text::get_text('hello');
-?>
-<script>
-	var req = new ReqAjax("test");
-	req.send("/api/demo.ajax.php", function(call){
-		console.debug(call);
-	})
-</script>
-<?php
+    public static bool $_is_buffering_on = false;
 
-$d = new kult_engine\DaoGenerator(new pokemon(), new k\Connector());
-$d->create_table();
+    public static function setter()
+    {
+        self::store();
+    }
 
-k\page::standardpage_body_end();
-k\page::standardpage_footer();
+    public static function store()
+    {
+        self::init_required();
+        if (!self::$_is_buffering_on) {
+            self::$_is_buffering_on = true;
+            mb_http_output('UTF-8');
+            ob_start('mb_output_handler');
+        }
+    }
+
+    public static function get()
+    {
+        self::init_required();
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = false;
+
+            return ob_get_clean();
+        }
+    }
+
+    public static function delete()
+    {
+        self::init_required();
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = false;
+            ob_clean();
+        }
+    }
+
+    public static function send()
+    {
+        self::init_required();
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = false;
+            ob_end_flush();
+        }
+    }
+
+    public static function destruct()
+    {
+        return [['kult_engine\\Buffer::send', null], 999];
+    }
+}
