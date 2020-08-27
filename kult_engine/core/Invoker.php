@@ -51,11 +51,6 @@ abstract class Invoker extends AbstractInvoker
 
         Text::init();
 
-        Buffer::init();
-        if (debug) {
-            Buffer::send();
-        }
-
         self::require_mods($ext);
         self::require_local_model();
         self::require_vendor();

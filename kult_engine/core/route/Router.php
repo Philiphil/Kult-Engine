@@ -32,7 +32,7 @@
 
 namespace KultEngine;
 
-use kult_engine as k;
+use KultEngine as k;
 
 abstract class Router
 {
@@ -60,7 +60,7 @@ abstract class Router
 
     public static function destruct()
     {
-        return [['kult_engine\\router::exec', null], 1];
+        return [['KultEngine\\Router::exec', null], 1];
     }
 
     public static function read_asked($brut)

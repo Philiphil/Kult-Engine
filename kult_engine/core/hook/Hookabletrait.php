@@ -32,7 +32,7 @@
 
 namespace KultEngine;
 
-use KultEngine\Core\Hook\Hook;
+use KultEngine;
 
 trait HookableTrait
 {

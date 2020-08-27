@@ -30,9 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine\Core\Hook;
-
-use KultEngine\CoreElementTrait;
+namespace KultEngine;
 
 abstract class Hook
 {
