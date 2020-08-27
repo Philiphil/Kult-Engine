@@ -71,6 +71,6 @@ abstract class WebService
 
     public static function destruct()
     {
-        return [['kult_engine\\WebService::execute', null], 2];
+        return [['KultEngine\\WebService::execute', null], 2];
     }
 }

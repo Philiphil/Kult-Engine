@@ -87,6 +87,6 @@ abstract class SCS
 
     public static function destruct()
     {
-        return [['kult_engine\SCS::exec', null], 998];
+        return [['KultEngine\SCS::exec', null], 998];
     }
 }
