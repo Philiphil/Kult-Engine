@@ -32,8 +32,6 @@
 
 namespace KultEngine;
 
-use KultEngine;
-
 trait HookableTrait
 {
     public static function hook()
