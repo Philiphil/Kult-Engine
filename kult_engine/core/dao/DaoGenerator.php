@@ -72,7 +72,12 @@ class DaoGenerator
         $b = $x->getProperties();
         $o = $x->newInstanceWithoutConstructor();
         foreach ($b as $p) {
-            $this->_obj[$p->getName()] = $o->{$p->getName()};
+            //old 
+            if(isset($o->{$p->getName()}) ){
+                $this->_obj[$p->getName()] = $o->{$p->getName()};
+            }else{                
+                $this->_obj[$p->getName()] = $p->getType();
+            }
         }
     }
 
@@ -142,13 +147,13 @@ class DaoGenerator
     {
     }
 
-    protected function select($val, $wat = '_id', $mult = 0)
+    protected function select($val, string $wat = '_id', bool $mult = false)
     {
     }
 
-    protected function select_all($val, $wat)
+    protected function select_all($val, string $wat)
     {
-        return $this->select($val, $wat, 1);
+        return $this->select($val, $wat, true);
     }
 
     protected function table_exists()

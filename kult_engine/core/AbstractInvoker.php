@@ -195,6 +195,7 @@ abstract class AbstractInvoker
         require_once constant('traitspath').'SettableTrait.php';
         require_once constant('traitspath').'QueryableTrait.php';
         require_once constant('traitspath').'CoreElementTrait.php';
+        require_once constant('traitspath').'JsonableTrait.php';
 
         self::require_quick('Hook');
     }
@@ -297,12 +298,24 @@ abstract class AbstractInvoker
 
                 return true;
             case 'connector':
-                require_once corepath.'dao'.DS.'AbstractConnector.php';
+                require_once constant('corepath').'dao'.DS.'AbstractConnector.php';
                 self::class_init($f);
 
                 return true;
             case 'AbstractSession':
-                require_once constant('abstpath').'AbstractSession.php';
+                ini_set("session.use_strict_mode",true);
+                ini_set("session.use_cookies",true);
+                ini_set("session.use_only_cookies ",true);
+                ini_set("session.cookie_httponly",true);
+                ini_set("session.use_trans_sid",false);        
+                ini_set('session.save_handler', 'files');
+                session_save_path(sys_get_temp_dir());
+
+                require_once constant('corepath').'jwt'.DS.'JWTHeader.php';
+                require_once constant('corepath').'jwt'.DS.'JWTPayload.php';
+                require_once constant('corepath').'jwt'.DS.'JWT.php';
+                require_once constant('corepath').'SecureSessionHandler.php';
+                require_once constant('corepath').'AbstractSession.php';
                 self::class_init($f);
 
                 return true;

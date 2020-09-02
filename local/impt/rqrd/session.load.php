@@ -34,6 +34,5 @@ namespace KultEngine;
 
 abstract class session extends AbstractSession
 {
-    use CoreElementTrait;
     public static ?string $_login_page = null;
 }

@@ -32,55 +32,41 @@
 
 namespace KultEngine;
 
+
+
 abstract class AbstractSession
 {
+    use CoreElementTrait;
+    private static ?SecureSessionHandler $_handler = null;
     public static ?string $_login_page = null;
-    public static $_login = 0;
-    public static $_token_1 = null;
-    public static $_token_2 = null;
+
+    public static bool $_login = false;
+    public static int $_destroyed=0;
     public static $_val = null;
 
     public static function setter()
     {
-        session_start();
-        self::$_login_page = self::$_login_page == null ? constant('loginpage') : self::$_login_page;
-        if (isset($_SESSION['login']) && password_verify($_SERVER['HTTP_USER_AGENT'], $_SESSION['token_1']) && password_verify('_S7aTic_:p=rm@tK3y;', $_SESSION['token_2'])) {
-            self::$_login = intval($_SESSION['login']);
-            self::$_token_1 = $_SESSION['token_1'];
-            self::$_token_2 = $_SESSION['token_2'];
-            self::$_val = isset($_SESSION['val']) ? $_SESSION['val'] : [];
-        } else {
-            self::destroy();
-        }
-    }
+        static::$_handler = new SecureSessionHandler();
+        static::$_handler->start();
 
-    public static function setter_conf($fnord)
-    {
-        session_start();
-        self::$_login_page = constant('loginpage');
-        if (isset($_SESSION['login']) && password_verify($_SERVER['HTTP_USER_AGENT'], $_SESSION['token_1']) && password_verify('_S7aTic_:p=rm@tK3y;', $_SESSION['token_2'])) {
-            self::$_login = intval($_SESSION['login']);
-            self::$_token_1 = $_SESSION['token_1'];
-            self::$_token_2 = $_SESSION['token_2'];
-            self::$_val = $_SESSION['val'];
-        } else {
-            self::destroy();
-        }
+        static::$_login_page = static::$_login_page == null ? constant('loginpage') : static::$_login_page;
+
+        $s = new secureSerial();
+        static::$_val = isset($_SESSION['val']) ? $s->unserialize($_SESSION['val']) : [];
     }
 
     public static function destroy()
     {
         unset($_SESSION['login']);
-        unset($_SESSION['token_1']);
-        unset($_SESSION['token_2']);
         unset($_SESSION['val']);
+        static::$_handler->destroy();
     }
 
     public static function login_required()
     {
-        if (!isset($_SESSION['login'])) {
+        if (static::get('login')) {
             if (!static::is_on_login_page()) {
-                redirect(constant('htmlpath').self::$_login_page, 0);
+                redirect(constant('htmlpath').static::$_login_page, 0);
                 exit;
             }
         }
@@ -91,19 +77,14 @@ abstract class AbstractSession
         return substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], DIRECTORY_SEPARATOR) + 1) === static::$_login_page;
     }
 
-    public static function end()
+    public static function close()
     {
-        session_write_close();
+        static::$_handler->close();
     }
 
-    public static function connexion()
+    public static function login()
     {
-        $_SESSION['login'] = 1;
-        $_SESSION['token_1'] = password_hash($_SERVER['HTTP_USER_AGENT'], PASSWORD_BCRYPT);
-        $_SESSION['token_2'] = password_hash('_S7aTic_:p=rm@tK3y;', PASSWORD_BCRYPT);
-        self::$_login = 1;
-        self::$_token_1 = $_SESSION['token_1'];
-        self::$_token_2 = $_SESSION['token_2'];
+        static::set("login",true);
     }
 
     public static function set($k, $v)
@@ -112,17 +93,14 @@ abstract class AbstractSession
         $b = isset($_SESSION['val']) ? $s->unserialize($_SESSION['val']) : [];
         $b[$k] = $v;
         $_SESSION['val'] = $s->serialize($b);
-        self::$_val = $b;
+        static::$_val = $b;
     }
 
     public static function get($k)
     {
-        if (!isset($_SESSION['val'])) {
-            return false;
+        if (!isset(static::$_val) ||  !isset(static::$_val[$k]) ) {
+            return null;
         }
-        $s = new secureSerial();
-        $b = $s->unserialize($_SESSION['val']);
-
-        return $b === false ? $b : $b[$k];
+        return static::$_val[$k];
     }
 }

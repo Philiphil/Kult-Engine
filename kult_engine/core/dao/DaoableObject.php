@@ -32,6 +32,24 @@
 
 namespace KultEngine;
 
+trait daoablePropertyTypeTrait{
+    abstract public function getValue();
+    abstract public function getType();
+}
+
+class id{
+    use daoablePropertyTypeTrait;
+    public int $id=0;
+    public function getValue(){ return $id;}
+    public function getType(){ return "int";}
+}
+class uniqid{
+    use daoablePropertyTypeTrait;
+    public string $uniqid="";
+    public function getValue(){ return $uniqid;}
+    public function getType(){ return "string";}
+}
+
 abstract class daoableObject
 {
     /*
@@ -40,35 +58,29 @@ abstract class daoableObject
         array = []
         obj=new obj()
      */
-    const CLASSIC = 0;
-    const ONETOMANY = 1;
-    const MANYTOMANY = 2;
 
-    public string $_id = 'id';
-    public string $_iduniq = 'string';
-    public int $_tabletype = 0;
+    protected id $_id;
+    protected uniqid $_iduniq;
 
-    public function __construct($typetable = self::CLASSIC)
+    public function __construct()
     {
-        $this->_tabletype = intval($typetable);
+        $this->id=new id();
+        $this->uniqid=new uniqid();
+
         $this->setIduniq();
-        foreach ($this as $key => $value) {
-            if (gettype($value) === 'string') {
-                $this->$key = '';
-            }
-        }
     }
 
     public function setIduniq(): daoableObject
     {
-        $this->_iduniq = uniqid();
+        $this->_iduniq=new uniqid();
+        $this->_iduniq->uniqid = uniqid();
 
         return $this;
     }
 
-    public function getDefaultId(): string
+    public function getDefaultId(): id
     {
-        return 'id';
+        return new id();
     }
 
     public function setDefaultId(): daoableObject
@@ -91,5 +103,15 @@ abstract class daoableObject
         $n->setIduniq()->setDefaultId();
 
         return $n;
+    }
+
+    public function __get($name)
+    {
+        if()
+    }
+
+    public function __set($name,$value)
+    {
+        if()
     }
 }
