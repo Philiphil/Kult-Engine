@@ -32,8 +32,6 @@
 
 namespace KultEngine;
 
-
-
 abstract class AbstractSession
 {
     use CoreElementTrait;
@@ -41,7 +39,7 @@ abstract class AbstractSession
     public static ?string $_login_page = null;
 
     public static bool $_login = false;
-    public static int $_destroyed=0;
+    public static int $_destroyed = 0;
     public static $_val = null;
 
     public static function setter()
@@ -84,7 +82,7 @@ abstract class AbstractSession
 
     public static function login()
     {
-        static::set("login",true);
+        static::set('login', true);
     }
 
     public static function set($k, $v)
@@ -98,9 +96,10 @@ abstract class AbstractSession
 
     public static function get($k)
     {
-        if (!isset(static::$_val) ||  !isset(static::$_val[$k]) ) {
+        if (!isset(static::$_val) || !isset(static::$_val[$k])) {
             return null;
         }
+
         return static::$_val[$k];
     }
 }

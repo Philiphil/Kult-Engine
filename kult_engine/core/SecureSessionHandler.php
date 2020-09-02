@@ -1,14 +1,43 @@
 <?php
 
+/*
+ * Kult Engine
+ * PHP framework
+ *
+ * MIT License
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * @package Kult Engine
+ * @author Théo Sorriaux (philiphil)
+ * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @license MIT
+ * @link https://github.com/Philiphil/Kult-Engine
+ */
+
 namespace KultEngine;
 
 use SessionHandler;
 
 class SecureSessionHandler extends SessionHandler
 {
-
     private $key;
-    private $cookie=[];
+    private $cookie = [];
 
     public function __construct()
     {
@@ -17,7 +46,7 @@ class SecureSessionHandler extends SessionHandler
             'path'     => ini_get('session.cookie_path'),
             'domain'   => ini_get('session.cookie_domain'),
             'secure'   => isset($_SERVER['HTTPS']),
-            'httponly' => true
+            'httponly' => true,
         ];
 
         $this->setup();
@@ -25,14 +54,13 @@ class SecureSessionHandler extends SessionHandler
 
     private function setup()
     {
-        ini_set("session.use_strict_mode",true);
-        ini_set("session.use_cookies",true);
-        ini_set("session.use_only_cookies ",true);
-        ini_set("session.cookie_httponly",true);
-        ini_set("session.use_trans_sid",false);        
+        ini_set('session.use_strict_mode', true);
+        ini_set('session.use_cookies', true);
+        ini_set('session.use_only_cookies ', true);
+        ini_set('session.cookie_httponly', true);
+        ini_set('session.use_trans_sid', false);
         ini_set('session.save_handler', 'files');
         session_save_path(sys_get_temp_dir());
-
 
         session_set_cookie_params(
             $this->cookie['lifetime'],
@@ -45,10 +73,12 @@ class SecureSessionHandler extends SessionHandler
 
     public function forget()
     {
-        if (session_id() === '') return false;
+        if (session_id() === '') {
+            return false;
+        }
         $_SESSION = [];
         setcookie(
-            "",
+            '',
             '',
             time() - 42000,
             $this->cookie['path'],
@@ -77,7 +107,8 @@ class SecureSessionHandler extends SessionHandler
 
     public function open($save_path, $session_name)
     {
-        $this->key = $this->getKey('KEY_' . $session_name);
+        $this->key = $this->getKey('KEY_'.$session_name);
+
         return parent::open($save_path, $session_name);
     }
 
@@ -91,13 +122,12 @@ class SecureSessionHandler extends SessionHandler
         return parent::write($id, mcrypt_encrypt(MCRYPT_3DES, $this->key, $data, MCRYPT_MODE_ECB));
     }
 
-
     private function getKey($name)
     {
         if (empty($_COOKIE[$name])) {
-            $key         = random_bytes(64);
+            $key = random_bytes(64);
             $cookieParam = session_get_cookie_params();
-            $encKey      = base64_encode($key);
+            $encKey = base64_encode($key);
             setcookie(
                 $name,
                 $encKey,
@@ -111,6 +141,7 @@ class SecureSessionHandler extends SessionHandler
         } else {
             $key = base64_decode($_COOKIE[$name]);
         }
+
         return $key;
     }
 }

@@ -32,11 +32,11 @@
 
 class pokemon extends KultEngine\daoableObject
 {
-    public int $_pokedex_id ;
-    public string $_name ;
-    public array $_where ;
-    public array $_abilities ;
-    public array $_types ;
+    public int $_pokedex_id;
+    public string $_name;
+    public array $_where;
+    public array $_abilities;
+    public array $_types;
     public int $_leveling;
-    public array $_egg_group ;
+    public array $_egg_group;
 }
