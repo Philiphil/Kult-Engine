@@ -68,7 +68,7 @@ class DaoGenerator
         $this->_obj = [];
         $x = new \ReflectionClass($fnord);
         $this->_obj[0] = $x->getName();
-        $this->_obj[0] = strpos($this->_obj[0], 'kult_engine\\') === 0 ? substr($this->_obj[0], 12) : $this->_obj[0];
+        $this->_obj[0] = strpos($this->_obj[0], 'KultEngine\\') === 0 ? substr($this->_obj[0], 11) : $this->_obj[0];
         $b = $x->getProperties();
         $o = $x->newInstanceWithoutConstructor();
         foreach ($b as $p) {

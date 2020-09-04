@@ -54,6 +54,10 @@ echo k\text::get_text('hello');
 $d = new k\DaoGenerator(new pokemon(), new k\Connector());
 $d->create_table();
 //TODO upgrade daoableObject to use typed property & relations
+
+$i = new pokemon();
+$i->name = "nn";
+var_dump($d->set($i));
 class user extends k\daoableObject{
 
 }
