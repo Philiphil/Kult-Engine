@@ -32,22 +32,26 @@
 
 namespace KultEngine;
 
-trait JsonableTrait{
-	public function __toJson()
-	{
-		return json_encode($this);
-	}
-	public static function __fromJsonString(string $json)
-	{
-		return $this->__fromJsonObject(json_decode($json));
-	}
-	public static function __fromJsonObject(object $json) : self
-	{
-		$properties = get_object_vars($json);
-		$d = new self();
-		foreach ($properties as $property => $value) {
-			$d->$property = $value;
-		}
-		return $d;
-	}
+trait JsonableTrait
+{
+    public function __toJson()
+    {
+        return json_encode($this);
+    }
+
+    public static function __fromJsonString(string $json)
+    {
+        return $this->__fromJsonObject(json_decode($json));
+    }
+
+    public static function __fromJsonObject(object $json): self
+    {
+        $properties = get_object_vars($json);
+        $d = new self();
+        foreach ($properties as $property => $value) {
+            $d->$property = $value;
+        }
+
+        return $d;
+    }
 }

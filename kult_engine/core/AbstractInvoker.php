@@ -303,11 +303,11 @@ abstract class AbstractInvoker
 
                 return true;
             case 'AbstractSession':
-                ini_set("session.use_strict_mode",true);
-                ini_set("session.use_cookies",true);
-                ini_set("session.use_only_cookies ",true);
-                ini_set("session.cookie_httponly",true);
-                ini_set("session.use_trans_sid",false);        
+                ini_set('session.use_strict_mode', true);
+                ini_set('session.use_cookies', true);
+                ini_set('session.use_only_cookies ', true);
+                ini_set('session.cookie_httponly', true);
+                ini_set('session.use_trans_sid', false);
                 ini_set('session.save_handler', 'files');
                 session_save_path(sys_get_temp_dir());
 

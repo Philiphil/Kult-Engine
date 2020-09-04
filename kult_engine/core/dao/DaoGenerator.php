@@ -72,10 +72,10 @@ class DaoGenerator
         $b = $x->getProperties();
         $o = $x->newInstanceWithoutConstructor();
         foreach ($b as $p) {
-            //old 
-            if(isset($o->{$p->getName()}) ){
+            //old
+            if (isset($o->{$p->getName()})) {
                 $this->_obj[$p->getName()] = $o->{$p->getName()};
-            }else{                
+            } else {
                 $this->_obj[$p->getName()] = $p->getType();
             }
         }

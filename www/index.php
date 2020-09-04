@@ -55,11 +55,8 @@ $d = new k\DaoGenerator(new pokemon(), new k\Connector());
 $d->create_table();
 //TODO upgrade daoableObject to use typed property & relations
 
-$i = new pokemon();
-$i->name = "nn";
-var_dump($d->set($i));
-class user extends k\daoableObject{
-
+class user extends k\daoableObject
+{
 }
 
 k\page::standardpage_body_end();

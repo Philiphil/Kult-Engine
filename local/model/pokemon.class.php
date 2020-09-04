@@ -32,6 +32,7 @@
 
 class pokemon extends KultEngine\daoableObject
 {
+
     public $_pokedex_id = 0;
     public $_name = 'string';
     public $_where = [];
