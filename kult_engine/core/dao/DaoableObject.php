@@ -51,13 +51,13 @@ abstract class daoableObject
     public function __construct($typetable = self::CLASSIC)
     {
         $this->_tabletype = intval($typetable);
-        $this->setIduniq();
         foreach ($this as $key => $value) {
             if (gettype($value) === 'string') {
                 $this->$key = '';
             }
         }
         $this->setDefaultId();
+        $this->setIduniq();
     }
 
     public function setIduniq(): daoableObject
