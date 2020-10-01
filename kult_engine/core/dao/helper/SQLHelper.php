@@ -156,7 +156,7 @@ class SQLHelper
             if ($b === 'id') {
                 $v .= $d.$key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
             } elseif ($b === \DateTime::class) {
-                $v .= $d.$key.' datetime NULL';            
+                $v .= $d.$key.' datetime NULL';
             } elseif (gettype($b) === 'integer') {
                 $v .= $d.$key." INT NOT NULL DEFAULT '0'";
             } elseif ($b === 'blob') {
