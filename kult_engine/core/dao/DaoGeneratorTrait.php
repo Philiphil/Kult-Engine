@@ -32,7 +32,7 @@
 
 namespace KultEngine;
 
-Trait DaoGeneratorTrait
+trait DaoGeneratorTrait
 {
     public $_obj;
     public $_helper = null;
@@ -95,7 +95,6 @@ Trait DaoGeneratorTrait
 
         return $o;
     }
-
 
     public function set(DaoableObject $object)
     {
