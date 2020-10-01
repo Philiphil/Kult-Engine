@@ -32,8 +32,10 @@
 
 namespace KultEngine;
 
-class DaoGeneratorSQL extends DaoGenerator
+class DaoGeneratorSQL implements DaoGeneratorInterface
 {
+    use daoGeneratorTrait;
+
     public function __construct($fnord = null, AbstractConnector $connector)
     {
         $this->asign($fnord);
@@ -41,7 +43,7 @@ class DaoGeneratorSQL extends DaoGenerator
         $this->_helper = new SQLHelper();
     }
 
-    public function set($fnord)
+    public function set(DaoableObject $fnord)
     {
         $this->verify_table();
         if ($fnord->_id === $fnord->getDefaultId()) {
@@ -96,7 +98,7 @@ class DaoGeneratorSQL extends DaoGenerator
         return $r;
     }
 
-    public function delete($fnord)
+    public function delete(DaoableObject $fnord)
     {
         $this->verify_table();
         $query = $this->_helper->delete($this->_obj[0], '_id');
@@ -132,14 +134,14 @@ class DaoGeneratorSQL extends DaoGenerator
         $query->execute();
     }
 
-    public function select($val, $wat = '_id', $mult = 0)
+    public function select($val, $key = '_id', $multi = 0)
     {
         $this->verify_table();
-        $query = (gettype($this->_obj[$wat]) === 'integer' ||
-            $this->_obj[$wat] === 'id' || gettype($this->_obj[$wat]) === 'boolean' ||
-            gettype($this->_obj[$wat]) === 'double')
-            ? $this->_helper->select_int($this->_obj[0], $wat, $wat)
-            : $this->_helper->select_string($this->_obj[0], $wat, $wat);
+        $query = (gettype($this->_obj[$key]) === 'integer' ||
+            $this->_obj[$key] === 'id' || gettype($this->_obj[$key]) === 'boolean' ||
+            gettype($this->_obj[$key]) === 'double')
+            ? $this->_helper->select_int($this->_obj[0], $key, $key)
+            : $this->_helper->select_string($this->_obj[0], $key, $key);
         $query = $this->query($query);
         $query->execute([$val]);
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -147,13 +149,13 @@ class DaoGeneratorSQL extends DaoGenerator
         if (count($query) == 0) {
             return 0;
         }
-        if (!$mult && count($query) > 1) {
+        if (!$multi && count($query) > 1) {
             return false;
         }
-        if (!$mult) {
+        if (!$multi) {
             return $this->rowToObj($query[0]);
         }
-        if ($mult) {
+        if ($multi) {
             $r = [];
             foreach ($query as $key) {
                 $r[] = $this->rowToObj($key[0]);
@@ -177,33 +179,4 @@ class DaoGeneratorSQL extends DaoGenerator
         }
     }
 
-    public function setConnector($fnord)
-    {
-        return parent::setConnector($fnord);
-    }
-
-    public function verify_table()
-    {
-        return parent::verify_table();
-    }
-
-    public function query($fnord)
-    {
-        return parent::query($fnord);
-    }
-
-    public function rowToObj($fnord)
-    {
-        return parent::rowToObj($fnord);
-    }
-
-    public function objToRow($fnord, $id = 1)
-    {
-        return parent::objToRow($fnord, $id);
-    }
-
-    public function select_all($fnord, $id)
-    {
-        return parent::select_all($fnord, $id);
-    }
 }

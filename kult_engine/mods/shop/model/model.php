@@ -32,7 +32,7 @@
 
 namespace KultEngine;
 
-class product extends daoableObject
+class product extends DaoableObject
 {
     public $_name = [];
     public $_price = 0;
@@ -47,7 +47,7 @@ class product extends daoableObject
     }
 }
 
-    class magasin extends daoableObject
+    class magasin extends DaoableObject
     {
         public $_nom = [];
         public $_rue = 'string';
@@ -72,7 +72,7 @@ class product extends daoableObject
         }
     }
 
-    class shopClient extends daoableObject
+    class shopClient extends DaoableObject
     {
         public $_banned = 0;
         public $_rue = 'string';
@@ -106,7 +106,7 @@ class product extends daoableObject
         }
     }
 
-    class commande extends daoableObject
+    class commande extends DaoableObject
     {
         public $_products = [];
         public $_magasin = 0;

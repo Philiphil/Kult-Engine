@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-class pokemon extends KultEngine\daoableObject
+class pokemon extends KultEngine\DaoableObject
 {
     public $_pokedex_id = 0;
     public $_name = 'string';

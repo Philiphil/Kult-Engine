@@ -245,6 +245,8 @@ abstract class AbstractInvoker
     {
         require_once corepath.'dao'.DS.'AbstractConnector.php';
         require_once corepath.'dao'.DS.'DaoableObject.php';
+        require_once corepath.'dao'.DS.'DaoGeneratorInterface.php';
+        require_once corepath.'dao'.DS.'DaoGeneratorTrait.php';
         require_once corepath.'dao'.DS.'DaoGenerator.php';
         require_once corepath.'dao'.DS.'DaoGeneratorSQL.php';
         require_once corepath.'dao'.DS.'helper'.DS.'SQLHelper.php';

@@ -32,28 +32,37 @@
 
 namespace KultEngine;
 
-class DaoGenerator
+interface DaoGeneratorInterface
 {
-    private DaoGeneratorInterface $_realGenerator;
+    public function setConnector(AbstractConnector $fnord);
 
-    public function __construct(DaoableObject $fnord, AbstractConnector $connector)
-    {
-        switch ($connector::getDriver()) {
-            case 'mysql':
-                $this->_realGenerator = new DaoGeneratorSQL($fnord, $connector);
-                break;
-        }
-    }
+    public function query($fnord);
 
-    public function __call($fn, $params)
-    {
-        return $this->_realGenerator->$fn(...$params);
-    }
+    public function asign(DaoableObject $fnord);
 
+    public function objToRow(DaoableObject $o, int $id);
 
-    public function __invoke(DaoableObject $fnord)
-    {
-        $this->_realGenerator->asign($fnord);
-    }
+    public function rowToObj($r);
 
+    public function set(DaoableObject $fnord);
+    
+    public function get_last();
+
+    public function get_all();
+
+    public function delete(DaoableObject $fnord);
+
+    public function create_table();
+    
+    public function delete_table();
+    
+    public function empty_table();    
+
+    public function select($val, string $key, bool $multi);
+
+    public function select_all($val, string $key);
+
+    public function table_exists();
+
+    public function verify_table();
 }

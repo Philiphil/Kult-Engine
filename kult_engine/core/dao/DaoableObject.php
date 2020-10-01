@@ -32,7 +32,7 @@
 
 namespace KultEngine;
 
-abstract class daoableObject
+abstract class DaoableObject
 {
     /*
         long ?

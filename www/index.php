@@ -53,11 +53,48 @@ echo k\text::get_text('hello');
 
 $d = new k\DaoGenerator(new pokemon(), new k\Connector());
 $d->create_table();
-//TODO upgrade daoableObject to use typed property & relations
 
-class user extends k\daoableObject
+
+trait TimedTrait
 {
+	public ?\DateTime $createdAt=null;
+	public ?\DateTime $modifiedAt=null;
+	public ?\DateTime $deletedAt=null;
+
 }
+
+class user extends k\DaoableObject
+{
+	use TimedTrait;
+	public string $email="string";
+
+}
+
+class userPassword extends k\DaoableObject{
+	public string $password="string";
+	public int $userId=0;
+}
+
+class userSocialAccount extends k\DaoableObject
+{
+	public string $uid="string";
+	public int $platform=0;
+	public int $userId=0;
+
+	const PLATFORM_TYPE_FACEBOOK=1;
+	const PLATFORM_TYPE_GOOGLE=2;
+	const PLATFORM_TYPE_GITHUB=3;
+	const PLATFORM_TYPE_TWITTER=4;
+}
+
+$d = new k\DaoGenerator(new user(), new k\Connector());
+$d->create_table();
+
+$d = new k\DaoGenerator(new userPassword(), new k\Connector());
+$d->create_table();
+
+$d(new userSocialAccount());
+$d->create_table();
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();
