@@ -50,10 +50,8 @@ class DaoGenerator
         return $this->_realGenerator->$fn(...$params);
     }
 
-
     public function __invoke(DaoableObject $fnord)
     {
         $this->_realGenerator->asign($fnord);
     }
-
 }

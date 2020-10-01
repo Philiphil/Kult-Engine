@@ -178,5 +178,4 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             return false;
         }
     }
-
 }
