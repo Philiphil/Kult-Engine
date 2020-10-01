@@ -34,7 +34,8 @@ namespace KultEngine;
 
 trait DaoGeneratorTrait
 {
-    public $_obj;
+    public string $_classname;
+    public array $_obj;
     public $_helper = null;
     public AbstractConnector $_connector;
 
@@ -54,14 +55,13 @@ trait DaoGeneratorTrait
         $x = new \ReflectionClass($fnord);
         $this->_obj[0] = $x->getName();
         $this->_obj[0] = strpos($this->_obj[0], 'KultEngine\\') === 0 ? substr($this->_obj[0], 11) : $this->_obj[0];
-        $b = $x->getProperties();
-        $o = $x->newInstanceWithoutConstructor();
-        foreach ($b as $p) {
-            //old
-            if (isset($o->{$p->getName()})) {
-                $this->_obj[$p->getName()] = $o->{$p->getName()};
+        $properties = $x->getProperties();
+        $instance = $x->newInstanceWithoutConstructor();
+        foreach ($properties as $p) {
+            if (isset($instance->{$p->getName()})) {
+                $this->_obj[$p->getName()] = $instance->{$p->getName()};
             } else {
-                $this->_obj[$p->getName()] = $p->getType();
+                $this->_obj[$p->getName()] = $p->getType()->getName();
             }
         }
     }

@@ -40,17 +40,11 @@ abstract class DaoableObject
         array = []
         obj=new obj()
      */
-    const CLASSIC = 0;
-    const ONETOMANY = 1;
-    const MANYTOMANY = 2;
-
     public string $_id = 'id';
     public string $_iduniq = 'string';
-    public int $_tabletype = 0;
 
     public function __construct($typetable = self::CLASSIC)
     {
-        $this->_tabletype = intval($typetable);
         foreach ($this as $key => $value) {
             if (gettype($value) === 'string') {
                 $this->$key = '';

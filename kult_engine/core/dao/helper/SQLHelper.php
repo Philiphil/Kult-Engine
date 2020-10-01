@@ -155,8 +155,8 @@ class SQLHelper
             $d = $i == 0 ? '' : ',';
             if ($b === 'id') {
                 $v .= $d.$key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
-            } elseif (is_array($b) || is_object($b)) {
-                $v .= $d.$key.' LONGTEXT NULL';
+            } elseif ($b === \DateTime::class) {
+                $v .= $d.$key.' datetime NULL';            
             } elseif (gettype($b) === 'integer') {
                 $v .= $d.$key." INT NOT NULL DEFAULT '0'";
             } elseif ($b === 'blob') {
@@ -167,6 +167,8 @@ class SQLHelper
                 $v .= $d.$key." DOUBLE NOT NULL DEFAULT '0'";
             } elseif (gettype($b) === 'boolean') {
                 $v .= $d.$key.' BOOLEAN NOT NULL DEFAULT '.($b ? 'TRUE' : 'FALSE');
+            } elseif (is_array($b) || is_object($b)) {
+                $v .= $d.$key.' LONGTEXT NULL';
             }
             $i++;
         }

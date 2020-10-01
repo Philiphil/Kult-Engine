@@ -51,8 +51,8 @@ echo k\text::get_text('hello');
 </script>
 <?php
 
-$d = new k\DaoGenerator(new pokemon(), new k\Connector());
-$d->create_table();
+//$d = new k\DaoGenerator(new pokemon(), new k\Connector());
+//$d->create_table();
 
 trait TimedTrait
 {
