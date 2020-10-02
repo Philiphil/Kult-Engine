@@ -25,12 +25,13 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2020, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace KultEngine;
+
 use KultEngine\Core\Dao\DaoableProperty;
 
 class SQLHelper
@@ -148,33 +149,35 @@ class SQLHelper
             $str = $d.$key;
             switch ($b->type) {
                 case DaoableProperty::TYPE_ID:
-                    $str .= " INT PRIMARY KEY AUTO_INCREMENT";
+                    $str .= ' INT PRIMARY KEY AUTO_INCREMENT';
                     break;
                 case DaoableProperty::TYPE_DATETIME:
-                    $str .= " datetime";
+                    $str .= ' datetime';
                     break;
                 case DaoableProperty::TYPE_INT:
-                    $str .= " INT";
+                    $str .= ' INT';
                     break;
                 case DaoableProperty::TYPE_STRING:
-                    $str .= " TEXT";
+                    $str .= ' TEXT';
                     break;
                 case DaoableProperty::TYPE_DOUBLE:
-                    $str .= " DOUBLE";
+                    $str .= ' DOUBLE';
                     break;
                 case DaoableProperty::TYPE_BOOL:
-                    $str .= " BOOLEAN";
+                    $str .= ' BOOLEAN';
                     break;
                 case DaoableProperty::TYPE_BLOB:
-                    $str .= " MEDIUMBLOB";
+                    $str .= ' MEDIUMBLOB';
                     break;
                 default:
                 case DaoableProperty::TYPE_LONGTEXT:
-                    $str .= " LONGTEXT";
+                    $str .= ' LONGTEXT';
                     break;
             }
-            $str .= $b->isNullable ? " NULL" : " NOT NULL";
-            if($b->defaultValue !== null) $str .= " DEFAULT '".addslashes($b->defaultValue)."'";
+            $str .= $b->isNullable ? ' NULL' : ' NOT NULL';
+            if ($b->defaultValue !== null) {
+                $str .= " DEFAULT '".addslashes($b->defaultValue)."'";
+            }
             $v .= $str;
 
             $i++;

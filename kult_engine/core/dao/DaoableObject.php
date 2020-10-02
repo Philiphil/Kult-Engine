@@ -25,21 +25,22 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2020, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace KultEngine;
+
 use KultEngine\Core\Dao\Id;
 
-
-class Relation extends DaoableObject{
-    const TYPE_MANY_TO_MANY=1;
-    const TYPE_MANY_TO_ONE=2;
-    const TYPE_ONE_TO_MANY=3;
-    const TYPE_ONE_TO_ONE=4;
-    public int $type=0;
+class Relation extends DaoableObject
+{
+    const TYPE_MANY_TO_MANY = 1;
+    const TYPE_MANY_TO_ONE = 2;
+    const TYPE_ONE_TO_MANY = 3;
+    const TYPE_ONE_TO_ONE = 4;
+    public int $type = 0;
 
     public KultEngine\DaoableObject $source;
     public KultEngine\DaoableObject $target;
@@ -49,12 +50,12 @@ class Relation extends DaoableObject{
     public ?string $sourceColumn;
     public ?string $targetColumn;
 
-    public function __construct(int $type, KultEngine\DaoableObject $target){
-        $this->type =$type;
-        $this->target=$target;
+    public function __construct(int $type, KultEngine\DaoableObject $target)
+    {
+        $this->type = $type;
+        $this->target = $target;
         parent::construct();
     }
-
 }
 
 abstract class DaoableObject
@@ -66,7 +67,7 @@ abstract class DaoableObject
         obj=new obj()
      */
     public Id $__id;
-    public string $__iduniq ;
+    public string $__iduniq;
 
     public function __construct()
     {

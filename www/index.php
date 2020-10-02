@@ -54,10 +54,8 @@ echo k\text::get_text('hello');
 //$d = new k\DaoGenerator(new pokemon(), new k\Connector());
 //$d->create_table();
 
-
 $d = new KultEngine\DaoGenerator(new user(), new KultEngine\Connector());
 $d->create_table();
-
 
 $d(new userEmail());
 $d->create_table();
