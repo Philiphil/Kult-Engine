@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2020, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -37,7 +37,7 @@ class crypter
     public $_key;
     public $_salt;
     public $_iv;
-    public $_cipher="AES-256-CBC";
+    public $_cipher = 'AES-256-CBC';
 
     public function __construct($key = 'D3f4ultKey!')
     {
