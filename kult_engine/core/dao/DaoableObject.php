@@ -31,6 +31,31 @@
  */
 
 namespace KultEngine;
+use KultEngine\Core\Dao\Id;
+
+
+class Relation extends DaoableObject{
+    const TYPE_MANY_TO_MANY=1;
+    const TYPE_MANY_TO_ONE=2;
+    const TYPE_ONE_TO_MANY=3;
+    const TYPE_ONE_TO_ONE=4;
+    public int $type=0;
+
+    public KultEngine\DaoableObject $source;
+    public KultEngine\DaoableObject $target;
+
+    public ?string $sourcTable;
+    public ?string $targetTable;
+    public ?string $sourceColumn;
+    public ?string $targetColumn;
+
+    public function __construct(int $type, KultEngine\DaoableObject $target){
+        $this->type =$type;
+        $this->target=$target;
+        parent::construct();
+    }
+
+}
 
 abstract class DaoableObject
 {
@@ -40,16 +65,11 @@ abstract class DaoableObject
         array = []
         obj=new obj()
      */
-    public string $_id = 'id';
-    public string $_iduniq = 'string';
+    public Id $__id;
+    public string $__iduniq ;
 
-    public function __construct($typetable = self::CLASSIC)
+    public function __construct()
     {
-        foreach ($this as $key => $value) {
-            if (gettype($value) === 'string') {
-                $this->$key = '';
-            }
-        }
         $this->setDefaultId();
         $this->setIduniq();
     }
@@ -61,9 +81,9 @@ abstract class DaoableObject
         return $this;
     }
 
-    public function getDefaultId(): string
+    public function getDefaultId(): int
     {
-        return 'id';
+        return -1;
     }
 
     public function setDefaultId(): daoableObject

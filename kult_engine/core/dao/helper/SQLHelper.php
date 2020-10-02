@@ -31,6 +31,7 @@
  */
 
 namespace KultEngine;
+use KultEngine\Core\Dao\DaoableProperty;
 
 class SQLHelper
 {
@@ -131,16 +132,6 @@ class SQLHelper
         return 'DROP TABLE '.$this->table_quoted($table);
     }
 
-    public function create_basic($table, $id, $obj, $size = 'MEDIUMBLOB'): string
-    {   //unused
-        $v = 'CREATE TABLE '.$this->table_quoted($table);
-        $v .= ' ( ';
-        $v .= $id.' INT PRIMARY KEY AUTO_INCREMENT  NOT NULL,';
-        $v .= $obj.' '.$size.')CHARSET=utf8mb4';
-
-        return $v;
-    }
-
     public function table_exists(): string
     {
         return "SHOW TABLES LIKE ':table'";
@@ -153,23 +144,39 @@ class SQLHelper
         $i = 0;
         foreach ($tableau as $key => $b) {
             $d = $i == 0 ? '' : ',';
-            if ($b === 'id') {
-                $v .= $d.$key.' INT PRIMARY KEY AUTO_INCREMENT NOT NULL';
-            } elseif ($b === \DateTime::class) {
-                $v .= $d.$key.' datetime NULL';
-            } elseif (gettype($b) === 'integer') {
-                $v .= $d.$key." INT NOT NULL DEFAULT '0'";
-            } elseif ($b === 'blob') {
-                $v .= $d.$key.' MEDIUMBLOB NULL';
-            } elseif (gettype($b) === 'string') {
-                $v .= $d.$key.' TEXT NULL';
-            } elseif (gettype($b) === 'double') {
-                $v .= $d.$key." DOUBLE NOT NULL DEFAULT '0'";
-            } elseif (gettype($b) === 'boolean') {
-                $v .= $d.$key.' BOOLEAN NOT NULL DEFAULT '.($b ? 'TRUE' : 'FALSE');
-            } elseif (is_array($b) || is_object($b)) {
-                $v .= $d.$key.' LONGTEXT NULL';
+
+            $str = $d.$key;
+            switch ($b->type) {
+                case DaoableProperty::TYPE_ID:
+                    $str .= " INT PRIMARY KEY AUTO_INCREMENT";
+                    break;
+                case DaoableProperty::TYPE_DATETIME:
+                    $str .= " datetime";
+                    break;
+                case DaoableProperty::TYPE_INT:
+                    $str .= " INT";
+                    break;
+                case DaoableProperty::TYPE_STRING:
+                    $str .= " TEXT";
+                    break;
+                case DaoableProperty::TYPE_DOUBLE:
+                    $str .= " DOUBLE";
+                    break;
+                case DaoableProperty::TYPE_BOOL:
+                    $str .= " BOOLEAN";
+                    break;
+                case DaoableProperty::TYPE_BLOB:
+                    $str .= " MEDIUMBLOB";
+                    break;
+                default:
+                case DaoableProperty::TYPE_LONGTEXT:
+                    $str .= " LONGTEXT";
+                    break;
             }
+            $str .= $b->isNullable ? " NULL" : " NOT NULL";
+            if($b->defaultValue !== null) $str .= " DEFAULT '".addslashes($b->defaultValue)."'";
+            $v .= $str;
+
             $i++;
         }
         $v .= ')CHARSET=utf8mb4';

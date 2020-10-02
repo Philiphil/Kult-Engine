@@ -31,11 +31,12 @@
  */
 
 namespace KultEngine;
+use KultEngine\Core\Dao\DaoableProperty;
 
 trait DaoGeneratorTrait
 {
-    public string $_classname;
-    public array $_obj;
+    public string $_classname="";
+    public array $_obj=[];
     public $_helper = null;
     public AbstractConnector $_connector;
 
@@ -51,10 +52,11 @@ trait DaoGeneratorTrait
 
     public function asign(DaoableObject $fnord)
     {
+        return $this->_asign($fnord);
         $this->_obj = [];
         $x = new \ReflectionClass($fnord);
-        $this->_obj[0] = $x->getName();
-        $this->_obj[0] = strpos($this->_obj[0], 'KultEngine\\') === 0 ? substr($this->_obj[0], 11) : $this->_obj[0];
+        $this->_classname = $x->getName();
+        $this->_classname = strpos($this->_classname, 'KultEngine\\') === 0 ? substr($this->_classname, 11) : $this->_classname;
         $properties = $x->getProperties();
         $instance = $x->newInstanceWithoutConstructor();
         foreach ($properties as $p) {
@@ -63,6 +65,24 @@ trait DaoGeneratorTrait
             } else {
                 $this->_obj[$p->getName()] = $p->getType()->getName();
             }
+        }
+    }
+
+    public function _asign(DaoableObject $fnord)
+    {
+        $this->_obj = [];
+        $x = new \ReflectionClass($fnord);
+        $this->_classname = $x->getName();
+        $this->_classname = strpos($this->_classname, 'KultEngine\\') === 0 ? substr($this->_classname, 11) : $this->_classname;
+        $properties = $x->getProperties();
+        $instance = $x->newInstanceWithoutConstructor();
+        foreach ($properties as $p) {  
+            $daoP = new DaoableProperty();
+            $daoP->setType($p->getType()->getName());
+            $daoP->isNullable=$p->getType()->allowsNull();
+            $daoP->defaultValue=isset($instance->{$p->getName()}) ? $instance->{$p->getName()} : null;
+
+            $this->_obj[$p->getName()] = $daoP;
         }
     }
 
@@ -86,7 +106,7 @@ trait DaoGeneratorTrait
 
     public function rowToObj($r)
     {
-        $x = new \ReflectionClass($this->_obj[0]);
+        $x = new \ReflectionClass($this->_classname);
         $a = $x->newInstanceWithoutConstructor();
         $o = $x->newInstance();
         foreach ($r as $key => $value) {

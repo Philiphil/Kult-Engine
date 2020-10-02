@@ -48,10 +48,10 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
         $this->verify_table();
         if ($fnord->_id === $fnord->getDefaultId()) {
             $o = $this->objToRow($fnord, 0);
-            $query = $this->_helper->insert($this->_obj[0], $o[0]);
+            $query = $this->_helper->insert($this->_classname, $o[0]);
             $query = $this->query($query);
             $query->execute($o[1]);
-            $query = $this->_helper->select_string($this->_obj[0], '_iduniq');
+            $query = $this->_helper->select_string($this->_classname, '_iduniq');
             $query = $this->query($query);
             $query->execute([$fnord->_iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             return $fnord;
         } else {
             $o = $this->objToRow($fnord, 0);
-            $query = $this->_helper->update_int($this->_obj[0], '_id', '_id', $o[0]);
+            $query = $this->_helper->update_int($this->_classname, '_id', '_id', $o[0]);
             $query = $this->query($query);
             $o[1][] = $fnord->_id;
             $query->execute($o[1]);
@@ -72,7 +72,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
     public function get_last()
     {
         $this->verify_table();
-        $query = $this->_helper->select_last($this->_obj[0], '_id');
+        $query = $this->_helper->select_last($this->_classname, '_id');
         $query = $this->query($query);
         $query->execute();
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -83,7 +83,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
     public function get_all()
     {
         $this->verify_table();
-        $query = $this->_helper->select_all($this->_obj[0], '_id');
+        $query = $this->_helper->select_all($this->_classname, '_id');
         $query = $this->query($query);
         $query->execute();
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -101,7 +101,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
     public function delete(DaoableObject $fnord)
     {
         $this->verify_table();
-        $query = $this->_helper->delete($this->_obj[0], '_id');
+        $query = $this->_helper->delete($this->_classname, '_id');
         $query = $this->query($query);
         $query->execute([$fnord->_id]);
     }
@@ -112,8 +112,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             return;
         }
         $x = $this->_obj;
-        unset($x[0]);
-        $query = $this->_helper->create_advance($this->_obj[0], $x);
+        $query = $this->_helper->create_advance($this->_classname, $x);
         $query = $this->query($query);
         $query->execute();
     }
@@ -121,7 +120,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
     public function delete_table()
     {
         $this->verify_table();
-        $query = $this->_helper->drop($this->_obj[0]);
+        $query = $this->_helper->drop($this->_classname);
         $query = $this->query($query);
         $query->execute();
     }
@@ -129,7 +128,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
     public function empty_table()
     {
         $this->verify_table();
-        $query = $this->_helper->truncate($this->_obj[0]);
+        $query = $this->_helper->truncate($this->_classname);
         $query = $this->query($query);
         $query->execute();
     }
@@ -140,8 +139,8 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
         $query = (gettype($this->_obj[$key]) === 'integer' ||
             $this->_obj[$key] === 'id' || gettype($this->_obj[$key]) === 'boolean' ||
             gettype($this->_obj[$key]) === 'double')
-            ? $this->_helper->select_int($this->_obj[0], $key, $key)
-            : $this->_helper->select_string($this->_obj[0], $key, $key);
+            ? $this->_helper->select_int($this->_classname, $key, $key)
+            : $this->_helper->select_string($this->_classname, $key, $key);
         $query = $this->query($query);
         $query->execute([$val]);
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -168,7 +167,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
     public function table_exists()
     {
         try {
-            $query = $this->_helper->select_last($this->_obj[0], '_id');
+            $query = $this->_helper->select_last($this->_classname, '__id');
             $query = $this->query($query);
             $query->execute();
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
