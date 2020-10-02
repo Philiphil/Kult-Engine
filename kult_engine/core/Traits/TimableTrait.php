@@ -32,21 +32,9 @@
 
 namespace KultEngine;
 
-require_once strstr(__FILE__, '..'.DIRECTORY_SEPARATOR.'cmd'.DIRECTORY_SEPARATOR.'app.php', true).'config.php';
-
-cli_set_process_title('Kult Engine');
-
-switch ($_SERVER['argv'][1]) {
-    case 'async':
-        Invoker::requireBase();
-        $e = unserialize(base64_decode($_SERVER['argv'][2]));
-        $e->_closure();
-        break;
-     case 'soros':
-        Invoker::requireBase(['soros_bot']);
-        $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
-        soros_bot::run($var);
-    default:
-        // code...
-        break;
+trait TimableTrait
+{
+    public ?\DateTime $createdAt = null;
+    public ?\DateTime $modifiedAt = null;
+    public ?\DateTime $deletedAt = null;
 }

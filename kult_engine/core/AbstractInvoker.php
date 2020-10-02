@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2020, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -196,6 +196,7 @@ abstract class AbstractInvoker
         require_once constant('traitspath').'QueryableTrait.php';
         require_once constant('traitspath').'CoreElementTrait.php';
         require_once constant('traitspath').'JsonableTrait.php';
+        require_once constant('traitspath').'TimableTrait.php';
 
         self::require_quick('Hook');
     }
@@ -244,6 +245,8 @@ abstract class AbstractInvoker
     public static function require_local_model(): void
     {
         require_once corepath.'dao'.DS.'AbstractConnector.php';
+        require_once corepath.'dao'.DS.'DaoableProperty.php';
+        require_once corepath.'dao'.DS.'Id.php';
         require_once corepath.'dao'.DS.'DaoableObject.php';
         require_once corepath.'dao'.DS.'DaoGeneratorInterface.php';
         require_once corepath.'dao'.DS.'DaoGeneratorTrait.php';

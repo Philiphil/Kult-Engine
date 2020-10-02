@@ -30,23 +30,34 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+class User extends KultEngine\DaoableObject
+{
+    use KultEngine\TimableTrait;
+    public ?\DateTime $lastLogin;
+}
 
-require_once strstr(__FILE__, '..'.DIRECTORY_SEPARATOR.'cmd'.DIRECTORY_SEPARATOR.'app.php', true).'config.php';
+class UserEmail extends KultEngine\DaoableObject
+{
+    public string $email;
+    public bool $main = true;
+    public User $user;
+}
 
-cli_set_process_title('Kult Engine');
+class UserPassword extends KultEngine\DaoableObject
+{
+    use KultEngine\TimableTrait;
+    public string $password;
+    public int $userId = 0;
+}
 
-switch ($_SERVER['argv'][1]) {
-    case 'async':
-        Invoker::requireBase();
-        $e = unserialize(base64_decode($_SERVER['argv'][2]));
-        $e->_closure();
-        break;
-     case 'soros':
-        Invoker::requireBase(['soros_bot']);
-        $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
-        soros_bot::run($var);
-    default:
-        // code...
-        break;
+class UserSocialAccount extends KultEngine\DaoableObject
+{
+    public string $uid;
+    public int $platform = 0;
+    public int $userId = 0;
+
+    const PLATFORM_TYPE_FACEBOOK = 1;
+    const PLATFORM_TYPE_GOOGLE = 2;
+    const PLATFORM_TYPE_GITHUB = 3;
+    const PLATFORM_TYPE_TWITTER = 4;
 }
