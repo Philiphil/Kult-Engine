@@ -25,18 +25,19 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2018, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2020, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace KultEngine;
+
 use KultEngine\Core\Dao\DaoableProperty;
 
 trait DaoGeneratorTrait
 {
-    public string $_classname="";
-    public array $_obj=[];
+    public string $_classname = '';
+    public array $_obj = [];
     public $_helper = null;
     public AbstractConnector $_connector;
 
@@ -76,11 +77,11 @@ trait DaoGeneratorTrait
         $this->_classname = strpos($this->_classname, 'KultEngine\\') === 0 ? substr($this->_classname, 11) : $this->_classname;
         $properties = $x->getProperties();
         $instance = $x->newInstanceWithoutConstructor();
-        foreach ($properties as $p) {  
+        foreach ($properties as $p) {
             $daoP = new DaoableProperty();
             $daoP->setType($p->getType()->getName());
-            $daoP->isNullable=$p->getType()->allowsNull();
-            $daoP->defaultValue=isset($instance->{$p->getName()}) ? $instance->{$p->getName()} : null;
+            $daoP->isNullable = $p->getType()->allowsNull();
+            $daoP->defaultValue = isset($instance->{$p->getName()}) ? $instance->{$p->getName()} : null;
 
             $this->_obj[$p->getName()] = $daoP;
         }

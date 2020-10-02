@@ -1,24 +1,55 @@
 <?php
 
+/*
+ * Kult Engine
+ * PHP framework
+ *
+ * MIT License
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * @package Kult Engine
+ * @author Théo Sorriaux (philiphil)
+ * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @license MIT
+ * @link https://github.com/Philiphil/Kult-Engine
+ */
+
 namespace KultEngine\Core\Dao;
-use KultEngine\DaoableObject;
 
-class DaoableProperty{
-    public int $type=1;
-    public bool $isNullable=false;
-    public $defaultValue=null;
+class DaoableProperty
+{
+    public int $type = 1;
+    public bool $isNullable = false;
+    public $defaultValue = null;
 
-    const TYPE_ID=1;
-    const TYPE_DATETIME=2;
-    const TYPE_FOREIGN_KEY=3;
-    const TYPE_INT=4;
-    const TYPE_STRING=5;
-    const TYPE_DOUBLE=6;
-    const TYPE_BOOL=7;    
-    const TYPE_LONGTEXT=8;
-    const TYPE_BLOB=9;
+    const TYPE_ID = 1;
+    const TYPE_DATETIME = 2;
+    const TYPE_FOREIGN_KEY = 3;
+    const TYPE_INT = 4;
+    const TYPE_STRING = 5;
+    const TYPE_DOUBLE = 6;
+    const TYPE_BOOL = 7;
+    const TYPE_LONGTEXT = 8;
+    const TYPE_BLOB = 9;
 
-    public function setType(string $nameType){
+    public function setType(string $nameType)
+    {
         //$nameType=substr($nameType, strrpos($nameType, '\\')+1);
         switch ($nameType) {
             case 'KultEngine\Core\Dao\Id':
@@ -31,7 +62,7 @@ class DaoableProperty{
             case 'int':
                 $this->type = self::TYPE_INT;
                 break;
-            case 'string':          
+            case 'string':
                 $this->type = self::TYPE_STRING;
                 break;
             case 'double':
@@ -49,5 +80,5 @@ class DaoableProperty{
                 $this->type = self::TYPE_LONGTEXT;
                 break;
         }
-    }    
+    }
 }
