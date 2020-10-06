@@ -34,7 +34,7 @@ namespace KultEngine;
 
 class JWTHeader
 {
-    use JsonableTrait;
+    use JsonSerializableTrait;
     public string $typ = 'JWT';
     public string $alg = 'none';
 }

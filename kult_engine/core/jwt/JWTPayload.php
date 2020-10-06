@@ -34,7 +34,7 @@ namespace KultEngine;
 
 class JWTPayload
 {
-    use JsonableTrait;
+    use JsonSerializableTrait;
     public $exp = '';
     public $iat = '';
     public $nbf = '';

@@ -40,15 +40,15 @@ interface DaoGeneratorInterface
 
     public function asign(DaoableObject $fnord);
 
-    public function objToRow(DaoableObject $o, int $id);
+    public function objToRow(DaoableObject $o, bool $keepId);
 
     public function rowToObj($r);
 
-    public function set(DaoableObject $fnord);
+    public function insert(DaoableObject $fnord);
 
-    public function get_last();
+    public function select_last();
 
-    public function get_all();
+    public function select_all();
 
     public function delete(DaoableObject $fnord);
 
@@ -59,9 +59,7 @@ interface DaoGeneratorInterface
     public function empty_table();
 
     public function select($val, string $key, bool $multi);
-
-    public function select_all($val, string $key);
-
+    
     public function table_exists();
 
     public function verify_table();

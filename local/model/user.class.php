@@ -33,14 +33,24 @@
 class User extends KultEngine\DaoableObject
 {
     use KultEngine\TimableTrait;
-    public ?\DateTime $lastLogin;
+    public OneToOneRelation $emails;
+
+    public function __setRelations()
+    {
+        $this->emails = new OneToOneRelation(UserEmail::class);
+    }
 }
 
 class UserEmail extends KultEngine\DaoableObject
 {
     public string $email;
     public bool $main = true;
-    public User $user;
+    public OneToOneRelation $user;
+
+    public function __setRelations()
+    {        
+        $this->user = new OneToOneRelation(User::class);
+    }
 }
 
 class UserPassword extends KultEngine\DaoableObject

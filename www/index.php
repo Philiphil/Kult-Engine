@@ -66,5 +66,10 @@ $d->create_table();
 $d(new userSocialAccount());
 $d->create_table();
 
+$d(new user());
+$u = new user();
+$u->lastLogin = new DateTime();
+$u = $d->insert($u);//remplacer u par &u pour eviter ça ?
+
 k\page::standardpage_body_end();
 k\page::standardpage_footer();
