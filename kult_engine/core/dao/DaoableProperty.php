@@ -37,7 +37,7 @@ class DaoableProperty
     public int $type = 1;
     public bool $isNullable = false;
     public $defaultValue = null;
-    public string $name="";
+    public string $name = '';
     public $value;
 
     const TYPE_ID = 1;
@@ -51,7 +51,7 @@ class DaoableProperty
     const TYPE_LONGTEXT = 9;
     const TYPE_BLOB = 10;
 
-    const REGULAR_TYPES=[
+    const REGULAR_TYPES = [
         self::TYPE_INT,
         self::TYPE_STRING,
         self::TYPE_DOUBLE,
@@ -87,7 +87,8 @@ class DaoableProperty
         }
     }
 
-    public function isPhpType(){
+    public function isPhpType()
+    {
         return in_array($this->type, self::REGULAR_TYPES);
     }
 }

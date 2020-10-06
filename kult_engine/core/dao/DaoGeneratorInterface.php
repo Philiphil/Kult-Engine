@@ -59,7 +59,7 @@ interface DaoGeneratorInterface
     public function empty_table();
 
     public function select($val, string $key, bool $multi);
-    
+
     public function table_exists();
 
     public function verify_table();
