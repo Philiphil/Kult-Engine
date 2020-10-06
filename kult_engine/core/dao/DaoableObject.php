@@ -79,7 +79,8 @@ class Relation extends DaoableProperty
 
 */
 
-class OneToOneRelation extends Relation{    
+class OneToOneRelation extends Relation
+{
     public int $type = Relation::TYPE_ONE_TO_ONE;
 
     public function __construct(DaoableObject $target)
@@ -87,7 +88,8 @@ class OneToOneRelation extends Relation{
         parent::construct($this->type, $target);
     }
 }
-class ManyToOneRelation extends Relation{    
+class ManyToOneRelation extends Relation
+{
     public int $type = Relation::TYPE_MANY_TO_ONE;
 
     public function __construct(DaoableObject $target)
@@ -95,7 +97,8 @@ class ManyToOneRelation extends Relation{
         parent::construct($this->type, $target);
     }
 }
-class OneToManyRelation extends Relation{    
+class OneToManyRelation extends Relation
+{
     public int $type = Relation::TYPE_ONE_TO_MANY;
 
     public function __construct(DaoableObject $target)
@@ -103,7 +106,8 @@ class OneToManyRelation extends Relation{
         parent::construct($this->type, $target);
     }
 }
-class ManyToManyRelation extends Relation{    
+class ManyToManyRelation extends Relation
+{
     public int $type = Relation::TYPE_MANY_TO_MANY;
 
     public function __construct(int $type, DaoableObject $target)
@@ -115,7 +119,7 @@ class ManyToManyRelation extends Relation{
     OneToOne
         Je dois creer une simple column fk
         stock id
-        retourne item        
+        retourne item
     ManyToOne
         source devrait avoir column fk
         target devrait rien avoir coté sql ?
@@ -173,6 +177,4 @@ abstract class DaoableObject
 
         return $n;
     }
-
-
 }

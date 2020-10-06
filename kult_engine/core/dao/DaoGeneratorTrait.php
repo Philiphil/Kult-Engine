@@ -62,8 +62,8 @@ trait DaoGeneratorTrait
         $properties = $x->getProperties();
         $instance = $x->newInstanceWithoutConstructor();
         foreach ($properties as $p) {
-            $daoP = new DaoableProperty();          
-            $daoP->name = $p->getName();  
+            $daoP = new DaoableProperty();
+            $daoP->name = $p->getName();
             $daoP->setType($p->getType()->getName());
             $daoP->isNullable = $p->getType()->allowsNull();
             $daoP->defaultValue = isset($instance->{$p->getName()}) ? $instance->{$p->getName()} : null;
@@ -82,20 +82,19 @@ trait DaoGeneratorTrait
             if ($keepId || (!$keepId && $p->getName() != '__id')) {
                 $r[0][$i] = $p->getName();
 
-                if(!isset($o->{$p->getName()})){
+                if (!isset($o->{$p->getName()})) {
                     $r[1][$i] = null;
+                } elseif (is_object($o->{$p->getName()}) && is_subclass_of($o->{$p->getName()}, DaoableProperty::class)) {
+                    $r[1][$i] = $o->{$p->getName()}->value;
+                } elseif (is_object($o->{$p->getName()}) && get_class($o->{$p->getName()}) == \DateTime::class) {
+                    $r[1][$i] = $o->{$p->getName()}->format($this->_dateTimeFormat);
+                } else {
+                    $r[1][$i] = is_array($o->{$p->getName()}) || is_object($o->{$p->getName()}) ? serialize($o->{$p->getName()}) : $o->{$p->getName()};
                 }
-                else if ( is_object($o->{$p->getName()}) && is_subclass_of($o->{$p->getName()}, DaoableProperty::class))
-                {
-                      $r[1][$i] = $o->{$p->getName()}->value;
-                }else if( is_object($o->{$p->getName()}) && get_class($o->{$p->getName()}) == \DateTime::class ) {                
-                     $r[1][$i] = $o->{$p->getName()}->format($this->_dateTimeFormat);
-                } else{                
-                     $r[1][$i] = is_array($o->{$p->getName()}) || is_object($o->{$p->getName()}) ? serialize($o->{$p->getName()}) : $o->{$p->getName()};
-                }               
                 $i++;
             }
         }
+
         return $r;
     }
 
@@ -104,26 +103,29 @@ trait DaoGeneratorTrait
         $x = new \ReflectionClass($this->_classname);
         $o = $x->newInstance();
         foreach ($r as $key => $value) {
-            if($this->_obj[$key]->isPhpType()){
-                 $o->{$key} = $value;
-            }else{
-
+            if ($this->_obj[$key]->isPhpType()) {
+                $o->{$key} = $value;
+            } else {
                 $o->{$key} = $this->getDaoPropertyInstance(
-                    $this->_obj[$key],$value);
+                    $this->_obj[$key],
+                    $value
+                );
             }
         }
+
         return $o;
     }
 
-    public function getDaoPropertyInstance($property,$value)
+    public function getDaoPropertyInstance($property, $value)
     {
         switch ($property->type) {
             case DaoableProperty::TYPE_DATETIME:
-                return new \DateTime($value);  
+                return new \DateTime($value);
             case DaoableProperty::TYPE_ID:
-                $that= new Id();
+                $that = new Id();
                 $that->value = $value;
-                return $that;     
+
+                return $that;
             default:
                 return null;
         }
@@ -135,5 +137,4 @@ trait DaoGeneratorTrait
             $this->create_table();
         }
     }
-
 }

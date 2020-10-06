@@ -60,7 +60,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
 
             return $fnord;
         } else {
-            $o = $this->objToRow($fnord,false);
+            $o = $this->objToRow($fnord, false);
             $query = $this->_helper->update_int($this->_classname, '__id', '__id', $o[0]);
             $query = $this->query($query);
             $o[1][] = $fnord->__id->value;
@@ -77,6 +77,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
         $query = $this->query($query);
         $query->execute();
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
+
         return isset($query[0]) ? $this->rowToObj($query[0]) : false;
     }
 
@@ -177,6 +178,4 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             return false;
         }
     }
-
-
 }

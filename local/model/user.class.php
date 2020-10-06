@@ -48,7 +48,7 @@ class UserEmail extends KultEngine\DaoableObject
     public OneToOneRelation $user;
 
     public function __setRelations()
-    {        
+    {
         $this->user = new OneToOneRelation(User::class);
     }
 }
