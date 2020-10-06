@@ -195,7 +195,7 @@ abstract class AbstractInvoker
         require_once constant('traitspath').'SettableTrait.php';
         require_once constant('traitspath').'QueryableTrait.php';
         require_once constant('traitspath').'CoreElementTrait.php';
-        require_once constant('traitspath').'JsonableTrait.php';
+        require_once constant('traitspath').'JsonSerializableTrait.php';
         require_once constant('traitspath').'TimableTrait.php';
 
         self::require_quick('Hook');

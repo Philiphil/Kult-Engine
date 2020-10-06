@@ -171,6 +171,7 @@ class SQLHelper
                     break;
                 default:
                 case DaoableProperty::TYPE_LONGTEXT:
+                case DaoableProperty::TYPE_SERIAL:
                     $str .= ' LONGTEXT';
                     break;
             }

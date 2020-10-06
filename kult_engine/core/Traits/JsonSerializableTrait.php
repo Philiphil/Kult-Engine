@@ -32,8 +32,13 @@
 
 namespace KultEngine;
 
-trait JsonableTrait
+trait JsonSerializableTrait
 {
+    public function jsonSerialize()
+    {
+        return $this->__toJson();
+    }
+
     public function __toJson()
     {
         return json_encode($this);

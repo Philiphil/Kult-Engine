@@ -33,6 +33,7 @@
 namespace KultEngine;
 
 use KultEngine\Core\Dao\DaoableProperty;
+use KultEngine\Core\Dao\Id;
 
 trait DaoGeneratorTrait
 {
@@ -40,6 +41,7 @@ trait DaoGeneratorTrait
     public array $_obj = [];
     public $_helper = null;
     public AbstractConnector $_connector;
+    public string $_dateTimeFormat = 'Y-m-d H:i:s';
 
     public function setConnector(AbstractConnector $fnord)
     {
@@ -53,24 +55,6 @@ trait DaoGeneratorTrait
 
     public function asign(DaoableObject $fnord)
     {
-        return $this->_asign($fnord);
-        $this->_obj = [];
-        $x = new \ReflectionClass($fnord);
-        $this->_classname = $x->getName();
-        $this->_classname = strpos($this->_classname, 'KultEngine\\') === 0 ? substr($this->_classname, 11) : $this->_classname;
-        $properties = $x->getProperties();
-        $instance = $x->newInstanceWithoutConstructor();
-        foreach ($properties as $p) {
-            if (isset($instance->{$p->getName()})) {
-                $this->_obj[$p->getName()] = $instance->{$p->getName()};
-            } else {
-                $this->_obj[$p->getName()] = $p->getType()->getName();
-            }
-        }
-    }
-
-    public function _asign(DaoableObject $fnord)
-    {
         $this->_obj = [];
         $x = new \ReflectionClass($fnord);
         $this->_classname = $x->getName();
@@ -79,25 +63,34 @@ trait DaoGeneratorTrait
         $instance = $x->newInstanceWithoutConstructor();
         foreach ($properties as $p) {
             $daoP = new DaoableProperty();
+            $daoP->name = $p->getName();
             $daoP->setType($p->getType()->getName());
             $daoP->isNullable = $p->getType()->allowsNull();
             $daoP->defaultValue = isset($instance->{$p->getName()}) ? $instance->{$p->getName()} : null;
 
-            $this->_obj[$p->getName()] = $daoP;
+            $this->_obj[$daoP->name] = $daoP;
         }
     }
 
-    public function objToRow(DaoableObject $o, $id = 1)
+    public function objToRow(DaoableObject $o, bool $keepId = true)
     {
         $x = new \ReflectionClass($o);
-        $a = $x->newInstanceWithoutConstructor();
-        $b = $x->getProperties();
+        $properties = $x->getProperties();
         $r = [];
         $i = 0;
-        foreach ($b as $p) {
-            if ($id == 1 || ($id == 0 && $p->getName() != '_id')) {
+        foreach ($properties as $p) {
+            if ($keepId || (!$keepId && $p->getName() != '__id')) {
                 $r[0][$i] = $p->getName();
-                $r[1][$i] = is_array($o->{$p->getName()}) || is_object($o->{$p->getName()}) ? serialize($o->{$p->getName()}) : $o->{$p->getName()};
+
+                if (!isset($o->{$p->getName()})) {
+                    $r[1][$i] = null;
+                } elseif (is_object($o->{$p->getName()}) && is_subclass_of($o->{$p->getName()}, DaoableProperty::class)) {
+                    $r[1][$i] = $o->{$p->getName()}->value;
+                } elseif (is_object($o->{$p->getName()}) && get_class($o->{$p->getName()}) == \DateTime::class) {
+                    $r[1][$i] = $o->{$p->getName()}->format($this->_dateTimeFormat);
+                } else {
+                    $r[1][$i] = is_array($o->{$p->getName()}) || is_object($o->{$p->getName()}) ? serialize($o->{$p->getName()}) : $o->{$p->getName()};
+                }
                 $i++;
             }
         }
@@ -108,57 +101,34 @@ trait DaoGeneratorTrait
     public function rowToObj($r)
     {
         $x = new \ReflectionClass($this->_classname);
-        $a = $x->newInstanceWithoutConstructor();
         $o = $x->newInstance();
         foreach ($r as $key => $value) {
-            @$o->{$key} = is_array($a->{$key}) || is_object($a->{$key}) ? unserialize($value) : $value;
+            if ($this->_obj[$key]->isPhpType()) {
+                $o->{$key} = $value;
+            } else {
+                $o->{$key} = $this->getDaoPropertyInstance(
+                    $this->_obj[$key],
+                    $value
+                );
+            }
         }
 
         return $o;
     }
 
-    public function set(DaoableObject $object)
+    public function getDaoPropertyInstance($property, $value)
     {
-    }
+        switch ($property->type) {
+            case DaoableProperty::TYPE_DATETIME:
+                return new \DateTime($value);
+            case DaoableProperty::TYPE_ID:
+                $that = new Id();
+                $that->value = $value;
 
-    public function get_last()
-    {
-    }
-
-    public function get_all()
-    {
-    }
-
-    public function delete($object)
-    {
-    }
-
-    public function create_table()
-    {
-        if ($this->table_exists()) {
-            return;
+                return $that;
+            default:
+                return null;
         }
-    }
-
-    public function delete_table()
-    {
-    }
-
-    public function empty_table()
-    {
-    }
-
-    public function select($val, string $key = '_id', bool $multi = false)
-    {
-    }
-
-    public function select_all($val, string $key)
-    {
-        return $this->select($val, $key, true);
-    }
-
-    public function table_exists()
-    {
     }
 
     public function verify_table()
