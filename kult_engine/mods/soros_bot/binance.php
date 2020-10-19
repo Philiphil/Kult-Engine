@@ -66,7 +66,7 @@ class binance
 
     private function setupApiConfigFromFile()
     {
-        if (empty($this->api_key) == false || empty($this->api_key) == false) {
+        if (!empty($this->api_key)) {
             return;
         }
         if (file_exists(getenv('HOME').'/.config/jaggedsoft/php-binance-api.json') == false) {
