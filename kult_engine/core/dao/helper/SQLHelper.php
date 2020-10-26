@@ -180,7 +180,7 @@ class SQLHelper
             }
             $str .= $b->isNullable ? ' NULL' : ' NOT NULL';
             if ($b->defaultValue !== null) {
-                $str .= is_string($b->defaultValue) ? " DEFAULT '".addslashes($b->defaultValue)."'" : "";
+                $str .= is_string($b->defaultValue) ? " DEFAULT '".addslashes($b->defaultValue)."'" : '';
             }
             $v .= $str;
 

@@ -51,7 +51,6 @@ class DaoableProperty
     const TYPE_LONGTEXT = 9;
     const TYPE_BLOB = 10;
 
-
     const TYPE_ONE_TO_ONE_RELATION = 11;
     const TYPE_MANY_TO_ONE_RELATION = 12;
     const TYPE_ONE_TO_MANY_RELATION = 13;

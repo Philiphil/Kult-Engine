@@ -70,8 +70,7 @@ $d(new user());
 $u = new user();
 $u->lastLogin = new DateTime();
 $u->emails = new userEmail();
-$u->emails->email= "33";
-
+$u->emails->email = '33';
 
 $u = $d->insert($u); //remplacer u par &u pour eviter ça ?
 var_dump($u->__id);
