@@ -44,7 +44,7 @@ interface DaoGeneratorInterface
 
     public function rowToObj($r);
 
-    public function insert(DaoableObject $fnord);
+    public function insert(DaoableObject &$fnord);
 
     public function select_last();
 

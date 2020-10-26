@@ -51,6 +51,12 @@ class DaoableProperty
     const TYPE_LONGTEXT = 9;
     const TYPE_BLOB = 10;
 
+
+    const TYPE_ONE_TO_ONE_RELATION = 11;
+    const TYPE_MANY_TO_ONE_RELATION = 12;
+    const TYPE_ONE_TO_MANY_RELATION = 13;
+    const TYPE_MANY_TO_MANY_RELATION = 14;
+
     const REGULAR_TYPES = [
         self::TYPE_INT,
         self::TYPE_STRING,
@@ -82,6 +88,14 @@ class DaoableProperty
                 return self::TYPE_DOUBLE;
             case 'bool':
                 return self::TYPE_BOOL;
+            case 'KultEngine\OneToOneRelation':
+                return self::TYPE_ONE_TO_ONE_RELATION;
+            case 'KultEngine\ManyToOneRelation':
+                return self::TYPE_MANY_TO_ONE_RELATION;
+            case 'KultEngine\OneToManyRelation':
+                return self::TYPE_ONE_TO_MANY_RELATION;
+            case 'KultEngine\ManyToManyRelation':
+                return self::TYPE_MANY_TO_MANY_RELATION;
             default:
                 return self::TYPE_SERIAL;
         }

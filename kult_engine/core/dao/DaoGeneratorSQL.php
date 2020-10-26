@@ -44,7 +44,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
         $this->_helper = new SQLHelper();
     }
 
-    public function insert(DaoableObject $fnord)
+    public function insert(DaoableObject &$fnord)
     {
         $this->verify_table();
         if ($fnord->__id->value === $fnord->__getDefaultId()) {

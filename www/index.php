@@ -51,12 +51,12 @@ echo k\text::get_text('hello');
 </script>
 <?php
 
-//$d = new k\DaoGenerator(new pokemon(), new k\Connector());
-//$d->create_table();
+$d = new k\DaoGenerator(new pokemon(), new k\Connector());
+$d->create_table();
 
 $d = new KultEngine\DaoGenerator(new user(), new KultEngine\Connector());
 $d->create_table();
-
+/*
 $d(new userEmail());
 $d->create_table();
 
@@ -65,11 +65,16 @@ $d->create_table();
 
 $d(new userSocialAccount());
 $d->create_table();
-
+/**/
 $d(new user());
 $u = new user();
 $u->lastLogin = new DateTime();
+$u->emails = new userEmail();
+$u->emails->email= "33";
+
+
 $u = $d->insert($u); //remplacer u par &u pour eviter ça ?
+var_dump($u->__id);
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

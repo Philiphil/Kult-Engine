@@ -169,6 +169,9 @@ class SQLHelper
                 case DaoableProperty::TYPE_BLOB:
                     $str .= ' MEDIUMBLOB';
                     break;
+                case DaoableProperty::TYPE_ONE_TO_ONE_RELATION:
+                    $str .= ' INT';
+                    break;
                 default:
                 case DaoableProperty::TYPE_LONGTEXT:
                 case DaoableProperty::TYPE_SERIAL:
@@ -177,7 +180,7 @@ class SQLHelper
             }
             $str .= $b->isNullable ? ' NULL' : ' NOT NULL';
             if ($b->defaultValue !== null) {
-                $str .= " DEFAULT '".addslashes($b->defaultValue)."'";
+                $str .= is_string($b->defaultValue) ? " DEFAULT '".addslashes($b->defaultValue)."'" : "";
             }
             $v .= $str;
 

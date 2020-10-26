@@ -35,103 +35,6 @@ namespace KultEngine;
 use KultEngine\Core\Dao\DaoableProperty;
 use KultEngine\Core\Dao\Id;
 
-class Relation extends DaoableProperty
-{
-    const TYPE_MANY_TO_MANY = 1;
-    const TYPE_MANY_TO_ONE = 2;
-    const TYPE_ONE_TO_MANY = 3;
-    const TYPE_ONE_TO_ONE = 4;
-    public int $type = 0;
-
-    public KultEngine\DaoableObject $source;
-    public KultEngine\DaoableObject $target;
-
-    public ?string $sourceColumn;
-    public ?string $targetColumn;
-
-    public function __construct(int $type, DaoableObject $target)
-    {
-        $this->type = $type;
-        $this->target = $target;
-
-        parent::construct();
-    }
-}
-/*
-    relation spec
-        type de relation : determiner par enfant
-        classe source : injecter automatiquement par daogenerator
-        classe cible : manuel, constructeur
-
-        table source
-            useless
-        table cible
-            useless
-            Je peux (veux pas rendre possible) création de 2 table par projet
-            Je peux pas renommer table (et meme si c'est le cas, je peux magouiller pour automatiser le fait que je le sache)
-
-        col cible
-            déjà le nom de la prop qui déclare le relation
-        col source
-            seul info manquante
-
-
-
-*/
-
-class OneToOneRelation extends Relation
-{
-    public int $type = Relation::TYPE_ONE_TO_ONE;
-
-    public function __construct(DaoableObject $target)
-    {
-        parent::construct($this->type, $target);
-    }
-}
-class ManyToOneRelation extends Relation
-{
-    public int $type = Relation::TYPE_MANY_TO_ONE;
-
-    public function __construct(DaoableObject $target)
-    {
-        parent::construct($this->type, $target);
-    }
-}
-class OneToManyRelation extends Relation
-{
-    public int $type = Relation::TYPE_ONE_TO_MANY;
-
-    public function __construct(DaoableObject $target)
-    {
-        parent::construct($this->type, $target);
-    }
-}
-class ManyToManyRelation extends Relation
-{
-    public int $type = Relation::TYPE_MANY_TO_MANY;
-
-    public function __construct(int $type, DaoableObject $target)
-    {
-        parent::construct($this->type, $target);
-    }
-}
-/*
-    OneToOne
-        Je dois creer une simple column fk
-        stock id
-        retourne item
-    ManyToOne
-        source devrait avoir column fk
-        target devrait rien avoir coté sql ?
-    OneToMany
-        source devrait rien avoir ?
-    ManyToMany
-        chacun devrait etre informer ?
-
-
-
-
-*/
 abstract class DaoableObject
 {
     public Id $__id;
@@ -176,5 +79,20 @@ abstract class DaoableObject
         $n->__setIduniq()->__setDefaultId();
 
         return $n;
+    }
+
+    public function __set($name,$value)
+    {
+        var_dump($name);
+        if(!isset(self::$name))return;
+
+        var_dump(get_type(self::$name));
+
+    }
+    public function __get($name)
+    {
+        if(!isset(self::$name))return;
+
+        return;
     }
 }
