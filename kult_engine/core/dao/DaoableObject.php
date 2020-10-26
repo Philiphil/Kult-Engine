@@ -32,7 +32,6 @@
 
 namespace KultEngine;
 
-use KultEngine\Core\Dao\DaoableProperty;
 use KultEngine\Core\Dao\Id;
 
 abstract class DaoableObject
@@ -81,18 +80,20 @@ abstract class DaoableObject
         return $n;
     }
 
-    public function __set($name,$value)
+    public function __set($name, $value)
     {
         var_dump($name);
-        if(!isset(self::$name))return;
+        if (!isset(self::$name)) {
+            return;
+        }
 
         var_dump(get_type(self::$name));
-
     }
+
     public function __get($name)
     {
-        if(!isset(self::$name))return;
-
-        return;
+        if (!isset(self::$name)) {
+            return;
+        }
     }
 }
