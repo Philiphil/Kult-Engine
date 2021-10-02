@@ -38,7 +38,7 @@ include '../config.php';
 use KultEngine as k;
 use KultEngine\Core\Dao\DaoGenerator;
 
-k\Invoker::requireBase(['Router',"Session"]);
+k\Invoker::requireBase(['Router', 'Session']);
 k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();
@@ -73,13 +73,10 @@ k\session::set("user",$objet);
 */
 var_dump($_SESSION);
 
-if(!k\Session::isLog())
-{
+if (!k\Session::isLog()) {
     k\session::login();
-	echo "test";
+    echo 'test';
 }
-
-
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

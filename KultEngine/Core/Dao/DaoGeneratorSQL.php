@@ -31,8 +31,8 @@
  */
 
 namespace KultEngine\Core\Dao;
-use KultEngine\Core\Dao\Helper\SQLHelper;
 
+use KultEngine\Core\Dao\Helper\SQLHelper;
 
 class DaoGeneratorSQL implements DaoGeneratorInterface
 {
@@ -59,6 +59,7 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             $query->execute([$fnord->__iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
             $fnord->__id->value = $query[0]['__id'];
+
             return $fnord;
         } else {
             $o = $this->objToRow($fnord, false);

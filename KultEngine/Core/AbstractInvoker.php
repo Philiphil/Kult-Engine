@@ -135,9 +135,8 @@ abstract class AbstractInvoker
             } elseif (contains('.load.', $impt[$i])) {
                 include constant('imptpath').$impt[$i];
                 $classname = strstr($impt[$i], '.', true);
-                if(strripos($classname,DS))
-                {
-                    $classname =  substr($classname,strripos($classname,DS)+1);
+                if (strripos($classname, DS)) {
+                    $classname = substr($classname, strripos($classname, DS) + 1);
                 }
 
                 self::class_init($classname);
@@ -147,11 +146,11 @@ abstract class AbstractInvoker
 
     public static function class_init(string $key): void
     {
-        if(class_exists($key)){
-             $class=$key;
-        }else if (class_exists(__NAMESPACE__.'\\'.$key)) {
+        if (class_exists($key)) {
+            $class = $key;
+        } elseif (class_exists(__NAMESPACE__.'\\'.$key)) {
             $class = __NAMESPACE__.'\\'.$key;
-        }else{
+        } else {
             return;
         }
         $uses = class_uses($class);
@@ -161,7 +160,7 @@ abstract class AbstractInvoker
         }
 
         if (in_array("KultEngine\CoreElementTrait", $uses) ||
-                in_array( "KultEngine\settable",$uses)
+                in_array("KultEngine\settable", $uses)
             ) {
             $class::init();
         }
@@ -323,6 +322,7 @@ abstract class AbstractInvoker
             case 'connector':
                 require_once constant('corepath').'dao'.DS.'AbstractConnector.php';
                 self::class_init($f);
+
                 return true;
             case 'Session':
                 ini_set('session.use_strict_mode', true);

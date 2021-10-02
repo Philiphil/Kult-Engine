@@ -31,7 +31,9 @@
  */
 
 namespace KultEngine\Core\JWT;
+
 use KultEngine\JsonSerializableTrait;
+
 class JWTPayload
 {
     use JsonSerializableTrait;

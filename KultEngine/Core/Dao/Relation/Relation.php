@@ -32,16 +32,21 @@
 
 namespace KultEngine;
 
-use \Attribute;
-use KultEngine\Core\Dao\DaoableProperty;
-use KultEngine\Core\Dao\Id;
-
+use Attribute;
 
 #[Attribute]
-class OneToOne{}
+class OneToOne
+{
+}
 #[Attribute]
-class ManyToOne{}
+class ManyToOne
+{
+}
 #[Attribute]
-class OneToMany{}
+class OneToMany
+{
+}
 #[Attribute]
-class ManyToMany{}
+class ManyToMany
+{
+}

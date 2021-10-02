@@ -32,11 +32,6 @@
 
 namespace KultEngine\Core\Dao;
 
-use KultEngine\Core\Dao\DaoableObject;
-use KultEngine\Core\Dao\DaoableProperty;
-use KultEngine\Core\Dao\Id;
-use KultEngine\Core\Dao\OneToOne;
-
 trait DaoGeneratorTrait
 {
     public string $_classname = '';
@@ -57,10 +52,10 @@ trait DaoGeneratorTrait
 
     public function asign(DaoableObject $fnord)
     {
-        list($this->_obj,$this->_classname) = $this->objToDaoableProperties($fnord);
+        list($this->_obj, $this->_classname) = $this->objToDaoableProperties($fnord);
     }
 
-    public function objToDaoableProperties(DaoableObject $fnord) : array
+    public function objToDaoableProperties(DaoableObject $fnord): array
     {
         $_obj = [];
         $x = new \ReflectionClass($fnord);
@@ -87,11 +82,9 @@ trait DaoGeneratorTrait
 
             $_obj[$daoP->name] = $daoP;
         }
+
         return [$_obj, $_classname];
     }
-
-
-
 
     public function objToRow(DaoableObject $o, bool $keepId = true): array
     {
@@ -109,7 +102,7 @@ trait DaoGeneratorTrait
                     $r[1][$i] = $o->{$p->name}->format($this->_dateTimeFormat);
                 } else {
                     /*is unknown object, serialize or relation*/
-                    switch ($p->type){
+                    switch ($p->type) {
                         case DaoableProperty::TYPE_ONE_TO_ONE_RELATION:
                         case DaoableProperty::TYPE_MANY_TO_ONE_RELATION:
                             $r[1][$i] = $o->{$p->name}->__id->value;
@@ -122,6 +115,7 @@ trait DaoGeneratorTrait
                 $i++;
             }
         }
+
         return $r;
     }
 
@@ -140,6 +134,7 @@ trait DaoGeneratorTrait
             }
         }
         var_dump($o);
+
         return $o;
     }
 
@@ -152,20 +147,25 @@ trait DaoGeneratorTrait
             case DaoableProperty::TYPE_ID:
                 $that = new Id();
                 $that->value = $value;
+
                 return $that;
             case DaoableProperty::TYPE_ONE_TO_ONE_RELATION:
             case DaoableProperty::TYPE_MANY_TO_ONE_RELATION:
             case DaoableProperty::TYPE_ONE_TO_MANY_RELATION:
             case DaoableProperty::TYPE_MANY_TO_MANY_RELATION:
-                list($_obj,$_classname) = $this->objToDaoableProperties(new $property->classtype);
-                $object= static::_select($value, $_classname, $_obj);
+                list($_obj, $_classname) = $this->objToDaoableProperties(new $property->classtype());
+                $object = static::_select($value, $_classname, $_obj);
                 var_dump($object);
-                return new $property->classtype;//$object;
+
+                return new $property->classtype(); //$object;
             default:
                 return null;
         }
     }
-    public function _select($val, $classname, $obj, $key = '__id', $multi = 0){}
+
+    public function _select($val, $classname, $obj, $key = '__id', $multi = 0)
+    {
+    }
 
     public function verifyTable(): void
     {

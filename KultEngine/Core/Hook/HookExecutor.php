@@ -31,7 +31,7 @@
  */
 
 namespace KultEngine\Core\Hook;
-use KultEngine\Core\Hook\Hook;
+
 class HookExecutor
 {
     public function __destruct()
