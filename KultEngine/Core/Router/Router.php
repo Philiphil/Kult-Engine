@@ -33,11 +33,13 @@
 namespace KultEngine\Core\Router;
 
 use KultEngine as k;
+use  KultEngine\Core\Hook\HookableTrait;
+ use KultEngine\CoreElementTrait;
 
 abstract class Router
 {
-    use  \KultEngine\CoreElementTrait;
-    use \KultEngine\Core\Hook\HookableTrait;
+    use CoreElementTrait;
+    use HookableTrait;
     public static array $_a_asked = [];
     public static string $_asked = '';
     public static string $_method = 'GET';
@@ -149,13 +151,3 @@ abstract class Router
         return $args;
     }
 }
-
-    class global_route
-    {
-        public $_route;
-
-        public function __construct($route, $func, $method = 'GET', $code = 200)
-        {
-            router::$_global_route[count(router::$_global_route)] = [$route, $func, $method, intval($code)];
-        }
-    }

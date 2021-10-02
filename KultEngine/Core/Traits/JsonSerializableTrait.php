@@ -34,7 +34,7 @@ namespace KultEngine;
 
 trait JsonSerializableTrait
 {
-    public function jsonSerialize()
+    public function jsonSerialize(): string
     {
         return $this->__toJson();
     }
@@ -44,9 +44,9 @@ trait JsonSerializableTrait
         return json_encode($this);
     }
 
-    public static function __fromJsonString(string $json)
+    public static function __fromJsonString(string $json): self
     {
-        return $this->__fromJsonObject(json_decode($json));
+        return static::__fromJsonObject(json_decode($json));
     }
 
     public static function __fromJsonObject(object $json): self

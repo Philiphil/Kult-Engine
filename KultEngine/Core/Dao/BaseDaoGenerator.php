@@ -32,7 +32,10 @@
 
 namespace KultEngine\Core\Dao;
 
-trait DaoGeneratorTrait
+use KultEngine\Core\Dao\Relation\Cascade;
+use KultEngine\Core\Dao\Relation\Relation;
+
+abstract class BaseDaoGenerator
 {
     public string $_classname = '';
     public array $_obj = [];
@@ -70,10 +73,14 @@ trait DaoGeneratorTrait
 
             foreach ($p->getAttributes() as $attribute) {
                 switch ($attribute->getName()) {
-                    case "KultEngine\OneToOne":
-                    case "KultEngine\ManyToOne":
-                        $daoP->classtype = $p->getType()->getName();
+                    case "KultEngine\Core\Dao\Relation\OneToOne":
+                    case "KultEngine\Core\Dao\Relation\ManyToOne":
+                    //case "KultEngine\Core\Dao\Relation\ManyToMany"://liaison table then
+                    case "KultEngine\Core\Dao\Relation\OneToMany":
+                        $daoP->class = $p->getType()->getName();
                         $daoP->setType($attribute->getName());
+                        $daoP->persist = in_array(Cascade::PERSIST, $attribute->getArguments());
+                        $daoP->remove = in_array(Cascade::REMOVE, $attribute->getArguments());
                         break;
                 }
             }
@@ -90,7 +97,14 @@ trait DaoGeneratorTrait
     {
         $r = [];
         $i = 0;
-        foreach ($this->_obj as $p) {
+
+        if ($o::class != $this->_classname) {
+            list($obj, $classname) = $this->objToDaoableProperties($o);
+        } else {
+            $obj = $this->_obj;
+        }
+
+        foreach ($obj as $p) {
             if ($keepId || $p->name != '__id') {
                 $r[0][$i] = $p->name;
 
@@ -119,28 +133,31 @@ trait DaoGeneratorTrait
         return $r;
     }
 
-    public function rowToObj($r): DaoableObject
+    public function rowToObj($r, $classname = null): DaoableObject
     {
-        $x = new \ReflectionClass($this->_classname);
+        $x = new \ReflectionClass($classname ?? $this->_classname);
         $o = $x->newInstance();
+        if ($classname && $classname != $this->_classname) {
+            list($obj, $classname) = $this->objToDaoableProperties($o);
+        } else {
+            $obj = $this->_obj;
+        }
         foreach ($r as $key => $value) {
-            if ($this->_obj[$key]->isPhpType()) {
+            if ($obj[$key]->isPhpType()) {
                 $o->{$key} = $value;
             } else {
                 $o->{$key} = $this->getDaoPropertyInstance(
-                    $this->_obj[$key],
+                    $obj[$key],
                     $value
                 );
             }
         }
-        var_dump($o);
 
         return $o;
     }
 
     public function getDaoPropertyInstance($property, $value)
     {
-        var_dump($property);
         switch ($property->type) {
             case DaoableProperty::TYPE_DATETIME:
                 return new \DateTime($value);
@@ -155,7 +172,6 @@ trait DaoGeneratorTrait
             case DaoableProperty::TYPE_MANY_TO_MANY_RELATION:
                 list($_obj, $_classname) = $this->objToDaoableProperties(new $property->classtype());
                 $object = static::_select($value, $_classname, $_obj);
-                var_dump($object);
 
                 return new $property->classtype(); //$object;
             default:
@@ -169,8 +185,35 @@ trait DaoGeneratorTrait
 
     public function verifyTable(): void
     {
+        $this->_verifyTable($this->_classname);
+    }
+
+    public function _verifyTable(string $classname): void
+    {
         if (!$this->tableExists()) {
             $this->createTable();
         }
     }
+
+    abstract public function insert(DaoableObject $fnord);
+
+    abstract public function selectLast();
+
+    abstract public function selectAll();
+
+    abstract public function delete(DaoableObject $fnord);
+
+    abstract public function createTable();
+
+    abstract public function deleteTable();
+
+    abstract public function emptyTable();
+
+    abstract public function _select($val, string $classname, array $obj, string $key = '__id', bool $multi = false);
+
+    abstract public function select($val, string $key, bool $multi);
+
+    abstract public function tableExists();
+    // abstract public function _tableExists(string $classname);
+   // abstract public function _createTable(string $classname);
 }

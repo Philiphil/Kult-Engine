@@ -56,7 +56,7 @@ class BasicCrypter
         $return = [];
         $return['iv'] = base64_encode($this->_iv);
         $return['salt'] = base64_encode($this->_salt);
-        $return['txt'] = base64_encode(openssl_encrypt($txt, $this->_cipher, $this->_key, 0, $this->_iv));
+        $return['value'] = base64_encode(openssl_encrypt($txt, $this->_cipher, $this->_key, 0, $this->_iv));
 
         return json_encode($return);
     }
@@ -67,7 +67,7 @@ class BasicCrypter
         $this->_iv = base64_decode($obj['iv']);
         $this->_salt = base64_decode($obj['salt']);
         $this->generate_key($key);
-        $h = base64_decode($obj['txt']);
+        $h = base64_decode($obj['value']);
 
         return openssl_decrypt($h, $this->_cipher, $this->_key, 0, $this->_iv);
     }

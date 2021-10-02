@@ -2,106 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e3de43f-c013-434d-a8ef-2a0e59bcc8d9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/model/Player.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/model/class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Kult-Engine.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/AbstractInvoker.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/AbstractInvoker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/BaseDaoGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/BaseDaoGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGeneratorSQL.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGeneratorSQL.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoableProperty.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoableProperty.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/Helper/SQLHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/Helper/SQLHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/Id.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/Id.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Dao/Relation/Relation.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/Relation/Relation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/JWT/JWT.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/JWT/JWT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Router/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Router/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Session/SecureSessionHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Session/SecureSessionHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/Core/Traits/JsonSerializableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/JsonSerializableTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/optn/BasicCrypter.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/BasicCrypter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/optn/Map.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/Map.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/optn/UuidGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/UuidGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/optn/fatData.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/fatData.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/optn/lilData.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/lilData.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KultEngine/optn/secureSerial.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/secureSerial.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/cmd/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/cmd/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/cmd/kult_engine.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/cmd/kult_engine.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/cmd/tmls.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/cmd/tmls.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/AbstractInvoker.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/AbstractInvoker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/AbstractSession.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Session/AbstractSession.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Analytics.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Analytics.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Buffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Buffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Inquisitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Inquisitor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Invoker.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Invoker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Logger.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Logger.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/SecureSessionHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Session/SecureSessionHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Text.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Text.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Traits/CoreElementTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/CoreElementTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Traits/DebuggableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/DebuggableTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Traits/JsonSerializableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/JsonSerializableTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Traits/QueryableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/QueryableTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Traits/SettableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/SettableTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/Traits/TimableTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Traits/TimableTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/WebService.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/WebService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/AbstractConnector.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/AbstractConnector.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/DaoGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/DaoGeneratorInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGeneratorInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/DaoGeneratorSQL.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGeneratorSQL.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/DaoGeneratorTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoGeneratorTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/DaoableObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoableObject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/DaoableProperty.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/DaoableProperty.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/Id.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/Id.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/Relation.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/Relation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/dao/helper/SQLHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Dao/helper/SQLHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/fonction.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/fonction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/hook/Hook.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Hook/Hook.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/hook/HookExecutor.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Hook/HookExecutor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/hook/Hookabletrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Hook/Hookabletrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/jwt/JWT.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/JWT/JWT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/jwt/JWTHeader.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/JWT/JWTHeader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/jwt/JWTPayload.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/JWT/JWTPayload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/route/Route.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Router/Route.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/core/route/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/Core/Router/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/demo/demo.handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/demo/demo.handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/cart.ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/cart.ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/cart.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/cart.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/model/model.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/model/model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/paiementValide.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/paiementValide.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/shop.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/shop.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/shop.config.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/shop.config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/shop.handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/shop.handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/admin_header.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/admin_header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/create_shop.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/create_shop.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/empty_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/empty_admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/magasin_admin_new.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/magasin_admin_new.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/product_admin_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/product_admin_edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/product_admin_new.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/product_admin_new.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/template/shopText.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/template/shopText.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/ticket.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/shop/validationpaiement.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/shop/validationpaiement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/soros_bot/binance.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/soros_bot/binance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/soros_bot/class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/soros_bot/class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/soros_bot/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/soros_bot/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/soros_bot/kraken.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/soros_bot/kraken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/mods/soros_bot/soros_bot.handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/mods/soros_bot/soros_bot.handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/crypter.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/crypter.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/drivecontroller.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/drivecontroller.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/fatData.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/fatData.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/fluentConcrete.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/fluentConcrete.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/lilData.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/lilData.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/loop.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/loop.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/map.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/map.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/mlText.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/mlText.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/picuploadHelper.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/picuploadHelper.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/sanitizer.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/sanitizer.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/secureSerial.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/secureSerial.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/serializableClosure.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/serializableClosure.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/sse.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/sse.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/templater.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/templater.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/uploadHelper.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/uploadHelper.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/urlTempo.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/urlTempo.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/vector.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/vector.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/optn/webPolice.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/optn/webPolice.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/tmp/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/tmp/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kult_engine/vendor/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/KultEngine/vendor/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/impt/rqrd/connector.load.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/impt/rqrd/Connector.load.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/impt/rqrd/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/impt/rqrd/route.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/impt/rqrd/session.load.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/impt/rqrd/Session.load.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/model/pokemon.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/model/pokemon.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/model/user.class.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/api/demo.ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/api/demo.ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/impt/rqrd/page.load.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/impt/rqrd/page.load.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/model/Creature.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/model/Creature.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-front/src/components/game/CreateCharacter/Skills.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-front/src/components/game/CreateCharacter/Skills.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-front/src/store/modules/newchar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-front/src/store/modules/newchar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/.eslintrc.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/.eslintrc.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/HelloI18n.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/common/AttributeInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/common/AttributeInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/common/NumberInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/common/NumberInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/common/SkillInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/common/SkillInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/game/CreateCharacter/Attributes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/game/CreateCharacter/Attributes.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/game/CreateCharacter/Main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/game/CreateCharacter/Main.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/game/CreateCharacter/Skills.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/components/game/CreateCharacter/Skills.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../WORK/woc-vue3/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../WORK/woc-vue3/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +49,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -117,14 +59,34 @@
   <component name="FavoritesManager">
     <favorites_list name="woc" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Sass File" />
+        <option value="SCSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/../../../../WORK/woc-front/package.json" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -162,16 +124,28 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/kult_engine/core/Session" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../WORK/hootside-app-rc-front/src/components/Variable" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="ts.external.directory.path" value="D:\PRORGRAMME\PhpStorm 2021.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\WORK\woc\kult_engine\core\Session" />
+      <recent name="D:\WORK\hootside-app-rc-front\src\components\Variable" />
+      <recent name="D:\WORK\woc-vue3\src" />
+      <recent name="D:\WORK\woc-vue3" />
+      <recent name="D:\WORK\woc-vue3\src\views" />
+      <recent name="D:\WORK\hootside-app-rc-front\src\layout" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\WORK\woc\local" />
+      <recent name="D:\WORK\woc-front\src\store\modules" />
+      <recent name="D:\PRORGRAMME\wamp3.2.3\www\woc-api\src\Repository\Creature" />
+      <recent name="D:\PRORGRAMME\wamp3.2.3\www\woc-api\src\Entity\Creature" />
+      <recent name="D:\WORK\woc-front\src\views" />
+      <recent name="D:\WORK\woc-front\src\components" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -185,7 +159,46 @@
       <workItem from="1630000082361" duration="25000" />
       <workItem from="1630046754405" duration="2867000" />
       <workItem from="1630076992834" duration="109000" />
-      <workItem from="1630077143753" duration="7796000" />
+      <workItem from="1630077143753" duration="7841000" />
+      <workItem from="1630132550591" duration="6607000" />
+      <workItem from="1630258706584" duration="1096000" />
+      <workItem from="1630334794323" duration="8453000" />
+      <workItem from="1630396742759" duration="7296000" />
+      <workItem from="1630423518926" duration="68000" />
+      <workItem from="1630431115208" duration="2064000" />
+      <workItem from="1630478154344" duration="595000" />
+      <workItem from="1630499276621" duration="43000" />
+      <workItem from="1630505570830" duration="9063000" />
+      <workItem from="1630564446136" duration="1538000" />
+      <workItem from="1630824859679" duration="5338000" />
+      <workItem from="1630861124389" duration="1407000" />
+      <workItem from="1630866120950" duration="131000" />
+      <workItem from="1630910967198" duration="740000" />
+      <workItem from="1630942173425" duration="6633000" />
+      <workItem from="1630995889401" duration="30664000" />
+      <workItem from="1631039591519" duration="770000" />
+      <workItem from="1631082831815" duration="31167000" />
+      <workItem from="1631168517918" duration="16887000" />
+      <workItem from="1631211444359" duration="1119000" />
+      <workItem from="1631256434676" duration="30090000" />
+      <workItem from="1631342591793" duration="4532000" />
+      <workItem from="1631375504007" duration="7113000" />
+      <workItem from="1631464104587" duration="6738000" />
+      <workItem from="1631513633046" duration="31190000" />
+      <workItem from="1631600295569" duration="35291000" />
+      <workItem from="1631686961727" duration="7836000" />
+      <workItem from="1631710071819" duration="8184000" />
+      <workItem from="1631968699834" duration="6132000" />
+      <workItem from="1632042092576" duration="367000" />
+      <workItem from="1632466276248" duration="15790000" />
+      <workItem from="1632587983599" duration="4264000" />
+      <workItem from="1632673339915" duration="7359000" />
+      <workItem from="1632723045367" duration="30969000" />
+      <workItem from="1632896201078" duration="25574000" />
+      <workItem from="1632935956761" duration="2670000" />
+      <workItem from="1633021430720" duration="3561000" />
+      <workItem from="1633069413682" duration="30265000" />
+      <workItem from="1633156360740" duration="2271000" />
     </task>
     <servers />
   </component>
@@ -228,8 +241,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

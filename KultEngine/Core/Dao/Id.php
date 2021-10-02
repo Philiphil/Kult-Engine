@@ -32,9 +32,14 @@
 
 namespace KultEngine\Core\Dao;
 
-class Id extends DaoableProperty
+class Id extends DaoableProperty implements \Stringable
 {
     public int $type = 1;
     public bool $isNullable = false;
     public $defaultValue = null;
+
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

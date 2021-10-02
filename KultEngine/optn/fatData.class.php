@@ -40,7 +40,7 @@ class fatData
     public function __construct($data = null, $time = null)
     {
         $this->_data = $data;
-        $this->_timestamp = is_null($time) ? time() : $time;
+        $this->_timestamp = $time ?? time();
     }
 
     public function set($name)
@@ -53,11 +53,5 @@ class fatData
         $v = json_decode(file_get_contents(constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR.$name.'.fat'), true);
 
         return new self($v['_data'], $v['_timestamp']);
-    }
-
-    public function __invoke($data)
-    {
-        $this->_data = $data;
-        $this->_timestamp = time();
     }
 }

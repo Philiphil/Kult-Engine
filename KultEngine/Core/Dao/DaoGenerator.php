@@ -34,7 +34,7 @@ namespace KultEngine\Core\Dao;
 
 class DaoGenerator
 {
-    private DaoGeneratorInterface $_realGenerator;
+    private BaseDaoGenerator $_realGenerator;
 
     public function __construct(DaoableObject $fnord, AbstractConnector $connector)
     {

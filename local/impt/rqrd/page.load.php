@@ -47,7 +47,7 @@ class page
                 <script>var timer = new Date();</script>
                 <title>'.$title.text::get_text('main_title').'</title>
                 <meta content="width=device-width, initial-scale=1" name="viewport" />
-
+                <meta name="google-signin-client_id" content="110930602597-hk0icd5fd1cjmr96u93psvsoshgr4puh.apps.googleusercontent.com">
                 <link href="'.constant('contentpath').'assets/main.css" rel="stylesheet" type="text/css" />
                 <link rel="shortcut icon" href="favicon.ico" />';
         self::standardpage_api();
@@ -57,7 +57,10 @@ class page
 
     public static function standardpage_header(): void
     {
-        echo '<body>';
+        echo '<body>
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+';
     }
 
     public static function standardpage_footer(): void
@@ -78,6 +81,10 @@ class page
     {
         include constant('rqrdpath').'javascript.php';
         echo'       
+        
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
         <script src="'.constant('contentpath').'script/jquery.js"></script>
         <script src="'.constant('contentpath').'script/json.js"></script>
         <script src="'.constant('contentpath').'script/ajax.class.js"></script>

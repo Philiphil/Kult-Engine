@@ -43,7 +43,7 @@ class config
     public static $kult_engineFolder = 'KultEngine';
 
     // HTML root folder's name
-    public static $htmlFolder = '/';
+    public static $htmlFolder = '';
 
     //SQL IDs
     public static $host = 'localhost:3306';

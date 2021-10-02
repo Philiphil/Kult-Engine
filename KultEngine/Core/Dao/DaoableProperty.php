@@ -35,10 +35,13 @@ namespace KultEngine\Core\Dao;
 class DaoableProperty
 {
     public int $type = 1;
+    public ?string $class = null;
     public bool $isNullable = false;
     public $defaultValue = null;
     public string $name = '';
     public $value;
+    public bool $persist = false;
+    public bool $remove = false;
 
     const TYPE_ID = 1;
     const TYPE_DATETIME = 2;
@@ -87,13 +90,13 @@ class DaoableProperty
                 return self::TYPE_DOUBLE;
             case 'bool':
                 return self::TYPE_BOOL;
-            case 'KultEngine\OneToOneRelation':
+            case 'KultEngine\Core\Dao\Relation\OneToOne':
                 return self::TYPE_ONE_TO_ONE_RELATION;
-            case 'KultEngine\ManyToOneRelation':
+            case 'KultEngine\Core\Dao\Relation\ManyToOne':
                 return self::TYPE_MANY_TO_ONE_RELATION;
-            case 'KultEngine\OneToManyRelation':
+            case 'KultEngine\Core\Dao\Relation\OneToMany':
                 return self::TYPE_ONE_TO_MANY_RELATION;
-            case 'KultEngine\ManyToManyRelation':
+            case 'KultEngine\Core\Dao\Relation\ManyToMany':
                 return self::TYPE_MANY_TO_MANY_RELATION;
             default:
                 return self::TYPE_SERIAL;

@@ -164,7 +164,7 @@ class SQLHelper
                     $str .= ' DOUBLE';
                     break;
                 case DaoableProperty::TYPE_BOOL:
-                    $str .= ' BOOLEAN';
+                    $str .= ' TINYINT(1)';
                     break;
                 case DaoableProperty::TYPE_BLOB:
                     $str .= ' MEDIUMBLOB';
