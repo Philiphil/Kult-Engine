@@ -35,13 +35,13 @@ namespace KultEngine\Core\Dao;
 class DaoableProperty
 {
     public int $type = 1;
-    public ?string $class=null;
+    public ?string $class = null;
     public bool $isNullable = false;
     public $defaultValue = null;
     public string $name = '';
     public $value;
-    public bool $persist=false;
-    public bool $remove=false;
+    public bool $persist = false;
+    public bool $remove = false;
 
     const TYPE_ID = 1;
     const TYPE_DATETIME = 2;

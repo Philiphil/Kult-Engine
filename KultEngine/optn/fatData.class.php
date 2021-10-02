@@ -54,5 +54,4 @@ class fatData
 
         return new self($v['_data'], $v['_timestamp']);
     }
-
 }
