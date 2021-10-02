@@ -30,18 +30,33 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core\Dao\Relation;
 
 use \Attribute;
 use KultEngine\Core\Dao\DaoableProperty;
 use KultEngine\Core\Dao\Id;
 
+class Cascade{
+    CONST PERSIST= "persist";
+    CONST REMOVE= "remove";
+}
+class Relation{
+  //  CONST REMOVE= "mappedBy";
+    public $attributes=[];
+    public function __construct(...$attributes)
+    {
+        foreach ($attributes as $attribute)
+        {
+            $this->attributes[] = $attribute;
+        }
+    }
+}
 
 #[Attribute]
-class OneToOne{}
+class OneToOne extends Relation{}
 #[Attribute]
-class ManyToOne{}
+class ManyToOne extends Relation{}
 #[Attribute]
-class OneToMany{}
+class OneToMany extends Relation{}
 #[Attribute]
-class ManyToMany{}
+class ManyToMany extends Relation{}

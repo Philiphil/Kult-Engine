@@ -52,32 +52,7 @@ echo k\text::get_text('hello');
 	})
 </script>
 <?php
-/*
-$d = new k\DaoGenerator(new PlayerLogin(), new k\Connector());
-$d->create_table();
 
-$d(new PlayerEmail());
-$d->create_table();
-
-$d(new PlayerPassword());
-$d->create_table();
-
-$d(new Player());
-$d->create_table();*/
-/**//*
-$d = new DaoGenerator(new Player(), new k\Connector());
-
-$objet = $d->selectLast();
-k\session::login();
-k\session::set("user",$objet);
-*/
-var_dump($_SESSION);
-
-if(!k\Session::isLog())
-{
-    k\session::login();
-	echo "test";
-}
 
 
 

@@ -1,16 +1,17 @@
-# Fullstack PHP Framework
+# BACKEND PHP Framework
 
 The Kult engine is a php framework aiming to be a lightweight and easy to use/configure/install/learn set of powerful tools able to fit every website's common task and need.
 
-**PHP 7**
+**PHP 8**
 
-**Version : 1.34-BETA**
+**Version : 2:PRE-RELEASE1**
 
 
 
 ## Why choose the Kult Engine ?
 
-I dont think someone should have linux, composer, wget, git, docker, dthen run 11 command in order to download a folder with .php files.
+A website is a folder full of PHP files, it should run anywhere, it should not require composer, docker, any particular OS, wget, nor to run 11 commands in order to run.
+You should not have to spend more time editing yaml files than do actual coding.
 
 You can drag & drop your website on a whole different server, just conf.php will require any change and no download will be required.
 
@@ -36,12 +37,7 @@ Based on this idea to make something that runs quick, the kult engine stated to 
 Just download it.
 ## How to make it run ?
 Extract it to your site's root folder and edit config.php 
-## How to make it work ? Well, in your files add
-```
-  require('../config.php');
-  kult_engine\invoker::require_basics();
-```
-## How to help me ?
-[Paypal](https://www.paypal.me/TSorriaux)
+## How to make it work ? 
+Default www/index.php serve as a demo, it should already run
 
 

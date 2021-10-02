@@ -36,7 +36,7 @@ class secureSerial
 {
     public static $_salt = ';0:1,lAur@]9ç';
 
-    public static function serialize($input)
+    public static function serialize($input): string
     {
         $output = [];
         $output[0] = serialize($input);

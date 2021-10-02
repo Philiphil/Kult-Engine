@@ -94,12 +94,12 @@ class SecureSessionHandler extends \SessionHandler
         return !(session_id() === '' && session_start() && mt_rand(0, 4) === 0) || $this->refresh();
     }
 
-    public function refresh()
+    public function refresh(): bool
     {
         return session_regenerate_id(true);
     }
 
-    public function close()
+    public function close(): bool
     {
         return session_write_close();
     }

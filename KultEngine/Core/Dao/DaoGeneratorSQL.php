@@ -31,12 +31,12 @@
  */
 
 namespace KultEngine\Core\Dao;
+use KultEngine\Core\Dao\BaseDaoGenerator;
 use KultEngine\Core\Dao\Helper\SQLHelper;
 
 
-class DaoGeneratorSQL implements DaoGeneratorInterface
+class DaoGeneratorSQL extends BaseDaoGenerator
 {
-    use DaoGeneratorTrait;
     public string $_dateTimeFormat = 'Y-m-d H:i:s';
 
     public function __construct(DaoableObject $fnord, AbstractConnector $connector)
@@ -46,29 +46,43 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
         $this->_helper = new SQLHelper();
     }
 
-    public function insert(DaoableObject &$fnord): DaoableObject
+    public function insert(DaoableObject $fnord): DaoableObject
     {
         $this->verifyTable();
+
+        list($daoableProperties ,$classname)= $this->objToDaoableProperties($fnord);
+
+        foreach ($daoableProperties as $daoableProperty)
+        {
+            if($daoableProperty->persist &&
+                ($daoableProperty->value == $fnord->__getDefaultId() ||
+                !$daoableProperty->isNullable && $daoableProperty->value===null)
+            )
+            {
+                $fnord->{$daoableProperty->name} = $this->insert($fnord->{$daoableProperty->name});
+            }
+        }/**/
+        $o = $this->objToRow($fnord, false);
         if ($fnord->__id->value === $fnord->__getDefaultId()) {
-            $o = $this->objToRow($fnord, 0);
-            $query = $this->_helper->insert($this->_classname, $o[0]);
+            $query = $this->_helper->insert($classname, $o[0]);
+            var_dump($query);
+            var_dump($o[1]);
             $query = $this->query($query);
+            var_dump($query);
+            var_dump($o[1]);
             $query->execute($o[1]);
-            $query = $this->_helper->select_string($this->_classname, '__iduniq');
+            $query = $this->_helper->select_string($classname, '__iduniq');
             $query = $this->query($query);
             $query->execute([$fnord->__iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
             $fnord->__id->value = $query[0]['__id'];
-            return $fnord;
         } else {
-            $o = $this->objToRow($fnord, false);
-            $query = $this->_helper->update_int($this->_classname, '__id', '__id', $o[0]);
+            $query = $this->_helper->update_int($classname, '__id', '__id', $o[0]);
             $query = $this->query($query);
             $o[1][] = $fnord->__id->value;
             $query->execute($o[1]);
-
-            return $fnord;
         }
+        return $fnord;
     }
 
     public function selectLast(): ?DaoableObject
@@ -135,14 +149,19 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
         $query->execute();
     }
 
-    public function select($val, $key = '__id', $multi = 0)
+    public function select($val, string $key = '__id', bool $multi=false)
     {
         $this->verifyTable();
-        $query = (gettype($this->_obj[$key]) === 'integer' ||
-            $this->_obj[$key] === 'id' || gettype($this->_obj[$key]) === 'boolean' ||
-            gettype($this->_obj[$key]) === 'double')
-            ? $this->_helper->select_int($this->_classname, $key, $key)
-            : $this->_helper->select_string($this->_classname, $key, $key);
+        return $this->_select($val,$this->_classname,$this->_obj,$key,$multi);
+    }
+
+    public function _select($val, string $classname, array $obj, string $key = '__id', bool $multi=false)
+    {
+        $query = (gettype($obj[$key]) === 'integer' ||
+            $obj[$key] === 'id' || gettype($obj[$key]) === 'boolean' ||
+            gettype($obj[$key]) === 'double')
+            ? $this->_helper->select_int($classname, $key, $key)
+            : $this->_helper->select_string($classname, $key, $key);
         $query = $this->query($query);
         $query->execute([$val]);
         $query = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -154,19 +173,20 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             return false;
         }
         if (!$multi) {
-            return $this->rowToObj($query[0]);
+
+            return $this->rowToObj($query[0],$classname);
         }
         if ($multi) {
             $r = [];
             foreach ($query as $key) {
-                $r[] = $this->rowToObj($key[0]);
+                $r[] = $this->rowToObj($key[0],$classname);
             }
 
             return $r;
         }
     }
 
-    public function tableExists()
+    public function tableExists(): bool
     {
         try {
             $query = $this->_helper->select_last($this->_classname, '__id');
@@ -179,4 +199,5 @@ class DaoGeneratorSQL implements DaoGeneratorInterface
             return false;
         }
     }
+
 }

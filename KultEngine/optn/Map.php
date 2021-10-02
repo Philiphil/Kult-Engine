@@ -95,7 +95,8 @@ class Map extends vector
     public function insert($key, $value) : void
     {
         if (is_int($key)) {
-            return parent::insert($key, $value);
+             parent::insert($key, $value);
+             return;
         }
         if (is_array($value)) {
             $value = new self($value);

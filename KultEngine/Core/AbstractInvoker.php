@@ -89,7 +89,7 @@ abstract class AbstractInvoker
 
         define('clipath', constant('cmdpath').'app.php');
 
-        define('traitspath', constant('corepath').'traits'.DIRECTORY_SEPARATOR);
+        define('traitspath', constant('corepath').'Traits'.DIRECTORY_SEPARATOR);
 
         define('tpltpath', constant('imptpath').'tplt'.DIRECTORY_SEPARATOR);
         define('ctrlpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
@@ -211,7 +211,6 @@ abstract class AbstractInvoker
         require_once constant('corepath').'fonction.php';
         require_once constant('traitspath').'DebuggableTrait.php';
         require_once constant('traitspath').'SettableTrait.php';
-        require_once constant('traitspath').'QueryableTrait.php';
         require_once constant('traitspath').'CoreElementTrait.php';
         require_once constant('traitspath').'JsonSerializableTrait.php';
         require_once constant('traitspath').'TimableTrait.php';
@@ -262,15 +261,17 @@ abstract class AbstractInvoker
 
     public static function require_local_model(): void
     {
-        require_once corepath.'dao'.DS.'AbstractConnector.php';
-        require_once corepath.'dao'.DS.'DaoableProperty.php';
-        require_once corepath.'dao'.DS.'Id.php';
-        require_once corepath.'dao'.DS.'DaoableObject.php';
-        require_once corepath.'dao'.DS.'DaoGeneratorInterface.php';
-        require_once corepath.'dao'.DS.'DaoGeneratorTrait.php';
-        require_once corepath.'dao'.DS.'DaoGenerator.php';
-        require_once corepath.'dao'.DS.'DaoGeneratorSQL.php';
-        require_once corepath.'dao'.DS.'helper'.DS.'SQLHelper.php';
+        require_once corepath.'Dao'.DS.'AbstractConnector.php';
+        require_once corepath.'Dao'.DS.'DaoableProperty.php';
+        require_once corepath.'Dao'.DS.'Id.php';
+        require_once corepath.'Dao'.DS.'DaoableObject.php';
+        require_once corepath.'Dao'.DS.'BaseDaoGenerator.php';
+        require_once corepath.'Dao'.DS.'DaoGenerator.php';
+        require_once corepath.'Dao'.DS.'DaoGeneratorSQL.php';
+        require_once corepath.'Dao'.DS.'Relation'.DS.'Relation.php';
+        require_once corepath.'Dao'.DS.'DaoGenerator.php';
+        require_once corepath.'Dao'.DS.'DaoGeneratorSQL.php';
+        require_once corepath.'Dao'.DS.'Helper'.DS.'SQLHelper.php';
         $model = scandir(constant('modelpath'));
         foreach ($model as $key) {
             if (contains('.class.', $key)) {
@@ -321,7 +322,7 @@ abstract class AbstractInvoker
 
                 return true;
             case 'connector':
-                require_once constant('corepath').'dao'.DS.'AbstractConnector.php';
+                require_once constant('corepath').'Dao'.DS.'AbstractConnector.php';
                 self::class_init($f);
                 return true;
             case 'Session':
@@ -332,9 +333,9 @@ abstract class AbstractInvoker
                 ini_set('session.use_trans_sid', false);
                 ini_set('session.save_handler', 'files');
                 session_save_path(sys_get_temp_dir());
-                require_once constant('corepath').'jwt'.DS.'JWTHeader.php';
-                require_once constant('corepath').'jwt'.DS.'JWTPayload.php';
-                require_once constant('corepath').'jwt'.DS.'JWT.php';
+                require_once constant('corepath').'JWT'.DS.'JWTHeader.php';
+                require_once constant('corepath').'JWT'.DS.'JWTPayload.php';
+                require_once constant('corepath').'JWT'.DS.'JWT.php';
                 require_once constant('corepath').'Session'.DS.'SecureSessionHandler.php';
                 require_once constant('corepath').'Session'.DS.'AbstractSession.php';
               //  self::class_init($f);
