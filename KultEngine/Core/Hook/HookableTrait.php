@@ -30,6 +30,15 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine\Core\Hook;
+
+trait HookableTrait
+{
+    public static function hook()
+    {
+        $bfr = static::destruct();
+        Hook::addHook($bfr[0], $bfr[1]);
+    }
+
+    abstract public static function destruct();
+}

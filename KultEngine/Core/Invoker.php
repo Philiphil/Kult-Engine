@@ -30,6 +30,36 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+abstract class Invoker extends AbstractInvoker
+{
+    public static function requireBase(?array $ext = null)
+    {
+        parent::_requireBase();
+
+        set_error_handler(__NAMESPACE__.'\Invoker::error');
+
+        require_once constant('corepath').'Logger.php';
+
+        require_once constant('rqrdpath').'i18n.php';
+        require_once constant('corepath').'Text.php';
+
+        require_once constant('corepath').'Buffer.php';
+
+        Text::init();
+
+        self::require_mods($ext);
+        self::require_local_model();
+        self::require_vendor();
+        self::require_local_controler();
+        self::require_impt();
+    }
+
+    public static function analytics()
+    {
+        self::_requireBase();
+        require_once constant('corepath').'Analytics.php';
+        Analytics::init();
+    }
+}

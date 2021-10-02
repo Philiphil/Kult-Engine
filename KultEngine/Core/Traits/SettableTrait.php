@@ -30,6 +30,54 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+trait SettableTrait
+{
+    private static bool $set = false;
+
+    abstract public static function setter();
+
+    abstract public static function setter_conf($fnord);
+
+    public static function init($fnord = null)
+    {
+        if (!self::$set) {
+            self::$set = true;
+            $r = is_null($fnord) ? self::setter() : self::setter_conf($fnord);
+            if (in_array(
+                "KultEngine\Core\Hook\HookableTrait",
+                class_uses(get_called_class())
+            )
+            ) {
+                self::hook();
+            }
+
+            return $r;
+        }
+        trigger_error(get_called_class().' ALREADY SET');
+    }
+
+    public static function uninit(): bool
+    {
+        if (self::$set) {
+            self::$set = false;
+
+            return false;
+        }
+        trigger_error(get_called_class().' NOT SET YET');
+
+        return true;
+    }
+
+    public static function init_required(): bool
+    {
+        if (!self::$set) {
+            trigger_error(get_called_class().' NOT SET', E_USER_ERROR);
+
+            return false;
+        }
+
+        return true;
+    }
+}

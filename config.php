@@ -40,13 +40,13 @@ class config
     public static $localCodeFolder = 'local';
 
     //kult_engine folder compared to config.php or fullpath
-    public static $kult_engineFolder = 'kult_engine';
+    public static $kult_engineFolder = 'KultEngine';
 
     // HTML root folder's name
     public static $htmlFolder = '/';
 
     //SQL IDs
-    public static $host = 'localhost:3301';
+    public static $host = 'localhost:3306';
     public static $db = 'test';
     public static $user = 'root';
     public static $pass = '';
@@ -68,5 +68,5 @@ class config
     public static $file = __FILE__;
 }
 
-require_once substr(config::$file, 0, -10).config::$kult_engineFolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'AbstractInvoker.php';
-require_once substr(config::$file, 0, -10).config::$kult_engineFolder.DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'Invoker.php';
+require_once substr(config::$file, 0, -10).config::$kult_engineFolder.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'AbstractInvoker.php';
+require_once substr(config::$file, 0, -10).config::$kult_engineFolder.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'Invoker.php';

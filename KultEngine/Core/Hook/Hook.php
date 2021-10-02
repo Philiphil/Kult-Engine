@@ -30,6 +30,32 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine\Core\Hook;
+
+use KultEngine\coreElementTrait;
+
+abstract class Hook
+{
+    use CoreElementTrait;
+
+    public static array $_hooks = [];
+    private static HookExecutor $_auto_executor;
+
+    public static function setter()
+    {
+        self::$_auto_executor = new HookExecutor();
+    }
+
+    public static function exec()
+    {
+        ksort(static::$_hooks);
+        foreach (static::$_hooks as $key) {
+            call_user_func($key[0], $key[1]);
+        }
+    }
+
+    public static function addHook($f, $p)
+    {
+        static::$_hooks[$p] = $f;
+    }
+}

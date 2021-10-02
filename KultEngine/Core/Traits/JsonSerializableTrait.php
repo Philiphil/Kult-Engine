@@ -30,6 +30,33 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+trait JsonSerializableTrait
+{
+    public function jsonSerialize()
+    {
+        return $this->__toJson();
+    }
+
+    public function __toJson(): string
+    {
+        return json_encode($this);
+    }
+
+    public static function __fromJsonString(string $json)
+    {
+        return $this->__fromJsonObject(json_decode($json));
+    }
+
+    public static function __fromJsonObject(object $json): self
+    {
+        $properties = get_object_vars($json);
+        $d = new self();
+        foreach ($properties as $property => $value) {
+            $d->$property = $value;
+        }
+
+        return $d;
+    }
+}
