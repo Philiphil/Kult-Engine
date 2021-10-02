@@ -153,7 +153,6 @@ abstract class BaseDaoGenerator
             }
         }
 
-
         return $o;
     }
 
@@ -173,12 +172,12 @@ abstract class BaseDaoGenerator
             case DaoableProperty::TYPE_MANY_TO_MANY_RELATION:
                 list($_obj, $_classname) = $this->objToDaoableProperties(new $property->classtype());
                 $object = static::_select($value, $_classname, $_obj);
+
                 return new $property->classtype(); //$object;
             default:
                 return null;
         }
     }
-
 
     public function _select($val, $classname, $obj, $key = '__id', $multi = 0)
     {
