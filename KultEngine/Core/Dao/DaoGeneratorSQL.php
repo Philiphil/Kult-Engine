@@ -73,6 +73,7 @@ class DaoGeneratorSQL extends BaseDaoGenerator
             $query->execute([$fnord->__iduniq]);
             $query = $query->fetchAll(\PDO::FETCH_ASSOC);
             $fnord->__id->value = $query[0]['__id'];
+            return $fnord;
         } else {
             $query = $this->_helper->update_int($classname, '__id', '__id', $o[0]);
             $query = $this->query($query);

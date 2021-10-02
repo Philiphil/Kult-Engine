@@ -34,6 +34,7 @@ namespace KultEngine;
 
 class UuidGenerator
 {
+
     public static function v3(string $namespace, string $name): string
     {
         if (!self::is_valid($namespace)) {
@@ -92,4 +93,5 @@ class UuidGenerator
         return preg_match('/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?'.
                 '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i', $uuid) === 1;
     }
+
 }
