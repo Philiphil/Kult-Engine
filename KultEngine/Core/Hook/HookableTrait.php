@@ -31,7 +31,6 @@
  */
 
 namespace KultEngine\Core\Hook;
-use KultEngine\Core\Hook\Hook;
 
 trait HookableTrait
 {

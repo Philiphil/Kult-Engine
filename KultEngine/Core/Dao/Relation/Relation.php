@@ -32,31 +32,39 @@
 
 namespace KultEngine\Core\Dao\Relation;
 
-use \Attribute;
-use KultEngine\Core\Dao\DaoableProperty;
-use KultEngine\Core\Dao\Id;
+use Attribute;
 
-class Cascade{
-    CONST PERSIST= "persist";
-    CONST REMOVE= "remove";
+class Cascade
+{
+    const PERSIST = 'persist';
+    const REMOVE = 'remove';
 }
-class Relation{
-  //  CONST REMOVE= "mappedBy";
-    public $attributes=[];
+class Relation
+{
+    //  CONST REMOVE= "mappedBy";
+    public $attributes = [];
+
     public function __construct(...$attributes)
     {
-        foreach ($attributes as $attribute)
-        {
+        foreach ($attributes as $attribute) {
             $this->attributes[] = $attribute;
         }
     }
 }
 
 #[Attribute]
-class OneToOne extends Relation{}
+class OneToOne extends Relation
+{
+}
 #[Attribute]
-class ManyToOne extends Relation{}
+class ManyToOne extends Relation
+{
+}
 #[Attribute]
-class OneToMany extends Relation{}
+class OneToMany extends Relation
+{
+}
 #[Attribute]
-class ManyToMany extends Relation{}
+class ManyToMany extends Relation
+{
+}

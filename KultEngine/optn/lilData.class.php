@@ -40,7 +40,7 @@ class lilData implements \ArrayAccess
     public function __construct($n = 'main')
     {
         $this->_name = $n;
-        if ($t = unserialize(file_get_contents(constant('tmppath').$this->_name .'.lil'))) {
+        if ($t = unserialize(file_get_contents(constant('tmppath').$this->_name.'.lil'))) {
             $this->_data = $t->_data;
         }
     }

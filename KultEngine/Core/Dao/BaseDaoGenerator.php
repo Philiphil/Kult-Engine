@@ -32,10 +32,6 @@
 
 namespace KultEngine\Core\Dao;
 
-use KultEngine\Core\Dao\DaoableObject;
-use KultEngine\Core\Dao\DaoableProperty;
-use KultEngine\Core\Dao\Id;
-use KultEngine\Core\Dao\Relation\OneToOne;
 use KultEngine\Core\Dao\Relation\Cascade;
 use KultEngine\Core\Dao\Relation\Relation;
 
@@ -59,10 +55,10 @@ abstract class BaseDaoGenerator
 
     public function asign(DaoableObject $fnord)
     {
-        list($this->_obj,$this->_classname) = $this->objToDaoableProperties($fnord);
+        list($this->_obj, $this->_classname) = $this->objToDaoableProperties($fnord);
     }
 
-    public function objToDaoableProperties(DaoableObject $fnord) : array
+    public function objToDaoableProperties(DaoableObject $fnord): array
     {
         $_obj = [];
         $x = new \ReflectionClass($fnord);
@@ -83,8 +79,8 @@ abstract class BaseDaoGenerator
                     case "KultEngine\Core\Dao\Relation\OneToMany":
                         $daoP->class = $p->getType()->getName();
                         $daoP->setType($attribute->getName());
-                        $daoP->persist = in_array(Cascade::PERSIST,$attribute->getArguments());
-                        $daoP->remove = in_array(Cascade::REMOVE,$attribute->getArguments());
+                        $daoP->persist = in_array(Cascade::PERSIST, $attribute->getArguments());
+                        $daoP->remove = in_array(Cascade::REMOVE, $attribute->getArguments());
                         break;
                 }
             }
@@ -93,6 +89,7 @@ abstract class BaseDaoGenerator
 
             $_obj[$daoP->name] = $daoP;
         }
+
         return [$_obj, $_classname];
     }
 
@@ -101,9 +98,9 @@ abstract class BaseDaoGenerator
         $r = [];
         $i = 0;
 
-        if($o::class != $this->_classname){
-            list($obj,$classname) = $this->objToDaoableProperties($o);
-        }else{
+        if ($o::class != $this->_classname) {
+            list($obj, $classname) = $this->objToDaoableProperties($o);
+        } else {
             $obj = $this->_obj;
         }
 
@@ -113,14 +110,13 @@ abstract class BaseDaoGenerator
 
                 if (!isset($o->{$p->name})) {
                     $r[1][$i] = null;
-                }
-                elseif (is_object($o->{$p->name}) && is_subclass_of($o->{$p->name}, DaoableProperty::class)) {
+                } elseif (is_object($o->{$p->name}) && is_subclass_of($o->{$p->name}, DaoableProperty::class)) {
                     $r[1][$i] = $o->{$p->name}->value;
                 } elseif (is_object($o->{$p->name}) && get_class($o->{$p->name}) == \DateTime::class) {
                     $r[1][$i] = $o->{$p->name}->format($this->_dateTimeFormat);
                 } else {
                     /*is unknown object, serialize or relation*/
-                    switch ($p->type){
+                    switch ($p->type) {
                         case DaoableProperty::TYPE_ONE_TO_ONE_RELATION:
                         case DaoableProperty::TYPE_MANY_TO_ONE_RELATION:
                             $r[1][$i] = $o->{$p->name}->__id->value;
@@ -133,16 +129,17 @@ abstract class BaseDaoGenerator
                 $i++;
             }
         }
+
         return $r;
     }
 
-    public function rowToObj($r,$classname=null): DaoableObject
+    public function rowToObj($r, $classname = null): DaoableObject
     {
-        $x = new \ReflectionClass($classname ??$this->_classname);
+        $x = new \ReflectionClass($classname ?? $this->_classname);
         $o = $x->newInstance();
-        if($classname && $classname != $this->_classname){
-            list($obj,$classname) = $this->objToDaoableProperties($o);
-        }else{
+        if ($classname && $classname != $this->_classname) {
+            list($obj, $classname) = $this->objToDaoableProperties($o);
+        } else {
             $obj = $this->_obj;
         }
         foreach ($r as $key => $value) {
@@ -155,6 +152,7 @@ abstract class BaseDaoGenerator
                 );
             }
         }
+
         return $o;
     }
 
@@ -166,12 +164,14 @@ abstract class BaseDaoGenerator
             case DaoableProperty::TYPE_ID:
                 $that = new Id();
                 $that->value = $value;
+
                 return $that;
             case DaoableProperty::TYPE_ONE_TO_ONE_RELATION:
             case DaoableProperty::TYPE_MANY_TO_ONE_RELATION:
             case DaoableProperty::TYPE_ONE_TO_MANY_RELATION:
             case DaoableProperty::TYPE_MANY_TO_MANY_RELATION:
-                list($_obj,$_classname) = $this->objToDaoableProperties(new $property->class);
+                list($_obj, $_classname) = $this->objToDaoableProperties(new $property->class());
+
                 return $this->_select($value, $_classname, $_obj);
             default:
                 return null;
@@ -189,6 +189,7 @@ abstract class BaseDaoGenerator
             $this->createTable();
         }
     }
+
     abstract public function insert(DaoableObject $fnord);
 
     abstract public function selectLast();
@@ -203,12 +204,11 @@ abstract class BaseDaoGenerator
 
     abstract public function emptyTable();
 
-    abstract public function _select($val, string $classname, array $obj, string $key = '__id', bool $multi=false);
+    abstract public function _select($val, string $classname, array $obj, string $key = '__id', bool $multi = false);
 
     abstract public function select($val, string $key, bool $multi);
 
     abstract public function tableExists();
-   // abstract public function _tableExists(string $classname);
+    // abstract public function _tableExists(string $classname);
    // abstract public function _createTable(string $classname);
-
 }

@@ -31,7 +31,7 @@
  */
 
 require_once '../../config.php';
-    KultEngine\Invoker::requireBase(['Session','WebService']);
+    KultEngine\Invoker::requireBase(['Session', 'WebService']);
 
     KultEngine\WebService::service('test', function ($args) {
         return ['op' => 1];

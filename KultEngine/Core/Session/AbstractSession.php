@@ -31,7 +31,7 @@
  */
 
 namespace KultEngine\Core\Session;
-use KultEngine\Core\Session\SecureSessionHandler;
+
 use KultEngine\coreElementTrait;
 use KultEngine\secureSerial;
 
@@ -85,7 +85,7 @@ abstract class AbstractSession
         static::set('login', true);
     }
 
-    public static function isLog() : bool
+    public static function isLog(): bool
     {
         return static::get('login') ?? false;
     }

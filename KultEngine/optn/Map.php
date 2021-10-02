@@ -82,21 +82,22 @@ class Map extends vector
         return $this[$this->_keys[$this->count() - 1]];
     }
 
-    public function pop_back() : void
+    public function pop_back(): void
     {
         $this->erase($this->_keys[$this->count() - 1]);
     }
 
-    public function pop_front() : void
+    public function pop_front(): void
     {
         $this->erase($this->_keys[0]);
     }
 
-    public function insert($key, $value) : void
+    public function insert($key, $value): void
     {
         if (is_int($key)) {
-             parent::insert($key, $value);
-             return;
+            parent::insert($key, $value);
+
+            return;
         }
         if (is_array($value)) {
             $value = new self($value);
