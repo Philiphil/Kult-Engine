@@ -41,12 +41,12 @@ class SQLHelper
         return strpos($table, '`') === false ? '`'.$table.'`' : $table;
     }
 
-    public function select_int(string $table,string $cat,string $id = 'id'): string
+    public function select_int(string $table, string $cat, string $id = 'id'): string
     {
         return 'SELECT * FROM '.$this->table_quoted($table).' WHERE '.$cat.' = :'.$id;
     }
 
-    public function select_string(string $table,string $cat, string $id = 'id'): string
+    public function select_string(string $table, string $cat, string $id = 'id'): string
     {
         return 'SELECT * FROM '.$this->table_quoted($table).' WHERE '.$cat.' like :'.$id;
     }
@@ -70,6 +70,7 @@ class SQLHelper
             $r .= ':'.$id[$i].' , ';
         }
         $r .= ':'.$id[count($id) - 1].' ) ';
+
         return $r;
     }
 
@@ -112,7 +113,7 @@ class SQLHelper
         return 'DELETE FROM '.$this->table_quoted($table).' WHERE '.$this->table_quoted($cat).' = :'.$id;
     }
 
-    public function select_last(string $table,string $cat): string
+    public function select_last(string $table, string $cat): string
     {
         return 'SELECT * FROM  '.$this->table_quoted($table).'WHERE 1=1 ORDER BY '.$cat.' DESC LIMIT 1';
     }

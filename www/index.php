@@ -36,9 +36,8 @@
 include '../config.php';
 
 use KultEngine as k;
-use KultEngine\Core\Dao\DaoGenerator;
 
-k\Invoker::requireBase(['Router',"Session"]);
+k\Invoker::requireBase(['Router', 'Session']);
 k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();
@@ -52,9 +51,6 @@ echo k\text::get_text('hello');
 	})
 </script>
 <?php
-
-
-
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

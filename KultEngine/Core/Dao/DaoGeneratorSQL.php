@@ -31,9 +31,8 @@
  */
 
 namespace KultEngine\Core\Dao;
-use KultEngine\Core\Dao\BaseDaoGenerator;
-use KultEngine\Core\Dao\Helper\SQLHelper;
 
+use KultEngine\Core\Dao\Helper\SQLHelper;
 
 class DaoGeneratorSQL extends BaseDaoGenerator
 {
@@ -50,15 +49,13 @@ class DaoGeneratorSQL extends BaseDaoGenerator
     {
         $this->verifyTable();
 
-        list($daoableProperties ,$classname)= $this->objToDaoableProperties($fnord);
+        list($daoableProperties, $classname) = $this->objToDaoableProperties($fnord);
 
-        foreach ($daoableProperties as $daoableProperty)
-        {
-            if($daoableProperty->persist &&
+        foreach ($daoableProperties as $daoableProperty) {
+            if ($daoableProperty->persist &&
                 ($daoableProperty->value == $fnord->__getDefaultId() ||
-                !$daoableProperty->isNullable && $daoableProperty->value===null)
-            )
-            {
+                !$daoableProperty->isNullable && $daoableProperty->value === null)
+            ) {
                 $fnord->{$daoableProperty->name} = $this->insert($fnord->{$daoableProperty->name});
             }
         }/**/
@@ -82,6 +79,7 @@ class DaoGeneratorSQL extends BaseDaoGenerator
             $o[1][] = $fnord->__id->value;
             $query->execute($o[1]);
         }
+
         return $fnord;
     }
 
@@ -149,13 +147,14 @@ class DaoGeneratorSQL extends BaseDaoGenerator
         $query->execute();
     }
 
-    public function select($val, string $key = '__id', bool $multi=false)
+    public function select($val, string $key = '__id', bool $multi = false)
     {
         $this->verifyTable();
-        return $this->_select($val,$this->_classname,$this->_obj,$key,$multi);
+
+        return $this->_select($val, $this->_classname, $this->_obj, $key, $multi);
     }
 
-    public function _select($val, string $classname, array $obj, string $key = '__id', bool $multi=false)
+    public function _select($val, string $classname, array $obj, string $key = '__id', bool $multi = false)
     {
         $query = (gettype($obj[$key]) === 'integer' ||
             $obj[$key] === 'id' || gettype($obj[$key]) === 'boolean' ||
@@ -173,13 +172,12 @@ class DaoGeneratorSQL extends BaseDaoGenerator
             return false;
         }
         if (!$multi) {
-
-            return $this->rowToObj($query[0],$classname);
+            return $this->rowToObj($query[0], $classname);
         }
         if ($multi) {
             $r = [];
             foreach ($query as $key) {
-                $r[] = $this->rowToObj($key[0],$classname);
+                $r[] = $this->rowToObj($key[0], $classname);
             }
 
             return $r;
@@ -199,5 +197,4 @@ class DaoGeneratorSQL extends BaseDaoGenerator
             return false;
         }
     }
-
 }

@@ -80,5 +80,4 @@ trait SettableTrait
 
         return true;
     }
-
 }

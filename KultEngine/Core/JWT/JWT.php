@@ -31,8 +31,6 @@
  */
 
 namespace KultEngine\Core\JWT;
-use KultEngine\Core\JWT\JWTHeader;
-use KultEngine\Core\JWT\JWTPayload;
 
 class JWT
 {

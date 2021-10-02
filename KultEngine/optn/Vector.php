@@ -43,11 +43,12 @@ class Vector implements \ArrayAccess, \Iterator, \Serializable, \JsonSerializabl
         $this->fromArray($data);
     }
 
-    public function fromArray(array $array):void
+    public function fromArray(array $array): void
     {
         $this->set($array);
     }
-    public function set(array $array):void
+
+    public function set(array $array): void
     {
         $this->_container = [];
         foreach ($array as $key => $value) {
@@ -166,7 +167,7 @@ class Vector implements \ArrayAccess, \Iterator, \Serializable, \JsonSerializabl
         $this->_container = unserialize($data);
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return json_encode($this->_container);
     }
@@ -204,7 +205,7 @@ class Vector implements \ArrayAccess, \Iterator, \Serializable, \JsonSerializabl
         $this[] = $value;
     }
 
-    public function push_front($value) : void
+    public function push_front($value): void
     {
         if (is_array($value)) {
             $value = new self($value);
