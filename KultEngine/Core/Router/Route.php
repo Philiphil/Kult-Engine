@@ -30,6 +30,12 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine\Core\Router;
+
+class Route
+{
+    public function __construct($route, $func, $method = 'GET', $code = 200)
+    {
+        Router::$_global_route[count(router::$_global_route)] = [$route, $func, $method, intval($code)];
+    }
+}

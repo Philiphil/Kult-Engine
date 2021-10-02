@@ -30,6 +30,47 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+abstract class WebService
+{
+    use \KultEngine\CoreElementTrait;
+    use \KultEngine\Core\Hook\HookableTrait;
+
+    public static string $_req;
+    public static string $_args;
+    public static string $_method;
+    public static string $_token;
+    public static array $_func = [];
+
+    public static function setter()
+    {
+        self::$_req = $_POST['req'] ?? $_GET['req'] ?? false;
+        self::$_args = isset($_POST['args']) ? json_decode($_POST['args'], true) : (isset($_GET['args']) ? json_decode($_GET['args'], true) : false);
+        self::$_token = $_POST['token'] ?? ($_GET['token'] ?? false);
+        self::$_method = $_SERVER['REQUEST_METHOD'];
+    }
+
+    public static function send($array = [])
+    {
+        $array['token'] = self::$_token;
+        echo json_encode($array);
+    }
+
+    public static function execute()
+    {
+        if (isset(self::$_func[self::$_method][self::$_req])) {
+            self::send(self::$_func[self::$_method][self::$_req](self::$_args));
+        }
+    }
+
+    public static function service($a, $c, $t = 'POST')
+    {
+        self::$_func[$t][$a] = $c;
+    }
+
+    public static function destruct()
+    {
+        return [['KultEngine\\WebService::execute', null], 2];
+    }
+}

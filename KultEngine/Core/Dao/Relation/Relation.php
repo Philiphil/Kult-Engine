@@ -30,6 +30,18 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+use \Attribute;
+use KultEngine\Core\Dao\DaoableProperty;
+use KultEngine\Core\Dao\Id;
+
+
+#[Attribute]
+class OneToOne{}
+#[Attribute]
+class ManyToOne{}
+#[Attribute]
+class OneToMany{}
+#[Attribute]
+class ManyToMany{}

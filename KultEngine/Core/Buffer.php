@@ -30,6 +30,60 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+abstract class Buffer
+{
+    use \KultEngine\CoreElementTrait;
+    use \KultEngine\Core\Hook\HookableTrait;
+
+    public static bool $_is_buffering_on = false;
+
+    public static function setter()
+    {
+        self::store();
+    }
+
+    public static function store()
+    {
+        self::init_required();
+        if (!self::$_is_buffering_on) {
+            self::$_is_buffering_on = true;
+            mb_http_output('UTF-8');
+            ob_start('mb_output_handler');
+        }
+    }
+
+    public static function get()
+    {
+        self::init_required();
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = false;
+
+            return ob_get_clean();
+        }
+    }
+
+    public static function delete()
+    {
+        self::init_required();
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = false;
+            ob_clean();
+        }
+    }
+
+    public static function send()
+    {
+        self::init_required();
+        if (self::$_is_buffering_on) {
+            self::$_is_buffering_on = false;
+            ob_end_flush();
+        }
+    }
+
+    public static function destruct()
+    {
+        return [['kult_engine\\Buffer::send', null], 999];
+    }
+}

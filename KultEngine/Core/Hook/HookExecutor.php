@@ -30,6 +30,12 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine\Core\Hook;
+use KultEngine\Core\Hook\Hook;
+class HookExecutor
+{
+    public function __destruct()
+    {
+        Hook::exec();
+    }
+}

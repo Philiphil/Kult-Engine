@@ -30,6 +30,14 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+class Connector extends \KultEngine\Core\Dao\AbstractConnector
+{
+    use CoreElementTrait;
+    //public static $_DB_DRIVER = 'mysql';
+    //public static $_DB_HOST = 'localhost';
+    //public static $_DB_NAME = 'test';
+    //public static $_DB_USER = 'root';
+    //public static $_DB_PASS = '';
+}

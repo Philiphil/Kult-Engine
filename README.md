@@ -10,7 +10,7 @@ The Kult engine is a php framework aiming to be a lightweight and easy to use/co
 
 ## Why choose the Kult Engine ?
 
-I dont think someone should have linux, composer, wget, git, docker, then run 11 command in order to download a folder with .php files.
+I dont think someone should have linux, composer, wget, git, docker, dthen run 11 command in order to download a folder with .php files.
 
 You can drag & drop your website on a whole different server, just conf.php will require any change and no download will be required.
 

@@ -30,6 +30,10 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+abstract class Session extends \KultEngine\Core\Session\AbstractSession
+{
+    use CoreElementTrait;
+    public static ?string $_login_page = null;
+}

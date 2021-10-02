@@ -30,6 +30,11 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine;
+
+trait TimableTrait
+{
+    public ?\DateTime $createdAt = null;
+    public ?\DateTime $modifiedAt = null;
+    public ?\DateTime $deletedAt = null;
+}

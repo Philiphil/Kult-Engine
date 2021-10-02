@@ -34,9 +34,11 @@
  */
 
 include '../config.php';
-use KultEngine as k;
 
-k\Invoker::requireBase(['Router']);
+use KultEngine as k;
+use KultEngine\Core\Dao\DaoGenerator;
+
+k\Invoker::requireBase(['Router',"Session"]);
 k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();
@@ -50,30 +52,34 @@ echo k\text::get_text('hello');
 	})
 </script>
 <?php
-
-$d = new k\DaoGenerator(new pokemon(), new k\Connector());
-$d->create_table();
-
-$d = new KultEngine\DaoGenerator(new user(), new KultEngine\Connector());
-$d->create_table();
 /*
-$d(new userEmail());
+$d = new k\DaoGenerator(new PlayerLogin(), new k\Connector());
 $d->create_table();
 
-$d(new userPassword());
+$d(new PlayerEmail());
 $d->create_table();
 
-$d(new userSocialAccount());
+$d(new PlayerPassword());
 $d->create_table();
-/**/
-$d(new user());
-$u = new user();
-$u->lastLogin = new DateTime();
-$u->emails = new userEmail();
-$u->emails->email = '33';
 
-$u = $d->insert($u); //remplacer u par &u pour eviter ça ?
-var_dump($u->__id);
+$d(new Player());
+$d->create_table();*/
+/**//*
+$d = new DaoGenerator(new Player(), new k\Connector());
+
+$objet = $d->selectLast();
+k\session::login();
+k\session::set("user",$objet);
+*/
+var_dump($_SESSION);
+
+if(!k\Session::isLog())
+{
+    k\session::login();
+	echo "test";
+}
+
+
 
 k\page::standardpage_body_end();
 k\page::standardpage_footer();

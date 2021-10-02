@@ -30,6 +30,67 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine\Core\Dao;
+
+use KultEngine\Core\Dao\Id;
+
+abstract class DaoableObject
+{
+    public Id $__id;
+    public string $__iduniq;
+
+    public function __construct()
+    {
+        $this->__setDefaultId();
+        $this->__setIduniq();
+    }
+
+    public function __setIduniq(): daoableObject
+    {
+        $this->__iduniq = uniqid();
+
+        return $this;
+    }
+
+    public function __getDefaultId(): int
+    {
+        return -1;
+    }
+
+    public function __setDefaultId(): daoableObject
+    {
+        $this->__id = new Id();
+        $this->__id->value = $this->__getDefaultId();
+
+        return $this;
+    }
+
+    public function __clean(): daoableObject
+    {
+        unset($this->__iduniq);
+
+        return $this;
+    }
+
+    public function __clone()
+    {
+        $n = $this;
+        $n->__setIduniq()->__setDefaultId();
+
+        return $n;
+    }
+
+    public function __set($name, $value)
+    {
+        if (!isset(self::$name)) {
+            return;
+        }
+    }
+
+    public function __get($name)
+    {
+        if (!isset(self::$name)) {
+            return;
+        }
+    }
+}

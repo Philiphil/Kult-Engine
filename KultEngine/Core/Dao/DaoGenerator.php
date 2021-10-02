@@ -30,6 +30,28 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-$demo = new KultEngine\Core\Router\Route('*', function () {
-    return 1;
-});
+namespace KultEngine\Core\Dao;
+
+class DaoGenerator
+{
+    private DaoGeneratorInterface $_realGenerator;
+
+    public function __construct(DaoableObject $fnord, AbstractConnector $connector)
+    {
+        switch ($connector::getDriver()) {
+            case 'mysql':
+                $this->_realGenerator = new DaoGeneratorSQL($fnord, $connector);
+                break;
+        }
+    }
+
+    public function __call($fn, $params)
+    {
+        return $this->_realGenerator->$fn(...$params);
+    }
+
+    public function __invoke(DaoableObject $fnord)
+    {
+        $this->_realGenerator->asign($fnord);
+    }
+}
