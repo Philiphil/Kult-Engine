@@ -32,8 +32,6 @@
 
 namespace KultEngine\Core\Dao;
 
-use KultEngine\Core\Dao\Id;
-
 abstract class DaoableObject
 {
     public Id $__id;

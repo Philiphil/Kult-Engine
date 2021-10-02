@@ -32,7 +32,6 @@
 
 namespace KultEngine\Core\Session;
 
-
 class SecureSessionHandler extends \SessionHandler
 {
     private $key;
