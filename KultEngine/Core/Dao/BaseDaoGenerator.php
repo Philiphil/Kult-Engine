@@ -179,10 +179,6 @@ abstract class BaseDaoGenerator
         }
     }
 
-    public function _select($val, $classname, $obj, $key = '__id', $multi = 0)
-    {
-    }
-
     public function verifyTable(): void
     {
         $this->_verifyTable($this->_classname);
