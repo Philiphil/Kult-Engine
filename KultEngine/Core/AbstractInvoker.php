@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -54,28 +54,28 @@ abstract class AbstractInvoker
             }
         }
     }
-    
-	public static function setter(): void
+
+    public static function setter(): void
     {
         $base = dirname(__FILE__).DS.'..';
-        
+
         define('basepath', $base.DIRECTORY_SEPARATOR);
-     
+
         if (Config::$webFolder && Config::$webFolder != '/') {
-        	define('viewpath', $base.DIRECTORY_SEPARATOR.Config::$webFolder.DIRECTORY_SEPARATOR);
+            define('viewpath', $base.DIRECTORY_SEPARATOR.Config::$webFolder.DIRECTORY_SEPARATOR);
         } else {
-        	define('viewpath', $base.DIRECTORY_SEPARATOR);
+            define('viewpath', $base.DIRECTORY_SEPARATOR);
         }
         define('localpath', $base.DS.'..'.DS.Config::$localCodeFolder.DS);
         define('modelpath', constant('localpath').'model'.DS);
-        define('controllerpath', dirname(__FILE__).DS );
+        define('controllerpath', dirname(__FILE__).DS);
 
         define('vendorpath', $base.DS.'vendor'.DS);
         define('modpath', $base.DS.'mods'.DS);
         define('imptpath', constant('localpath').'impt'.DS);
         define('tmppath', constant('controllerpath').'tmp'.DS);
         define('optnpath', constant('controllerpath').'optn'.DS);
-        define('corepath', dirname(__FILE__).DS );
+        define('corepath', dirname(__FILE__).DS);
         define('cmdpath', constant('controllerpath').'cmd'.DIRECTORY_SEPARATOR);
 
         define('clipath', constant('cmdpath').'app.php');
@@ -194,11 +194,11 @@ abstract class AbstractInvoker
     public static function _requireBase(): void
     {
         self::is_ke_runnable();
-	    spl_autoload_register('KultEngine\Core\AbstractInvoker::loader');
+        spl_autoload_register('KultEngine\Core\AbstractInvoker::loader');
 
-	    define('DS', DIRECTORY_SEPARATOR);
-	    require_once dirname(__FILE__).DS.'..'.DS.'Config'.DS.'Config.php';
-	    
+        define('DS', DIRECTORY_SEPARATOR);
+        require_once dirname(__FILE__).DS.'..'.DS.'Config'.DS.'Config.php';
+
         self::setter();
         mb_internal_encoding('UTF-8');
 
@@ -327,11 +327,11 @@ abstract class AbstractInvoker
                 ini_set('session.use_trans_sid', false);
                 ini_set('session.save_handler', 'files');
                 session_save_path(sys_get_temp_dir());
-                require_once constant('corepath')."Security".DS.'JWT'.DS.'JWTHeader.php';
-                require_once constant('corepath')."Security".DS.'JWT'.DS.'JWTPayload.php';
-                require_once constant('corepath')."Security".DS.'JWT'.DS.'JWT.php';
-                require_once constant('corepath')."Security".DS.'Session'.DS.'SecureSessionHandler.php';
-                require_once constant('corepath')."Security".DS.'Session'.DS.'AbstractSession.php';
+                require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWTHeader.php';
+                require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWTPayload.php';
+                require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWT.php';
+                require_once constant('corepath').'Security'.DS.'Session'.DS.'SecureSessionHandler.php';
+                require_once constant('corepath').'Security'.DS.'Session'.DS.'AbstractSession.php';
               //  self::class_init($f);
 
                 return true;

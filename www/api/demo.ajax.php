@@ -25,13 +25,13 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-require_once "..".DIRECTORY_SEPARATOR."../KultEngine/Core/AbstractInvoker.php";
-require_once "../../KultEngine/Invoker.php";
+require_once '..'.DIRECTORY_SEPARATOR.'../KultEngine/Core/AbstractInvoker.php';
+require_once '../../KultEngine/Invoker.php';
 
     KultEngine\Invoker::requireBase(['Session', 'WebService']);
 

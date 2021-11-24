@@ -33,8 +33,8 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-require_once "../KultEngine/Core/AbstractInvoker.php";
-require_once "../KultEngine/Invoker.php";
+require_once '../KultEngine/Core/AbstractInvoker.php';
+require_once '../KultEngine/Invoker.php';
 
 use KultEngine as k;
 use KultEngine\Invoker;

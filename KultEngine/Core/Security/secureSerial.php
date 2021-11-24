@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -51,6 +51,7 @@ class SecureSerial
         if (password_verify(self::$_salt.$input[0].self::$_salt, $input[1])) {
             return unserialize($input[0]);
         }
-	    throw new \Exception("unserialize failed");
+
+        throw new \Exception('unserialize failed');
     }
 }
