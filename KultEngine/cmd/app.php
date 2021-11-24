@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -43,7 +43,7 @@ switch ($_SERVER['argv'][1]) {
         $e->_closure();
         break;
      case 'soros':
-        Invoker::requireBase(['Session','soros_bot']);
+        Invoker::requireBase(['Session', 'soros_bot']);
         $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
         soros_bot::run($var);
     default:

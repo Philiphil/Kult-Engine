@@ -25,7 +25,7 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
@@ -210,5 +210,4 @@ abstract class BaseDaoGenerator
     abstract public function select($val, string $key, bool $multi);
 
     abstract public function tableExists();
-
 }

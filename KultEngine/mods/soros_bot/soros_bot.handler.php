@@ -25,12 +25,13 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace KultEngine;
+
 use KultEngine\Core\Dao\DaoGenerator;
 
 class soros_bot
@@ -100,9 +101,9 @@ class soros_bot
         self::$max_records = $max_records;
         self::$records = [];
         self::$db_records = $db_records;
-        self::$dao_stock = new daoGenerator(new \stock(), new Connector);
+        self::$dao_stock = new daoGenerator(new \stock(), new Connector());
         if (self::$db_records) {
-            self::$dao_records = new daoGenerator(new \stock_record(), new Connector);
+            self::$dao_records = new daoGenerator(new \stock_record(), new Connector());
         }
         self::$ticker = self::$api->prices();
         self::$depth = self::$api->exchangeInfo();

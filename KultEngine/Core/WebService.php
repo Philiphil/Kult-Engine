@@ -25,20 +25,20 @@
  *
  * @package Kult Engine
  * @author Théo Sorriaux (philiphil)
- * @copyright Copyright (c) 2016-2020, Théo Sorriaux
+ * @copyright Copyright (c) 2016-2021, Théo Sorriaux
  * @license MIT
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
 namespace KultEngine\Core;
 
-use KultEngine\CoreElementTrait;
 use KultEngine\Core\Hook\HookableTrait;
+use KultEngine\CoreElementTrait;
 
 abstract class WebService
 {
-	use CoreElementTrait;
-	use HookableTrait;
+    use CoreElementTrait;
+    use HookableTrait;
     public static string $_req;
     public static string $_args;
     public static string $_method;
