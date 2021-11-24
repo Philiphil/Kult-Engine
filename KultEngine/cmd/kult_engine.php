@@ -34,6 +34,6 @@ namespace KultEngine;
 
 abstract class kult_engine
 {
-    public static $_ver = '1.35b';
-    public static $_time = '1562771511';
+    public static $_ver = '2:PRE-RELEASE1';
+    public static $_time = '1637769026';
 }

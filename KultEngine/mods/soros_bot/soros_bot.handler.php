@@ -31,6 +31,7 @@
  */
 
 namespace KultEngine;
+use KultEngine\Core\Dao\DaoGenerator;
 
 class soros_bot
 {
@@ -88,7 +89,7 @@ class soros_bot
 
         self::$etalon = $ETALON;
         self::$test = $test_currency;
-        self::$api = new \Binance\API($KEY, $SECRET);
+        self::$api = new \Binance\binance($KEY, $SECRET);
         self::$no_follow = $NOFOLLOW;
         self::$tick = $tick;
         self::$min_buy_val = $min_buy_value;
@@ -99,9 +100,9 @@ class soros_bot
         self::$max_records = $max_records;
         self::$records = [];
         self::$db_records = $db_records;
-        self::$dao_stock = new daoGenerator(new \stock());
+        self::$dao_stock = new daoGenerator(new \stock(), new Connector);
         if (self::$db_records) {
-            self::$dao_records = new daoGenerator(new \stock_record());
+            self::$dao_records = new daoGenerator(new \stock_record(), new Connector);
         }
         self::$ticker = self::$api->prices();
         self::$depth = self::$api->exchangeInfo();

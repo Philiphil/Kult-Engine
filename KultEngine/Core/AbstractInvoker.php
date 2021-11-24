@@ -54,37 +54,27 @@ abstract class AbstractInvoker
             }
         }
     }
-
-    public static function setter(): void
+    
+	public static function setter(): void
     {
         $base = dirname(__FILE__).DS.'..';
-
-        define('multi', Config::$multi);
+        
         define('basepath', $base.DIRECTORY_SEPARATOR);
-
-        if (!Config::$multi) {
-            if (Config::$webFolder && Config::$webFolder != '/') {
-                define('viewpath', $base.DIRECTORY_SEPARATOR.Config::$webFolder.DIRECTORY_SEPARATOR);
-            } else {
-                define('viewpath', $base.DIRECTORY_SEPARATOR);
-            }
+     
+        if (Config::$webFolder && Config::$webFolder != '/') {
+        	define('viewpath', $base.DIRECTORY_SEPARATOR.Config::$webFolder.DIRECTORY_SEPARATOR);
         } else {
-            $bfr = debug_backtrace();
-            define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(constant('basepath')), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(constant('basepath'))), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
+        	define('viewpath', $base.DIRECTORY_SEPARATOR);
         }
-        define('localpath', $base.DIRECTORY_SEPARATOR.'..'.DS.Config::$localCodeFolder.DIRECTORY_SEPARATOR);
-        define('modelpath', constant('localpath').'model'.DIRECTORY_SEPARATOR);
+        define('localpath', $base.DS.'..'.DS.Config::$localCodeFolder.DS);
+        define('modelpath', constant('localpath').'model'.DS);
         define('controllerpath', dirname(__FILE__).DS );
 
         define('vendorpath', $base.DS.'vendor'.DS);
-        define('modpath', constant('controllerpath').'mods'.DIRECTORY_SEPARATOR);
-        if (!Config::$multi) {
-            define('imptpath', constant('localpath').'impt'.DIRECTORY_SEPARATOR);
-        } else {
-            define('imptpath', constant('viewpath').'local'.DIRECTORY_SEPARATOR.'impt'.DIRECTORY_SEPARATOR);
-        }
-        define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
-        define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
+        define('modpath', $base.DS.'mods'.DS);
+        define('imptpath', constant('localpath').'impt'.DS);
+        define('tmppath', constant('controllerpath').'tmp'.DS);
+        define('optnpath', constant('controllerpath').'optn'.DS);
         define('corepath', dirname(__FILE__).DS );
         define('cmdpath', constant('controllerpath').'cmd'.DIRECTORY_SEPARATOR);
 

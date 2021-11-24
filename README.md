@@ -4,7 +4,7 @@ The Kult Engine is a PHP framework aiming to be a lightweight and easy to use/co
 
 **PHP 8**
 
-**Version : 2:PRE-RELEASE1**
+**Version : 2:PRE-RELEASE2**
 
 
 
@@ -15,7 +15,7 @@ You should not have to spend more time editing yaml files than do actual coding.
 
 You can drag & drop your website on a whole different server, just config.php will require any change and no download will be required.
 
-Based on this idea to make something that runs quick, the kult engine started to grow, and since version 33.1 is proud to be ready for production.
+Based on this idea to make something that runs quick, the kult engine started to grow, and since version 0.33.1 is proud to be ready for production.
 
 ## Features
 * Easy to use, learn, install and run.

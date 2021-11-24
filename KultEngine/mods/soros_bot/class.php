@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-class stock extends kult_engine\DaoableObjectDaoableObject
+class stock extends KultEngine\Core\Dao\DaoableObject
 {
     public $_sym = 'string';
     public $_prix_achat = 0.0;
@@ -53,7 +53,7 @@ class stock extends kult_engine\DaoableObjectDaoableObject
     }
 }
 
-class stock_record extends kult_engine\DaoableObject
+class stock_record extends KultEngine\Core\Dao\DaoableObject
 {
     public $_sym = 'string';
     public $_prix = 0.0;
@@ -100,7 +100,7 @@ class stock_record extends kult_engine\DaoableObject
     }
 }
 
-class soros_stats extends kult_engine\DaoableObject
+class soros_stats extends KultEngine\Core\Dao\DaoableObject
 {
     public $_current_btc_val = 0.0;
     public $_timestamp = '';

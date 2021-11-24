@@ -32,8 +32,8 @@
 
 namespace KultEngine;
 
-require_once strstr(__FILE__, '..'.DIRECTORY_SEPARATOR.'cmd'.DIRECTORY_SEPARATOR.'app.php', true).'Config.php';
-
+require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'AbstractInvoker.php';
+require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Invoker.php';
 cli_set_process_title('Kult Engine');
 
 switch ($_SERVER['argv'][1]) {
@@ -43,7 +43,7 @@ switch ($_SERVER['argv'][1]) {
         $e->_closure();
         break;
      case 'soros':
-        Invoker::requireBase(['soros_bot']);
+        Invoker::requireBase(['Session','soros_bot']);
         $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
         soros_bot::run($var);
     default:

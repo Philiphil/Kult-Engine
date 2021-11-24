@@ -39,16 +39,13 @@ class Config
     //local code folder compared to Config.php or fullpath
     public static $localCodeFolder = 'local';
 
-    //kult_engine folder compared to Config.php or fullpath
-    public static $kult_engineFolder = 'KultEngine';
-
     // HTML root folder's name
     public static $htmlFolder = '';
 
     //SQL IDs
-    public static $host = 'localhost:3301';
+    public static $host = 'localhost:3306';
     public static $db = 'test';
-    public static $user = 'user';
+    public static $user = 'root';
     public static $pass = '';
     public static $driver = 'mysql';
 
@@ -61,9 +58,4 @@ class Config
     public static $serverLang = ['en', 'fr'];
     public static $loginPage = '';
 
-    //Does multiple site run on the same kult engine ?  true/false
-    // localCodeFolder should be in webfolder then.
-    public static $multi = false;
-
-    public static $file = __FILE__;
 }
