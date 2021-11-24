@@ -149,7 +149,7 @@ class drive
 }
 /*
 SERVICE
-    require_once '../config.php';
+    require_once '../Config.php';
     kult_engine\invoker::require_basics(["webService"]);
 
     kult_engine\webService::service('getAuthToken', function ($args) {

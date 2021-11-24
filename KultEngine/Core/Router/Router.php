@@ -51,7 +51,7 @@ abstract class Router
     public static int $_code = 200;
     public static int $_routing = 0;
 
-    public static function setter()
+    public static function setter(): void
     {
         self::$_method = strtoupper($_SERVER['REQUEST_METHOD']);
         self::$_asked = strpos($_SERVER['REQUEST_URI'], '?') > -1 ? substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?')) : $_SERVER['REQUEST_URI'];

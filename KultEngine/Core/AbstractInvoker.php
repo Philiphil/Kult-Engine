@@ -30,7 +30,9 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core;
+
+use KultEngine\Config\Config;
 
 abstract class AbstractInvoker
 {
@@ -55,15 +57,14 @@ abstract class AbstractInvoker
 
     public static function setter(): void
     {
-        $base = dirname(config::$file);
+        $base = dirname(__FILE__).DS.'..';
 
-        define('multi', config::$multi);
+        define('multi', Config::$multi);
         define('basepath', $base.DIRECTORY_SEPARATOR);
-        define('DS', DIRECTORY_SEPARATOR);
 
-        if (!config::$multi) {
-            if (config::$webFolder && config::$webFolder != '/') {
-                define('viewpath', $base.DIRECTORY_SEPARATOR.config::$webFolder.DIRECTORY_SEPARATOR);
+        if (!Config::$multi) {
+            if (Config::$webFolder && Config::$webFolder != '/') {
+                define('viewpath', $base.DIRECTORY_SEPARATOR.Config::$webFolder.DIRECTORY_SEPARATOR);
             } else {
                 define('viewpath', $base.DIRECTORY_SEPARATOR);
             }
@@ -71,20 +72,20 @@ abstract class AbstractInvoker
             $bfr = debug_backtrace();
             define('viewpath', $base.DIRECTORY_SEPARATOR.substr($bfr[count($bfr) - 1]['file'], strlen(constant('basepath')), strpos(substr($bfr[count($bfr) - 1]['file'], strlen(constant('basepath'))), DIRECTORY_SEPARATOR)).DIRECTORY_SEPARATOR);
         }
-        define('localpath', $base.DIRECTORY_SEPARATOR.config::$localCodeFolder.DIRECTORY_SEPARATOR);
+        define('localpath', $base.DIRECTORY_SEPARATOR.'..'.DS.Config::$localCodeFolder.DIRECTORY_SEPARATOR);
         define('modelpath', constant('localpath').'model'.DIRECTORY_SEPARATOR);
-        define('controllerpath', $base.DIRECTORY_SEPARATOR.config::$kult_engineFolder.DIRECTORY_SEPARATOR);
+        define('controllerpath', dirname(__FILE__).DS );
 
-        define('vendorpath', constant('controllerpath').'vendor'.DIRECTORY_SEPARATOR);
+        define('vendorpath', $base.DS.'vendor'.DS);
         define('modpath', constant('controllerpath').'mods'.DIRECTORY_SEPARATOR);
-        if (!config::$multi) {
+        if (!Config::$multi) {
             define('imptpath', constant('localpath').'impt'.DIRECTORY_SEPARATOR);
         } else {
             define('imptpath', constant('viewpath').'local'.DIRECTORY_SEPARATOR.'impt'.DIRECTORY_SEPARATOR);
         }
         define('tmppath', constant('controllerpath').'tmp'.DIRECTORY_SEPARATOR);
         define('optnpath', constant('controllerpath').'optn'.DIRECTORY_SEPARATOR);
-        define('corepath', constant('controllerpath').'Core'.DIRECTORY_SEPARATOR);
+        define('corepath', dirname(__FILE__).DS );
         define('cmdpath', constant('controllerpath').'cmd'.DIRECTORY_SEPARATOR);
 
         define('clipath', constant('cmdpath').'app.php');
@@ -95,25 +96,25 @@ abstract class AbstractInvoker
         define('ctrlpath', constant('imptpath').'ctrl'.DIRECTORY_SEPARATOR);
         define('rqrdpath', constant('imptpath').'rqrd'.DIRECTORY_SEPARATOR);
 
-        define('htmlpath', config::$htmlFolder);
+        define('htmlpath', Config::$htmlFolder);
         define('contentpath', constant('htmlpath').'content/');
         define('apipath', constant('htmlpath').'api/');
         define('imagepath', constant('contentpath').'images/');
 
-        define('debug', config::$debug);
-        define('logfile', config::$log);
-        define('default_lang', config::$defaultLang);
-        define('server_lang', config::$serverLang);
-        define('loginpage', config::$loginPage);
-        define('view', config::$webFolder);
+        define('debug', Config::$debug);
+        define('logfile', Config::$log);
+        define('default_lang', Config::$defaultLang);
+        define('server_lang', Config::$serverLang);
+        define('loginpage', Config::$loginPage);
+        define('view', Config::$webFolder);
         define('url', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '.php') + 4));
         define('page', substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/'), strpos($_SERVER['PHP_SELF'], '.php') + 4));
 
-        define('host', config::$host);
-        define('db', config::$db);
-        define('user', config::$user);
-        define('pass', config::$pass);
-        define('driver', config::$driver);
+        define('host', Config::$host);
+        define('db', Config::$db);
+        define('user', Config::$user);
+        define('pass', Config::$pass);
+        define('driver', Config::$driver);
     }
 
     public static function require_impt(): void
@@ -203,8 +204,12 @@ abstract class AbstractInvoker
     public static function _requireBase(): void
     {
         self::is_ke_runnable();
+	    spl_autoload_register('KultEngine\Core\AbstractInvoker::loader');
+
+	    define('DS', DIRECTORY_SEPARATOR);
+	    require_once dirname(__FILE__).DS.'..'.DS.'Config'.DS.'Config.php';
+	    
         self::setter();
-        spl_autoload_register(__NAMESPACE__.'\Invoker::loader');
         mb_internal_encoding('UTF-8');
 
         require_once constant('corepath').'fonction.php';
@@ -212,7 +217,6 @@ abstract class AbstractInvoker
         require_once constant('traitspath').'SettableTrait.php';
         require_once constant('traitspath').'CoreElementTrait.php';
         require_once constant('traitspath').'JsonSerializableTrait.php';
-        require_once constant('traitspath').'TimableTrait.php';
 
         self::require_quick('Hook');
     }
@@ -333,11 +337,11 @@ abstract class AbstractInvoker
                 ini_set('session.use_trans_sid', false);
                 ini_set('session.save_handler', 'files');
                 session_save_path(sys_get_temp_dir());
-                require_once constant('corepath').'JWT'.DS.'JWTHeader.php';
-                require_once constant('corepath').'JWT'.DS.'JWTPayload.php';
-                require_once constant('corepath').'JWT'.DS.'JWT.php';
-                require_once constant('corepath').'Session'.DS.'SecureSessionHandler.php';
-                require_once constant('corepath').'Session'.DS.'AbstractSession.php';
+                require_once constant('corepath')."Security".DS.'JWT'.DS.'JWTHeader.php';
+                require_once constant('corepath')."Security".DS.'JWT'.DS.'JWTPayload.php';
+                require_once constant('corepath')."Security".DS.'JWT'.DS.'JWT.php';
+                require_once constant('corepath')."Security".DS.'Session'.DS.'SecureSessionHandler.php';
+                require_once constant('corepath')."Security".DS.'Session'.DS.'AbstractSession.php';
               //  self::class_init($f);
 
                 return true;

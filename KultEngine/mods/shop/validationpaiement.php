@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-require_once 'config.php';
+require_once 'Config.php';
     page::import_require();
     require constant('PHPMAILER');
 

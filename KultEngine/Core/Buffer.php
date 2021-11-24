@@ -39,7 +39,7 @@ abstract class Buffer
 
     public static bool $_is_buffering_on = false;
 
-    public static function setter()
+    public static function setter(): void
     {
         self::store();
     }

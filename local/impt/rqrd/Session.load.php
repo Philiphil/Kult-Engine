@@ -32,7 +32,7 @@
 
 namespace KultEngine;
 
-abstract class Session extends \KultEngine\Core\Session\AbstractSession
+abstract class Session extends \KultEngine\Core\Security\Session\AbstractSession
 {
     use CoreElementTrait;
     public static ?string $_login_page = null;

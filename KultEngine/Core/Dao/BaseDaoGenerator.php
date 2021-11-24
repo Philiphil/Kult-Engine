@@ -210,6 +210,5 @@ abstract class BaseDaoGenerator
     abstract public function select($val, string $key, bool $multi);
 
     abstract public function tableExists();
-    // abstract public function _tableExists(string $classname);
-   // abstract public function _createTable(string $classname);
+
 }

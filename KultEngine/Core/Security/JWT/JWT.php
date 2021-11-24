@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine\Core\JWT;
+namespace KultEngine\Core\Security\JWT;
 
 class JWT
 {

@@ -39,7 +39,7 @@ define('shoppath', substr(__FILE__, 0, strlen(__FILE__) - 16));
 define('shoptemplate', constant('shoppath').'template'.DIRECTORY_SEPARATOR);
 define('shopmodel', constant('shoppath').'model'.DIRECTORY_SEPARATOR);
 
-require_once constant('shoppath').'shop.config.php';
+require_once constant('shoppath').'shop.Config.php';
 define('currency_html', shopConfig::$currency_char);
 switch (shopConfig::$currency_name) {
     case 'euro':

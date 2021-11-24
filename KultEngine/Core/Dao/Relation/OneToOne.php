@@ -30,45 +30,11 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core\Dao\Relation;
 
-class BasicCrypter
+use Attribute;
+
+#[Attribute]
+class OneToOne extends Relation
 {
-    public $_key;
-    public $_salt;
-    public $_iv;
-    public $_cipher = 'AES-256-CBC';
-
-    public function __construct($key = 'D3f4ultKey!')
-    {
-        $this->_salt = random_bytes(32);
-        $this->_iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->_cipher));
-        $this->generate_key($key);
-    }
-
-    public function generate_key($key)
-    {
-        $this->_key = hash_pbkdf2('sha256', $key, $this->_salt, 10000, 32);
-    }
-
-    public function encrypt($txt)
-    {
-        $return = [];
-        $return['iv'] = base64_encode($this->_iv);
-        $return['salt'] = base64_encode($this->_salt);
-        $return['value'] = base64_encode(openssl_encrypt($txt, $this->_cipher, $this->_key, 0, $this->_iv));
-
-        return json_encode($return);
-    }
-
-    public function decrypt($json, $key = 'D3f4ultKey!')
-    {
-        $obj = json_decode($json, true);
-        $this->_iv = base64_decode($obj['iv']);
-        $this->_salt = base64_decode($obj['salt']);
-        $this->generate_key($key);
-        $h = base64_decode($obj['value']);
-
-        return openssl_decrypt($h, $this->_cipher, $this->_key, 0, $this->_iv);
-    }
 }

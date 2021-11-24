@@ -30,9 +30,11 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-require_once '../../config.php';
+require_once "..".DIRECTORY_SEPARATOR."../KultEngine/Core/AbstractInvoker.php";
+require_once "../../KultEngine/Invoker.php";
+
     KultEngine\Invoker::requireBase(['Session', 'WebService']);
 
-    KultEngine\WebService::service('test', function ($args) {
+    KultEngine\Core\WebService::service('test', function ($args) {
         return ['op' => 1];
     }, 'POST');

@@ -33,11 +33,13 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-include '../config.php';
+require_once "../KultEngine/Core/AbstractInvoker.php";
+require_once "../KultEngine/Invoker.php";
 
 use KultEngine as k;
+use KultEngine\Invoker;
 
-k\Invoker::requireBase(['Router', 'Session']);
+Invoker::requireBase(['Router', 'Session']);
 k\page::standardpage_head();
 k\page::standardpage_header();
 k\page::standardpage_body_begin();

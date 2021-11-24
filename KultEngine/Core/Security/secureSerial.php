@@ -30,36 +30,27 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core\Security;
 
-abstract class Invoker extends AbstractInvoker
+class SecureSerial
 {
-    public static function requireBase(?array $ext = null)
+    public static $_salt = ';0:1,lAur@]9ç';
+
+    public static function serialize($input): string
     {
-        parent::_requireBase();
+        $output = [];
+        $output[0] = serialize($input);
+        $output[1] = password_hash(self::$_salt.$output[0].self::$_salt, PASSWORD_BCRYPT);
 
-        set_error_handler(__NAMESPACE__.'\Invoker::error');
-
-        require_once constant('corepath').'Logger.php';
-
-        require_once constant('rqrdpath').'i18n.php';
-        require_once constant('corepath').'Text.php';
-
-        require_once constant('corepath').'Buffer.php';
-
-        Text::init();
-
-        self::require_mods($ext);
-        self::require_local_model();
-        self::require_vendor();
-        self::require_local_controler();
-        self::require_impt();
+        return json_encode($output);
     }
 
-    public static function analytics()
+    public static function unserialize(string $input)
     {
-        self::_requireBase();
-        require_once constant('corepath').'Analytics.php';
-        Analytics::init();
+        $input = json_decode($input);
+        if (password_verify(self::$_salt.$input[0].self::$_salt, $input[1])) {
+            return unserialize($input[0]);
+        }
+	    throw new \Exception("unserialize failed");
     }
 }

@@ -38,7 +38,7 @@ abstract class Text
     public static array $_server;
     public static string $_default;
 
-    public static function setter()
+    public static function setter(): void
     {
         self::$_default = constant('default_lang');
         self::$_server = constant('server_lang');

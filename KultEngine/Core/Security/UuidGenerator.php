@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core\Security;
 
 class UuidGenerator
 {

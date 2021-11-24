@@ -30,10 +30,10 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine\Core\Session;
+namespace KultEngine\Core\Security\Session;
 
 use KultEngine\coreElementTrait;
-use KultEngine\secureSerial;
+use KultEngine\Core\Security\SecureSerial;
 
 abstract class AbstractSession
 {

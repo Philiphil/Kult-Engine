@@ -32,13 +32,6 @@
 
 namespace KultEngine\Core\Dao\Relation;
 
-use Attribute;
-
-class Cascade
-{
-    const PERSIST = 'persist';
-    const REMOVE = 'remove';
-}
 class Relation
 {
     //  CONST REMOVE= "mappedBy";
@@ -50,21 +43,4 @@ class Relation
             $this->attributes[] = $attribute;
         }
     }
-}
-
-#[Attribute]
-class OneToOne extends Relation
-{
-}
-#[Attribute]
-class ManyToOne extends Relation
-{
-}
-#[Attribute]
-class OneToMany extends Relation
-{
-}
-#[Attribute]
-class ManyToMany extends Relation
-{
 }

@@ -30,7 +30,6 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
 
 function timer_init()
 {

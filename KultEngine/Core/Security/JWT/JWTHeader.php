@@ -30,11 +30,13 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core\Security\JWT;
 
-trait TimableTrait
+use KultEngine\JsonSerializableTrait;
+
+class JWTHeader
 {
-    public ?\DateTime $createdAt = null;
-    public ?\DateTime $modifiedAt = null;
-    public ?\DateTime $deletedAt = null;
+    use JsonSerializableTrait;
+    public string $typ = 'JWT';
+    public string $alg = 'none';
 }

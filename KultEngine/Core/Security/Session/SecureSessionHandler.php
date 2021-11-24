@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine\Core\Session;
+namespace KultEngine\Core\Security\Session;
 
 class SecureSessionHandler extends \SessionHandler
 {

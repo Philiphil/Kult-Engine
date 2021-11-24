@@ -30,7 +30,7 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-include 'config.php';
+include 'Config.php';
     page::header();
         $trajet = connector::ticket_get_trajet($_POST['custom']);
     $tmp = $trajet->get_voyages();

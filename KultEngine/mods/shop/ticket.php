@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'Config.php';
 page::standardpage_head('Ticket');
 ?>
 <body>

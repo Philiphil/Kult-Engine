@@ -30,20 +30,22 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core;
+
+use KultEngine\CoreElementTrait;
+use KultEngine\Core\Hook\HookableTrait;
 
 abstract class WebService
 {
-    use \KultEngine\CoreElementTrait;
-    use \KultEngine\Core\Hook\HookableTrait;
-
+	use CoreElementTrait;
+	use HookableTrait;
     public static string $_req;
     public static string $_args;
     public static string $_method;
     public static string $_token;
     public static array $_func = [];
 
-    public static function setter()
+    public static function setter(): void
     {
         self::$_req = $_POST['req'] ?? $_GET['req'] ?? false;
         self::$_args = isset($_POST['args']) ? json_decode($_POST['args'], true) : (isset($_GET['args']) ? json_decode($_GET['args'], true) : false);
@@ -64,13 +66,13 @@ abstract class WebService
         }
     }
 
-    public static function service($a, $c, $t = 'POST')
+    public static function service($name, $function, $method = 'POST')
     {
-        self::$_func[$t][$a] = $c;
+        self::$_func[$method][$name] = $function;
     }
 
     public static function destruct()
     {
-        return [['KultEngine\\WebService::execute', null], 2];
+        return [['KultEngine\\Core\\WebService::execute', null], 2];
     }
 }

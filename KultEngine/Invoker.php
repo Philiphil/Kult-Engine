@@ -32,21 +32,35 @@
 
 namespace KultEngine;
 
-require_once strstr(__FILE__, '..'.DIRECTORY_SEPARATOR.'cmd'.DIRECTORY_SEPARATOR.'app.php', true).'Config.php';
+use KultEngine\Core\AbstractInvoker;
 
-cli_set_process_title('Kult Engine');
+abstract class Invoker extends AbstractInvoker
+{
+    public static function requireBase(?array $ext = null)
+    {
+        parent::_requireBase();
+       // set_error_handler(__NAMESPACE__.'\Core\AbstractInvoker::error');
 
-switch ($_SERVER['argv'][1]) {
-    case 'async':
-        Invoker::requireBase();
-        $e = unserialize(base64_decode($_SERVER['argv'][2]));
-        $e->_closure();
-        break;
-     case 'soros':
-        Invoker::requireBase(['soros_bot']);
-        $var = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : false;
-        soros_bot::run($var);
-    default:
-        // code...
-        break;
+        require_once constant('corepath').'Logger.php';
+
+        require_once constant('rqrdpath').'i18n.php';
+        require_once constant('corepath').'Text.php';
+
+        require_once constant('corepath').'Buffer.php';
+
+        Text::init();
+
+        self::require_mods($ext);
+        self::require_local_model();
+        self::require_vendor();
+        self::require_local_controler();
+        self::require_impt();
+    }
+
+    public static function analytics()
+    {
+        self::_requireBase();
+        require_once constant('corepath').'Analytics.php';
+        Analytics::init();
+    }
 }

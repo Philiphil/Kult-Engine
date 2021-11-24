@@ -31,6 +31,7 @@
  */
 
 namespace KultEngine;
+use KultEngine\Config\Config;
 
 /*
     Couplage PHP/JS

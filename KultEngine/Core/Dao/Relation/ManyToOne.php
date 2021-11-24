@@ -30,28 +30,11 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine;
+namespace KultEngine\Core\Dao\Relation;
 
-class secureSerial
+use Attribute;
+
+#[Attribute]
+class ManyToOne extends Relation
 {
-    public static $_salt = ';0:1,lAur@]9ç';
-
-    public static function serialize($input): string
-    {
-        $output = [];
-        $output[0] = serialize($input);
-        $output[1] = password_hash(self::$_salt.$output[0].self::$_salt, PASSWORD_BCRYPT);
-
-        return json_encode($output);
-    }
-
-    public static function unserialize($input)
-    {
-        $input = json_decode($input);
-        if (password_verify(self::$_salt.$input[0].self::$_salt, $input[1])) {
-            return unserialize($input[0]);
-        }
-
-        return false;
-    }
 }

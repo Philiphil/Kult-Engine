@@ -30,52 +30,45 @@
  * @link https://github.com/Philiphil/Kult-Engine
  */
 
-namespace KultEngine\Core\JWT;
+namespace KultEngine\Core\Security;
 
-use KultEngine\JsonSerializableTrait;
-
-class JWTPayload
+class BasicCrypter
 {
-    use JsonSerializableTrait;
-    public $exp = '';
-    public $iat = '';
-    public $nbf = '';
-    public $jti = '';
-    public $iss = '';
-    public $sub = '';
-    public $aud = '';
-    public int $maxage = 3600;
+    public $_key;
+    public $_salt;
+    public $_iv;
+    public $_cipher = 'AES-256-CBC';
 
-    public function generateClaims(): self
+    public function __construct($key = 'D3f4ultKey!')
     {
-        $time = time();
-        $this->iat = $time;
-        $this->nbf = $time;
-        $this->exp = $time + $this->maxage;
-        $this->jti = uniqid();
-
-        return $this;
+        $this->_salt = random_bytes(32);
+        $this->_iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->_cipher));
+        $this->generate_key($key);
     }
 
-    public function verifyClaims(): bool
+    public function generate_key($key)
     {
-        if ($this->exp < time()) {
-            throw new \Exception('expired');
-        }
-        if ($this->iat > time()) {
-            throw new \Exception('issued in the future');
-        }
-        if ($this->nbf > time()) {
-            throw new \Exception('used before');
-        }
+        $this->_key = hash_pbkdf2('sha256', $key, $this->_salt, 10000, 32);
+    }
 
-        return true;
+    public function encrypt($txt)
+    {
+        $return = [];
+        $return['iv'] = base64_encode($this->_iv);
+        $return['salt'] = base64_encode($this->_salt);
+        $return['value'] = base64_encode(openssl_encrypt($txt, $this->_cipher, $this->_key, 0, $this->_iv));
+
+        return json_encode($return);
+    }
+
+    public function decrypt($json, $key = 'D3f4ultKey!')
+    {
+        $obj = json_decode($json, true);
+        $this->_iv = base64_decode($obj['iv']);
+        $this->_salt = base64_decode($obj['salt']);
+        $this->generate_key($key);
+        $h = base64_decode($obj['value']);
+
+        return openssl_decrypt($h, $this->_cipher, $this->_key, 0, $this->_iv);
     }
 }
-
-/* ex
-$d = new JWT();
-$d->setAlg(JWT::ALG_HS256);
-$e = $d->encode();
-var_dump( JWT::decode($e) );
-*/
