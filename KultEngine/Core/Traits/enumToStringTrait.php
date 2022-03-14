@@ -32,12 +32,17 @@
 
 namespace KultEngine;
 
-trait enumToStringTrait{
-	function toString(): ?string{
-		$reflection = new  ReflectionEnum(static::class);
-		foreach ($reflection->getCases() as $rCase) {
-			if($rCase->getValue()->value == $this->value) return $rCase->name;
-		}
-		return null;
-	}
+trait enumToStringTrait
+{
+    public function toString(): ?string
+    {
+        $reflection = new  ReflectionEnum(static::class);
+        foreach ($reflection->getCases() as $rCase) {
+            if ($rCase->getValue()->value == $this->value) {
+                return $rCase->name;
+            }
+        }
+
+        return null;
+    }
 }

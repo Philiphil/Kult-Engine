@@ -73,16 +73,16 @@ abstract class AbstractConnector
         //$option = array(\PDO::MYSQL_ATTR_MAX_BUFFER_SIZE => 2097152);
         switch ($fnord) {
             case 'mysql':
-                self::$_db = new \pdo('mysql:host='.self::$_DB_HOST.';dbname='.self::$_DB_NAME.';charset=utf8mb4', self::$_DB_USER, self::$_DB_PASS);
+                self::$_db = new \PDO('mysql:host='.self::$_DB_HOST.';dbname='.self::$_DB_NAME.';charset=utf8mb4', self::$_DB_USER, self::$_DB_PASS);
                 break;
             case 'odbc':
-                self::$_db = new \pdo('odbc:DRIVER={ODBC Driver 13 for SQL Server};SERVER='.self::$_DB_HOST.';DATABASE='.self::$_DB_NAME.';', self::$_DB_USER, self::$_DB_PASS);
+                self::$_db = new \PDO('odbc:DRIVER={ODBC Driver 13 for SQL Server};SERVER='.self::$_DB_HOST.';DATABASE='.self::$_DB_NAME.';', self::$_DB_USER, self::$_DB_PASS);
                 break;
             case 'sqlsrv':
-                self::$_db = new \pdo('sqlsrv:Server='.self::$_DB_HOST.';Database='.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS);
+                self::$_db = new \PDO('sqlsrv:Server='.self::$_DB_HOST.';Database='.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS);
                 break;
             case 'sqlite':
-                self::$_db = new \pdo('sqlite:'.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS, [\PDO::ATTR_PERSISTENT => true]);
+                self::$_db = new \PDO('sqlite:'.self::$_DB_NAME, self::$_DB_USER, self::$_DB_PASS, [\PDO::ATTR_PERSISTENT => true]);
                 break;
         }
         self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
