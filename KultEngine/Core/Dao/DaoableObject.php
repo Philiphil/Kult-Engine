@@ -43,9 +43,9 @@ abstract class DaoableObject
         $this->__setIduniq();
     }
 
-    public function __setIduniq(): daoableObject
+    public function __setIduniq(?string $uniq=null): daoableObject
     {
-        $this->__iduniq = uniqid();
+        $this->__iduniq = $uniq ?? realUniqid();
 
         return $this;
     }
