@@ -43,7 +43,7 @@ abstract class DaoableObject
         $this->__setIduniq();
     }
 
-    public function __setIduniq(?string $uniq=null): daoableObject
+    public function __setIduniq(?string $uniq = null): daoableObject
     {
         $this->__iduniq = $uniq ?? realUniqid();
 
