@@ -140,9 +140,9 @@ function array_merge_recursive_distinct(array &$array1, array &$array2)
 
 function realUniqid(): string
 {
-    try {
+    try{
         return time().bin2hex(random_bytes(12));
-    } catch (\Exception $exception) {
+    }catch (\Exception $exception){
         return time().uniqid();
     }
 }
