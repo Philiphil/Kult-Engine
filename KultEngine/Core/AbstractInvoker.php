@@ -42,7 +42,7 @@ abstract class AbstractInvoker
             return;
         }
         foreach ($mods as $key) {
-            if (self::require_quick($key) == true) {
+            if (self::require_quick($key)) {
                 continue;
             }
             switch ($key) {
@@ -160,7 +160,7 @@ abstract class AbstractInvoker
     public static function loader(string $className): bool
     {
         $className = substr($className, strripos($className, '\\') + 1);
-        if (self::require_quick($className) == true) {
+        if (self::require_quick($className)) {
             return true;
         }
 
@@ -330,6 +330,7 @@ abstract class AbstractInvoker
                 require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWTHeader.php';
                 require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWTPayload.php';
                 require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWT.php';
+                require_once constant('corepath').'Security'.DS.'JWT'.DS.'JWTService.php';
                 require_once constant('corepath').'Security'.DS.'Session'.DS.'SecureSessionHandler.php';
                 require_once constant('corepath').'Security'.DS.'Session'.DS.'AbstractSession.php';
               //  self::class_init($f);
