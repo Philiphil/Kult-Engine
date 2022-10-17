@@ -52,7 +52,7 @@ class JWTPayload
         $this->iat = $time;
         $this->nbf = $time;
         $this->exp = $time + $this->maxage;
-        $this->jti = uniqid();
+        $this->jti = $time.uniqid();
 
         return $this;
     }
