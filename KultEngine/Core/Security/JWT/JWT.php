@@ -47,5 +47,4 @@ class JWT
     {
         $this->_header->alg = $alg;
     }
-
 }

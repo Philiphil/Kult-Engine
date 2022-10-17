@@ -35,8 +35,8 @@ namespace KultEngine\Core\Security\JWT;
 class JWTService
 {
     public static string $key = 'AAZAB3NzaC1yc2EA42069AAADAQABAAAByXFwdYGWTl14ItFk2zv4Bs12rgZa27081742016fQU9WBtLJxixn7Zh7vjsqyR7A1EV20ZJd5pXYeVKkX8P883M=';
-    public static int $maxage=3600;
-    public static ?string $alg=null;
+    public static int $maxage = 3600;
+    public static ?string $alg = null;
 
     const ALG_HS256 = 'HS256';
     const ALG_HS384 = 'HS384';
@@ -57,11 +57,10 @@ class JWTService
         self::ALG_NONE  => ['none', 'none'],
     ];
 
-
-
-    public static function createJwt(array $claims=[]): JWT{
+    public static function createJwt(array $claims = []): JWT
+    {
         $jwt = new JWT();
-        if(!self::$alg){
+        if (!self::$alg) {
             self::$alg = self::DEFAULT_ALG;
         }
 
@@ -69,10 +68,9 @@ class JWTService
             throw new \Exception(self::$alg.' not available');
         }
         $jwt->setAlg(self::$alg);
-        $jwt->_payload->maxage=self::$maxage;
+        $jwt->_payload->maxage = self::$maxage;
 
-        foreach ($claims as $claim => $value)
-        {
+        foreach ($claims as $claim => $value) {
             $jwt->_payload->$claim = $value;
         }
 
