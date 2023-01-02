@@ -1,4 +1,6 @@
 # BACKEND PHP Framework
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FPhiliphil%2FKult-Engine.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FPhiliphil%2FKult-Engine?ref=badge_shield)
+
 
 The Kult Engine is a PHP framework aiming to be a lightweight and easy to use/configure/install/learn set of powerful tools able to fit every website's common needs
 
@@ -41,3 +43,7 @@ Extract it to your site's root folder and edit config.php
 Default www/index.php serve as a demo, it should already run
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FPhiliphil%2FKult-Engine.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FPhiliphil%2FKult-Engine?ref=badge_large)
